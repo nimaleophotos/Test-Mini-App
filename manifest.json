@@ -1,7 +1,7 @@
 {
   "name": "$LENS Playground",
   "description": "Apply $LENS token-gated filters and share photos!",
-  "url": "https://YOUR-VERCEL-URL.vercel.app",
+  "url": "https://test-mini-app-one.vercel.app/",
   "icon": "https://YOUR-VERCEL-URL.vercel.app/icon.png",
   "author": "Your Name",
   "version": "1.0.0"
