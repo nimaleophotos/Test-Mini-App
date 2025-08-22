@@ -3,71 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>$LENS Playground</title>
+  <title>Lens App</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>$LENS Playground 🎉</h1>
-    <p>Token-gated photo filters + camera + sharing</p>
+    <h1>Lens App</h1>
+    <p class="subtitle">Token-gated photo filters + minting + sharing</p>
   </header>
 
-  <!-- Wallet connect -->
-  <section class="card">
+  <!-- Wallet -->
+  <section id="walletSection">
     <button id="connectBtn">Connect Wallet</button>
     <p id="walletStatus">Not connected</p>
     <p id="lensBalance">Your $LENS Balance: 0</p>
   </section>
 
-  <!-- Fun random photo -->
-  <section class="card">
-    <p>Click the button to add a random photo</p>
-    <button id="magicBtn">Add Random Photo</button>
+  <!-- Gallery -->
+  <section id="gallerySection">
+    <h2>Minted Photos Gallery</h2>
     <div id="gallery"></div>
+    <p class="muted">No minted photos yet...</p>
   </section>
 
-  <!-- Upload -->
-  <section class="card">
-    <h2>Upload Your Photo</h2>
-    <input type="file" id="fileInput" accept="image/*" />
-    <div id="preview"></div>
-
-    <div class="filter-btns">
-      <button onclick="applyFilter('none')">Normal</button>
-      <button onclick="applyFilter('grayscale(100%)')">Black & White</button>
-      <button onclick="applyFilter('sepia(100%)')">Sepia</button>
-      <button onclick="applyFilter('contrast(200%)')">High Contrast</button>
-      <button onclick="applyFilter('blur(3px)')">Blur</button>
-    </div>
-
-    <button id="saveBtn">Save Photo</button>
-    <button id="shareBtn">Share to Farcaster</button>
+  <!-- Actions -->
+  <section id="actions">
+    <button onclick="window.location.href='upload.html'">Upload Photo</button>
+    <button onclick="window.location.href='camera.html'">📷 Camera</button>
   </section>
 
-  <!-- Camera -->
-  <section class="card" id="cameraSection">
-    <h2>Camera</h2>
-    <div id="cameraShell">
-      <video id="camera" playsinline autoplay muted></video>
-      <div id="cameraControls">
-        <select id="cameraFilter">
-          <option value="none">Normal</option>
-          <option value="grayscale(100%)">Black & White</option>
-          <option value="sepia(100%)">Sepia</option>
-          <option value="contrast(200%)">High Contrast (gated)</option>
-          <option value="blur(3px)">Blur</option>
-        </select>
-        <button id="startCameraBtn">Start</button>
-        <button id="flipCameraBtn">Flip</button>
-        <button id="captureBtn">Capture</button>
-      </div>
-    </div>
-    <canvas id="captureCanvas" style="display:none;"></canvas>
-  </section>
-
-  <!-- Ethers.js must load first -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
-  <!-- Then your app.js -->
   <script src="app.js"></script>
 </body>
 </html>
