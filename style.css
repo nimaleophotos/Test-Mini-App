@@ -1,22 +1,80 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: system-ui, sans-serif;
   padding: 20px;
   text-align: center;
+  background: #f8f9fc;
+  color: #222;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 6px;
+}
+
+.card {
+  background: white;
+  padding: 16px;
+  margin: 12px auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 500px;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 10px 16px;
   margin: 5px;
   border-radius: 8px;
   cursor: pointer;
+  border: none;
+  font-weight: 500;
+  background: #6b5cff;
+  color: #fff;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #5749d8;
 }
 
 #gallery img, #preview img {
-  max-width: 300px;
-  margin: 10px;
+  max-width: 100%;
+  margin: 10px auto;
   border-radius: 12px;
+  display: block;
 }
 
 .filter-btns button {
   margin: 3px;
+  background: #eee;
+  color: #333;
+}
+.filter-btns button:hover {
+  background: #ddd;
+}
+
+/* Camera styles */
+#cameraShell {
+  display: grid;
+  gap: 12px;
+}
+#camera {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #111;
+  border-radius: 16px;
+  object-fit: cover;
+}
+#cameraControls {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 8px;
+}
+#cameraControls button, #cameraControls select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 14px;
 }
