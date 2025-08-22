@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$LENS Playground</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Wallet connect -->
+  <button id="connectBtn">Connect Wallet</button>
+  <p id="walletStatus">Not connected</p>
+  <p id="lensBalance">Your $LENS Balance: 0</p>
+
+
+  <h1>Welcome to $LENS Playground 🎉</h1>
+  <p>Click the button to see some magic!</p>
+  <button id="magicBtn">Click Me</button>
+  <div id="gallery"></div>
+
+  <h2>Upload Your Photo</h2>
+  <input type="file" id="fileInput" accept="image/*" />
+  <div id="preview"></div>
+
+  <div class="filter-btns">
+    <button onclick="applyFilter('none')">Normal</button>
+    <button onclick="applyFilter('grayscale(100%)')">Black & White</button>
+    <button onclick="applyFilter('sepia(100%)')">Sepia</button>
+    <button onclick="applyFilter('contrast(200%)')">High Contrast</button>
+    <button onclick="applyFilter('blur(3px)')">Blur</button>
+  </div>
+
+  <button id="saveBtn">Save Photo</button>
+  <button id="shareBtn">Share to Farcaster</button>
+
+    <!-- Ethers.js must load first -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
+
+  <!-- Then your app.js -->
+  <script src="app.js"></script>
+
+</body>
+</html>

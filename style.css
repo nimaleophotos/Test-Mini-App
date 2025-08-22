@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#gallery img, #preview img {
+  max-width: 300px;
+  margin: 10px;
+  border-radius: 12px;
+}
+
+.filter-btns button {
+  margin: 3px;
+}
