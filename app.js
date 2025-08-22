@@ -11,15 +11,20 @@ let provider, signer, userAddress;
 
 connectBtn.addEventListener("click", async () => {
   try {
-    if (window.ethereum) {
-      provider = new ethers.BrowserProvider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = await provider.getSigner();
-      userAddress = await signer.getAddress();
-      walletStatus.innerText = `Connected: ${userAddress}`;
-    } else {
+    if (!window.ethereum) {
       alert("Please install MetaMask!");
+      return;
     }
+
+    provider = new ethers.BrowserProvider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    signer = await provider.getSigner();
+    userAddress = await signer.getAddress();
+    walletStatus.innerText = `Connected: ${userAddress}`;
+
+    const balance = await checkLensBalance();
+    document.getElementById("lensBalance").innerText =
+      `Your $LENS Balance: ${balance}`;
   } catch (err) {
     console.error("Wallet connect error:", err);
   }
@@ -32,31 +37,13 @@ async function checkLensBalance() {
   return Number(ethers.formatUnits(balance, 18));
 }
 
-connectBtn.addEventListener("click", async () => {
-  if (window.ethereum) {
-    provider = new ethers.BrowserProvider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    signer = await provider.getSigner();
-    userAddress = await signer.getAddress();
-    walletStatus.innerText = `Connected: ${userAddress}`;
-
-    // fetch balance after connect
-    const balance = await checkLensBalance();
-    document.getElementById("lensBalance").innerText =
-      `Your $LENS Balance: ${balance}`;
-  } else {
-    alert("Please install MetaMask!");
-  }
-});
-
-
 // ============ PART 1: Random photo ============
 const btn = document.getElementById("magicBtn");
 const gallery = document.getElementById("gallery");
 
 btn.addEventListener("click", () => {
   const img = document.createElement("img");
-  img.src = "https://picsum.photos/300";
+  img.src = "https://picsum.photos/300?random=" + Date.now();
   gallery.appendChild(img);
 });
 
@@ -134,3 +121,85 @@ shareBtn.addEventListener("click", () => {
 
   window.open(`https://warpcast.com/~/compose?text=${text}`, "_blank");
 });
+
+// ============ PART 6: Camera ============
+const videoEl = document.getElementById("camera");
+const startBtn = document.getElementById("startCameraBtn");
+const flipBtn  = document.getElementById("flipCameraBtn");
+const captureBtn = document.getElementById("captureBtn");
+const filterSelect = document.getElementById("cameraFilter");
+const captureCanvas = document.getElementById("captureCanvas");
+
+let currentStream = null;
+let useFacingMode = "environment"; // default to back camera on mobile
+
+async function canUseFilter(value) {
+  if (value !== "contrast(200%)") return true;
+  const bal = await checkLensBalance();
+  if (bal >= 1) return true;
+  alert("Need at least 1 $LENS to use High Contrast.");
+  return false;
+}
+
+function applyVideoFilter(value) {
+  videoEl.style.filter = value || "none";
+}
+
+async function startCamera() {
+  try {
+    if (currentStream) currentStream.getTracks().forEach(t => t.stop());
+
+    const constraints = {
+      audio: false,
+      video: { facingMode: useFacingMode }
+    };
+
+    currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+    videoEl.srcObject = currentStream;
+
+    startBtn.disabled = true;
+    flipBtn.disabled = false;
+    captureBtn.disabled = false;
+  } catch (err) {
+    console.error("Camera error:", err);
+    alert("Could not access camera. Check permissions and HTTPS.");
+  }
+}
+
+function flipCamera() {
+  useFacingMode = (useFacingMode === "user") ? "environment" : "user";
+  startCamera();
+}
+
+async function onFilterChange() {
+  const value = filterSelect.value;
+  if (await canUseFilter(value)) {
+    applyVideoFilter(value);
+  } else {
+    filterSelect.value = "none";
+    applyVideoFilter("none");
+  }
+}
+
+function capturePhoto() {
+  if (!videoEl.videoWidth) return;
+  captureCanvas.width = videoEl.videoWidth;
+  captureCanvas.height = videoEl.videoHeight;
+
+  const ctx = captureCanvas.getContext("2d");
+  ctx.filter = getComputedStyle(videoEl).filter || "none";
+  ctx.drawImage(videoEl, 0, 0, captureCanvas.width, captureCanvas.height);
+
+  const dataUrl = captureCanvas.toDataURL("image/png");
+  const img = document.createElement("img");
+  img.src = dataUrl;
+
+  preview.innerHTML = "";
+  preview.appendChild(img.cloneNode());
+  gallery.prepend(img);
+}
+
+if (startBtn) startBtn.addEventListener("click", startCamera);
+if (flipBtn) flipBtn.addEventListener("click", flipCamera);
+if (captureBtn) captureBtn.addEventListener("click", capturePhoto);
+if (filterSelect) filterSelect.addEventListener("change", onFilterChange);
