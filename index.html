@@ -2,38 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lens App</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header>
-    <h1>Lens App</h1>
-    <p class="subtitle">Token-gated photo filters + minting + sharing</p>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="left">
+      <img src="lens-logo.png" alt="Lens Logo" class="lens-logo"/>
+      <h1>Lens App</h1>
+    </div>
+    <div class="right">
+      <div id="profileCircle" class="profile-circle"></div>
+      <button id="connectWalletBtn" class="connect-btn">Connect</button>
+    </div>
   </header>
 
-  <!-- Wallet -->
-  <section id="walletSection">
-    <button id="connectBtn">Connect Wallet</button>
-    <p id="walletStatus">Not connected</p>
-    <p id="lensBalance">Your $LENS Balance: 0</p>
+  <!-- Leaderboard Section -->
+  <section class="leaderboard">
+    <h2>Leaderboard 📊</h2>
+    <p>Coming soon... 🛠</p>
   </section>
 
-  <!-- Gallery -->
-  <section id="gallerySection">
-    <h2>Minted Photos Gallery</h2>
-    <div id="gallery"></div>
-    <p class="muted">No minted photos yet...</p>
+  <!-- Camera Section -->
+  <section class="camera-section">
+    <div id="cameraFrame" class="camera-frame hidden">
+      <video id="video" autoplay></video>
+      <canvas id="canvas" class="hidden"></canvas>
+      <button id="captureBtn" class="capture-btn">📸 Capture</button>
+    </div>
+    <button id="openCameraBtn" class="circle-btn main-camera">📷</button>
   </section>
 
-  <!-- Actions -->
-  <section id="actions">
-    <button onclick="window.location.href='upload.html'">Upload Photo</button>
-    <button onclick="window.location.href='camera.html'">📷 Camera</button>
-  </section>
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <button class="circle-btn small" id="galleryBtn">🖼</button>
+    <button class="circle-btn small" id="mintedBtn">🪙</button>
+    <button class="circle-btn small" id="filtersBtn">🎨</button>
+  </nav>
 
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
