@@ -1,51 +1,149 @@
-import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.min.js";
+// ============ Wallet Connect + ENS ============
+const LENS_TOKEN_ADDRESS = "0xbd78521E5666A28F528F8D78Eba0e6C9680DDb07";
+const ERC20_ABI = ["function balanceOf(address owner) view returns (uint256)"];
 
-let provider;
-let signer;
-let profileCircle = document.getElementById("profileCircle");
-let connectWalletBtn = document.getElementById("connectWalletBtn");
+const connectBtn = document.getElementById("connectBtn");
+const walletStatus = document.getElementById("walletStatus");
+let provider, signer, userAddress;
 
-// Connect wallet
-connectWalletBtn.addEventListener("click", async () => {
-  if (window.ethereum) {
-    try {
-      provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = provider.getSigner();
-      const address = await signer.getAddress();
-
-      // Try ENS
-      let ensName = await provider.lookupAddress(address);
-      let displayName = ensName ? ensName : `${address.slice(0, 6)}...${address.slice(-4)}`;
-
-      // Update UI
-      connectWalletBtn.style.display = "none"; // hide button
-      profileCircle.title = displayName; // hover tooltip
-
-      // If ENS has an avatar
-      if (ensName) {
-        let avatar = await provider.getAvatar(ensName);
-        if (avatar) {
-          profileCircle.style.backgroundImage = `url(${avatar})`;
-        } else {
-          profileCircle.style.background = "#6a5acd"; // fallback color
-        }
-      } else {
-        profileCircle.style.background = "#6a5acd";
-      }
-
-      // Show ENS/address below profile circle
-      let info = document.createElement("p");
-      info.textContent = displayName;
-      info.style.fontSize = "14px";
-      info.style.color = "#aaa";
-      document.querySelector(".right").appendChild(info);
-
-    } catch (err) {
-      console.error("Wallet connection error:", err);
-      alert("❌ Could not connect wallet. Check MetaMask.");
-    }
-  } else {
-    alert("Please install MetaMask to connect your wallet.");
+async function connectWallet() {
+  if (!window.ethereum) {
+    alert("Please install MetaMask!");
+    return;
   }
-});
+  provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  signer = await provider.getSigner();
+  userAddress = await signer.getAddress();
+
+  // Try ENS
+  let ensName = await provider.lookupAddress(userAddress);
+  if (ensName) {
+    walletStatus.innerText = `Connected: ${ensName}`;
+  } else {
+    walletStatus.innerText = `Connected: ${userAddress}`;
+  }
+
+  connectBtn.style.display = "none";
+
+  // Fetch balance
+  const balance = await checkLensBalance();
+  document.getElementById("lensBalance").innerText =
+    `Your $LENS Balance: ${balance}`;
+}
+
+async function checkLensBalance() {
+  if (!signer) return 0;
+  const contract = new ethers.Contract(LENS_TOKEN_ADDRESS, ERC20_ABI, provider);
+  const balance = await contract.balanceOf(userAddress);
+  return Number(ethers.formatUnits(balance, 18));
+}
+
+if (connectBtn) {
+  connectBtn.addEventListener("click", connectWallet);
+}
+
+// ============ Upload & Preview ============
+const fileInput = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
+
+if (fileInput) {
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+// ============ Camera ============
+const camera = document.getElementById("camera");
+const captureBtn = document.getElementById("captureBtn");
+
+if (camera && captureBtn) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+      camera.srcObject = stream;
+    })
+    .catch((err) => console.error("Camera error:", err));
+
+  captureBtn.addEventListener("click", () => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = camera.videoWidth;
+    canvas.height = camera.videoHeight;
+    ctx.drawImage(camera, 0, 0);
+
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
+    preview.innerHTML = "";
+    preview.appendChild(img);
+  });
+}
+
+// ============ Filters ============
+async function applyFilter(filter) {
+  const img = preview.querySelector("img");
+  if (!img) return;
+
+  if (filter === "contrast(200%)") {
+    const balance = await checkLensBalance();
+    if (balance < 1) {
+      alert("You need at least 1 $LENS to use this filter!");
+      return;
+    }
+  }
+  img.style.filter = filter;
+}
+
+// ============ Save ============
+const saveBtn = document.getElementById("saveBtn");
+if (saveBtn) {
+  saveBtn.addEventListener("click", () => {
+    const img = preview.querySelector("img");
+    if (!img) return;
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx.filter = img.style.filter || "none";
+    ctx.drawImage(img, 0, 0);
+
+    const link = document.createElement("a");
+    link.download = "edited-photo.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
+
+// ============ Share ============
+const shareBtn = document.getElementById("shareBtn");
+if (shareBtn) {
+  shareBtn.addEventListener("click", () => {
+    const img = preview.querySelector("img");
+    if (!img) {
+      alert("Upload or capture a photo first!");
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx.filter = img.style.filter || "none";
+    ctx.drawImage(img, 0, 0);
+
+    const dataUrl = canvas.toDataURL("image/png");
+    const text = encodeURIComponent("Check out my photo with $LENS filter 🎨");
+
+    window.open(`https://warpcast.com/~/compose?text=${text}`, "_blank");
+  });
+}
