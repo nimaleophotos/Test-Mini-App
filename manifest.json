@@ -1,8 +1,8 @@
 {
   "name": "$LENS Playground",
-  "description": "Apply $LENS token-gated filters, save and share photos on Farcaster!",
+  "description": "Token-gated photo filters, camera capture, save and share on Farcaster!",
   "url": "https://test-mini-app-one.vercel.app/",
-  "icon": "https://test-mini-app-one.vercel.app//icon.png",
+  "icon": "https://test-mini-app-one.vercel.app/icon.png",
   "author": "nimaleophotos",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
