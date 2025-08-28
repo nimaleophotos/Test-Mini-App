@@ -3,504 +3,1484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LensShot - Photography Mini App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>LENS APP - Photography Farcaster Mini-App</title>
     <style>
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
-        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.05); }
-        .camera-preview { aspect-ratio: 1/1; }
-        .filter-preview { filter: grayscale(100%) contrast(120%); }
-        .filter-vintage { filter: sepia(30%) contrast(110%) brightness(110%); }
-        .filter-noir { filter: grayscale(100%) contrast(150%) brightness(90%); }
-        .filter-glow { filter: brightness(120%) contrast(110%) saturate(130%); }
-        .pulse-ring { animation: pulse-ring 2s infinite; }
-        @keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
-        .slide-up { animation: slideUp 0.3s ease-out; }
-        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme {
+            background: #e8e9ea;
+            color: #2c2c2c;
+        }
+        
+        .app-container {
+            width: 424px;
+            height: 695px;
+            margin: 0 auto;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 50%, #2a2a2a 100%);
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .app-container {
+            background: linear-gradient(135deg, #f0f1f2 0%, #e8e9ea 50%, #dfe0e1 100%);
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .lens-flare {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .lens-flare:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .lens-flare:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .lens-flare:nth-child(3) {
+            bottom: 30%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-15px) scale(1.1); opacity: 0.1; }
+        }
+        
+        /* Main Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lens-logo {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .lens-logo {
+            border-color: #2c2c2c;
+        }
+        
+        .lens-logo::before {
+            content: '';
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .lens-logo::before {
+            border-color: #2c2c2c;
+        }
+        
+        .app-title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .app-title {
+            color: #2c2c2c;
+        }
+        
+        .connect-wallet {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 11px;
+            margin-top: 18px;
+        }
+        
+        body.light-theme .connect-wallet {
+            background: rgba(44,44,44,0.1);
+            border-color: rgba(44,44,44,0.3);
+            color: #2c2c2c;
+        }
+        
+        .connect-wallet:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        body.light-theme .connect-wallet:hover {
+            background: rgba(44,44,44,0.2);
+        }
+        
+        /* Daily Slogan */
+        .daily-slogan {
+            margin-top: 3px;
+        }
+        
+        .slogan-text {
+            font-size: 9px;
+            font-weight: 400;
+            color: #ccc;
+            margin: 0;
+            transition: all 0.3s ease;
+            opacity: 1;
+            min-height: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+        
+        body.light-theme .slogan-text {
+            color: #666;
+        }
+        
+        .slogan-word {
+            opacity: 0;
+            transform: translateX(-8px);
+            animation: wordAppear 0.5s ease forwards;
+            display: inline-block;
+        }
+        
+        @keyframes wordAppear {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Tabs */
+        .tabs-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0 0 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px 12px 0 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-bottom: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .tabs-container {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .tab-buttons {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tab-button {
+            padding: 10px 8px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 800;
+            text-align: center;
+            border-bottom: 2px solid transparent;
+            position: relative;
+            font-size: 11px;
+        }
+        
+        .tab-button:first-child {
+            flex: 1;
+        }
+        
+        .tab-button:nth-child(2) {
+            flex: 1.8;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .tab-button:last-child {
+            flex: 1;
+        }
+        
+        .tab-button.active {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: rgba(255,255,255,0.6);
+        }
+        
+        .tab-button:hover:not(.active) {
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .tab-content {
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .tab-panel {
+            display: none;
+            height: 100%;
+        }
+        
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            padding: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .bottom-nav {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .nav-button {
+            flex: 1;
+            padding: 8px 6px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            position: relative;
+        }
+        
+        .nav-button:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-1px);
+        }
+        
+        .camera-button {
+            width: 50px !important;
+            height: 50px !important;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%) !important;
+            color: #000 !important;
+            font-weight: 700 !important;
+            font-size: 8px !important;
+            flex: none !important;
+            box-shadow: 0 3px 12px rgba(255,255,255,0.3) !important;
+            border: 2px solid rgba(255,255,255,0.8) !important;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .camera-button:hover {
+            transform: translateY(-2px) scale(1.05) !important;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.4) !important;
+        }
+        
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            margin-bottom: 1px;
+        }
+        
+        .camera-button .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 2px;
+        }
+        
+        /* Full Page Screens */
+        .page-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 50%, #2a2a2a 100%);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            padding: 15px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .page-screen {
+            background: linear-gradient(135deg, #f0f1f2 0%, #e8e9ea 50%, #dfe0e1 100%);
+        }
+        
+        .page-screen.show {
+            display: flex;
+            animation: slideInFromRight 0.4s ease;
+        }
+        
+        @keyframes slideInFromRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(100%); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .back-button {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        body.light-theme .back-button {
+            background: rgba(44,44,44,0.1);
+            border-color: rgba(44,44,44,0.3);
+            color: #2c2c2c;
+        }
+        
+        .back-button:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        body.light-theme .back-button:hover {
+            background: rgba(44,44,44,0.2);
+        }
+        
+        .page-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .page-title {
+            color: #2c2c2c;
+        }
+        
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .info-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .info-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .info-section p {
+            font-size: 11px;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        .feature-card h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card p {
+            font-size: 10px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+        
+        .competition-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .competition-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+        
+        .competition-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        
+        .competition-description {
+            font-size: 11px;
+            color: #ccc;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        
+        .competition-prize {
+            font-size: 11px;
+            color: #FFD700;
+            font-weight: 600;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        .gallery-placeholder {
+            color: #888;
+            font-size: 9px;
+            text-align: center;
+        }
+        
+        .settings-group {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .settings-group h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-size: 11px;
+            color: #ccc;
+        }
+        
+        .setting-toggle {
+            width: 40px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .setting-toggle.active {
+            background: #007BFF;
+        }
+        
+        .setting-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .setting-toggle.active::after {
+            transform: translateX(20px);
+        }
+        
+        /* Leaderboard Styles */
+        .leaderboard-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        
+        .leaderboard-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 4px;
+            max-height: 320px;
+            min-height: 320px;
+        }
+        
+        .leaderboard-scroll::-webkit-scrollbar {
+            width: 3px;
+        }
+        
+        .leaderboard-scroll::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        
+        .leaderboard-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        .leaderboard-item.first {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .leaderboard-item.second {
+            background: rgba(220, 220, 220, 0.15);
+            border-color: rgba(220, 220, 220, 0.4);
+            border-width: 2px;
+        }
+        
+        .leaderboard-item.third {
+            background: rgba(205, 127, 50, 0.1);
+            border-color: rgba(205, 127, 50, 0.3);
+        }
+        
+        .rank-sticker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            position: relative;
+        }
+        
+        .rank-sticker.first {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(255, 193, 7, 0.6));
+            color: #000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+        
+        .rank-sticker.second {
+            background: linear-gradient(135deg, rgba(220, 220, 220, 0.9), rgba(192, 192, 192, 0.8));
+            color: #000;
+            box-shadow: 0 0 12px rgba(220, 220, 220, 0.6);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .rank-sticker.third {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.8), rgba(184, 115, 51, 0.6));
+            color: #fff;
+            box-shadow: 0 0 10px rgba(205, 127, 50, 0.4);
+        }
+        
+        .rank-sticker.regular {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .username {
+            font-weight: 600;
+            margin-bottom: 1px;
+            font-size: 11px;
+        }
+        
+        .username.first {
+            font-weight: 800;
+            color: #FFD700;
+        }
+        
+        .username.second {
+            font-weight: 800;
+            color: #E8E8E8;
+            text-shadow: 0 0 6px rgba(220, 220, 220, 0.5);
+        }
+        
+        .username.third {
+            font-weight: 800;
+            color: #CD7F32;
+        }
+        
+        .points {
+            color: #888;
+            font-size: 10px;
+        }
+        
+        .current-user-rank {
+            background: rgba(0, 123, 255, 0.1);
+            border: 2px solid rgba(0, 123, 255, 0.4);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 4px;
+        }
+        
+        .current-user-rank .rank-sticker {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.6));
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+        }
+        
+        .current-user-rank .username {
+            color: #007BFF;
+            font-weight: 700;
+        }
+        
+        .rank-separator {
+            text-align: center;
+            color: #fff;
+            font-size: 10px;
+            margin: 4px 0 4px 0;
+            position: relative;
+        }
+        
+        .rank-separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1;
+        }
+        
+        .rank-separator span {
+            background: #000;
+            padding: 0 12px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* POD Styles */
+        .pod-image {
+            width: 100%;
+            height: 220px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .pod-description {
+            font-size: 11px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        
+        /* Learning Styles */
+        .tip-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tip-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        
+        .tip-content {
+            font-size: 10px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .content {
+                padding: 12px;
+            }
+            
+            .app-title {
+                font-size: 16px;
+            }
+            
+            .nav-button {
+                font-size: 8px;
+                padding: 8px 6px;
+            }
+        }
     </style>
 </head>
-<body class="gradient-bg min-h-screen text-white">
-    <!-- Main Container - Farcaster Frame Aspect Ratio -->
-    <div class="w-full max-w-md mx-auto bg-black min-h-screen relative overflow-hidden">
+<body>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="bg-animation">
+            <div class="lens-flare"></div>
+            <div class="lens-flare"></div>
+            <div class="lens-flare"></div>
+        </div>
         
-        <!-- Header -->
-        <div class="flex items-center justify-between p-4 border-b border-gray-800">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                    <span class="text-black font-bold text-sm">📸</span>
-                </div>
-                <h1 class="text-xl font-bold">LensShot</h1>
-            </div>
-            <div class="flex items-center space-x-2">
-                <div id="lensBalance" class="bg-gray-800 px-3 py-1 rounded-full text-sm">
-                    <span class="text-yellow-400">$LENS</span> <span id="lensAmount">0</span>
-                </div>
-                <button id="walletBtn" class="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                    Connect Wallet
-                </button>
-            </div>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <div class="flex border-b border-gray-800">
-            <button class="tab-btn flex-1 py-3 text-center font-medium border-b-2 border-white" data-tab="camera">Camera</button>
-            <button class="tab-btn flex-1 py-3 text-center font-medium text-gray-400 border-b-2 border-transparent hover:text-white" data-tab="leaderboard">Leaderboard</button>
-            <button class="tab-btn flex-1 py-3 text-center font-medium text-gray-400 border-b-2 border-transparent hover:text-white" data-tab="competitions">Competitions</button>
-        </div>
-
-        <!-- Camera Tab -->
-        <div id="cameraTab" class="tab-content">
-            <!-- Camera Preview -->
-            <div class="relative">
-                <div id="cameraPreview" class="camera-preview bg-gray-900 flex items-center justify-center border-b border-gray-800">
-                    <video id="videoElement" class="w-full h-full object-cover hidden" autoplay muted playsinline></video>
-                    <div id="cameraPlaceholder" class="text-center">
-                        <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl">📷</span>
-                        </div>
-                        <p class="text-gray-400">Tap camera to start</p>
+        <!-- Main Home Page -->
+        <div class="content" id="homePage">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo-section">
+                    <div class="title-row">
+                        <div class="lens-logo"></div>
+                        <h1 class="app-title">LENS APP</h1>
                     </div>
-                    <canvas id="captureCanvas" class="hidden"></canvas>
+                    <div class="daily-slogan">
+                        <div class="slogan-text" id="dynamicSlogan">Capture the moment with $LENS</div>
+                    </div>
                 </div>
-
-                <!-- Filter Overlay -->
-                <div id="filterOverlay" class="absolute inset-0 pointer-events-none"></div>
+                <button class="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
             </div>
-
-            <!-- Filters -->
-            <div class="p-4">
-                <h3 class="text-sm font-medium mb-3">Filters</h3>
-                <div class="flex space-x-3 overflow-x-auto pb-2">
-                    <button class="filter-btn flex-shrink-0 w-16 h-16 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-xs active" data-filter="none">
-                        <span class="mb-1">🔄</span>
-                        <span>None</span>
+            
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-button" onclick="switchTab('leaderboard')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="13" width="4" height="8" rx="1"/>
+                            <rect x="10" y="9" width="4" height="12" rx="1"/>
+                            <rect x="17" y="5" width="4" height="16" rx="1"/>
+                            <line x1="1" y1="22" x2="23" y2="22"/>
+                        </svg>
                     </button>
-                    <button class="filter-btn flex-shrink-0 w-16 h-16 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-xs" data-filter="bw">
-                        <span class="mb-1">⚫</span>
-                        <span>B&W</span>
-                    </button>
-                    <button class="filter-btn flex-shrink-0 w-16 h-16 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-xs" data-filter="vintage">
-                        <span class="mb-1">📸</span>
-                        <span>Vintage</span>
-                    </button>
-                    <button class="filter-btn flex-shrink-0 w-16 h-16 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-xs premium" data-filter="noir">
-                        <span class="mb-1">🎭</span>
-                        <span>Noir</span>
-                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center">
-                            <span class="text-black text-xs">💎</span>
-                        </div>
-                    </button>
-                    <button class="filter-btn flex-shrink-0 w-16 h-16 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-xs premium" data-filter="glow">
-                        <span class="mb-1">✨</span>
-                        <span>Glow</span>
-                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center">
-                            <span class="text-black text-xs">💎</span>
-                        </div>
+                    <button class="tab-button active" onclick="switchTab('pod')">P &nbsp; O &nbsp; D</button>
+                    <button class="tab-button" onclick="switchTab('learning')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M6 9.5v6.5l6 3 6-3v-6.5"/>
+                            <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                        </svg>
                     </button>
                 </div>
-            </div>
-
-            <!-- Camera Controls -->
-            <div class="p-4 flex items-center justify-center space-x-8">
-                <button id="galleryBtn" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
-                    <span class="text-xl">🖼️</span>
-                </button>
-                <button id="captureBtn" class="relative w-20 h-20 bg-white rounded-full flex items-center justify-center">
-                    <div class="w-16 h-16 bg-white rounded-full border-4 border-gray-300"></div>
-                    <div class="absolute inset-0 rounded-full pulse-ring bg-white opacity-20"></div>
-                </button>
-                <button id="flipBtn" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
-                    <span class="text-xl">🔄</span>
-                </button>
-            </div>
-
-            <!-- Points Display -->
-            <div class="px-4 pb-4">
-                <div class="bg-gray-900 rounded-lg p-3 flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-gray-400">Your Points</p>
-                        <p class="text-xl font-bold" id="userPoints">1,250</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm text-gray-400">Photos Taken</p>
-                        <p class="text-xl font-bold" id="photoCount">23</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Leaderboard Tab -->
-        <div id="leaderboardTab" class="tab-content hidden">
-            <div class="p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold">Leaderboard</h2>
-                    <div class="bg-gray-800 px-3 py-1 rounded-full text-sm">
-                        <span class="text-green-400">●</span> Live
-                    </div>
-                </div>
-
-                <!-- Top 3 -->
-                <div class="grid grid-cols-3 gap-2 mb-6">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-gray-700 rounded-full mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-2xl">🥈</span>
-                        </div>
-                        <p class="text-sm font-medium">alice.eth</p>
-                        <p class="text-xs text-gray-400">2,890 pts</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-20 h-20 bg-yellow-400 rounded-full mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-3xl">🏆</span>
-                        </div>
-                        <p class="text-sm font-medium">bob.eth</p>
-                        <p class="text-xs text-gray-400">3,450 pts</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-gray-700 rounded-full mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-2xl">🥉</span>
-                        </div>
-                        <p class="text-sm font-medium">carol.eth</p>
-                        <p class="text-xs text-gray-400">2,340 pts</p>
-                    </div>
-                </div>
-
-                <!-- Leaderboard List -->
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between bg-gray-900 rounded-lg p-3">
-                        <div class="flex items-center space-x-3">
-                            <span class="text-lg font-bold text-gray-400">4</span>
-                            <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                                <span>👤</span>
+                
+                <div class="tab-content">
+                    <!-- Leaderboard Tab -->
+                    <div class="tab-panel" id="leaderboard">
+                        <div class="leaderboard-container">
+                            <div class="leaderboard-scroll" id="leaderboardList">
+                                <!-- Top 100 users will be populated by JavaScript -->
                             </div>
-                            <div>
-                                <p class="font-medium">dave.eth</p>
-                                <p class="text-xs text-gray-400">$LENS Holder</p>
+                            
+                            <!-- Current User Rank (always shown) -->
+                            <div class="rank-separator">
+                                <span>Your Rank</span>
                             </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold">1,890</p>
-                            <p class="text-xs text-gray-400">pts</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between bg-gray-900 rounded-lg p-3 border-2 border-yellow-400">
-                        <div class="flex items-center space-x-3">
-                            <span class="text-lg font-bold text-yellow-400">5</span>
-                            <div class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
-                                <span>👤</span>
-                            </div>
-                            <div>
-                                <p class="font-medium">You</p>
-                                <p class="text-xs text-yellow-400">$LENS Holder</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold">1,250</p>
-                            <p class="text-xs text-gray-400">pts</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Competitions Tab -->
-        <div id="competitionsTab" class="tab-content hidden">
-            <div class="p-4">
-                <h2 class="text-xl font-bold mb-4">Photography Competitions</h2>
-
-                <!-- Active Competition -->
-                <div class="bg-gray-900 rounded-lg p-4 mb-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-bold">Weekly: Street Photography</h3>
-                        <span class="bg-green-500 text-xs px-2 py-1 rounded-full">Active</span>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-3">Ends in 3 days, 14 hours</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm">Prize Pool: 1000 $LENS</span>
-                        <span class="text-sm">45 entries</span>
-                    </div>
-                </div>
-
-                <!-- Competition Entries -->
-                <div class="mb-4">
-                    <h3 class="font-medium mb-3">Top Entries</h3>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="bg-gray-900 rounded-lg overflow-hidden">
-                            <div class="aspect-square bg-gray-700 flex items-center justify-center">
-                                <span class="text-4xl">📸</span>
-                            </div>
-                            <div class="p-3">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium">alice.eth</span>
-                                    <span class="text-sm text-yellow-400">⭐ 23</span>
+                            <div class="leaderboard-item current-user-rank">
+                                <div class="rank-sticker">
+                                    <span>247</span>
                                 </div>
-                                <button class="vote-btn w-full bg-white text-black py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors" data-entry="1">
-                                    Vote
-                                </button>
+                                <div class="user-info">
+                                    <div class="username">photographer.eth</div>
+                                    <div class="points">8,420 points</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="bg-gray-900 rounded-lg overflow-hidden">
-                            <div class="aspect-square bg-gray-700 flex items-center justify-center">
-                                <span class="text-4xl">🌆</span>
+                    </div>
+                    
+                    <!-- POD Tab -->
+                    <div class="tab-panel active" id="pod">
+                        <div class="pod-image">
+                            <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3" 
+                                 alt="Featured photography by Nima Leo" 
+                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="width: 100%; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; color: #888;">
+                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                                <p style="margin-top: 8px; font-size: 10px;">Image loading...</p>
                             </div>
-                            <div class="p-3">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium">bob.eth</span>
-                                    <span class="text-sm text-yellow-400">⭐ 19</span>
-                                </div>
-                                <button class="vote-btn w-full bg-white text-black py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors" data-entry="2">
-                                    Vote
-                                </button>
-                            </div>
+                        </div>
+                        <div class="pod-description">
+                            <strong>Today's Featured Photo (Picture of The Day):</strong><br>
+                            Latest cast by <strong>Nima Leo</strong> (@nimaleophotos.eth)<br><br>
+                            A stunning capture showcasing exceptional composition and artistic vision. Nima Leo continues to push the boundaries of contemporary photography with this compelling visual narrative.
+                        </div>
+                    </div>
+                    
+                    <!-- Learning Tab -->
+                    <div class="tab-panel" id="learning">
+                        <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 15px; text-align: center; color: #fff;">Photography Tutorials</h2>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Mobile Photography</div>
+                            <div class="tip-content">Master the art of photography using your smartphone. Learn composition, lighting, and editing techniques specifically for mobile devices.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Basic Photography</div>
+                            <div class="tip-content">Foundation skills every photographer needs. Understand exposure, aperture, shutter speed, and ISO to take control of your camera.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Intermediate Photography</div>
+                            <div class="tip-content">Advanced composition techniques, creative lighting setups, and post-processing workflows to elevate your photography skills.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Pro Photography</div>
+                            <div class="tip-content">Professional techniques, business skills, client management, and advanced equipment usage for commercial photography success.</div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Upcoming Competition -->
-                <div class="bg-gray-900 rounded-lg p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-bold">Daily: Portrait Challenge</h3>
-                        <span class="bg-gray-600 text-xs px-2 py-1 rounded-full">Upcoming</span>
+            </div>
+            
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <button class="nav-button" onclick="openPage('info')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">?</text>
+                    </svg>
+                    Info
+                </button>
+                <button class="nav-button" onclick="openPage('competition')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                        <path d="M4 22h16"/>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                        <circle cx="12" cy="6" r="1.5" fill="currentColor"/>
+                    </svg>
+                    Competition
+                </button>
+                <button class="nav-button camera-button">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                        <circle cx="12" cy="13" r="3"/>
+                    </svg>
+                    Camera
+                </button>
+                <button class="nav-button" onclick="openPage('gallery')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21,15 16,10 5,21"/>
+                        <text x="12" y="20" text-anchor="middle" font-size="6" font-weight="bold" fill="currentColor">LENS</text>
+                    </svg>
+                    LENS Gallery
+                </button>
+                <button class="nav-button" onclick="openPage('settings')">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    Settings
+                </button>
+            </div>
+        </div>
+        
+        <!-- Full Page Screens -->
+        <!-- Info Page -->
+        <div class="page-screen" id="infoPage">
+            <div class="page-header">
+                <button class="back-button" onclick="closePage()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </button>
+                <div class="page-title">App Information</div>
+                <div style="width: 50px;"></div>
+            </div>
+            <div class="page-content">
+                <div class="info-section">
+                    <h3>Welcome to LENS APP</h3>
+                    <p>LENS APP is the premier photography community on Farcaster, connecting photographers worldwide through the power of blockchain technology and social interaction.</p>
+                    <p>Share your work, compete in daily challenges, and discover amazing photography from creators around the globe.</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📸 Photo Sharing</h4>
+                        <p>Upload and share your best photography with the community. Get feedback and recognition for your creative work.</p>
                     </div>
-                    <p class="text-sm text-gray-400 mb-3">Starts in 18 hours</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm">Prize Pool: 250 $LENS</span>
-                        <span class="text-sm">Max 100 entries</span>
+                    <div class="feature-card">
+                        <h4>🏆 Competitions</h4>
+                        <p>Participate in daily, weekly, and monthly photography competitions with exciting prizes and recognition.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Leaderboards</h4>
+                        <p>Track your progress and see how you rank against other photographers in the community.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎓 Learning</h4>
+                        <p>Access tutorials and tips from professional photographers to improve your skills.</p>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h3>About $LENS Token</h3>
+                    <p>Earn $LENS tokens by participating in the community, winning competitions, and sharing quality content. Use your tokens to unlock premium features and exclusive content.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Competition Page -->
+        <div class="page-screen" id="competitionPage">
+            <div class="page-header">
+                <button class="back-button" onclick="closePage()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </button>
+                <div class="page-title">Photography Competitions</div>
+                <div style="width: 50px;"></div>
+            </div>
+            <div class="page-content">
+                <div class="competition-item">
+                    <div class="competition-title">🏆 Daily Photo Challenge</div>
+                    <div class="competition-description">Submit your best photo of the day based on our daily theme. Winners are selected every 24 hours and featured on the main page.</div>
+                    <div class="competition-prize">Prize: 100 $LENS + Featured Spot</div>
+                </div>
+                
+                <div class="competition-item">
+                    <div class="competition-title">🎯 Weekly Theme Contest</div>
+                    <div class="competition-description">Each week features a specific photography theme. Create and submit photos that best represent the weekly challenge.</div>
+                    <div class="competition-prize">Prize: 500 $LENS + Gallery Feature</div>
+                </div>
+                
+                <div class="competition-item">
+                    <div class="competition-title">📱 Mobile Photography Masters</div>
+                    <div class="competition-description">Showcase the power of mobile photography. Only photos taken with smartphones are eligible for this monthly competition.</div>
+                    <div class="competition-prize">Prize: 1000 $LENS + Pro Badge</div>
+                </div>
+                
+                <div class="competition-item">
+                    <div class="competition-title">🌟 Monthly Portfolio Review</div>
+                    <div class="competition-description">Submit your best 5 photos for professional review and feedback from industry experts.</div>
+                    <div class="competition-prize">Prize: Professional Feedback + Mentorship</div>
+                </div>
+                
+                <div class="competition-item">
+                    <div class="competition-title">🏅 Annual Photography Awards</div>
+                    <div class="competition-description">The biggest competition of the year! Multiple categories including Portrait, Landscape, Street, and Abstract photography.</div>
+                    <div class="competition-prize">Prize: 10,000 $LENS + NFT Collection</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Gallery Page -->
+        <div class="page-screen" id="galleryPage">
+            <div class="page-header">
+                <button class="back-button" onclick="closePage()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </button>
+                <div class="page-title">LENS Gallery</div>
+                <div style="width: 50px;"></div>
+            </div>
+            <div class="page-content">
+                <div class="info-section">
+                    <h3>Featured Collections</h3>
+                    <p>Discover the best photography from our community, curated by experts and voted by users.</p>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #1</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #2</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #3</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #4</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #5</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #6</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #7</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #8</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">Featured<br>Photo #9</div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Community Showcase</h3>
+                    <p>Recent uploads from photographers in our community. Vote for your favorites to help them climb the leaderboard!</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔥 Trending Now</h4>
+                        <p>The most popular photos this week, based on community votes and engagement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 My Portfolio</h4>
+                        <p>View and manage your uploaded photos, track their performance, and see engagement stats.</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Capture Modal -->
-        <div id="captureModal" class="fixed inset-0 bg-black bg-opacity-90 hidden flex items-center justify-center z-50">
-            <div class="bg-gray-900 rounded-lg p-6 m-4 max-w-sm w-full slide-up">
-                <div class="text-center mb-4">
-                    <div class="w-32 h-32 bg-gray-700 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                        <span class="text-4xl">📸</span>
+        
+        <!-- Settings Page -->
+        <div class="page-screen" id="settingsPage">
+            <div class="page-header">
+                <button class="back-button" onclick="closePage()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </button>
+                <div class="page-title">Settings</div>
+                <div style="width: 50px;"></div>
+            </div>
+            <div class="page-content">
+                <div class="settings-group">
+                    <h3>Public Settings</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">Dark & Light Mode</div>
+                        <div class="setting-toggle active" onclick="toggleTheme(this)"></div>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">Great Shot!</h3>
-                    <p class="text-sm text-gray-400">+50 points earned</p>
+                    <div class="setting-item">
+                        <div class="setting-label">Show ENS Domain</div>
+                        <div class="setting-toggle" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">Mint Directly to LENS Gallery</div>
+                        <div class="setting-toggle" onclick="toggleSetting(this)"></div>
+                    </div>
                 </div>
-                <div class="space-y-3">
-                    <button id="mintBtn" class="w-full bg-yellow-400 text-black py-3 rounded-lg font-medium hover:bg-yellow-500 transition-colors">
-                        Mint as NFT (Optional)
-                    </button>
-                    <button id="shareBtn" class="w-full bg-white text-black py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-                        Share on Farcaster
-                    </button>
-                    <button id="closeModal" class="w-full bg-gray-700 text-white py-3 rounded-lg font-medium hover:bg-gray-600 transition-colors">
-                        Close
-                    </button>
+                
+                <div class="settings-group">
+                    <h3>Privacy & Security</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">Private Gallery</div>
+                        <div class="setting-toggle" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">Hide from Leaderboard</div>
+                        <div class="setting-toggle" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">Two-Factor Authentication</div>
+                        <div class="setting-toggle active" onclick="toggleSetting(this)"></div>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h3>Notifications</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">Competition Updates</div>
+                        <div class="setting-toggle active" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">New Followers</div>
+                        <div class="setting-toggle active" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">Photo Likes</div>
+                        <div class="setting-toggle" onclick="toggleSetting(this)"></div>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h3>Camera Preferences</h3>
+                    <div class="setting-item">
+                        <div class="setting-label">Auto-Upload</div>
+                        <div class="setting-toggle" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">High Quality Mode</div>
+                        <div class="setting-toggle active" onclick="toggleSetting(this)"></div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">Location Tagging</div>
+                        <div class="setting-toggle active" onclick="toggleSetting(this)"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // App State
-        let currentFilter = 'none';
-        let isWalletConnected = false;
-        let lensBalance = 0;
-        let userPoints = 1250;
-        let photoCount = 23;
-        let stream = null;
-        let facingMode = 'user';
-
-        // DOM Elements
-        const walletBtn = document.getElementById('walletBtn');
-        const lensAmount = document.getElementById('lensAmount');
-        const userPointsEl = document.getElementById('userPoints');
-        const photoCountEl = document.getElementById('photoCount');
-        const videoElement = document.getElementById('videoElement');
-        const cameraPlaceholder = document.getElementById('cameraPlaceholder');
-        const captureBtn = document.getElementById('captureBtn');
-        const flipBtn = document.getElementById('flipBtn');
-        const captureModal = document.getElementById('captureModal');
-        const filterOverlay = document.getElementById('filterOverlay');
-
-        // Tab Navigation
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabName = btn.dataset.tab;
-                
-                // Update tab buttons
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.classList.remove('border-white', 'text-white');
-                    b.classList.add('border-transparent', 'text-gray-400');
-                });
-                btn.classList.add('border-white', 'text-white');
-                btn.classList.remove('border-transparent', 'text-gray-400');
-                
-                // Show/hide tab content
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.add('hidden');
-                });
-                document.getElementById(tabName + 'Tab').classList.remove('hidden');
+        function connectWallet() {
+            const walletButton = document.querySelector('.connect-wallet');
+            walletButton.textContent = 'photographer.eth';
+        }
+        
+        function openTutorial() {
+            window.open('https://farcaster.xyz/nimaleophotos.eth', '_blank');
+        }
+        
+        function openPage(pageType) {
+            // Hide all pages first
+            document.querySelectorAll('.page-screen').forEach(page => {
+                page.classList.remove('show');
             });
-        });
-
-        // Wallet Connection
-        walletBtn.addEventListener('click', async () => {
-            if (!isWalletConnected) {
-                // Simulate wallet connection
-                walletBtn.textContent = 'Connecting...';
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                isWalletConnected = true;
-                lensBalance = Math.floor(Math.random() * 1000) + 100;
-                lensAmount.textContent = lensBalance.toLocaleString();
-                walletBtn.textContent = '0x1234...5678';
-                walletBtn.classList.add('bg-green-500', 'hover:bg-green-600');
-                walletBtn.classList.remove('bg-white', 'text-black', 'hover:bg-gray-200');
-            }
-        });
-
-        // Camera Functions
-        async function startCamera() {
-            try {
-                if (stream) {
-                    stream.getTracks().forEach(track => track.stop());
-                }
-                
-                stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: facingMode },
-                    audio: false
-                });
-                
-                videoElement.srcObject = stream;
-                videoElement.classList.remove('hidden');
-                cameraPlaceholder.classList.add('hidden');
-                applyCurrentFilter();
-            } catch (error) {
-                console.error('Camera access denied:', error);
-                alert('Camera access is required for this feature');
+            
+            // Show the selected page
+            const page = document.getElementById(pageType + 'Page');
+            if (page) {
+                page.classList.add('show');
             }
         }
-
-        // Filter System
-        function applyCurrentFilter() {
-            const video = videoElement;
-            video.className = 'w-full h-full object-cover';
+        
+        function closePage() {
+            // Hide all pages
+            document.querySelectorAll('.page-screen').forEach(page => {
+                page.classList.remove('show');
+            });
+        }
+        
+        function toggleSetting(toggle) {
+            toggle.classList.toggle('active');
+        }
+        
+        function toggleTheme(toggle) {
+            toggle.classList.toggle('active');
+            document.body.classList.toggle('light-theme');
+        }
+        
+        function switchTab(tabName) {
+            // Remove active class from all tab buttons and panels
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
             
-            switch(currentFilter) {
-                case 'bw':
-                    video.classList.add('filter-preview');
-                    break;
-                case 'vintage':
-                    video.classList.add('filter-vintage');
-                    break;
-                case 'noir':
-                    video.classList.add('filter-noir');
-                    break;
-                case 'glow':
-                    video.classList.add('filter-glow');
-                    break;
-                default:
-                    break;
+            // Add active class to clicked button and corresponding panel
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        // Generate leaderboard data
+        function generateLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            const usernames = [
+                'artlens.eth', 'streetphoto.eth', 'blackwhite.eth', 'urbanshot.eth', 'nightcrawler.eth',
+                'goldenhour.eth', 'shadowplay.eth', 'minimalist.eth', 'bokehmaster.eth', 'frameseeker.eth',
+                'lightchaser.eth', 'momentcapture.eth', 'visualpoet.eth', 'lenscrafted.eth', 'shutterfly.eth',
+                'pixelperfect.eth', 'focuspoint.eth', 'aperturepro.eth', 'exposureking.eth', 'composure.eth',
+                'darkroom.eth', 'filmgrain.eth', 'analogsoul.eth', 'digitalart.eth', 'photojournal.eth',
+                'streetwise.eth', 'portraitpro.eth', 'landscaper.eth', 'macro.eth', 'wildlife.eth',
+                'architecture.eth', 'fashion.eth', 'wedding.eth', 'documentary.eth', 'abstract.eth',
+                'vintage.eth', 'modern.eth', 'classic.eth', 'creative.eth', 'artistic.eth',
+                'professional.eth', 'amateur.eth', 'enthusiast.eth', 'hobbyist.eth', 'collector.eth',
+                'curator.eth', 'critic.eth', 'teacher.eth', 'student.eth', 'mentor.eth',
+                'snapshot.eth', 'capture.eth', 'shutter.eth', 'exposure.eth', 'focus.eth',
+                'lens.eth', 'frame.eth', 'shot.eth', 'click.eth', 'zoom.eth',
+                'flash.eth', 'iso.eth', 'aperture.eth', 'depth.eth', 'bokeh.eth',
+                'contrast.eth', 'saturation.eth', 'brightness.eth', 'shadow.eth', 'highlight.eth',
+                'grain.eth', 'noise.eth', 'sharp.eth', 'blur.eth', 'motion.eth',
+                'still.eth', 'candid.eth', 'posed.eth', 'natural.eth', 'studio.eth',
+                'outdoor.eth', 'indoor.eth', 'sunrise.eth', 'sunset.eth', 'noon.eth',
+                'twilight.eth', 'dawn.eth', 'dusk.eth', 'midnight.eth', 'morning.eth',
+                'evening.eth', 'night.eth', 'day.eth', 'light.eth', 'dark.eth',
+                'bright.eth', 'dim.eth', 'soft.eth', 'hard.eth', 'warm.eth',
+                'cool.eth', 'vivid.eth', 'muted.eth', 'rich.eth', 'pale.eth',
+                'deep.eth', 'shallow.eth', 'wide.eth', 'narrow.eth', 'close.eth',
+                'distant.eth', 'near.eth', 'far.eth', 'high.eth', 'low.eth',
+                'angle.eth', 'perspective.eth', 'viewpoint.eth', 'composition.eth', 'balance.eth'
+            ];
+            
+            let html = '';
+            
+            // Create exactly 100 users with proper scoring
+            for (let i = 1; i <= 100; i++) {
+                const username = usernames[i - 1] || `photographer${i}.eth`;
+                const basePoints = 20000;
+                const points = basePoints - (i * 150) + Math.floor(Math.random() * 100);
+                
+                let rankClass = 'regular';
+                let itemClass = '';
+                let usernameClass = '';
+                
+                if (i === 1) {
+                    rankClass = 'first';
+                    itemClass = 'first';
+                    usernameClass = 'first';
+                } else if (i === 2) {
+                    rankClass = 'second';
+                    itemClass = 'second';
+                    usernameClass = 'second';
+                } else if (i === 3) {
+                    rankClass = 'third';
+                    itemClass = 'third';
+                    usernameClass = 'third';
+                }
+                
+                html += `
+                    <div class="leaderboard-item ${itemClass}">
+                        <div class="rank-sticker ${rankClass}">
+                            <span>${i}</span>
+                        </div>
+                        <div class="user-info">
+                            <div class="username ${usernameClass}">${username}</div>
+                            <div class="points">${points.toLocaleString()} points</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            leaderboardList.innerHTML = html;
+        }
+        
+        // Dynamic slogan rotation
+        const slogans = [
+            "Capture the moment with $LENS!",
+            "Through the $LENS, every moment becomes timeless!",
+            "A $LENS doesn't just capture images, it captures emotions!",
+            "The world looks different through every $LENS!",
+            "Behind every $LENS lies a new perspective!",
+            "A $LENS frames stories words can't tell!",
+            "Life is sharper when seen through the right $LENS!",
+            "The $LENS is the bridge between vision and memory!",
+            "Every $LENS carries the eye of its photographer!",
+            "Through the $LENS, the ordinary becomes extraordinary!",
+            "The $LENS teaches us to focus on what truly matters!",
+            "Discover the world through a different $LENS!",
+            "Every $LENS has a story to tell!",
+            "A $LENS turns moments into memories!",
+            "See the unseen through your $LENS!",
+            "Life is more vivid through a $LENS!",
+            "A $LENS captures what words cannot!",
+            "Through the $LENS, creativity has no limits!",
+            "The right $LENS can change your perspective!",
+            "A $LENS frames more than pictures — it frames vision!",
+            "Photography begins with a $LENS and a curious eye!"
+        ];
+        
+        let currentSloganIndex = 0;
+        
+        function updateSlogan() {
+            const sloganElement = document.getElementById('dynamicSlogan');
+            if (sloganElement) {
+                // Clear current content
+                sloganElement.innerHTML = '';
+                
+                // Get next slogan
+                currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+                const newSlogan = slogans[currentSloganIndex];
+                
+                // Split into words and animate each one
+                const words = newSlogan.split(' ');
+                words.forEach((word, index) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'slogan-word';
+                    wordSpan.textContent = word;
+                    wordSpan.style.animationDelay = `${index * 0.1}s`;
+                    sloganElement.appendChild(wordSpan);
+                });
             }
         }
-
-        // Filter Selection
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.dataset.filter;
-                
-                // Check if premium filter and user has LENS tokens
-                if (btn.classList.contains('premium') && lensBalance < 100) {
-                    alert('You need at least 100 $LENS tokens to use premium filters!');
-                    return;
-                }
-                
-                // Update active filter
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                currentFilter = filter;
-                applyCurrentFilter();
-            });
-        });
-
-        // Camera Controls
-        captureBtn.addEventListener('click', () => {
-            if (!stream) {
-                startCamera();
-                return;
-            }
+        
+        // Initialize leaderboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            generateLeaderboard();
             
-            // Simulate photo capture
-            captureBtn.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                captureBtn.style.transform = 'scale(1)';
-                
-                // Update stats
-                photoCount++;
-                userPoints += 50;
-                if (lensBalance > 0) userPoints += 25; // LENS holder bonus
-                
-                photoCountEl.textContent = photoCount;
-                userPointsEl.textContent = userPoints.toLocaleString();
-                
-                // Show capture modal
-                captureModal.classList.remove('hidden');
-            }, 150);
-        });
-
-        flipBtn.addEventListener('click', () => {
-            facingMode = facingMode === 'user' ? 'environment' : 'user';
-            if (stream) {
-                startCamera();
-            }
-        });
-
-        // Modal Controls
-        document.getElementById('closeModal').addEventListener('click', () => {
-            captureModal.classList.add('hidden');
-        });
-
-        document.getElementById('mintBtn').addEventListener('click', () => {
-            if (!isWalletConnected) {
-                alert('Please connect your wallet first!');
-                return;
-            }
-            alert('Minting NFT... (Demo - this would mint on-chain)');
-            captureModal.classList.add('hidden');
-        });
-
-        document.getElementById('shareBtn').addEventListener('click', () => {
-            alert('Sharing to Farcaster... (Demo - this would post to FC)');
-            userPoints += 25; // Bonus for sharing
-            userPointsEl.textContent = userPoints.toLocaleString();
-            captureModal.classList.add('hidden');
-        });
-
-        // Competition Voting
-        document.querySelectorAll('.vote-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (!isWalletConnected) {
-                    alert('Please connect your wallet to vote!');
-                    return;
-                }
-                if (lensBalance < 10) {
-                    alert('You need at least 10 $LENS tokens to vote!');
-                    return;
-                }
-                
-                btn.textContent = 'Voted!';
-                btn.classList.add('bg-green-500', 'hover:bg-green-600');
-                btn.classList.remove('bg-white', 'text-black', 'hover:bg-gray-200');
-                btn.disabled = true;
-                
-                // Deduct voting cost
-                lensBalance -= 10;
-                lensAmount.textContent = lensBalance.toLocaleString();
-            });
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set initial active filter
-            document.querySelector('.filter-btn[data-filter="none"]').classList.add('active');
+            // Initialize first slogan with animation
+            updateSlogan();
+            
+            // Start slogan rotation (every 20 seconds = 20000ms)
+            setInterval(updateSlogan, 20000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97309607376bf5ee',t:'MTc1NTg0NzAwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9761906326fe66ae',t:'MTc1NjM2MDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
