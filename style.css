@@ -1,62 +1,34 @@
-body {
-  font-family: 'Inter', sans-serif;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
+/* Learning Styles */
+.tip-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.tip-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-1px);
+}
+.tip-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 12px;
+}
+.tip-content {
+    font-size: 10px;
+    color: #ccc;
+    line-height: 1.4;
+}
+/* Responsive */
+@media (max-width: 480px) {
+    .content { padding: 12px; }
+    .app-title { font-size: 16px; }
+    .nav-button { font-size: 8px; padding: 8px 6px; }
 }
 
-header {
-  margin-bottom: 20px;
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.subtitle {
-  font-size: 1rem;
-  color: #aaa;
-}
-
-button {
-  background: #6c63ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:hover {
-  background: #837dff;
-}
-
-#gallery img, #preview img {
-  max-width: 300px;
-  margin: 10px;
-  border-radius: 12px;
-}
-
-#camera {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 12px;
-  margin: 10px auto;
-  display: block;
-  background: #111;
-}
-
-.filter-btns button {
-  margin: 4px;
-}
-
-.muted {
-  color: #666;
-  font-size: 0.9rem;
-}
+/* Add all other CSS from your <style> section here, unchanged */
