@@ -1,149 +1,82 @@
-// ============ Wallet Connect + ENS ============
-const LENS_TOKEN_ADDRESS = "0xbd78521E5666A28F528F8D78Eba0e6C9680DDb07";
-const ERC20_ABI = ["function balanceOf(address owner) view returns (uint256)"];
-
-const connectBtn = document.getElementById("connectBtn");
-const walletStatus = document.getElementById("walletStatus");
-let provider, signer, userAddress;
-
-async function connectWallet() {
-  if (!window.ethereum) {
-    alert("Please install MetaMask!");
-    return;
-  }
-  provider = new ethers.BrowserProvider(window.ethereum);
-  await provider.send("eth_requestAccounts", []);
-  signer = await provider.getSigner();
-  userAddress = await signer.getAddress();
-
-  // Try ENS
-  let ensName = await provider.lookupAddress(userAddress);
-  if (ensName) {
-    walletStatus.innerText = `Connected: ${ensName}`;
-  } else {
-    walletStatus.innerText = `Connected: ${userAddress}`;
-  }
-
-  connectBtn.style.display = "none";
-
-  // Fetch balance
-  const balance = await checkLensBalance();
-  document.getElementById("lensBalance").innerText =
-    `Your $LENS Balance: ${balance}`;
+function connectWallet() {
+    const walletButton = document.querySelector('.connect-wallet');
+    walletButton.textContent = 'photographer.eth';
 }
-
-async function checkLensBalance() {
-  if (!signer) return 0;
-  const contract = new ethers.Contract(LENS_TOKEN_ADDRESS, ERC20_ABI, provider);
-  const balance = await contract.balanceOf(userAddress);
-  return Number(ethers.formatUnits(balance, 18));
+function openTutorial() {
+    window.open('https://farcaster.xyz/nimaleophotos.eth', '_blank');
 }
-
-if (connectBtn) {
-  connectBtn.addEventListener("click", connectWallet);
+function openPage(pageType) {
+    document.querySelectorAll('.page-screen').forEach(page => page.classList.remove('show'));
+    const page = document.getElementById(pageType + 'Page');
+    if (page) page.classList.add('show');
 }
-
-// ============ Upload & Preview ============
-const fileInput = document.getElementById("fileInput");
-const preview = document.getElementById("preview");
-
-if (fileInput) {
-  fileInput.addEventListener("change", (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.innerHTML = "";
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        preview.appendChild(img);
-      };
-      reader.readAsDataURL(file);
+function closePage() {
+    document.querySelectorAll('.page-screen').forEach(page => page.classList.remove('show'));
+}
+function toggleSetting(toggle) { toggle.classList.toggle('active'); }
+function toggleTheme(toggle) {
+    document.body.classList.toggle('light-theme');
+    const svg = toggle.querySelector('svg');
+    if(document.body.classList.contains('light-theme')){
+        svg.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    } else {
+        svg.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
     }
-  });
+}
+function switchTab(tabName){
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tabName).classList.add('active');
 }
 
-// ============ Camera ============
-const camera = document.getElementById("camera");
-const captureBtn = document.getElementById("captureBtn");
-
-if (camera && captureBtn) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then((stream) => {
-      camera.srcObject = stream;
-    })
-    .catch((err) => console.error("Camera error:", err));
-
-  captureBtn.addEventListener("click", () => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = camera.videoWidth;
-    canvas.height = camera.videoHeight;
-    ctx.drawImage(camera, 0, 0);
-
-    const img = document.createElement("img");
-    img.src = canvas.toDataURL("image/png");
-    preview.innerHTML = "";
-    preview.appendChild(img);
-  });
-}
-
-// ============ Filters ============
-async function applyFilter(filter) {
-  const img = preview.querySelector("img");
-  if (!img) return;
-
-  if (filter === "contrast(200%)") {
-    const balance = await checkLensBalance();
-    if (balance < 1) {
-      alert("You need at least 1 $LENS to use this filter!");
-      return;
+function generateLeaderboard() {
+    const leaderboardList = document.getElementById('leaderboardList');
+    const usernames = [/* all 100 usernames from your JS */];
+    let html = '';
+    for (let i = 1; i <= 100; i++) {
+        const username = usernames[i-1]||`photographer${i}.eth`;
+        const basePoints = 20000;
+        const points = basePoints-(i*150)+Math.floor(Math.random()*100);
+        let rankClass='', itemClass='', usernameClass='';
+        if(i===1){rankClass='first';itemClass='first';usernameClass='first';}
+        else if(i===2){rankClass='second';itemClass='second';usernameClass='second';}
+        else if(i===3){rankClass='third';itemClass='third';usernameClass='third';}
+        html += `<div class="leaderboard-item ${itemClass}">
+                    <div class="rank-sticker ${rankClass}"><span>${i}</span></div>
+                    <div class="user-info"><div class="username ${usernameClass}">${username}</div>
+                    <div class="points">${points.toLocaleString()} points</div></div></div>`;
     }
-  }
-  img.style.filter = filter;
+    leaderboardList.innerHTML = html;
 }
 
-// ============ Save ============
-const saveBtn = document.getElementById("saveBtn");
-if (saveBtn) {
-  saveBtn.addEventListener("click", () => {
-    const img = preview.querySelector("img");
-    if (!img) return;
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    ctx.filter = img.style.filter || "none";
-    ctx.drawImage(img, 0, 0);
-
-    const link = document.createElement("a");
-    link.download = "edited-photo.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  });
-}
-
-// ============ Share ============
-const shareBtn = document.getElementById("shareBtn");
-if (shareBtn) {
-  shareBtn.addEventListener("click", () => {
-    const img = preview.querySelector("img");
-    if (!img) {
-      alert("Upload or capture a photo first!");
-      return;
+const slogans = [
+    "Capture the moment with $LENS!",
+    "Behind every $LENS lies a new perspective!",
+    "Every $LENS has a story to tell!",
+    "A $LENS turns moments into memories!",
+    "See the unseen through your $LENS!",
+    "Life is more vivid through a $LENS!",
+    "A $LENS captures what words cannot!"
+];
+let currentSloganIndex = 0;
+function updateSlogan() {
+    const sloganElement = document.getElementById('dynamicSlogan');
+    if(sloganElement){
+        sloganElement.innerHTML='';
+        currentSloganIndex=(currentSloganIndex+1)%slogans.length;
+        slogans[currentSloganIndex].split(' ').forEach((word,index)=>{
+            const wordSpan=document.createElement('span');
+            wordSpan.className='slogan-word';
+            wordSpan.textContent=word;
+            wordSpan.style.animationDelay=`${index*0.1}s`;
+            sloganElement.appendChild(wordSpan);
+        });
     }
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    ctx.filter = img.style.filter || "none";
-    ctx.drawImage(img, 0, 0);
-
-    const dataUrl = canvas.toDataURL("image/png");
-    const text = encodeURIComponent("Check out my photo with $LENS filter 🎨");
-
-    window.open(`https://warpcast.com/~/compose?text=${text}`, "_blank");
-  });
 }
+
+document.addEventListener('DOMContentLoaded',function(){
+    generateLeaderboard();
+    updateSlogan();
+    setInterval(updateSlogan,20000);
+});
