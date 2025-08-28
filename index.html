@@ -144,7 +144,7 @@
         }
         
         .app-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             letter-spacing: 1.5px;
             transition: all 0.3s ease;
@@ -184,17 +184,17 @@
         
         /* Daily Slogan */
         .daily-slogan {
-            margin-top: 3px;
+            margin-top: 15px;
         }
         
         .slogan-text {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 400;
             color: #ccc;
             margin: 0;
             transition: all 0.3s ease;
             opacity: 1;
-            min-height: 12px;
+            min-height: 14px;
             display: flex;
             flex-wrap: wrap;
             gap: 3px;
@@ -223,7 +223,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            margin: 15px 0 0 0;
+            margin: 2px 0 0 0;
             background: rgba(255,255,255,0.05);
             border-radius: 12px 12px 0 0;
             border: 1px solid rgba(255,255,255,0.1);
@@ -340,6 +340,24 @@
             align-items: center;
             gap: 3px;
             position: relative;
+        }
+        
+        .nav-button:nth-child(1) {
+            margin-right: 15px;
+        }
+        
+        .nav-button:nth-child(2) {
+            margin-right: 15px;
+        }
+        
+        .nav-button:nth-child(4) {
+            margin-left: 15px;
+            font-size: 8px;
+            white-space: nowrap;
+        }
+        
+        .nav-button:nth-child(5) {
+            margin-left: 15px;
         }
         
         .nav-button:hover {
@@ -1048,7 +1066,7 @@
                         <polyline points="21,15 16,10 5,21"/>
                         <text x="12" y="20" text-anchor="middle" font-size="6" font-weight="bold" fill="currentColor">LENS</text>
                     </svg>
-                    LENS Gallery
+                    LENS&nbsp;Gallery
                 </button>
                 <button class="nav-button" onclick="openPage('settings')">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1425,26 +1443,12 @@
         // Dynamic slogan rotation
         const slogans = [
             "Capture the moment with $LENS!",
-            "Through the $LENS, every moment becomes timeless!",
-            "A $LENS doesn't just capture images, it captures emotions!",
-            "The world looks different through every $LENS!",
             "Behind every $LENS lies a new perspective!",
-            "A $LENS frames stories words can't tell!",
-            "Life is sharper when seen through the right $LENS!",
-            "The $LENS is the bridge between vision and memory!",
-            "Every $LENS carries the eye of its photographer!",
-            "Through the $LENS, the ordinary becomes extraordinary!",
-            "The $LENS teaches us to focus on what truly matters!",
-            "Discover the world through a different $LENS!",
             "Every $LENS has a story to tell!",
             "A $LENS turns moments into memories!",
             "See the unseen through your $LENS!",
             "Life is more vivid through a $LENS!",
-            "A $LENS captures what words cannot!",
-            "Through the $LENS, creativity has no limits!",
-            "The right $LENS can change your perspective!",
-            "A $LENS frames more than pictures — it frames vision!",
-            "Photography begins with a $LENS and a curious eye!"
+            "A $LENS captures what words cannot!"
         ];
         
         let currentSloganIndex = 0;
@@ -1482,5 +1486,5 @@
             setInterval(updateSlogan, 20000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9761abbb4757fe9c',t:'MTc1NjM2MTY5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9761c198b551fe9c',t:'MTc1NjM2MjU4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
