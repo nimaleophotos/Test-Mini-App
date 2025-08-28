@@ -3,8 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LENS App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>LENS APP</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+
+        /* Light Theme Overrides */
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #222;
+        }
+
+        body.light-theme .info-section,
+        body.light-theme .feature-card,
+        body.light-theme .competition-item,
+        body.light-theme .leaderboard-item,
+        body.light-theme .pod-image,
+        body.light-theme .tip-card,
+        body.light-theme .settings-group {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.1);
+            color: #222;
+        }
+
+        body.light-theme .username {
+            color: #222;
+        }
+
+        body.light-theme .points,
+        body.light-theme .setting-label,
+        body.light-theme .tip-content {
+            color: #555;
+        }
+
+        .info-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+
+        .feature-card h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 11px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .competition-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .competition-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+
+        .competition-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .competition-description {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .competition-prize {
+            font-size: 12px;
+            color: #FFD700;
+            font-weight: 600;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .gallery-placeholder {
+            color: #888;
+            font-size: 9px;
+            text-align: center;
+        }
+
+        .settings-group {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+
+        .settings-group h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-size: 11px;
+            color: #ccc;
+        }
+
+        .setting-toggle {
+            width: 40px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .setting-toggle.active {
+            background: #007BFF;
+        }
+
+        .setting-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .setting-toggle.active::after {
+            transform: translateX(20px);
+        }
+
+        /* Leaderboard Styles */
+        .leaderboard-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .leaderboard-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 4px;
+            max-height: 320px;
+            min-height: 320px;
+        }
+
+        .leaderboard-scroll::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .leaderboard-scroll::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+
+        .leaderboard-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .leaderboard-item.first {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .leaderboard-item.second {
+            background: rgba(220, 220, 220, 0.15);
+            border-color: rgba(220, 220, 220, 0.4);
+            border-width: 2px;
+        }
+
+        .leaderboard-item.third {
+            background: rgba(205, 127, 50, 0.1);
+            border-color: rgba(205, 127, 50, 0.3);
+        }
+
+        .rank-sticker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            position: relative;
+        }
+
+        .rank-sticker.first {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(255, 193, 7, 0.6));
+            color: #000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .rank-sticker.second {
+            background: linear-gradient(135deg, rgba(220, 220, 220, 0.9), rgba(192, 192, 192, 0.8));
+            color: #000;
+            box-shadow: 0 0 12px rgba(220, 220, 220, 0.6);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .rank-sticker.third {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.8), rgba(184, 115, 51, 0.6));
+            color: #fff;
+            box-shadow: 0 0 10px rgba(205, 127, 50, 0.4);
+        }
+
+        .rank-sticker.regular {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .username {
+            font-weight: 600;
+            margin-bottom: 1px;
+            font-size: 11px;
+        }
+
+        .username.first {
+            font-weight: 800;
+            color: #FFD700;
+        }
+
+        .username.second {
+            font-weight: 800;
+            color: #E8E8E8;
+            text-shadow: 0 0 6px rgba(220, 220, 220, 0.5);
+        }
+
+        .username.third {
+            font-weight: 800;
+            color: #CD7F32;
+        }
+
+        .points {
+            color: #888;
+            font-size: 10px;
+        }
+
+        .current-user-rank {
+            background: rgba(0, 123, 255, 0.1);
+            border: 2px solid rgba(0, 123, 255, 0.4);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 4px;
+        }
+
+        .current-user-rank .rank-sticker {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.6));
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+        }
+
+        .current-user-rank .username {
+            color: #007BFF;
+            font-weight: 700;
+        }
+
+        .rank-separator {
+            text-align: center;
+            color: #fff;
+            font-size: 10px;
+            margin: 4px 0 4px 0;
+            position: relative;
+        }
+
+        .rank-separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1;
+        }
+
+        .rank-separator span {
+            background: #000;
+            padding: 0 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* POD Styles */
+        .pod-image {
+            width: 100%;
+            height: 220px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pod-description {
+            font-size: 11px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        /* Dark/Light Theme */
+        body.light-theme {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        body.light-theme .info-section,
+        body.light-theme .feature-card,
+        body.light-theme .competition-item,
+        body.light-theme .pod-image,
+        body.light-theme .setting-group,
+        body.light-theme .leaderboard-item,
+        body.light-theme .current-user-rank {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        body.light-theme .tip-card {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        body.light-theme .username {
+            color: #333 !important;
+        }
+
+        body.light-theme .points {
+            color: #555;
+        }
+
+        body.light-theme .rank-separator span {
+            background: #f8f9fa;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -38,7 +483,6 @@
                     <button class="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
                 </div>
             </div>
-            
             <!-- Tabs -->
             <div class="tabs-container">
                 <div class="tab-buttons">
@@ -66,10 +510,10 @@
                     <div class="tab-panel" id="leaderboard">
                         <div class="leaderboard-container">
                             <div class="leaderboard-scroll" id="leaderboardList">
-                                <!-- Top 100 users will be populated by JavaScript -->
+                                <!-- Top 100 users populated by JS -->
                             </div>
                             
-                            <!-- Current User Rank (always shown) -->
+                            <!-- Current User Rank -->
                             <div class="rank-separator">
                                 <span>Your Rank</span>
                             </div>
@@ -176,22 +620,94 @@
                 </button>
             </div>
         </div>
-        
-        <!-- Full Page Screens -->
-        <div id="infoPage" class="page-screen">
-            <!-- Info page content... same as your code -->
-        </div>
-        <div id="competitionPage" class="page-screen">
-            <!-- Competition page content... same as your code -->
-        </div>
-        <div id="galleryPage" class="page-screen">
-            <!-- Gallery page content... same as your code -->
-        </div>
-        <div id="rewardsPage" class="page-screen">
-            <!-- Rewards page content... same as your code -->
-        </div>
-    </div>
 
-    <script src="script.js"></script>
+    <script>
+        function connectWallet() {
+            const walletButton = document.querySelector('.connect-wallet');
+            walletButton.textContent = 'photographer.eth';
+        }
+
+        function openTutorial() {
+            window.open('https://farcaster.xyz/nimaleophotos.eth', '_blank');
+        }
+
+        function openPage(pageType) {
+            document.querySelectorAll('.page-screen').forEach(page => page.classList.remove('show'));
+            const page = document.getElementById(pageType + 'Page');
+            if (page) page.classList.add('show');
+        }
+
+        function closePage() {
+            document.querySelectorAll('.page-screen').forEach(page => page.classList.remove('show'));
+        }
+
+        function toggleTheme(toggle) {
+            document.body.classList.toggle('light-theme');
+            const svg = toggle.querySelector('svg');
+            if (document.body.classList.contains('light-theme')) {
+                svg.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+            } else {
+                svg.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+            }
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function generateLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            const usernames = [...Array(100).keys()].map(i => `photographer${i+1}.eth`);
+            let html = '';
+            for (let i = 1; i <= 100; i++) {
+                const points = 20000 - (i*150) + Math.floor(Math.random()*100);
+                let itemClass = i===1?'first':i===2?'second':i===3?'third':'';
+                let rankClass = itemClass || 'regular';
+                let usernameClass = itemClass || '';
+                html += `<div class="leaderboard-item ${itemClass}">
+                    <div class="rank-sticker ${rankClass}"><span>${i}</span></div>
+                    <div class="user-info">
+                        <div class="username ${usernameClass}">${usernames[i-1]}</div>
+                        <div class="points">${points.toLocaleString()} points</div>
+                    </div>
+                </div>`;
+            }
+            leaderboardList.innerHTML = html;
+        }
+
+        const slogans = [
+            "Capture the moment with $LENS!",
+            "Behind every $LENS lies a new perspective!",
+            "Every $LENS has a story to tell!",
+            "A $LENS turns moments into memories!",
+            "See the unseen through your $LENS!",
+            "Life is more vivid through a $LENS!",
+            "A $LENS captures what words cannot!"
+        ];
+        let currentSloganIndex = 0;
+        function updateSlogan() {
+            const sloganElement = document.getElementById('dynamicSlogan');
+            if (!sloganElement) return;
+            sloganElement.innerHTML = '';
+            currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+            const words = slogans[currentSloganIndex].split(' ');
+            words.forEach((word,i)=>{
+                const span = document.createElement('span');
+                span.className='slogan-word';
+                span.textContent=word;
+                span.style.animationDelay=`${i*0.1}s`;
+                sloganElement.appendChild(span);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            generateLeaderboard();
+            updateSlogan();
+            setInterval(updateSlogan, 20000);
+        });
+    </script>
 </body>
 </html>
