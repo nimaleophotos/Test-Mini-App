@@ -1191,11 +1191,38 @@
             background-size: 50% 50%;
         }
         
-        .grid-leading {
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,0.3) 1px, transparent 1px),
-                linear-gradient(-45deg, rgba(255,255,255,0.3) 1px, transparent 1px);
-            background-size: 100% 100%;
+        .aspect-ratio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        .aspect-ratio-overlay.active {
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,0.8) 0%, 
+                transparent 20%, 
+                transparent 80%, 
+                rgba(0,0,0,0.8) 100%);
+        }
+        
+        .aspect-ratio-overlay.square {
+            background: linear-gradient(to right, 
+                rgba(0,0,0,0.8) 0%, 
+                transparent 12.5%, 
+                transparent 87.5%, 
+                rgba(0,0,0,0.8) 100%);
+        }
+        
+        .aspect-ratio-overlay.portrait {
+            background: linear-gradient(to right, 
+                rgba(0,0,0,0.8) 0%, 
+                transparent 25%, 
+                transparent 75%, 
+                rgba(0,0,0,0.8) 100%);
         }
         
         .camera-controls-top {
@@ -1205,8 +1232,21 @@
             right: 15px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             z-index: 10;
+        }
+        
+        .camera-controls-left {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .camera-controls-right {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
         }
         
         .camera-controls-bottom {
@@ -1222,21 +1262,26 @@
         }
         
         .camera-btn {
+            width: 44px;
+            height: 44px;
             background: rgba(0,0,0,0.6);
             border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
-            padding: 8px 12px;
-            border-radius: 20px;
+            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 12px;
             font-weight: 500;
             backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .camera-btn:hover {
             background: rgba(0,0,0,0.8);
             border-color: rgba(255,255,255,0.5);
+            transform: scale(1.05);
         }
         
         .camera-btn.active {
@@ -1251,21 +1296,61 @@
         }
         
         .zoom-btn {
+            width: 40px;
+            height: 40px;
             background: rgba(0,0,0,0.6);
             border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
-            padding: 6px 12px;
-            border-radius: 15px;
+            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 11px;
             font-weight: 600;
             backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .zoom-btn.active {
             background: rgba(255,255,255,0.2);
             border-color: rgba(255,255,255,0.6);
+        }
+        
+        .zoom-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .aspect-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .aspect-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 9px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .aspect-btn.active {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.6);
+        }
+        
+        .aspect-btn:hover {
+            transform: scale(1.05);
         }
         
         .capture-button {
@@ -1296,7 +1381,7 @@
             left: 50%;
             width: 50px;
             height: 50px;
-            background: #fff;
+            background: #007BFF;
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: all 0.2s ease;
@@ -1307,13 +1392,26 @@
             height: 40px;
         }
         
+        .timer-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            z-index: 100;
+            display: none;
+        }
+        
         .photo-preview {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -1334,26 +1432,30 @@
         
         .preview-actions {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .preview-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             backdrop-filter: blur(10px);
+            white-space: nowrap;
         }
         
         .preview-btn:hover {
             background: rgba(255,255,255,0.2);
             border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
         }
         
         .preview-btn.primary {
@@ -1372,6 +1474,28 @@
         
         .preview-btn.success:hover {
             background: rgba(40,167,69,1);
+        }
+        
+        .preview-btn.secondary {
+            background: rgba(108,117,125,0.8);
+            border-color: rgba(108,117,125,1);
+        }
+        
+        .preview-btn.secondary:hover {
+            background: rgba(108,117,125,1);
+        }
+        
+        .preview-btn.disabled {
+            background: rgba(108,117,125,0.4);
+            border-color: rgba(108,117,125,0.6);
+            color: rgba(255,255,255,0.5);
+            cursor: not-allowed;
+        }
+        
+        .preview-btn.disabled:hover {
+            background: rgba(108,117,125,0.4);
+            border-color: rgba(108,117,125,0.6);
+            transform: none;
         }
         
         .camera-error {
@@ -1410,6 +1534,15 @@
             .capture-button::after {
                 width: 40px;
                 height: 40px;
+            }
+            
+            .preview-actions {
+                gap: 8px;
+            }
+            
+            .preview-btn {
+                padding: 10px 16px;
+                font-size: 11px;
             }
         }
     </style>
@@ -1983,25 +2116,28 @@
                 <!-- Camera Overlay -->
                 <div class="camera-overlay">
                     <div class="grid-overlay" id="gridOverlay"></div>
+                    <div class="aspect-ratio-overlay" id="aspectOverlay"></div>
                 </div>
                 
                 <!-- Top Controls -->
                 <div class="camera-controls-top">
-                    <button class="camera-btn" onclick="closeCamera()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 6L6 18M6 6l12 12"/>
-                        </svg>
-                    </button>
+                    <div class="camera-controls-left">
+                        <button class="camera-btn" onclick="closeCamera()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 6L6 18M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
                     
-                    <div style="display: flex; gap: 10px;">
+                    <div class="camera-controls-right">
                         <button class="camera-btn" id="flashBtn" onclick="toggleFlash()">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="flashIcon">
                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                             </svg>
                         </button>
                         
                         <button class="camera-btn" id="gridBtn" onclick="toggleGrid()">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="3" width="6" height="6"/>
                                 <rect x="15" y="3" width="6" height="6"/>
                                 <rect x="3" y="15" width="6" height="6"/>
@@ -2010,9 +2146,18 @@
                         </button>
                         
                         <button class="camera-btn" onclick="switchCamera()">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 8l4 4-4 4M7 16l-4-4 4-4"/>
-                                <path d="M21 12H3"/>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="12" r="3"/>
+                                <circle cx="15" cy="12" r="3"/>
+                                <path d="M9 9l6 6"/>
+                                <path d="M15 9l-6 6"/>
+                            </svg>
+                        </button>
+                        
+                        <button class="camera-btn" id="timerBtn" onclick="toggleTimer()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
                             </svg>
                         </button>
                     </div>
@@ -2020,6 +2165,14 @@
                 
                 <!-- Bottom Controls -->
                 <div class="camera-controls-bottom">
+                    <!-- Aspect Ratio Controls -->
+                    <div class="aspect-controls">
+                        <button class="aspect-btn active" onclick="setAspectRatio('full')">Full</button>
+                        <button class="aspect-btn" onclick="setAspectRatio('1:1')">1:1</button>
+                        <button class="aspect-btn" onclick="setAspectRatio('3:4')">3:4</button>
+                        <button class="aspect-btn" onclick="setAspectRatio('9:16')">9:16</button>
+                    </div>
+                    
                     <!-- Zoom Controls -->
                     <div class="zoom-controls">
                         <button class="zoom-btn" onclick="setZoom(0.5)">0.5x</button>
@@ -2030,6 +2183,9 @@
                     <!-- Capture Button -->
                     <button class="capture-button" onclick="capturePhoto()"></button>
                 </div>
+                
+                <!-- Timer Display -->
+                <div class="timer-display" id="timerDisplay">3</div>
                 
                 <!-- Error Message -->
                 <div class="camera-error" id="cameraError" style="display: none;">
@@ -2043,9 +2199,10 @@
             <div class="photo-preview" id="photoPreview">
                 <img class="preview-image" id="previewImage" alt="Captured photo">
                 <div class="preview-actions">
-                    <button class="preview-btn" onclick="retakePhoto()">Retake</button>
-                    <button class="preview-btn success" onclick="saveToGallery()">Save to Gallery</button>
-                    <button class="preview-btn primary" onclick="mintToLens()">Mint on LENS Gallery</button>
+                    <button class="preview-btn secondary" onclick="retakePhoto()">Recapture</button>
+                    <button class="preview-btn primary" onclick="shareOnFarcaster()">Share on Farcaster</button>
+                    <button class="preview-btn success" onclick="saveToGallery()">Save</button>
+                    <button class="preview-btn disabled" onclick="mintToLens()">Mint (Coming Soon)</button>
                 </div>
             </div>
         </div>
@@ -2258,8 +2415,11 @@
         let currentCamera = 'user'; // 'user' for front, 'environment' for back
         let currentZoom = 1;
         let flashEnabled = false;
-        let gridType = 'none'; // 'none', '3x3', 'symmetrical', 'leading'
+        let gridType = 'none'; // 'none', '3x3', 'symmetrical'
+        let aspectRatio = 'full'; // 'full', '1:1', '3:4', '9:16'
+        let timerSeconds = 0; // 0 = off, 3, 5
         let capturedImageData = null;
+        let isTimerActive = false;
         
         async function openCamera() {
             const cameraScreen = document.getElementById('cameraScreen');
@@ -2284,6 +2444,11 @@
             // Reset preview
             const photoPreview = document.getElementById('photoPreview');
             photoPreview.classList.remove('show');
+            
+            // Reset timer
+            isTimerActive = false;
+            const timerDisplay = document.getElementById('timerDisplay');
+            timerDisplay.style.display = 'none';
         }
         
         async function startCamera() {
@@ -2365,10 +2530,14 @@
         
         function toggleFlash() {
             const flashBtn = document.getElementById('flashBtn');
+            const flashIcon = document.getElementById('flashIcon');
             flashEnabled = !flashEnabled;
             
             if (flashEnabled) {
                 flashBtn.classList.add('active');
+                // Flash on icon
+                flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>';
+                
                 // Apply flash effect to video if supported
                 if (currentStream) {
                     const track = currentStream.getVideoTracks()[0];
@@ -2381,6 +2550,9 @@
                 }
             } else {
                 flashBtn.classList.remove('active');
+                // Flash off icon (with diagonal line)
+                flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/><line x1="2" y1="2" x2="22" y2="22" stroke="currentColor" stroke-width="2"/>';
+                
                 if (currentStream) {
                     const track = currentStream.getVideoTracks()[0];
                     const capabilities = track.getCapabilities();
@@ -2397,8 +2569,8 @@
             const gridBtn = document.getElementById('gridBtn');
             const gridOverlay = document.getElementById('gridOverlay');
             
-            // Cycle through grid types
-            const gridTypes = ['none', '3x3', 'symmetrical', 'leading'];
+            // Cycle through grid types: none -> 3x3 -> symmetrical -> none
+            const gridTypes = ['none', '3x3', 'symmetrical'];
             const currentIndex = gridTypes.indexOf(gridType);
             const nextIndex = (currentIndex + 1) % gridTypes.length;
             gridType = gridTypes[nextIndex];
@@ -2416,6 +2588,31 @@
             }
         }
         
+        function toggleTimer() {
+            const timerBtn = document.getElementById('timerBtn');
+            
+            // Cycle through timer options: 0 -> 3 -> 5 -> 0
+            const timerOptions = [0, 3, 5];
+            const currentIndex = timerOptions.indexOf(timerSeconds);
+            const nextIndex = (currentIndex + 1) % timerOptions.length;
+            timerSeconds = timerOptions[nextIndex];
+            
+            if (timerSeconds > 0) {
+                timerBtn.classList.add('active');
+                // Update button text to show timer value
+                timerBtn.innerHTML = `<span style="font-size: 10px; font-weight: 700;">${timerSeconds}s</span>`;
+            } else {
+                timerBtn.classList.remove('active');
+                // Reset to clock icon
+                timerBtn.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                `;
+            }
+        }
+        
         function setZoom(zoom) {
             currentZoom = zoom;
             
@@ -2424,6 +2621,35 @@
             event.target.classList.add('active');
             
             applyZoom(zoom);
+        }
+        
+        function setAspectRatio(ratio) {
+            aspectRatio = ratio;
+            
+            // Update active aspect button
+            document.querySelectorAll('.aspect-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            applyAspectRatio(ratio);
+        }
+        
+        function applyAspectRatio(ratio) {
+            const aspectOverlay = document.getElementById('aspectOverlay');
+            
+            // Remove all aspect classes
+            aspectOverlay.className = 'aspect-ratio-overlay';
+            
+            if (ratio !== 'full') {
+                aspectOverlay.classList.add('active');
+                
+                if (ratio === '1:1') {
+                    aspectOverlay.classList.add('square');
+                } else if (ratio === '9:16') {
+                    aspectOverlay.classList.add('portrait');
+                } else if (ratio === '3:4') {
+                    aspectOverlay.classList.add('active'); // Default active styling for 3:4
+                }
+            }
         }
         
         function applyZoom(zoom) {
@@ -2453,11 +2679,42 @@
         }
         
         function capturePhoto() {
+            if (isTimerActive) return; // Prevent multiple captures during timer
+            
+            if (timerSeconds > 0) {
+                startTimer();
+            } else {
+                takePhoto();
+            }
+        }
+        
+        function startTimer() {
+            isTimerActive = true;
+            const timerDisplay = document.getElementById('timerDisplay');
+            let countdown = timerSeconds;
+            
+            timerDisplay.textContent = countdown;
+            timerDisplay.style.display = 'block';
+            
+            const timerInterval = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    timerDisplay.textContent = countdown;
+                } else {
+                    clearInterval(timerInterval);
+                    timerDisplay.style.display = 'none';
+                    takePhoto();
+                    isTimerActive = false;
+                }
+            }, 1000);
+        }
+        
+        function takePhoto() {
             const video = document.getElementById('cameraVideo');
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
             
-            // Set canvas dimensions to match video
+            // Set canvas dimensions
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             
@@ -2490,7 +2747,7 @@
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
             }
             
-            // Convert to data URL
+            // Convert to image data
             capturedImageData = canvas.toDataURL('image/jpeg', 0.9);
             
             // Show preview
@@ -2521,111 +2778,47 @@
             link.click();
             
             // Show success message
-            showSuccessMessage('Photo saved to gallery!');
+            alert('Photo saved to your device!');
+        }
+        
+        function shareOnFarcaster() {
+            if (!capturedImageData) return;
             
-            // Close preview and camera
-            retakePhoto();
-            setTimeout(() => {
-                closeCamera();
-            }, 1000);
+            // Generate a random image title for the cast
+            const imageTitles = [
+                'Street Photography', 'Golden Hour', 'Urban Life', 'Portrait Session', 
+                'Landscape View', 'Night Shot', 'Candid Moment', 'Architecture', 
+                'Nature Scene', 'City Lights', 'Sunset Capture', 'Morning Light'
+            ];
+            const randomTitle = imageTitles[Math.floor(Math.random() * imageTitles.length)];
+            
+            // Create the cast text
+            const castText = `I captured ${randomTitle} with @lensapp $LENS! Share yours!`;
+            
+            // Open Farcaster with the cast text
+            const farcasterUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}`;
+            window.open(farcasterUrl, '_blank');
+            
+            // Show success message
+            alert('Opening Farcaster to share your photo!');
         }
         
         function mintToLens() {
-            if (!capturedImageData) return;
-            
-            // Simulate minting process
-            const mintingOverlay = document.createElement('div');
-            mintingOverlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.9);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                color: white;
-                font-family: 'Inter', sans-serif;
-            `;
-            
-            mintingOverlay.innerHTML = `
-                <div style="text-align: center;">
-                    <div style="width: 60px; height: 60px; border: 3px solid #007BFF; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
-                    <h3 style="margin: 0 0 10px 0; font-size: 18px;">Minting to LENS Gallery...</h3>
-                    <p style="margin: 0; color: #ccc; font-size: 14px;">This may take a few moments</p>
-                </div>
-                <style>
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            `;
-            
-            document.body.appendChild(mintingOverlay);
-            
-            // Simulate minting delay
-            setTimeout(() => {
-                document.body.removeChild(mintingOverlay);
-                showSuccessMessage('Photo minted to LENS Gallery! 🎉');
-                
-                // Close preview and camera
-                retakePhoto();
-                setTimeout(() => {
-                    closeCamera();
-                }, 1000);
-            }, 3000);
+            alert('NFT minting feature coming soon! Stay tuned for updates.');
         }
         
-        function showSuccessMessage(message) {
-            const successDiv = document.createElement('div');
-            successDiv.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(40, 167, 69, 0.9);
-                color: white;
-                padding: 12px 24px;
-                border-radius: 25px;
-                z-index: 10000;
-                font-weight: 600;
-                backdrop-filter: blur(10px);
-                animation: slideDown 0.3s ease;
-            `;
-            
-            successDiv.textContent = message;
-            document.body.appendChild(successDiv);
-            
-            // Add animation styles
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideDown {
-                    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-                    to { opacity: 1; transform: translateX(-50%) translateY(0); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            setTimeout(() => {
-                document.body.removeChild(successDiv);
-                document.head.removeChild(style);
-            }, 3000);
-        }
-        
-        // Initialize leaderboard when page loads
+        // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             generateLeaderboard();
             
-            // Initialize first slogan with animation
-            updateSlogan();
+            // Start slogan rotation
+            setInterval(updateSlogan, 4000);
             
-            // Start slogan rotation (every 20 seconds = 20000ms)
-            setInterval(updateSlogan, 20000);
+            // Auto-connect wallet simulation
+            setTimeout(() => {
+                connectWallet();
+            }, 2000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976ace3990471c7a',t:'MTc1NjQ1NzQ3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976af42d67565c3c',t:'MTc1NjQ1OTAzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
