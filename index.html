@@ -2821,26 +2821,84 @@
             alert('Photo saved to your device!');
         }
         
-        function shareOnFarcaster() {
+        async function shareOnFarcaster() {
             if (!capturedImageData) return;
             
-            // Generate a random image title for the cast
-            const imageTitles = [
-                'Street Photography', 'Golden Hour', 'Urban Life', 'Portrait Session', 
-                'Landscape View', 'Night Shot', 'Candid Moment', 'Architecture', 
-                'Nature Scene', 'City Lights', 'Sunset Capture', 'Morning Light'
-            ];
-            const randomTitle = imageTitles[Math.floor(Math.random() * imageTitles.length)];
-            
-            // Create the cast text
-            const castText = `I captured ${randomTitle} with @lensapp $LENS! Share yours!`;
-            
-            // Open Farcaster with the cast text
-            const farcasterUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}`;
-            window.open(farcasterUrl, '_blank');
-            
-            // Show success message
-            alert('Opening Farcaster to share your photo!');
+            try {
+                // Generate a random image title for the cast
+                const imageTitles = [
+                    'Street Photography', 'Golden Hour', 'Urban Life', 'Portrait Session', 
+                    'Landscape View', 'Night Shot', 'Candid Moment', 'Architecture', 
+                    'Nature Scene', 'City Lights', 'Sunset Capture', 'Morning Light'
+                ];
+                const randomTitle = imageTitles[Math.floor(Math.random() * imageTitles.length)];
+                
+                // Create the cast text with your exact format
+                const castText = `I captured ${randomTitle} with @lensapp!\n\nShare yours! $LENS`;
+                
+                // Convert base64 to blob
+                const response = await fetch(capturedImageData);
+                const blob = await response.blob();
+                
+                // Create form data for the image upload
+                const formData = new FormData();
+                formData.append('file', blob, `lens-photo-${Date.now()}.jpg`);
+                
+                // Check if Web Share API is available and supports files
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'photo.jpg', { type: 'image/jpeg' })] })) {
+                    // Use Web Share API to share directly to Farcaster
+                    const file = new File([blob], `lens-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
+                    
+                    await navigator.share({
+                        title: 'LENS Photo',
+                        text: castText,
+                        files: [file]
+                    });
+                    
+                    alert('Photo shared successfully!');
+                } else {
+                    // Fallback: Create a temporary download and open Farcaster
+                    const link = document.createElement('a');
+                    link.download = `lens-photo-${Date.now()}.jpg`;
+                    link.href = capturedImageData;
+                    link.click();
+                    
+                    // Open Farcaster compose with text
+                    const farcasterUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}`;
+                    window.open(farcasterUrl, '_blank');
+                    
+                    alert('Photo downloaded! Please upload it manually to your Farcaster cast that just opened.');
+                }
+                
+            } catch (error) {
+                console.error('Error sharing photo:', error);
+                
+                // Fallback method
+                const imageTitles = [
+                    'Street Photography', 'Golden Hour', 'Urban Life', 'Portrait Session', 
+                    'Landscape View', 'Night Shot', 'Candid Moment', 'Architecture', 
+                    'Nature Scene', 'City Lights', 'Sunset Capture', 'Morning Light'
+                ];
+                const randomTitle = imageTitles[Math.floor(Math.random() * imageTitles.length)];
+                const castText = `I captured ${randomTitle} with @lensapp!\n\nShare yours! $LENS`;
+                
+                // Download the image
+                const link = document.createElement('a');
+                link.download = `lens-photo-${Date.now()}.jpg`;
+                link.href = capturedImageData;
+                link.click();
+                
+                // Copy text to clipboard
+                try {
+                    await navigator.clipboard.writeText(castText);
+                    alert('Photo downloaded and caption copied to clipboard! Please paste it in your Farcaster cast.');
+                } catch (clipboardError) {
+                    // Open Farcaster with the text
+                    const farcasterUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}`;
+                    window.open(farcasterUrl, '_blank');
+                    alert('Photo downloaded! Please upload it to your Farcaster cast that just opened.');
+                }
+            }
         }
         
         function mintToLens() {
@@ -2860,5 +2918,5 @@
             }, 2000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976b60dfd792c148',t:'MTc1NjQ2MzQ4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976b6676f147a00a',t:'MTc1NjQ2MzcxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
