@@ -2171,11 +2171,11 @@
                     
                     <!-- Zoom Controls -->
                     <div class="zoom-controls">
-                        <button class="zoom-btn" onclick="setZoom(0.5)">0.5x</button>
-                        <button class="zoom-btn active" onclick="setZoom(1)">1x</button>
-                        <button class="zoom-btn" onclick="setZoom(2)">2x</button>
+                        <button class="zoom-btn" onclick="setZoom('wide', event)">0.5x</button>
+                        <button class="zoom-btn active" onclick="setZoom('normal', event)">1x</button>
+                        <button class="zoom-btn" onclick="setZoom('zoom', event)">2x</button>
                     </div>
-                    
+
                     <!-- Capture Button -->
                     <button class="capture-button" onclick="capturePhoto()"></button>
                 </div>
@@ -2644,15 +2644,32 @@
             }
         }
         
-        function setZoom(zoom) {
-            currentZoom = zoom;
-            
+        async function setZoom(mode, event) {
             // Update active zoom button
             document.querySelectorAll('.zoom-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            applyZoom(zoom);
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            // Detect platform
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(ua);
+            const isiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+            // Map mode → zoom level
+            if (mode === "wide") {
+                currentZoom = isiOS ? 0.5 : (isAndroid ? 0.6 : 0.5);
+            } else if (mode === "normal") {
+                currentZoom = 1.0;
+            } else if (mode === "zoom") {
+                currentZoom = 2.0;
+            } else {
+                currentZoom = 1.0; // fallback
+            }
+
+            applyZoom(currentZoom);
         }
+
         
         function toggleAspectRatio() {
             const aspectBtn = document.getElementById('aspectBtn');
