@@ -2644,31 +2644,58 @@
             }
         }
         
-        async function setZoom(mode, event) {
-            // Update active zoom button
-            document.querySelectorAll('.zoom-btn').forEach(btn => btn.classList.remove('active'));
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
+async function setZoom(mode, event) {
+    document.querySelectorAll('.zoom-btn').forEach(btn => btn.classList.remove('active'));
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
 
-            // Detect platform
-            const ua = navigator.userAgent || navigator.vendor || window.opera;
-            const isAndroid = /android/i.test(ua);
-            const isiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isAndroid = /android/i.test(ua);
+    const isiOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
 
-            // Map mode → zoom level
-            if (mode === "wide") {
-                currentZoom = isiOS ? 0.5 : (isAndroid ? 0.6 : 0.5);
-            } else if (mode === "normal") {
-                currentZoom = 1.0;
-            } else if (mode === "zoom") {
-                currentZoom = 2.0;
+    if (isiOS) {
+        if (mode === "wide") currentZoom = 0.5;
+        else if (mode === "normal") currentZoom = 1.0;
+        else if (mode === "zoom") currentZoom = 2.0;
+
+        applyZoom(currentZoom);
+
+    } else if (isAndroid) {
+        if (mode === "wide") {
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(d => d.kind === "videoinput");
+
+            const wideCam = videoDevices.find(d =>
+                d.label.toLowerCase().includes("wide") ||
+                d.label.toLowerCase().includes("ultra")
+            );
+
+            if (wideCam) {
+                if (currentStream) currentStream.getTracks().forEach(t => t.stop());
+                currentStream = await navigator.mediaDevices.getUserMedia({
+                    video: { deviceId: { exact: wideCam.deviceId } }
+                });
+                document.getElementById("cameraVideo").srcObject = currentStream;
             } else {
-                currentZoom = 1.0; // fallback
+                currentZoom = 0.6;
+                applyZoom(currentZoom);
             }
-
+        } else if (mode === "normal") {
+            currentZoom = 1.0;
+            applyZoom(currentZoom);
+        } else if (mode === "zoom") {
+            currentZoom = 2.0;
             applyZoom(currentZoom);
         }
+    } else {
+        if (mode === "wide") currentZoom = 0.5;
+        else if (mode === "normal") currentZoom = 1.0;
+        else if (mode === "zoom") currentZoom = 2.0;
+
+        applyZoom(currentZoom);
+    }
+}
 
         
         function toggleAspectRatio() {
