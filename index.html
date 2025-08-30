@@ -1,123 +1,118 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Zap, ZapOff, RotateCcw } from "lucide-react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Mini Camera App</title>
+  <style>
+    body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; font-family:sans-serif; }
+    #camera { position:relative; width:100%; height:100%; }
+    video { width:100%; height:100%; object-fit:cover; }
+    .controls { position:absolute; bottom:20px; width:100%; display:flex; justify-content:center; gap:12px; z-index:10; }
+    .controls button { padding:15px; border:none; border-radius:50%; background:rgba(255,255,255,0.2); color:white; font-size:16px; cursor:pointer; }
+    .lens-switcher { position:absolute; bottom:100px; width:100%; display:flex; justify-content:center; gap:8px; z-index:10; }
+    .lens-switcher button { padding:10px 14px; border:none; border-radius:12px; background:rgba(255,255,255,0.2); color:white; cursor:pointer; }
+    .grid { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; 
+      background-image: linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px);
+      background-size: 33.3% 33.3%; display:none; z-index:5;
+    }
+  </style>
+</head>
+<body>
+  <div id="camera">
+    <video id="preview" autoplay playsinline muted></video>
+    <div id="grid" class="grid"></div>
 
-export default function CameraApp() {
-  const videoRef = useRef(null);
-  const streamRef = useRef(null);
+    <div class="lens-switcher" id="lensSwitcher"></div>
 
-  const [devices, setDevices] = useState([]);
-  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
-  const [flash, setFlash] = useState(false);
+    <div class="controls">
+      <button id="captureBtn">📸</button>
+      <button id="switchBtn">🔄</button>
+      <button id="flashBtn">⚡</button>
+      <button id="gridBtn">#</button>
+    </div>
+  </div>
+  <canvas id="snap" style="display:none;"></canvas>
 
-  // 🔍 Get all cameras (lenses)
-  useEffect(() => {
-    async function loadDevices() {
+  <script>
+    let video = document.getElementById('preview');
+    let canvas = document.getElementById('snap');
+    let grid = document.getElementById('grid');
+    let lensSwitcher = document.getElementById('lensSwitcher');
+
+    let stream = null;
+    let devices = [];
+    let currentDeviceId = null;
+    let torchOn = false;
+
+    // 1️⃣ Enumerate cameras and populate lens buttons
+    async function initCameras() {
+      await navigator.mediaDevices.getUserMedia({ video: true }); // permission
+      devices = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'videoinput');
+      renderLensButtons();
+      if (devices.length > 0) startStream(devices[0].deviceId);
+    }
+
+    function renderLensButtons() {
+      lensSwitcher.innerHTML = '';
+      devices.forEach((d, i) => {
+        let btn = document.createElement('button');
+        btn.innerText = i===0 ? "0.5x" : i===1 ? "1x" : i===2 ? "2x" : "Lens";
+        btn.onclick = () => startStream(d.deviceId);
+        lensSwitcher.appendChild(btn);
+      });
+    }
+
+    // 2️⃣ Start camera stream
+    async function startStream(deviceId) {
+      if (stream) stream.getTracks().forEach(t => t.stop());
       try {
-        const allDevices = await navigator.mediaDevices.enumerateDevices();
-        const cams = allDevices.filter(d => d.kind === "videoinput");
-        setDevices(cams);
-
-        if (cams.length > 0) {
-          startStream(cams[0].deviceId); // default = first back cam
-        }
-      } catch (err) {
-        console.error("Error listing devices:", err);
+        stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: deviceId }, width:{ideal:1920}, height:{ideal:1080} } });
+        video.srcObject = stream;
+        currentDeviceId = deviceId;
+      } catch(e) {
+        console.error("Camera error:", e);
       }
     }
-    loadDevices();
-  }, []);
 
-  // 🎥 Start camera stream
-  async function startStream(deviceId) {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-    }
+    // 3️⃣ Capture photo
+    document.getElementById('captureBtn').onclick = () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      let ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      let dataUrl = canvas.toDataURL('image/jpeg');
+      window.open(dataUrl, '_blank');
+    };
 
-    try {
-      const constraints = {
-        video: {
-          deviceId: { exact: deviceId },
-          width: { ideal: 1920 },
-          height: { ideal: 1080 }
-        }
-      };
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      streamRef.current = stream;
-      videoRef.current.srcObject = stream;
-      setSelectedDeviceId(deviceId);
-    } catch (err) {
-      console.error("Error starting camera:", err);
-    }
-  }
+    // 4️⃣ Switch front/back camera
+    document.getElementById('switchBtn').onclick = () => {
+      let front = devices.find(d=>d.label.toLowerCase().includes('front'));
+      let back = devices.find(d=>d.label.toLowerCase().includes('back'));
+      if (currentDeviceId === front?.deviceId && back) startStream(back.deviceId);
+      else if (front) startStream(front.deviceId);
+    };
 
-  // 📸 Take photo
-  function capturePhoto() {
-    const canvas = document.createElement("canvas");
-    const video = videoRef.current;
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const dataUrl = canvas.toDataURL("image/jpeg");
-    console.log("Captured photo:", dataUrl);
-  }
+    // 5️⃣ Flash toggle (torch)
+    document.getElementById('flashBtn').onclick = async () => {
+      if (!stream) return;
+      let track = stream.getVideoTracks()[0];
+      let caps = track.getCapabilities();
+      if (caps.torch) {
+        torchOn = !torchOn;
+        await track.applyConstraints({ advanced:[{ torch: torchOn }] });
+      } else {
+        alert("Torch not supported on this device/browser");
+      }
+    };
 
-  return (
-    <div className="relative h-screen w-full bg-black overflow-hidden">
-      {/* Camera preview */}
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        muted
-        className="w-full h-full object-cover"
-      />
+    // 6️⃣ Grid toggle
+    document.getElementById('gridBtn').onclick = () => {
+      grid.style.display = grid.style.display === 'block' ? 'none' : 'block';
+    };
 
-      {/* Lens switcher */}
-      <div className="absolute bottom-28 w-full flex justify-center gap-4">
-        {devices.map((cam, i) => (
-          <button
-            key={cam.deviceId}
-            onClick={() => startStream(cam.deviceId)}
-            className={`px-4 py-2 rounded-full ${
-              cam.deviceId === selectedDeviceId
-                ? "bg-blue-500 text-white"
-                : "bg-white/20 text-white"
-            }`}
-          >
-            {i === 0 ? "0.5x" : i === 1 ? "1x" : i === 2 ? "2x" : "Lens"}
-          </button>
-        ))}
-      </div>
-
-      {/* Capture + Switch + Flash */}
-      <div className="absolute bottom-8 w-full flex justify-center gap-6">
-        <button
-          onClick={capturePhoto}
-          className="w-16 h-16 rounded-full bg-white"
-        />
-        <button
-          onClick={() => {
-            // Switch between front & back
-            const front = devices.find(d => d.label.toLowerCase().includes("front"));
-            const back = devices.find(d => d.label.toLowerCase().includes("back"));
-            if (selectedDeviceId === front?.deviceId && back) {
-              startStream(back.deviceId);
-            } else if (front) {
-              startStream(front.deviceId);
-            }
-          }}
-          className="p-4 bg-white/20 text-white rounded-full"
-        >
-          <RotateCcw />
-        </button>
-        <button
-          onClick={() => setFlash(f => !f)}
-          className="p-4 bg-white/20 text-white rounded-full"
-        >
-          {flash ? <Zap /> : <ZapOff />}
-        </button>
-      </div>
-    </div>
-  );
-}
+    initCameras();
+  </script>
+</body>
+</html>
