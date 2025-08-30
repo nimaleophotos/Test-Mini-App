@@ -1265,30 +1265,7 @@
                 linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
         }
         
-        /* Grid styles for 9:16 aspect ratio */
-        .grid-3x3.grid-9-16 {
-            border-top: 2px solid rgba(255,255,255,0.8);
-            border-bottom: 2px solid rgba(255,255,255,0.8);
-            border-left: none;
-            border-right: none;
-            top: calc(50% - 28.125%);
-            height: 56.25%;
-            background-image: 
-                linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px)),
-                linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px));
-        }
-        
-        .grid-symmetrical.grid-9-16 {
-            border-top: 2px solid rgba(255,255,255,0.8);
-            border-bottom: 2px solid rgba(255,255,255,0.8);
-            border-left: none;
-            border-right: none;
-            top: calc(50% - 28.125%);
-            height: 56.25%;
-            background-image: 
-                linear-gradient(to right, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px)),
-                linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
-        }
+
         
         /* Default grid styles (fallback) */
         .grid-3x3 {
@@ -1340,17 +1317,7 @@
                     rgba(0,0,0,1) 100%);
         }
         
-        /* 9:16 vertical aspect ratio */
-        .aspect-ratio-overlay.ratio-9-16 {
-            background: 
-                linear-gradient(to bottom, 
-                    rgba(0,0,0,1) 0%, 
-                    rgba(0,0,0,1) calc(50% - 28.125%), 
-                    transparent calc(50% - 28.125%), 
-                    transparent calc(50% + 28.125%), 
-                    rgba(0,0,0,1) calc(50% + 28.125%), 
-                    rgba(0,0,0,1) 100%);
-        }
+
         
         .camera-controls-top {
             position: absolute;
@@ -2587,22 +2554,33 @@
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 const videoDevices = devices.filter(device => device.kind === 'videoinput');
                 
+                console.log('Available video devices:', videoDevices.map(d => d.label));
+                
                 // Check for ultra-wide camera indicators
                 const hasUltraWide = videoDevices.some(device => {
                     const label = device.label.toLowerCase();
                     return label.includes('ultra') || 
                            label.includes('wide') || 
                            label.includes('0.5') ||
-                           (label.includes('back') && (label.includes('2') || label.includes('wide')));
+                           label.includes('0.6') ||
+                           label.includes('back') && (label.includes('2') || label.includes('wide'));
                 });
                 
-                // iOS typically has ultra-wide, some Android phones do too
+                // iOS typically has ultra-wide, Android support varies
                 const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
                 const isAndroid = /Android/.test(navigator.userAgent);
                 
-                // More conservative approach for Android
-                isUltraWideSupported = hasUltraWide || (isIOS && videoDevices.length > 2);
+                // For iOS: assume ultra-wide if 3+ cameras, for Android: rely on device labels
+                if (isIOS) {
+                    isUltraWideSupported = videoDevices.length >= 3;
+                } else if (isAndroid) {
+                    // Android: be more aggressive in detection
+                    isUltraWideSupported = hasUltraWide || videoDevices.length >= 3;
+                } else {
+                    isUltraWideSupported = hasUltraWide;
+                }
                 
+                console.log('Ultra-wide supported:', isUltraWideSupported, 'Device count:', videoDevices.length);
                 return isUltraWideSupported;
             } catch (error) {
                 console.error('Error checking camera devices:', error);
@@ -2624,28 +2602,56 @@
                     }
                 };
                 
-                // For 0.6x zoom on back camera, try to use ultra-wide camera if supported
-                if (currentZoom === 0.6 && currentCamera === 'environment' && isUltraWideSupported) {
+                // For 0.5x zoom on back camera, try to use ultra-wide camera if supported
+                if (currentZoom === 0.5 && currentCamera === 'environment' && isUltraWideSupported) {
                     try {
                         // Try to get ultra-wide camera specifically
                         const devices = await navigator.mediaDevices.enumerateDevices();
                         const videoDevices = devices.filter(device => device.kind === 'videoinput');
-                        const ultraWideDevice = videoDevices.find(device => {
+                        
+                        console.log('Looking for ultra-wide among:', videoDevices.map(d => d.label));
+                        
+                        // Try multiple strategies to find ultra-wide camera
+                        let ultraWideDevice = null;
+                        
+                        // Strategy 1: Look for explicit ultra-wide keywords
+                        ultraWideDevice = videoDevices.find(device => {
                             const label = device.label.toLowerCase();
-                            return label.includes('ultra') ||
-                                   label.includes('wide') ||
-                                   label.includes('0.5') ||
-                                   label.includes('0.6') ||
-                                   (label.includes('back') && (label.includes('2') || label.includes('wide')));
+                            return label.includes('ultra') || label.includes('0.5') || label.includes('0.6');
                         });
+                        
+                        // Strategy 2: Look for "wide" in back cameras
+                        if (!ultraWideDevice) {
+                            ultraWideDevice = videoDevices.find(device => {
+                                const label = device.label.toLowerCase();
+                                return label.includes('wide') && (label.includes('back') || label.includes('rear'));
+                            });
+                        }
+                        
+                        // Strategy 3: For Android, try the third camera (often ultra-wide)
+                        if (!ultraWideDevice && videoDevices.length >= 3) {
+                            // Sort by deviceId and try the third one (common pattern)
+                            const sortedDevices = videoDevices.sort((a, b) => a.deviceId.localeCompare(b.deviceId));
+                            ultraWideDevice = sortedDevices[2]; // Third camera
+                            console.log('Trying third camera as ultra-wide:', ultraWideDevice.label);
+                        }
+                        
+                        // Strategy 4: Try different deviceId patterns
+                        if (!ultraWideDevice) {
+                            ultraWideDevice = videoDevices.find(device => {
+                                return device.deviceId.includes('2') || device.deviceId.includes('wide');
+                            });
+                        }
                         
                         if (ultraWideDevice) {
                             constraints.video.deviceId = { exact: ultraWideDevice.deviceId };
                             delete constraints.video.facingMode;
-                            console.log('Using ultra-wide camera:', ultraWideDevice.label);
+                            console.log('Using ultra-wide camera:', ultraWideDevice.label, ultraWideDevice.deviceId);
+                        } else {
+                            console.log('No ultra-wide camera found, using digital zoom');
                         }
                     } catch (e) {
-                        console.log('Ultra-wide camera not available, using digital zoom');
+                        console.log('Ultra-wide camera selection failed:', e);
                     }
                 }
                 
@@ -2657,7 +2663,7 @@
                 video.className = currentCamera === 'environment' ? 'camera-video back-camera' : 'camera-video';
                 
                 // Apply zoom transform only if not using actual ultra-wide camera
-                const usingActualUltraWide = currentZoom === 0.6 && currentCamera === 'environment' && isUltraWideSupported && constraints.video.deviceId;
+                const usingActualUltraWide = currentZoom === 0.5 && currentCamera === 'environment' && isUltraWideSupported && constraints.video.deviceId;
                 
                 if (!usingActualUltraWide) {
                     video.style.transform = currentCamera === 'user' ? 
@@ -2692,9 +2698,9 @@
                 // Front camera: only 1x zoom
                 zoomControls.innerHTML = '<button class="zoom-btn active" onclick="setZoom(1)">1x</button>';
             } else {
-                // Back camera: 0.6x, 1x, 2x zoom
+                // Back camera: 0.5x, 1x, 2x zoom
                 zoomControls.innerHTML = `
-                    <button class="zoom-btn ${currentZoom === 0.6 ? 'active' : ''}" onclick="setZoom(0.6)">0.6x</button>
+                    <button class="zoom-btn ${currentZoom === 0.5 ? 'active' : ''}" onclick="setZoom(0.5)">0.5x</button>
                     <button class="zoom-btn ${currentZoom === 1 ? 'active' : ''}" onclick="setZoom(1)">1x</button>
                     <button class="zoom-btn ${currentZoom === 2 ? 'active' : ''}" onclick="setZoom(2)">2x</button>
                 `;
@@ -2751,7 +2757,7 @@
             if (gridMode === 'off') return;
             
             // Remove existing aspect ratio classes
-            gridOverlay.classList.remove('grid-full', 'grid-1-1', 'grid-3-4', 'grid-9-16');
+            gridOverlay.classList.remove('grid-full', 'grid-1-1', 'grid-3-4');
             
             // Add aspect ratio specific class
             if (aspectRatio === 'full') {
@@ -2760,8 +2766,6 @@
                 gridOverlay.classList.add('grid-1-1');
             } else if (aspectRatio === '3:4') {
                 gridOverlay.classList.add('grid-3-4');
-            } else if (aspectRatio === '9:16') {
-                gridOverlay.classList.add('grid-9-16');
             }
         }
         
@@ -2795,10 +2799,6 @@
                 aspectRatio = '3:4';
                 aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">3:4</span>';
                 aspectOverlay.className = 'aspect-ratio-overlay ratio-3-4';
-            } else if (aspectRatio === '3:4') {
-                aspectRatio = '9:16';
-                aspectBtn.innerHTML = '<span style="font-size: 8px; font-weight: 700;">9:16</span>';
-                aspectOverlay.className = 'aspect-ratio-overlay ratio-9-16';
             } else {
                 aspectRatio = 'full';
                 aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">Full</span>';
@@ -2823,8 +2823,8 @@
                 event.target.classList.add('active');
             }
             
-            // For 0.6x zoom on back camera, try to restart camera with ultra-wide if supported
-            if (zoom === 0.6 && currentCamera === 'environment') {
+            // For 0.5x zoom on back camera, try to restart camera with ultra-wide if supported
+            if (zoom === 0.5 && currentCamera === 'environment') {
                 stopCamera();
                 await startCamera();
             } else {
@@ -2870,16 +2870,6 @@
                     cropY = (videoHeight - cropHeight) / 2;
                 } else {
                     cropWidth = videoHeight * 3 / 4;
-                    cropX = (videoWidth - cropWidth) / 2;
-                }
-            } else if (aspectRatio === '9:16') {
-                // Crop to 9:16 vertical aspect ratio (crop from top/bottom)
-                const targetHeight = videoWidth * 16 / 9;
-                if (targetHeight <= videoHeight) {
-                    cropHeight = targetHeight;
-                    cropY = (videoHeight - cropHeight) / 2;
-                } else {
-                    cropWidth = videoHeight * 9 / 16;
                     cropX = (videoWidth - cropWidth) / 2;
                 }
             }
@@ -2963,5 +2953,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9772cec526c537c0',t:'MTc1NjU0MTM4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9772d5fe440c37c0',t:'MTc1NjU0MTY4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
