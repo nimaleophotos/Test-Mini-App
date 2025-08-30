@@ -2402,14 +2402,26 @@
         // Dynamic slogan animation
         function animateSlogan() {
             const slogans = [
-                "Capture the moment with $LENS",
-                "Share your vision with the world",
-                "Photography meets blockchain",
-                "Every shot tells a story",
-                "Frame your future with LENS",
-                "Where creativity meets community",
-                "Snap, share, earn with $LENS",
-                "Your lens, your story, your rewards"
+                "Capture the moment through your $LENS!",
+                "Discover new worlds with $LENS.",
+                "Focus your vision through $LENS!",
+                "Memories are sharper with $LENS.",
+                "Tell your story through $LENS!",
+                "See beauty unfold with $LENS.",
+                "Frame your future through $LENS!",
+                "Creativity comes alive in $LENS.",
+                "Unlock perspectives with $LENS!",
+                "Emotions come into focus with $LENS.",
+                "Explore hidden details through $LENS!",
+                "The world looks brighter with $LENS.",
+                "Life is sharper when seen through $LENS!",
+                "Capture light, capture life with $LENS.",
+                "Your vision, your story, your $LENS!",
+                "Find clarity in every shot with $LENS.",
+                "The magic of moments lives in $LENS!",
+                "Focus on what matters through $LENS.",
+                "Every frame finds meaning in $LENS!",
+                "See the extraordinary through $LENS."
             ];
             
             const sloganElement = document.getElementById('dynamicSlogan');
@@ -2426,18 +2438,9 @@
                 words.forEach((word, index) => {
                     const span = document.createElement('span');
                     span.className = 'slogan-word';
-                    span.textContent = word;
+                    span.textContent = word + (index < words.length - 1 ? ' ' : '');
                     span.style.animationDelay = `${index * 0.1}s`;
                     sloganElement.appendChild(span);
-                    
-                    // Add space after word (except last word)
-                    if (index < words.length - 1) {
-                        const space = document.createElement('span');
-                        space.textContent = ' ';
-                        space.className = 'slogan-word';
-                        space.style.animationDelay = `${index * 0.1}s`;
-                        sloganElement.appendChild(space);
-                    }
                 });
                 
                 currentIndex = (currentIndex + 1) % slogans.length;
@@ -2458,6 +2461,7 @@
         let timerMode = 'off';
         let aspectRatio = 'full';
         let currentZoom = 1;
+        let isUltraWideSupported = false;
         
         function openCamera() {
             const cameraScreen = document.getElementById('cameraScreen');
@@ -2471,9 +2475,36 @@
             stopCamera();
         }
         
+        async function checkUltraWideSupport() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                
+                // Check if there are multiple back cameras (indicating ultra-wide support)
+                const backCameras = videoDevices.filter(device => 
+                    device.label.toLowerCase().includes('back') || 
+                    device.label.toLowerCase().includes('rear') ||
+                    device.label.toLowerCase().includes('environment')
+                );
+                
+                // iOS typically has multiple cameras, Android may not
+                isUltraWideSupported = backCameras.length > 1 || 
+                    /iPhone|iPad|iPod/.test(navigator.userAgent);
+                
+                return isUltraWideSupported;
+            } catch (error) {
+                console.error('Error checking camera devices:', error);
+                isUltraWideSupported = false;
+                return false;
+            }
+        }
+
         async function startCamera() {
             try {
-                const constraints = {
+                // Check ultra-wide support first
+                await checkUltraWideSupport();
+                
+                let constraints = {
                     video: {
                         facingMode: currentCamera,
                         width: { ideal: 1920 },
@@ -2481,12 +2512,47 @@
                     }
                 };
                 
+                // For 0.5x zoom, try to use ultra-wide camera if supported
+                if (currentZoom === 0.5 && currentCamera === 'environment' && isUltraWideSupported) {
+                    try {
+                        // Try to get ultra-wide camera specifically
+                        const devices = await navigator.mediaDevices.enumerateDevices();
+                        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                        const ultraWideDevice = videoDevices.find(device => 
+                            device.label.toLowerCase().includes('ultra') ||
+                            device.label.toLowerCase().includes('wide') ||
+                            (device.label.toLowerCase().includes('back') && device.label.includes('2'))
+                        );
+                        
+                        if (ultraWideDevice) {
+                            constraints.video.deviceId = { exact: ultraWideDevice.deviceId };
+                            delete constraints.video.facingMode;
+                        }
+                    } catch (e) {
+                        console.log('Ultra-wide camera not available, using standard camera');
+                    }
+                }
+                
                 currentStream = await navigator.mediaDevices.getUserMedia(constraints);
                 const video = document.getElementById('cameraVideo');
                 video.srcObject = currentStream;
                 
-                // Update video class based on camera
+                // Update video class and zoom based on camera and support
                 video.className = currentCamera === 'environment' ? 'camera-video back-camera' : 'camera-video';
+                
+                // Apply zoom transform only if not using actual ultra-wide camera
+                if (currentZoom === 0.5 && !isUltraWideSupported) {
+                    video.style.transform = currentCamera === 'user' ? 
+                        `scaleX(-1) scale(${currentZoom})` : 
+                        `scale(${currentZoom})`;
+                } else if (currentZoom !== 0.5 || !isUltraWideSupported) {
+                    video.style.transform = currentCamera === 'user' ? 
+                        `scaleX(-1) scale(${currentZoom})` : 
+                        `scale(${currentZoom})`;
+                } else {
+                    // Reset transform when using actual ultra-wide
+                    video.style.transform = currentCamera === 'user' ? 'scaleX(-1)' : 'none';
+                }
                 
                 document.getElementById('cameraError').style.display = 'none';
             } catch (error) {
@@ -2581,18 +2647,24 @@
             }
         }
         
-        function setZoom(zoom) {
+        async function setZoom(zoom) {
             currentZoom = zoom;
             
             // Update active zoom button
             document.querySelectorAll('.zoom-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Apply zoom to video (this is a visual effect, actual zoom would require camera API)
-            const video = document.getElementById('cameraVideo');
-            video.style.transform = currentCamera === 'user' ? 
-                `scaleX(-1) scale(${zoom})` : 
-                `scale(${zoom})`;
+            // For 0.5x zoom on back camera, try to restart camera with ultra-wide if supported
+            if (zoom === 0.5 && currentCamera === 'environment') {
+                stopCamera();
+                await startCamera();
+            } else {
+                // Apply zoom transform for other zoom levels or when ultra-wide not available
+                const video = document.getElementById('cameraVideo');
+                video.style.transform = currentCamera === 'user' ? 
+                    `scaleX(-1) scale(${zoom})` : 
+                    `scale(${zoom})`;
+            }
         }
         
         async function capturePhoto() {
@@ -2691,5 +2763,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9772211fd5ca1cba',t:'MTc1NjUzNDI3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977241daa68949b9',t:'MTc1NjUzNTYxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
