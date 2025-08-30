@@ -2715,18 +2715,55 @@
             await startCamera();
         }
         
-        function toggleFlash() {
+        async function toggleFlash() {
             const flashBtn = document.getElementById('flashBtn');
             const flashIcon = document.getElementById('flashIcon');
             
-            if (flashMode === 'off') {
-                flashMode = 'on';
-                flashBtn.classList.add('active');
-                flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor"/>';
-            } else {
-                flashMode = 'off';
-                flashBtn.classList.remove('active');
-                flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>';
+            try {
+                if (flashMode === 'off') {
+                    // Try to enable flash/torch
+                    if (currentStream) {
+                        const track = currentStream.getVideoTracks()[0];
+                        const capabilities = track.getCapabilities();
+                        
+                        if (capabilities.torch) {
+                            await track.applyConstraints({
+                                advanced: [{ torch: true }]
+                            });
+                            flashMode = 'on';
+                            flashBtn.classList.add('active');
+                            flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor"/>';
+                        } else {
+                            // Fallback: simulate flash with screen flash
+                            flashMode = 'screen';
+                            flashBtn.classList.add('active');
+                            flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor"/>';
+                        }
+                    }
+                } else {
+                    // Turn off flash
+                    if (currentStream && flashMode === 'on') {
+                        const track = currentStream.getVideoTracks()[0];
+                        await track.applyConstraints({
+                            advanced: [{ torch: false }]
+                        });
+                    }
+                    flashMode = 'off';
+                    flashBtn.classList.remove('active');
+                    flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>';
+                }
+            } catch (error) {
+                console.log('Flash not supported on this device:', error);
+                // Fallback to screen flash mode
+                if (flashMode === 'off') {
+                    flashMode = 'screen';
+                    flashBtn.classList.add('active');
+                    flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor"/>';
+                } else {
+                    flashMode = 'off';
+                    flashBtn.classList.remove('active');
+                    flashIcon.innerHTML = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>';
+                }
             }
         }
         
@@ -2841,6 +2878,11 @@
                 await startTimer();
             }
             
+            // Trigger flash effect if enabled
+            if (flashMode === 'screen' || flashMode === 'on') {
+                await triggerFlashEffect();
+            }
+            
             const video = document.getElementById('cameraVideo');
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -2943,6 +2985,40 @@
         
 
         
+        function triggerFlashEffect() {
+            return new Promise(resolve => {
+                // Create flash overlay
+                const flashOverlay = document.createElement('div');
+                flashOverlay.style.position = 'absolute';
+                flashOverlay.style.top = '0';
+                flashOverlay.style.left = '0';
+                flashOverlay.style.width = '100%';
+                flashOverlay.style.height = '100%';
+                flashOverlay.style.backgroundColor = 'white';
+                flashOverlay.style.opacity = '0';
+                flashOverlay.style.zIndex = '100';
+                flashOverlay.style.pointerEvents = 'none';
+                flashOverlay.style.transition = 'opacity 0.1s ease';
+                
+                const cameraScreen = document.getElementById('cameraScreen');
+                cameraScreen.appendChild(flashOverlay);
+                
+                // Trigger flash animation
+                setTimeout(() => {
+                    flashOverlay.style.opacity = '0.8';
+                }, 10);
+                
+                setTimeout(() => {
+                    flashOverlay.style.opacity = '0';
+                }, 150);
+                
+                setTimeout(() => {
+                    cameraScreen.removeChild(flashOverlay);
+                    resolve();
+                }, 250);
+            });
+        }
+        
         function requestCameraPermission() {
             startCamera();
         }
@@ -2953,5 +3029,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9772d5fe440c37c0',t:'MTc1NjU0MTY4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9772ddd1e28137c0',t:'MTc1NjU0MjAwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
