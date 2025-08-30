@@ -1,132 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-  <title>Mini Camera</title>
-  <style>
-    html, body {
-      margin:0; padding:0; height:100%; background:black;
-      font-family:sans-serif; color:white;
-      overflow:hidden;
-    }
-    #camera {
-      position:relative;
-      width:100%; height:100%;
-      background:black;
-    }
-    video {
-      width:100%; height:100%;
-      object-fit:cover;
-    }
-    /* Grid overlay */
-    .overlay.grid {
-      position:absolute; top:0; left:0; right:0; bottom:0;
-      pointer-events:none;
-      background-image: linear-gradient(rgba(255,255,255,.25) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,.25) 1px, transparent 1px);
-      background-size: 33.3% 33.3%;
-      display:none;
-    }
-    /* Lens buttons at top */
-    .lens {
-      position:absolute; top:10px; left:0; right:0;
-      display:flex; justify-content:center; gap:12px;
-      z-index:10;
-    }
-    .lens button, .controls button {
-      background:rgba(0,0,0,.5); border:none; color:white;
-      border-radius:50%; width:60px; height:60px;
-      font-size:16px; cursor:pointer;
-    }
-    /* Bottom controls */
-    .controls {
-      position:absolute; bottom:20px; left:0; right:0;
-      display:flex; justify-content:center; gap:40px;
-      z-index:10;
-    }
-    canvas { display:none; }
-  </style>
-</head>
-<body>
-  <div id="camera">
-    <video id="preview" autoplay playsinline></video>
-    <div id="grid" class="overlay grid"></div>
+<html lang=”en”>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div class="lens">
-      <button onclick="setLens(0.5)">0.5x</button>
-      <button onclick="setLens(1)">1x</button>
-      <button onclick="setLens(2)">2x</button>
-    </div>
+		<!-- Name of the app -->
+		<title>Camera App</title>
 
-    <div class="controls">
-      <button onclick="toggleTorch()">⚡</button>
-      <button onclick="capture()">📸</button>
-      <button onclick="toggleGrid()">#</button>
-    </div>
-  </div>
-  <canvas id="snap"></canvas>
+		<!-- Link to main style sheet -->
+		<link rel="stylesheet" href="style.css"> 
+	</head>
+	<body>
 
-  <script>
-    let stream, track;
-    let devices = [];
+		<!-- Camera -->
+		<main id="camera">
 
-    async function initCamera(deviceId) {
-      if (stream) stream.getTracks().forEach(t => t.stop());
-      stream = await navigator.mediaDevices.getUserMedia({
-        video: deviceId ? { deviceId: { exact: deviceId } } : { facingMode: "environment" }
-      });
-      const video = document.getElementById("preview");
-      video.srcObject = stream;
-      track = stream.getVideoTracks()[0];
-    }
+		    <!-- Camera sensor -->
+		    <canvas id="camera--sensor"></canvas>
+		    
+		    <!-- Camera view -->
+		    <video id="camera--view" autoplay playsinline></video>
+		    
+		    <!-- Camera output -->
+		    <img src="//:0" alt="" id="camera--output">
 
-    async function setLens(level) {
-      if (!track) return;
-      const caps = track.getCapabilities();
-      if (caps && "zoom" in caps) {
-        // Try hardware zoom (iOS Safari)
-        const clamped = Math.min(caps.zoom.max, Math.max(caps.zoom.min, level));
-        await track.applyConstraints({ advanced: [{ zoom: clamped }] });
-      } else {
-        // Fallback: switch deviceId
-        if (!devices.length) devices = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === "videoinput");
-        // naive heuristic: pick nth camera
-        let target = devices[level === 0.5 ? 0 : (level === 1 ? 1 : 2)];
-        if (target) await initCamera(target.deviceId);
-        else alert("No matching lens available");
-      }
-    }
+		    <!-- Camera trigger -->
+		    <button id="camera--trigger">Take a picture</button>
 
-    async function toggleTorch() {
-      if (!track) return;
-      const caps = track.getCapabilities();
-      if ("torch" in caps) {
-        const settings = track.getSettings();
-        const torchOn = settings.torch === true;
-        await track.applyConstraints({ advanced: [{ torch: !torchOn }] });
-      } else {
-        alert("Flash not supported on this device/browser");
-      }
-    }
+		</main>
 
-    function toggleGrid() {
-      const grid = document.getElementById("grid");
-      grid.style.display = grid.style.display === "block" ? "none" : "block";
-    }
-
-    function capture() {
-      const video = document.getElementById("preview");
-      const canvas = document.getElementById("snap");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const url = canvas.toDataURL("image/jpeg");
-      window.open(url, "_blank");
-    }
-
-    initCamera();
-  </script>
-</body>
+		<!-- Reference to your JavaScript file -->
+		<script src="app.js"></script> 
+	</body>
 </html>
