@@ -1202,15 +1202,15 @@
         
         .grid-3x3 {
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.6) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255,255,255,0.6) 2px, transparent 2px);
+                linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px);
             background-size: 33.33% 33.33%;
         }
         
         .grid-symmetrical {
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.6) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255,255,255,0.6) 2px, transparent 2px);
+                linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px);
             background-size: 50% 50%;
         }
         
@@ -1532,6 +1532,30 @@
             padding: 20px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
+        }
+        
+        .focus-indicator {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 15;
+        }
+        
+        .focus-indicator.active {
+            opacity: 1;
+            animation: focusPulse 1s ease-out;
+        }
+        
+        @keyframes focusPulse {
+            0% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
         }
         
 
@@ -2106,12 +2130,13 @@
         <!-- Camera Screen -->
         <div class="camera-screen" id="cameraScreen">
             <div class="camera-viewport">
-                <video class="camera-video" id="cameraVideo" autoplay playsinline></video>
+                <video class="camera-video" id="cameraVideo" autoplay playsinline onclick="focusAtPoint(event)"></video>
                 
                 <!-- Camera Overlay -->
                 <div class="camera-overlay">
                     <div class="grid-overlay" id="gridOverlay"></div>
                     <div class="aspect-ratio-overlay" id="aspectOverlay"></div>
+                    <div class="focus-indicator" id="focusIndicator"></div>
                 </div>
                 
                 <!-- Top Controls -->
@@ -2165,8 +2190,8 @@
                 <div class="camera-controls-bottom">
                     
                     <!-- Zoom Controls -->
-                    <div class="zoom-controls">
-                        <button class="zoom-btn" onclick="setZoom(0.5)">0.5x</button>
+                    <div class="zoom-controls" id="zoomControls">
+                        <button class="zoom-btn" onclick="setZoom(0.6)">0.6x</button>
                         <button class="zoom-btn active" onclick="setZoom(1)">1x</button>
                         <button class="zoom-btn" onclick="setZoom(2)">2x</button>
                     </div>
@@ -2455,7 +2480,7 @@
         
         // Camera functionality
         let currentStream = null;
-        let currentCamera = 'user'; // 'user' for front, 'environment' for back
+        let currentCamera = 'environment'; // 'user' for front, 'environment' for back
         let flashMode = 'off';
         let gridMode = 'off';
         let timerMode = 'off';
@@ -2480,16 +2505,21 @@
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 const videoDevices = devices.filter(device => device.kind === 'videoinput');
                 
-                // Check if there are multiple back cameras (indicating ultra-wide support)
-                const backCameras = videoDevices.filter(device => 
-                    device.label.toLowerCase().includes('back') || 
-                    device.label.toLowerCase().includes('rear') ||
-                    device.label.toLowerCase().includes('environment')
-                );
+                // Check for ultra-wide camera indicators
+                const hasUltraWide = videoDevices.some(device => {
+                    const label = device.label.toLowerCase();
+                    return label.includes('ultra') || 
+                           label.includes('wide') || 
+                           label.includes('0.5') ||
+                           (label.includes('back') && (label.includes('2') || label.includes('wide')));
+                });
                 
-                // iOS typically has multiple cameras, Android may not
-                isUltraWideSupported = backCameras.length > 1 || 
-                    /iPhone|iPad|iPod/.test(navigator.userAgent);
+                // iOS typically has ultra-wide, some Android phones do too
+                const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+                const isAndroid = /Android/.test(navigator.userAgent);
+                
+                // More conservative approach for Android
+                isUltraWideSupported = hasUltraWide || (isIOS && videoDevices.length > 2);
                 
                 return isUltraWideSupported;
             } catch (error) {
@@ -2512,24 +2542,28 @@
                     }
                 };
                 
-                // For 0.5x zoom, try to use ultra-wide camera if supported
-                if (currentZoom === 0.5 && currentCamera === 'environment' && isUltraWideSupported) {
+                // For 0.6x zoom on back camera, try to use ultra-wide camera if supported
+                if (currentZoom === 0.6 && currentCamera === 'environment' && isUltraWideSupported) {
                     try {
                         // Try to get ultra-wide camera specifically
                         const devices = await navigator.mediaDevices.enumerateDevices();
                         const videoDevices = devices.filter(device => device.kind === 'videoinput');
-                        const ultraWideDevice = videoDevices.find(device => 
-                            device.label.toLowerCase().includes('ultra') ||
-                            device.label.toLowerCase().includes('wide') ||
-                            (device.label.toLowerCase().includes('back') && device.label.includes('2'))
-                        );
+                        const ultraWideDevice = videoDevices.find(device => {
+                            const label = device.label.toLowerCase();
+                            return label.includes('ultra') ||
+                                   label.includes('wide') ||
+                                   label.includes('0.5') ||
+                                   label.includes('0.6') ||
+                                   (label.includes('back') && (label.includes('2') || label.includes('wide')));
+                        });
                         
                         if (ultraWideDevice) {
                             constraints.video.deviceId = { exact: ultraWideDevice.deviceId };
                             delete constraints.video.facingMode;
+                            console.log('Using ultra-wide camera:', ultraWideDevice.label);
                         }
                     } catch (e) {
-                        console.log('Ultra-wide camera not available, using standard camera');
+                        console.log('Ultra-wide camera not available, using digital zoom');
                     }
                 }
                 
@@ -2541,11 +2575,9 @@
                 video.className = currentCamera === 'environment' ? 'camera-video back-camera' : 'camera-video';
                 
                 // Apply zoom transform only if not using actual ultra-wide camera
-                if (currentZoom === 0.5 && !isUltraWideSupported) {
-                    video.style.transform = currentCamera === 'user' ? 
-                        `scaleX(-1) scale(${currentZoom})` : 
-                        `scale(${currentZoom})`;
-                } else if (currentZoom !== 0.5 || !isUltraWideSupported) {
+                const usingActualUltraWide = currentZoom === 0.6 && currentCamera === 'environment' && isUltraWideSupported && constraints.video.deviceId;
+                
+                if (!usingActualUltraWide) {
                     video.style.transform = currentCamera === 'user' ? 
                         `scaleX(-1) scale(${currentZoom})` : 
                         `scale(${currentZoom})`;
@@ -2553,6 +2585,9 @@
                     // Reset transform when using actual ultra-wide
                     video.style.transform = currentCamera === 'user' ? 'scaleX(-1)' : 'none';
                 }
+                
+                // Update zoom controls visibility based on camera
+                updateZoomControls();
                 
                 document.getElementById('cameraError').style.display = 'none';
             } catch (error) {
@@ -2568,8 +2603,26 @@
             }
         }
         
+        function updateZoomControls() {
+            const zoomControls = document.getElementById('zoomControls');
+            
+            if (currentCamera === 'user') {
+                // Front camera: only 1x zoom
+                zoomControls.innerHTML = '<button class="zoom-btn active" onclick="setZoom(1)">1x</button>';
+            } else {
+                // Back camera: 0.6x, 1x, 2x zoom
+                zoomControls.innerHTML = `
+                    <button class="zoom-btn ${currentZoom === 0.6 ? 'active' : ''}" onclick="setZoom(0.6)">0.6x</button>
+                    <button class="zoom-btn ${currentZoom === 1 ? 'active' : ''}" onclick="setZoom(1)">1x</button>
+                    <button class="zoom-btn ${currentZoom === 2 ? 'active' : ''}" onclick="setZoom(2)">2x</button>
+                `;
+            }
+        }
+        
         async function switchCamera() {
             currentCamera = currentCamera === 'user' ? 'environment' : 'user';
+            // Reset zoom to 1x when switching cameras
+            currentZoom = 1;
             stopCamera();
             await startCamera();
         }
@@ -2648,14 +2701,21 @@
         }
         
         async function setZoom(zoom) {
+            // Don't allow zoom changes on front camera except 1x
+            if (currentCamera === 'user' && zoom !== 1) {
+                return;
+            }
+            
             currentZoom = zoom;
             
             // Update active zoom button
             document.querySelectorAll('.zoom-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             
-            // For 0.5x zoom on back camera, try to restart camera with ultra-wide if supported
-            if (zoom === 0.5 && currentCamera === 'environment') {
+            // For 0.6x zoom on back camera, try to restart camera with ultra-wide if supported
+            if (zoom === 0.6 && currentCamera === 'environment') {
                 stopCamera();
                 await startCamera();
             } else {
@@ -2753,6 +2813,55 @@
             alert('NFT minting feature coming soon! 🎨\n\nThis will allow you to mint your photos as NFTs on the blockchain.');
         }
         
+        function focusAtPoint(event) {
+            const video = event.target;
+            const rect = video.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Show focus indicator
+            const focusIndicator = document.getElementById('focusIndicator');
+            focusIndicator.style.left = x + 'px';
+            focusIndicator.style.top = y + 'px';
+            focusIndicator.classList.remove('active');
+            
+            // Trigger animation
+            setTimeout(() => {
+                focusIndicator.classList.add('active');
+            }, 10);
+            
+            // Remove animation after completion
+            setTimeout(() => {
+                focusIndicator.classList.remove('active');
+            }, 1000);
+            
+            // Try to apply focus if supported by the camera
+            if (currentStream) {
+                const videoTrack = currentStream.getVideoTracks()[0];
+                if (videoTrack && videoTrack.getCapabilities) {
+                    const capabilities = videoTrack.getCapabilities();
+                    if (capabilities.focusMode && capabilities.focusMode.includes('manual')) {
+                        try {
+                            // Calculate relative coordinates (0-1)
+                            const relativeX = x / rect.width;
+                            const relativeY = y / rect.height;
+                            
+                            videoTrack.applyConstraints({
+                                advanced: [{
+                                    focusMode: 'manual',
+                                    pointsOfInterest: [{x: relativeX, y: relativeY}]
+                                }]
+                            }).catch(err => {
+                                console.log('Manual focus not supported:', err);
+                            });
+                        } catch (error) {
+                            console.log('Focus control not available:', error);
+                        }
+                    }
+                }
+            }
+        }
+        
         function requestCameraPermission() {
             startCamera();
         }
@@ -2763,5 +2872,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977241daa68949b9',t:'MTc1NjUzNTYxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97724c9045577746',t:'MTc1NjUzNjA1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
