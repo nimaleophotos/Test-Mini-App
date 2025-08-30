@@ -1,305 +1,123 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { UploadFile } from "@/integrations/Core";
-import { Photo } from "@/entities/Photo";
-import CameraControls from "../components/camera/CameraControls";
-import CameraMode from "../components/camera/CameraMode";
-import FilterStrip from "../components/camera/FilterStrip";
-import CameraSettings from "../components/camera/CameraSettings";
-import { Camera as CameraIcon, RotateCcw, Zap, ZapOff, Timer, Grid3X3, Settings } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Zap, ZapOff, RotateCcw } from "lucide-react";
 
-export default function CameraPage() {
+export default function CameraApp() {
   const videoRef = useRef(null);
-  const canvasRef = useRef(null);
   const streamRef = useRef(null);
-  
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [facingMode, setFacingMode] = useState('environment');
-  const [flashMode, setFlashMode] = useState('auto');
-  const [currentFilter, setCurrentFilter] = useState('none');
-  const [cameraMode, setCameraMode] = useState('photo');
-  const [showGrid, setShowGrid] = useState(false);
-  const [timerSeconds, setTimerSeconds] = useState(0);
-  const [countdown, setCountdown] = useState(0);
-  const [zoom, setZoom] = useState(1);
-  const [isCapturing, setIsCapturing] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
 
-  const startCamera = useCallback(async () => {
+  const [devices, setDevices] = useState([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
+  const [flash, setFlash] = useState(false);
+
+  // 🔍 Get all cameras (lenses)
+  useEffect(() => {
+    async function loadDevices() {
+      try {
+        const allDevices = await navigator.mediaDevices.enumerateDevices();
+        const cams = allDevices.filter(d => d.kind === "videoinput");
+        setDevices(cams);
+
+        if (cams.length > 0) {
+          startStream(cams[0].deviceId); // default = first back cam
+        }
+      } catch (err) {
+        console.error("Error listing devices:", err);
+      }
+    }
+    loadDevices();
+  }, []);
+
+  // 🎥 Start camera stream
+  async function startStream(deviceId) {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+    }
+
     try {
       const constraints = {
         video: {
-          facingMode: facingMode,
+          deviceId: { exact: deviceId },
           width: { ideal: 1920 },
           height: { ideal: 1080 }
         }
       };
-      
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       streamRef.current = stream;
-      
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        setIsStreaming(true);
-      }
-    } catch (error) {
-      console.error("Camera access error:", error);
+      videoRef.current.srcObject = stream;
+      setSelectedDeviceId(deviceId);
+    } catch (err) {
+      console.error("Error starting camera:", err);
     }
-  }, [facingMode]);
+  }
 
-  const stopCamera = useCallback(() => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-      streamRef.current = null;
-    }
-    setIsStreaming(false);
-  }, []);
-
-  const capturePhoto = useCallback(async () => {
-    if (!videoRef.current || isCapturing) return;
-    
-    setIsCapturing(true);
-    
-    try {
-      const canvas = canvasRef.current;
-      const video = videoRef.current;
-      
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      
-      const ctx = canvas.getContext('2d');
-      
-      // Apply current filter
-      applyFilter(ctx, video, currentFilter);
-      
-      // Convert to blob and upload
-      canvas.toBlob(async (blob) => {
-        try {
-          const file = new File([blob], `photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
-          const { file_url } = await UploadFile({ file });
-          
-          // Save to database
-          await Photo.create({
-            title: `Photo ${new Date().toLocaleDateString()}`,
-            file_url,
-            camera_mode: cameraMode,
-            filter_applied: currentFilter,
-            metadata: {
-              width: canvas.width,
-              height: canvas.height,
-              flash_used: flashMode === 'on',
-              front_camera: facingMode === 'user'
-            }
-          });
-          
-          // Flash effect
-          document.body.style.background = 'white';
-          setTimeout(() => {
-            document.body.style.background = '';
-          }, 100);
-          
-        } catch (error) {
-          console.error("Error saving photo:", error);
-        } finally {
-          setIsCapturing(false);
-        }
-      }, 'image/jpeg', 0.9);
-      
-    } catch (error) {
-      console.error("Error capturing photo:", error);
-      setIsCapturing(false);
-    }
-  }, [isCapturing, currentFilter, cameraMode, flashMode, facingMode]);
-
-  useEffect(() => {
-    startCamera();
-    return () => stopCamera();
-  }, [startCamera, stopCamera]);
-
-  useEffect(() => {
-    let interval;
-    if (countdown > 0) {
-      interval = setInterval(() => {
-        setCountdown(prev => {
-          if (prev === 1) {
-            capturePhoto();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [countdown, capturePhoto]);
-
-  const switchCamera = () => {
-    setFacingMode(prev => prev === 'user' ? 'environment' : 'user');
-  };
-
-  const toggleFlash = () => {
-    const modes = ['auto', 'on', 'off', 'torch'];
-    const currentIndex = modes.indexOf(flashMode);
-    setFlashMode(modes[(currentIndex + 1) % modes.length]);
-  };
-
-  const startTimer = () => {
-    if (timerSeconds > 0) {
-      setCountdown(timerSeconds);
-    } else {
-      capturePhoto();
-    }
-  };
-
-  const applyFilter = (ctx, video, filter) => {
-    ctx.drawImage(video, 0, 0);
-    
-    switch (filter) {
-      case 'bw':
-        ctx.filter = 'grayscale(100%)';
-        break;
-      case 'sepia':
-        ctx.filter = 'sepia(100%)';
-        break;
-      case 'vintage':
-        ctx.filter = 'sepia(50%) contrast(1.2) brightness(1.1)';
-        break;
-      case 'cold':
-        ctx.filter = 'hue-rotate(180deg) saturate(1.3)';
-        break;
-      case 'warm':
-        ctx.filter = 'hue-rotate(25deg) saturate(1.2) brightness(1.05)';
-        break;
-      default:
-        ctx.filter = 'none';
-    }
-    
-    if (filter !== 'none') {
-      ctx.drawImage(video, 0, 0);
-    }
-  };
+  // 📸 Take photo
+  function capturePhoto() {
+    const canvas = document.createElement("canvas");
+    const video = videoRef.current;
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL("image/jpeg");
+    console.log("Captured photo:", dataUrl);
+  }
 
   return (
     <div className="relative h-screen w-full bg-black overflow-hidden">
-      {/* Camera Preview */}
-      <div className="absolute inset-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className="w-full h-full object-cover"
-          style={{
-            transform: facingMode === 'user' ? 'scaleX(-1)' : 'none',
-            filter: currentFilter !== 'none' ? getFilterCSS(currentFilter) : 'none'
+      {/* Camera preview */}
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        muted
+        className="w-full h-full object-cover"
+      />
+
+      {/* Lens switcher */}
+      <div className="absolute bottom-28 w-full flex justify-center gap-4">
+        {devices.map((cam, i) => (
+          <button
+            key={cam.deviceId}
+            onClick={() => startStream(cam.deviceId)}
+            className={`px-4 py-2 rounded-full ${
+              cam.deviceId === selectedDeviceId
+                ? "bg-blue-500 text-white"
+                : "bg-white/20 text-white"
+            }`}
+          >
+            {i === 0 ? "0.5x" : i === 1 ? "1x" : i === 2 ? "2x" : "Lens"}
+          </button>
+        ))}
+      </div>
+
+      {/* Capture + Switch + Flash */}
+      <div className="absolute bottom-8 w-full flex justify-center gap-6">
+        <button
+          onClick={capturePhoto}
+          className="w-16 h-16 rounded-full bg-white"
+        />
+        <button
+          onClick={() => {
+            // Switch between front & back
+            const front = devices.find(d => d.label.toLowerCase().includes("front"));
+            const back = devices.find(d => d.label.toLowerCase().includes("back"));
+            if (selectedDeviceId === front?.deviceId && back) {
+              startStream(back.deviceId);
+            } else if (front) {
+              startStream(front.deviceId);
+            }
           }}
-        />
-        
-        {/* Grid Lines */}
-        {showGrid && (
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="w-full h-full grid grid-cols-3 grid-rows-3">
-              {Array(9).fill(0).map((_, i) => (
-                <div key={i} className="border border-white/30" />
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* Countdown Timer */}
-        {countdown > 0 && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-            <div className="text-8xl font-bold text-white animate-pulse">
-              {countdown}
-            </div>
-          </div>
-        )}
+          className="p-4 bg-white/20 text-white rounded-full"
+        >
+          <RotateCcw />
+        </button>
+        <button
+          onClick={() => setFlash(f => !f)}
+          className="p-4 bg-white/20 text-white rounded-full"
+        >
+          {flash ? <Zap /> : <ZapOff />}
+        </button>
       </div>
-
-      {/* Top Controls */}
-      <div className="absolute top-0 left-0 right-0 z-40 pt-12 pb-6 px-6">
-        <div className="glass-effect rounded-2xl p-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={toggleFlash}
-                className={`p-2 rounded-full smooth-transition ${
-                  flashMode === 'on' || flashMode === 'torch' 
-                    ? 'bg-yellow-500 text-black' 
-                    : 'bg-white/20 text-white hover:bg-white/30'
-                }`}
-              >
-                {flashMode === 'off' ? <ZapOff className="w-5 h-5" /> : <Zap className="w-5 h-5" />}
-              </button>
-              
-              <button
-                onClick={() => setShowGrid(!showGrid)}
-                className={`p-2 rounded-full smooth-transition ${
-                  showGrid 
-                    ? 'bg-[var(--electric-blue)] text-black' 
-                    : 'bg-white/20 text-white hover:bg-white/30'
-                }`}
-              >
-                <Grid3X3 className="w-5 h-5" />
-              </button>
-            </div>
-
-            <CameraMode 
-              currentMode={cameraMode}
-              onModeChange={setCameraMode}
-            />
-
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setShowSettings(!showSettings)}
-                className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 smooth-transition"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Filter Strip */}
-      <FilterStrip
-        currentFilter={currentFilter}
-        onFilterChange={setCurrentFilter}
-      />
-
-      {/* Camera Controls */}
-      <CameraControls
-        onCapture={startTimer}
-        onSwitchCamera={switchCamera}
-        isCapturing={isCapturing}
-        timerSeconds={timerSeconds}
-        onTimerChange={setTimerSeconds}
-        facingMode={facingMode}
-      />
-
-      {/* Settings Panel */}
-      {showSettings && (
-        <CameraSettings
-          flashMode={flashMode}
-          onFlashChange={setFlashMode}
-          showGrid={showGrid}
-          onGridToggle={setShowGrid}
-          onClose={() => setShowSettings(false)}
-        />
-      )}
-
-      {/* Hidden canvas for processing */}
-      <canvas ref={canvasRef} className="hidden" />
     </div>
   );
-}
-
-// Helper function for CSS filters
-function getFilterCSS(filter) {
-  switch (filter) {
-    case 'bw': return 'grayscale(100%)';
-    case 'sepia': return 'sepia(100%)';
-    case 'vintage': return 'sepia(50%) contrast(1.2) brightness(1.1)';
-    case 'cold': return 'hue-rotate(180deg) saturate(1.3)';
-    case 'warm': return 'hue-rotate(25deg) saturate(1.2) brightness(1.05)';
-    default: return 'none';
-  }
 }
