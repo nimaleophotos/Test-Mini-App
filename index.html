@@ -1201,19 +1201,17 @@
         }
         
         .grid-3x3 {
+            border: 2px solid rgba(255,255,255,0.8);
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.8) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255,255,255,0.8) 2px, transparent 2px);
-            background-size: 33.33% 33.33%;
-            background-position: 33.33% 0, 0 33.33%;
+                linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px)),
+                linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px));
         }
         
         .grid-symmetrical {
+            border: 2px solid rgba(255,255,255,0.8);
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.8) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(255,255,255,0.8) 2px, transparent 2px);
-            background-size: 50% 50%;
-            background-position: 50% 0, 0 50%;
+                linear-gradient(to right, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px)),
+                linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
         }
         
         .aspect-ratio-overlay {
@@ -1224,30 +1222,67 @@
             height: 100%;
             pointer-events: none;
             transition: all 0.3s ease;
+            background: transparent;
         }
         
-        .aspect-ratio-overlay.active {
-            background: linear-gradient(to bottom, 
-                rgba(0,0,0,0.8) 0%, 
-                transparent 20%, 
-                transparent 80%, 
-                rgba(0,0,0,0.8) 100%);
+        /* 16:9 aspect ratio */
+        .aspect-ratio-overlay.ratio-16-9 {
+            background: 
+                linear-gradient(to bottom, 
+                    rgba(0,0,0,1) 0%, 
+                    rgba(0,0,0,1) calc(50% - 28.125%), 
+                    transparent calc(50% - 28.125%), 
+                    transparent calc(50% + 28.125%), 
+                    rgba(0,0,0,1) calc(50% + 28.125%), 
+                    rgba(0,0,0,1) 100%);
         }
         
-        .aspect-ratio-overlay.square {
-            background: linear-gradient(to right, 
-                rgba(0,0,0,0.8) 0%, 
-                transparent 12.5%, 
-                transparent 87.5%, 
-                rgba(0,0,0,0.8) 100%);
+        /* 4:3 aspect ratio */
+        .aspect-ratio-overlay.ratio-4-3 {
+            background: 
+                linear-gradient(to bottom, 
+                    rgba(0,0,0,1) 0%, 
+                    rgba(0,0,0,1) calc(50% - 37.5%), 
+                    transparent calc(50% - 37.5%), 
+                    transparent calc(50% + 37.5%), 
+                    rgba(0,0,0,1) calc(50% + 37.5%), 
+                    rgba(0,0,0,1) 100%);
         }
         
-        .aspect-ratio-overlay.portrait {
-            background: linear-gradient(to right, 
-                rgba(0,0,0,0.8) 0%, 
-                transparent 25%, 
-                transparent 75%, 
-                rgba(0,0,0,0.8) 100%);
+        /* 1:1 square aspect ratio */
+        .aspect-ratio-overlay.ratio-1-1 {
+            background: 
+                linear-gradient(to right, 
+                    rgba(0,0,0,1) 0%, 
+                    rgba(0,0,0,1) calc(50% - 50vw * 0.5), 
+                    transparent calc(50% - 50vw * 0.5), 
+                    transparent calc(50% + 50vw * 0.5), 
+                    rgba(0,0,0,1) calc(50% + 50vw * 0.5), 
+                    rgba(0,0,0,1) 100%);
+        }
+        
+        /* 3:4 portrait aspect ratio */
+        .aspect-ratio-overlay.ratio-3-4 {
+            background: 
+                linear-gradient(to right, 
+                    rgba(0,0,0,1) 0%, 
+                    rgba(0,0,0,1) calc(50% - 37.5%), 
+                    transparent calc(50% - 37.5%), 
+                    transparent calc(50% + 37.5%), 
+                    rgba(0,0,0,1) calc(50% + 37.5%), 
+                    rgba(0,0,0,1) 100%);
+        }
+        
+        /* 9:16 vertical aspect ratio */
+        .aspect-ratio-overlay.ratio-9-16 {
+            background: 
+                linear-gradient(to right, 
+                    rgba(0,0,0,1) 0%, 
+                    rgba(0,0,0,1) calc(50% - 28.125%), 
+                    transparent calc(50% - 28.125%), 
+                    transparent calc(50% + 28.125%), 
+                    rgba(0,0,0,1) calc(50% + 28.125%), 
+                    rgba(0,0,0,1) 100%);
         }
         
         .camera-controls-top {
@@ -2664,15 +2699,23 @@
             if (aspectRatio === 'full') {
                 aspectRatio = '16:9';
                 aspectBtn.innerHTML = '<span style="font-size: 8px; font-weight: 700;">16:9</span>';
-                aspectOverlay.className = 'aspect-ratio-overlay active';
+                aspectOverlay.className = 'aspect-ratio-overlay ratio-16-9';
             } else if (aspectRatio === '16:9') {
+                aspectRatio = '4:3';
+                aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">4:3</span>';
+                aspectOverlay.className = 'aspect-ratio-overlay ratio-4-3';
+            } else if (aspectRatio === '4:3') {
                 aspectRatio = '1:1';
                 aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">1:1</span>';
-                aspectOverlay.className = 'aspect-ratio-overlay square active';
+                aspectOverlay.className = 'aspect-ratio-overlay ratio-1-1';
             } else if (aspectRatio === '1:1') {
-                aspectRatio = '4:5';
-                aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">4:5</span>';
-                aspectOverlay.className = 'aspect-ratio-overlay portrait active';
+                aspectRatio = '3:4';
+                aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">3:4</span>';
+                aspectOverlay.className = 'aspect-ratio-overlay ratio-3-4';
+            } else if (aspectRatio === '3:4') {
+                aspectRatio = '9:16';
+                aspectBtn.innerHTML = '<span style="font-size: 8px; font-weight: 700;">9:16</span>';
+                aspectOverlay.className = 'aspect-ratio-overlay ratio-9-16';
             } else {
                 aspectRatio = 'full';
                 aspectBtn.innerHTML = '<span style="font-size: 9px; font-weight: 700;">Full</span>';
@@ -2716,23 +2759,71 @@
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Set canvas size based on aspect ratio
-            let width = video.videoWidth;
-            let height = video.videoHeight;
+            // Get original video dimensions
+            const videoWidth = video.videoWidth;
+            const videoHeight = video.videoHeight;
+            
+            // Calculate crop dimensions based on aspect ratio
+            let cropWidth = videoWidth;
+            let cropHeight = videoHeight;
+            let cropX = 0;
+            let cropY = 0;
             
             if (aspectRatio === '16:9') {
-                height = width * 9 / 16;
+                // Crop to 16:9 aspect ratio
+                const targetHeight = videoWidth * 9 / 16;
+                if (targetHeight <= videoHeight) {
+                    cropHeight = targetHeight;
+                    cropY = (videoHeight - cropHeight) / 2;
+                } else {
+                    cropWidth = videoHeight * 16 / 9;
+                    cropX = (videoWidth - cropWidth) / 2;
+                }
+            } else if (aspectRatio === '4:3') {
+                // Crop to 4:3 aspect ratio
+                const targetHeight = videoWidth * 3 / 4;
+                if (targetHeight <= videoHeight) {
+                    cropHeight = targetHeight;
+                    cropY = (videoHeight - cropHeight) / 2;
+                } else {
+                    cropWidth = videoHeight * 4 / 3;
+                    cropX = (videoWidth - cropWidth) / 2;
+                }
             } else if (aspectRatio === '1:1') {
-                height = width;
-            } else if (aspectRatio === '4:5') {
-                height = width * 5 / 4;
+                // Crop to square 1:1 aspect ratio
+                const minDimension = Math.min(videoWidth, videoHeight);
+                cropWidth = minDimension;
+                cropHeight = minDimension;
+                cropX = (videoWidth - cropWidth) / 2;
+                cropY = (videoHeight - cropHeight) / 2;
+            } else if (aspectRatio === '3:4') {
+                // Crop to 3:4 portrait aspect ratio
+                const targetWidth = videoHeight * 3 / 4;
+                if (targetWidth <= videoWidth) {
+                    cropWidth = targetWidth;
+                    cropX = (videoWidth - cropWidth) / 2;
+                } else {
+                    cropHeight = videoWidth * 4 / 3;
+                    cropY = (videoHeight - cropHeight) / 2;
+                }
+            } else if (aspectRatio === '9:16') {
+                // Crop to 9:16 vertical aspect ratio
+                const targetWidth = videoHeight * 9 / 16;
+                if (targetWidth <= videoWidth) {
+                    cropWidth = targetWidth;
+                    cropX = (videoWidth - cropWidth) / 2;
+                } else {
+                    cropHeight = videoWidth * 16 / 9;
+                    cropY = (videoHeight - cropHeight) / 2;
+                }
             }
             
-            canvas.width = width;
-            canvas.height = height;
+            // Set canvas size to cropped dimensions
+            canvas.width = cropWidth;
+            canvas.height = cropHeight;
             
-            // Draw video frame to canvas
-            ctx.drawImage(video, 0, 0, width, height);
+            // Draw cropped video frame to canvas
+            ctx.drawImage(video, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
             
             // Convert to blob and show preview
             canvas.toBlob(blob => {
@@ -2805,5 +2896,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97726225827e9ffc',t:'MTc1NjUzNjkzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9772bc643154907e',t:'MTc1NjU0MDYzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
