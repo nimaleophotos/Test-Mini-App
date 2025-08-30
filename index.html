@@ -1,276 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Multi‑Lens Camera (super‑wide / wide / normal)</title>
-  <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; padding: 18px; background:#f6f7fb }
-    .camera { display:flex; gap:12px; align-items:center }
-    video { width: 320px; height: 240px; background:#000; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.12) }
-    canvas { display:none }
-    .controls { display:flex; gap:8px; flex-wrap:wrap }
-    button { padding:8px 12px; border-radius:8px; border:1px solid #ddd; background:white; cursor:pointer }
-    button.primary { background:#0b84ff; color:white; border-color:#0b84ff }
-    small.note { color:#555; display:block; margin-top:6px }
-    .badge { font-size:12px; padding:6px 8px; border-radius:999px; background:#fff; border:1px solid #ddd }
-  </style>
-</head>
-<body>
-  <h2>Multi‑Lens Camera</h2>
-  <div class="camera">
-    <video id="preview" autoplay playsinline></video>
-    <div>
-      <div class="controls">
-        <button id="btn-allow">Enable Camera (permission)</button>
-        <button id="btn-detect">Detect Lenses</button>
-        <button id="btn-superwide">Super‑wide</button>
-        <button id="btn-wide">Wide</button>
-        <button id="btn-normal">Normal</button>
-        <button id="btn-capture" class="primary">Capture</button>
-      </div>
-      <small class="note">Tips: On iOS you must allow camera permission first before device labels appear. If the browser exposes only one camera, the code will fall back gracefully.</small>
-      <div style="margin-top:8px">
-        <span class="badge" id="detected">Detected: —</span>
-      </div>
-    </div>
-  </div>
-  <canvas id="snap" width="1280" height="720"></canvas>
+<video id="preview" autoplay playsinline></video>
+<div>
+  <button onclick="setZoom(0.5)">0.5x</button>
+  <button onclick="setZoom(1)">1x</button>
+  <button onclick="setZoom(2)">2x</button>
+</div>
 
-  <script>
-    // Multi‑lens HTML camera helper
-    // - Requests permission, enumerates video inputs
-    // - Probes each deviceId and classifies into superwide / wide / normal using heuristics
-    // - Lets user switch between them and capture a photo
+<script>
+let stream, track;
 
-    const preview = document.getElementById('preview');
-    const snap = document.getElementById('snap');
-    const ctx = snap.getContext('2d');
-    const btnAllow = document.getElementById('btn-allow');
-    const btnDetect = document.getElementById('btn-detect');
-    const btnSuper = document.getElementById('btn-superwide');
-    const btnWide = document.getElementById('btn-wide');
-    const btnNormal = document.getElementById('btn-normal');
-    const btnCapture = document.getElementById('btn-capture');
-    const detectedBadge = document.getElementById('detected');
+async function initCamera() {
+  stream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: "environment" }
+  });
+  document.getElementById("preview").srcObject = stream;
+  track = stream.getVideoTracks()[0];
+}
 
-    let currentStream = null;
-    let devices = []; // {deviceId, label, kind}
-    let lensMap = { superwide: null, wide: null, normal: null };
+async function setZoom(level) {
+  if (!track) return alert("Camera not started");
+  const capabilities = track.getCapabilities();
+  if ("zoom" in capabilities) {
+    // Safari (iOS 16+) and some Androids map zoom to hardware lenses
+    const clamped = Math.min(capabilities.zoom.max, Math.max(capabilities.zoom.min, level));
+    await track.applyConstraints({ advanced: [{ zoom: clamped }] });
+  } else {
+    alert("Zoom not supported on this browser — fallback to device switching required");
+  }
+}
 
-    function stopStream(stream) {
-      if (!stream) return;
-      stream.getTracks().forEach(t => t.stop());
-    }
-
-    async function ensurePermission() {
-      try {
-        // On some browsers (iOS Safari) enumerateDevices requires permission first
-        const s = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        stopStream(s);
-        return true;
-      } catch (e) {
-        console.warn('permission denied or unavailable', e);
-        return false;
-      }
-    }
-
-    async function listVideoInputs() {
-      const all = await navigator.mediaDevices.enumerateDevices();
-      return all.filter(d => d.kind === 'videoinput');
-    }
-
-    // Heuristics to classify a device label into lens family
-    function labelHeuristic(label) {
-      if (!label) return null;
-      const l = label.toLowerCase();
-      if (/(ultra|super|ultrawide|ultra-wide|superwide|ultrawide)/.test(l)) return 'superwide';
-      if (/(wide|main|back|rear|primary)/.test(l)) return 'wide';
-      if (/(tele|telephoto|zoom|portrait)/.test(l)) return 'normal'; // tele often means zoom/telephoto — use as 'normal' or fallback
-      return null;
-    }
-
-    // Probe a device by opening it briefly to get capabilities/settings. Stops stream afterwards.
-    async function probeDevice(deviceId) {
-      let s = null;
-      try {
-        s = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: deviceId } }, audio: false });
-        const track = s.getVideoTracks()[0];
-        const settings = track.getSettings ? track.getSettings() : {};
-        const caps = track.getCapabilities ? track.getCapabilities() : {};
-        stopStream(s);
-        return { settings, capabilities: caps };
-      } catch (e) {
-        console.warn('probe failed for', deviceId, e);
-        stopStream(s);
-        return null;
-      }
-    }
-
-    // Build mapping using heuristics and probing. This is best-effort: browsers differ widely.
-    async function detectLenses() {
-      detectedBadge.textContent = 'Detecting…';
-
-      // Ensure permission so labels are exposed (especially on Safari iOS)
-      await ensurePermission();
-
-      devices = await listVideoInputs();
-      if (!devices.length) {
-        detectedBadge.textContent = 'No video input devices found';
-        return;
-      }
-
-      // First try to assign by label heuristics
-      const byLabel = {};
-      for (const d of devices) {
-        const kind = labelHeuristic(d.label);
-        if (kind) {
-          if (!byLabel[kind]) byLabel[kind] = [];
-          byLabel[kind].push(d);
-        }
-      }
-
-      // Fill lensMap from byLabel when possible
-      lensMap = { superwide: null, wide: null, normal: null };
-      if (byLabel.superwide && byLabel.superwide.length) lensMap.superwide = byLabel.superwide[0].deviceId;
-      if (byLabel.wide && byLabel.wide.length) lensMap.wide = byLabel.wide[0].deviceId;
-      if (byLabel.normal && byLabel.normal.length) lensMap.normal = byLabel.normal[0].deviceId;
-
-      // If heuristics didn't fully populate, probe remaining devices to see which has largest/smallest focal-like properties
-      const unassigned = devices.filter(d => !Object.values(lensMap).includes(d.deviceId));
-
-      // Probe each unassigned device to read resolution ranges if possible
-      const probes = await Promise.all(unassigned.map(d => probeDevice(d.deviceId)));
-
-      // Map unassigned by capability heuristics: look for wide aspect ratios / native widths
-      for (let i = 0; i < unassigned.length; i++) {
-        const d = unassigned[i];
-        const probe = probes[i];
-        // choose by max width or aspect ratio heuristics
-        const maxWidth = probe && probe.capabilities && probe.capabilities.width ? Math.max(probe.capabilities.width.max || 0, probe.capabilities.width.min || 0) : 0;
-        d._maxWidth = maxWidth;
-      }
-
-      // Sort unassigned by maxWidth descending (superwide often provides larger FOV but not guaranteed)
-      unassigned.sort((a, b) => (b._maxWidth || 0) - (a._maxWidth || 0));
-
-      // Assign fallbacks: prefer to fill wide then normal then superwide (depends on device ordering)
-      for (const d of unassigned) {
-        if (!lensMap.wide) lensMap.wide = d.deviceId;
-        else if (!lensMap.normal) lensMap.normal = d.deviceId;
-        else if (!lensMap.superwide) lensMap.superwide = d.deviceId;
-      }
-
-      // As a final fallback, if still empty assign first available to normal
-      if (!lensMap.normal && devices[0]) lensMap.normal = devices[0].deviceId;
-
-      // Update UI
-      const parts = [];
-      for (const k of ['superwide','wide','normal']) {
-        parts.push(`${k}:${lensMap[k] ? 'yes' : 'no'}`);
-      }
-      detectedBadge.textContent = parts.join(' | ');
-
-      // enable buttons depending on availability
-      btnSuper.disabled = !lensMap.superwide;
-      btnWide.disabled = !lensMap.wide;
-      btnNormal.disabled = !lensMap.normal;
-
-      return lensMap;
-    }
-
-    async function startByDeviceId(deviceId, preferWidth = 1280, preferHeight = 720) {
-      try {
-        stopStream(currentStream);
-        const constraints = {
-          video: {
-            deviceId: deviceId ? { exact: deviceId } : undefined,
-            width: { ideal: preferWidth },
-            height: { ideal: preferHeight },
-            facingMode: 'environment',
-            // Some browsers accept "aspectRatio" -- we don't force it.
-          },
-          audio: false
-        };
-        currentStream = await navigator.mediaDevices.getUserMedia(constraints);
-        preview.srcObject = currentStream;
-        return currentStream;
-      } catch (e) {
-        console.error('startByDeviceId failed', e);
-        throw e;
-      }
-    }
-
-    async function capture() {
-      if (!currentStream) {
-        alert('Start a camera stream first (Enable Camera -> Detect Lenses or choose a lens)');
-        return;
-      }
-      const track = currentStream.getVideoTracks()[0];
-      const settings = track.getSettings ? track.getSettings() : {};
-
-      // Size canvas to current video display size (or settings)
-      const w = preview.videoWidth || settings.width || 1280;
-      const h = preview.videoHeight || settings.height || 720;
-      snap.width = w;
-      snap.height = h;
-      ctx.drawImage(preview, 0, 0, w, h);
-      // show temporary preview in a new window
-      const data = snap.toDataURL('image/jpeg', 0.92);
-      const win = window.open();
-      win.document.write(`<img src="${data}" style="max-width:100%">`);
-    }
-
-    // Wire UI
-    btnAllow.addEventListener('click', async () => {
-      btnAllow.disabled = true;
-      const ok = await ensurePermission();
-      if (!ok) alert('Camera permission required.');
-      btnAllow.disabled = false;
-    });
-
-    btnDetect.addEventListener('click', async () => {
-      btnDetect.disabled = true;
-      try {
-        await detectLenses();
-      } finally {
-        btnDetect.disabled = false;
-      }
-    });
-
-    btnSuper.addEventListener('click', async () => {
-      if (!lensMap.superwide) return alert('Super‑wide lens not detected');
-      await startByDeviceId(lensMap.superwide, 1920, 1080);
-    });
-    btnWide.addEventListener('click', async () => {
-      if (!lensMap.wide) return alert('Wide lens not detected');
-      await startByDeviceId(lensMap.wide, 1920, 1080);
-    });
-    btnNormal.addEventListener('click', async () => {
-      if (!lensMap.normal) return alert('Normal lens not detected');
-      await startByDeviceId(lensMap.normal, 1280, 960);
-    });
-
-    btnCapture.addEventListener('click', capture);
-
-    // Auto-detect on load but don't request permission until user interacts (friendly UX)
-    (async () => {
-      // If browser already has permission state 'granted', detect automatically
-      if (navigator.permissions) {
-        try {
-          const p = await navigator.permissions.query({ name: 'camera' });
-          if (p.state === 'granted') {
-            await detectLenses();
-          }
-        } catch (e) {
-          // some browsers don't support querying 'camera'
-        }
-      }
-    })();
-
-    // Helpful note for developers: there is no standard API which says "this camera is the ultra-wide".
-    // Web apps must rely on device labels, capabilities, or user selection. Always provide a fallback UI
-    // and let the user pick which camera they want if automatic heuristics fail.
-  </script>
-</body>
-</html>
+initCamera();
+</script>
