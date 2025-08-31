@@ -1520,6 +1520,27 @@
             transform: scale(1.05);
         }
         
+        .gallery-upload-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.4);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-upload-btn:hover {
+            background: rgba(0,0,0,0.8);
+            border-color: rgba(255,255,255,0.6);
+            transform: scale(1.05);
+        }
+        
         .capture-button {
             width: 70px;
             height: 70px;
@@ -2327,8 +2348,19 @@
                         <button class="zoom-btn" onclick="setZoom(2)">2x</button>
                     </div>
                     
-                    <!-- Capture Button -->
-                    <button class="capture-button" onclick="capturePhoto()"></button>
+                    <!-- Gallery and Capture Buttons -->
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <button class="gallery-upload-btn" onclick="selectFromGallery()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21,15 16,10 5,21"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Capture Button -->
+                        <button class="capture-button" onclick="capturePhoto()"></button>
+                    </div>
                 </div>
                 
                 <!-- Timer Display -->
@@ -3114,6 +3146,44 @@
             });
         }
         
+        function selectFromGallery() {
+            // Create hidden file input
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            
+            fileInput.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select a valid image file.');
+                        return;
+                    }
+                    
+                    // Validate file size (max 10MB)
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert('Image file is too large. Please select an image smaller than 10MB.');
+                        return;
+                    }
+                    
+                    // Create URL for the selected image
+                    const imageUrl = URL.createObjectURL(file);
+                    
+                    // Show photo preview with the selected image
+                    showPhotoPreview(imageUrl);
+                }
+                
+                // Clean up
+                document.body.removeChild(fileInput);
+            };
+            
+            // Trigger file selection
+            document.body.appendChild(fileInput);
+            fileInput.click();
+        }
+        
         function requestCameraPermission() {
             startCamera();
         }
@@ -3124,5 +3194,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9774c0c6e018760b',t:'MTc1NjU2MTc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977a954515a7f5ea',t:'MTc1NjYyMjkxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
