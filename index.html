@@ -1611,25 +1611,31 @@
         }
         
         .preview-actions {
-            display: flex;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            width: 100%;
+            max-width: 280px;
         }
         
         .preview-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.3);
             color: #fff;
-            padding: 12px 20px;
-            border-radius: 25px;
+            padding: 10px 12px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
             backdrop-filter: blur(10px);
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-height: 40px;
         }
         
         .preview-btn:hover {
@@ -3097,80 +3103,65 @@
             
             // Update preview actions based on source
             if (fromGallery) {
-                // For gallery images: only Share on Farcaster and Mint (coming soon)
+                // For gallery images: only Share on Farcaster and Mint (coming soon) - centered in grid
                 previewActions.innerHTML = `
-                    <button class="preview-btn primary" onclick="shareOnFarcaster()" style="display: flex; align-items: center; gap: 8px;">
+                    <button class="preview-btn primary" onclick="shareOnFarcaster()">
                         <img src="https://github.com/vrypan/farcaster-brand/raw/main/icons/icon-rounded/purple-white.png" 
                              alt="Farcaster" 
-                             width="20" 
-                             height="20" 
-                             style="border-radius: 4px;"
+                             width="16" 
+                             height="16" 
+                             style="border-radius: 3px;"
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                        </svg>
-                        <span>Share on Farcaster</span>
-                    </button>
-                    <button class="preview-btn disabled" onclick="mintToLens()" style="display: flex; align-items: center; gap: 8px;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 12l2 2 4-4"/>
-                            <path d="M12 2v4"/>
-                            <path d="M12 18v4"/>
-                            <path d="M4.93 4.93l2.83 2.83"/>
-                            <path d="M16.24 16.24l2.83 2.83"/>
-                            <path d="M2 12h4"/>
-                            <path d="M18 12h4"/>
-                            <path d="M4.93 19.07l2.83-2.83"/>
-                            <path d="M16.24 7.76l2.83-2.83"/>
-                        </svg>
-                        <span>Mint (Coming Soon)</span>
-                    </button>
-                `;
-            } else {
-                // For camera photos: all 4 options
-                previewActions.innerHTML = `
-                    <button class="preview-btn secondary" onclick="retakePhoto()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 4v6h6"/>
-                            <path d="M23 20v-6h-6"/>
-                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
-                        </svg>
-                    </button>
-                    <button class="preview-btn primary" onclick="shareOnFarcaster()" style="display: flex; align-items: center; gap: 8px;">
-                        <img src="https://github.com/vrypan/farcaster-brand/raw/main/icons/icon-rounded/purple-white.png" 
-                             alt="Farcaster" 
-                             width="20" 
-                             height="20" 
-                             style="border-radius: 4px;"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                         </svg>
                         <span>Share</span>
                     </button>
-                    <button class="preview-btn success" onclick="saveToGallery()" style="display: flex; align-items: center; gap: 8px;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button class="preview-btn disabled" onclick="mintToLens()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 12l2 2 4-4"/>
+                        </svg>
+                        <span>Mint</span>
+                    </button>
+                `;
+            } else {
+                // For camera photos: all 4 options in 2x2 grid
+                previewActions.innerHTML = `
+                    <button class="preview-btn primary" onclick="shareOnFarcaster()">
+                        <img src="https://github.com/vrypan/farcaster-brand/raw/main/icons/icon-rounded/purple-white.png" 
+                             alt="Farcaster" 
+                             width="16" 
+                             height="16" 
+                             style="border-radius: 3px;"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                        <span>Share</span>
+                    </button>
+                    <button class="preview-btn disabled" onclick="mintToLens()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 12l2 2 4-4"/>
+                        </svg>
+                        <span>Mint</span>
+                    </button>
+                    <button class="preview-btn secondary" onclick="retakePhoto()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 4v6h6"/>
+                            <path d="M23 20v-6h-6"/>
+                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                        </svg>
+                        <span>Retake</span>
+                    </button>
+                    <button class="preview-btn success" onclick="saveToGallery()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
                             <polyline points="17,21 17,13 7,13 7,21"/>
                             <polyline points="7,3 7,8 15,8"/>
                         </svg>
                         <span>Save</span>
-                    </button>
-                    <button class="preview-btn disabled" onclick="mintToLens()" style="display: flex; align-items: center; gap: 8px;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 12l2 2 4-4"/>
-                            <path d="M12 2v4"/>
-                            <path d="M12 18v4"/>
-                            <path d="M4.93 4.93l2.83 2.83"/>
-                            <path d="M16.24 16.24l2.83 2.83"/>
-                            <path d="M2 12h4"/>
-                            <path d="M18 12h4"/>
-                            <path d="M4.93 19.07l2.83-2.83"/>
-                            <path d="M16.24 7.76l2.83-2.83"/>
-                        </svg>
-                        <span>Mint</span>
                     </button>
                 `;
             }
@@ -3285,5 +3276,5 @@
             animateSlogan();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977ac91ab744febb',t:'MTc1NjYyNTAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977acea3a594febb',t:'MTc1NjYyNTI2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
