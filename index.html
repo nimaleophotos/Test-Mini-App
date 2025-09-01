@@ -260,12 +260,25 @@
             }
         }
         
+        /* Separator Line */
+        .nav-separator {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 80%, transparent 100%);
+            margin: 8px 0 12px 0;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .nav-separator {
+            background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 80%, transparent 100%);
+        }
+
         /* Tabs */
         .tabs-container {
             flex: 1;
             display: flex;
             flex-direction: column;
-            margin: 2px 0 0 0;
+            margin: 0;
             background: rgba(255,255,255,0.08);
             border-radius: 12px 12px 0 0;
             border: 1px solid rgba(255,255,255,0.15);
@@ -358,11 +371,37 @@
         .tab-content {
             flex: 1;
             padding: 15px;
+            overflow: hidden;
         }
         
         .tab-panel {
             display: none;
             height: 100%;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin-right: -4px;
+        }
+        
+        .tab-panel::-webkit-scrollbar {
+            width: 3px;
+        }
+        
+        .tab-panel::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        
+        .tab-panel::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        
+        body.light-theme .tab-panel::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme .tab-panel::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.3);
         }
         
         .tab-panel.active {
@@ -394,6 +433,24 @@
         body.light-theme .bottom-nav {
             background: rgba(0,0,0,0.03);
             border-color: rgba(0,0,0,0.08);
+        }
+        
+        .nav-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .nav-buttons-container {
+            background: rgba(0,0,0,0.015);
+            border-color: rgba(0,0,0,0.03);
         }
         
         .nav-button {
@@ -748,14 +805,14 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
         }
         
         .gallery-item {
             aspect-ratio: 1;
             background: rgba(255,255,255,0.1);
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid rgba(255,255,255,0.2);
             display: flex;
             align-items: center;
@@ -766,6 +823,19 @@
             overflow: hidden;
         }
         
+        body.light-theme .gallery-item {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.2);
+        }
+        
+        body.light-theme .featured-spots-title {
+            color: #1a1a1a !important;
+        }
+        
+        body.light-theme .tutorial-section-title {
+            color: #1a1a1a !important;
+        }
+        
         .gallery-item:hover {
             transform: scale(1.05);
             border-color: rgba(255,255,255,0.4);
@@ -773,8 +843,9 @@
         
         .gallery-placeholder {
             color: #888;
-            font-size: 9px;
+            font-size: 8px;
             text-align: center;
+            font-weight: 500;
         }
         
         .settings-group {
@@ -847,27 +918,45 @@
             min-height: 0;
         }
         
-        .leaderboard-scroll {
+        .leaderboard-scrollable {
             flex: 1;
             overflow-y: auto;
-            padding-right: 4px;
-            margin-bottom: 4px;
-            max-height: 320px;
-            min-height: 320px;
+            padding-right: 8px;
+            margin-right: -4px;
         }
         
-        .leaderboard-scroll::-webkit-scrollbar {
+        .leaderboard-scrollable::-webkit-scrollbar {
             width: 3px;
         }
         
-        .leaderboard-scroll::-webkit-scrollbar-track {
+        .leaderboard-scrollable::-webkit-scrollbar-track {
             background: rgba(255,255,255,0.1);
             border-radius: 2px;
         }
         
-        .leaderboard-scroll::-webkit-scrollbar-thumb {
+        .leaderboard-scrollable::-webkit-scrollbar-thumb {
             background: rgba(255,255,255,0.3);
             border-radius: 2px;
+        }
+        
+        body.light-theme .leaderboard-scrollable::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme .leaderboard-scrollable::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .leaderboard-fixed-rank {
+            flex-shrink: 0;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .leaderboard-fixed-rank {
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
         
         .leaderboard-item {
@@ -1202,6 +1291,183 @@
             color: #1a1a1a !important;
         }
         
+        /* Spotlight Purchase Modal */
+        .spotlight-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .spotlight-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .spotlight-modal-content {
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .spotlight-modal-content {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.15);
+        }
+        
+        .spotlight-modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .spotlight-modal-title {
+            color: #1a1a1a;
+        }
+        
+        .spotlight-modal-subtitle {
+            font-size: 12px;
+            color: #b8bcc8;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .spotlight-modal-subtitle {
+            color: #495057;
+        }
+        
+        .spotlight-modal-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #10B981;
+            margin: 16px 0;
+        }
+        
+        .spotlight-modal-duration {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .spotlight-modal-duration {
+            color: #666;
+        }
+        
+        .spotlight-modal-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 12px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .spotlight-modal-input {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.2);
+            color: #1a1a1a;
+        }
+        
+        .spotlight-modal-input:focus {
+            outline: none;
+            border-color: #007BFF;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        body.light-theme .spotlight-modal-input:focus {
+            background: rgba(0,0,0,0.08);
+        }
+        
+        .spotlight-modal-input::placeholder {
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+        }
+        
+        body.light-theme .spotlight-modal-input::placeholder {
+            color: rgba(0,0,0,0.4);
+        }
+        
+        .spotlight-modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .spotlight-modal-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .spotlight-modal-btn.buy {
+            background: #007BFF;
+            color: #fff;
+        }
+        
+        .spotlight-modal-btn.buy:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+        
+        .spotlight-modal-btn.cancel {
+            background: #DC3545;
+            color: #fff;
+        }
+        
+        .spotlight-modal-btn.cancel:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+        
+        .spotlight-locked {
+            border: 2px solid #10B981 !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+        }
+        
+        .spotlight-owned {
+            border: 2px solid #10B981 !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+        }
+        
+        .spotlight-available {
+            border: 2px solid #6B7280 !important;
+            background: rgba(107, 114, 128, 0.1) !important;
+        }
+        
+        .spotlight-timer {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            font-size: 8px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
         /* Camera Styles */
         .camera-screen {
             position: absolute;
@@ -1761,26 +2027,29 @@
                     <!-- Leaderboard Tab -->
                     <div class="tab-panel" id="leaderboard">
                         <div class="leaderboard-container">
-                            <div class="rank-separator">
-                                <span>LENS App Leaderboard</span>
-                            </div>
-                            <div class="leaderboard-scroll" id="leaderboardList">
-                                <!-- Top 100 users will be populated by JavaScript -->
+                            <div class="leaderboard-scrollable">
+                                <div class="rank-separator">
+                                    <span>LENS App Leaderboard</span>
+                                </div>
+                                <div id="leaderboardList">
+                                    <!-- Top 100 users will be populated by JavaScript -->
+                                </div>
                             </div>
                             
-                            <!-- Current User Rank (always shown) -->
-                            <div class="rank-separator">
-                                <span>Your Rank</span>
-                            </div>
-                            <div class="leaderboard-item current-user-rank">
-                                <div class="rank-sticker">
-                                    <span>247</span>
+                            <div class="leaderboard-fixed-rank">
+                                <div class="rank-separator">
+                                    <span>Your Rank</span>
                                 </div>
-                                <div class="user-info">
-                                    <div class="username">photographer.eth</div>
-                                    <div class="points">
-                                        <span class="points-gem"></span>
-                                        8,420 points
+                                <div class="leaderboard-item current-user-rank">
+                                    <div class="rank-sticker">
+                                        <span>247</span>
+                                    </div>
+                                    <div class="user-info">
+                                        <div class="username">photographer.eth</div>
+                                        <div class="points">
+                                            <span class="points-gem"></span>
+                                            8,420 points
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1810,11 +2079,48 @@
                             
                             <strong>Description:</strong> A breathtaking capture of the iconic Camel Rock formation, showcasing the raw beauty and geological wonder of this natural landmark. The composition masterfully balances the rugged textures against the expansive sky, creating a powerful visual narrative.
                         </div>
+                        
+                        <!-- Featured Photos Section -->
+                        <div style="margin-top: 20px;">
+                            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #fff; transition: all 0.3s ease;" class="featured-spots-title">Spotlight Spots</h3>
+                            <div class="gallery-grid">
+                                <div class="gallery-item" id="spotlight-1" onclick="handleSpotlightClick(1)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #1</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-2" onclick="handleSpotlightClick(2)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #2</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-3" onclick="handleSpotlightClick(3)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #3</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-4" onclick="handleSpotlightClick(4)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #4</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-5" onclick="handleSpotlightClick(5)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #5</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-6" onclick="handleSpotlightClick(6)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #6</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-7" onclick="handleSpotlightClick(7)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #7</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-8" onclick="handleSpotlightClick(8)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #8</div>
+                                </div>
+                                <div class="gallery-item" id="spotlight-9" onclick="handleSpotlightClick(9)" style="cursor: pointer;">
+                                    <div class="gallery-placeholder">Spotlight<br>Spot #9</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Learning Tab -->
                     <div class="tab-panel" id="learning">
                         <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 15px; text-align: center; color: #fff; transition: all 0.3s ease;" class="tutorial-title">Photography Tutorials</h2>
+                        
+                        <!-- Photography Basics Section -->
+                        <h3 style="font-size: 14px; font-weight: 600; margin: 20px 0 10px 0; color: #fff; transition: all 0.3s ease;" class="tutorial-section-title">📸 Photography Fundamentals</h3>
                         <div class="tip-card" onclick="openTutorial()">
                             <div class="tip-title">Mobile Photography</div>
                             <div class="tip-content">Master the art of photography using your smartphone. Learn composition, lighting, and editing techniques specifically for mobile devices.</div>
@@ -1831,54 +2137,119 @@
                             <div class="tip-title">Pro Photography</div>
                             <div class="tip-content">Professional techniques, business skills, client management, and advanced equipment usage for commercial photography success.</div>
                         </div>
+                        
+                        <!-- Composition & Techniques Section -->
+                        <h3 style="font-size: 14px; font-weight: 600; margin: 20px 0 10px 0; color: #fff; transition: all 0.3s ease;" class="tutorial-section-title">🎨 Composition & Techniques</h3>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Rule of Thirds</div>
+                            <div class="tip-content">Learn the fundamental composition rule that creates balanced and visually appealing photographs.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Leading Lines</div>
+                            <div class="tip-content">Use lines in your composition to guide the viewer's eye and create dynamic, engaging images.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Depth of Field</div>
+                            <div class="tip-content">Master aperture control to create stunning bokeh effects and control what's in focus in your images.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Golden Hour Photography</div>
+                            <div class="tip-content">Capture magical lighting during the golden hour for warm, soft, and professionally lit photographs.</div>
+                        </div>
+                        
+                        <!-- Post Processing Section -->
+                        <h3 style="font-size: 14px; font-weight: 600; margin: 20px 0 10px 0; color: #fff; transition: all 0.3s ease;" class="tutorial-section-title">✨ Post Processing Tutorials</h3>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Lightroom Basics</div>
+                            <div class="tip-content">Essential Lightroom skills for organizing, editing, and enhancing your photos with professional results.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Photoshop Fundamentals</div>
+                            <div class="tip-content">Learn core Photoshop techniques for advanced photo manipulation, retouching, and creative editing.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Mobile Editing Apps</div>
+                            <div class="tip-content">Master mobile editing with apps like VSCO, Snapseed, and Adobe Lightroom Mobile for on-the-go processing.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Color Grading</div>
+                            <div class="tip-content">Create cinematic looks and moods through advanced color grading techniques and color theory.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">HDR Processing</div>
+                            <div class="tip-content">Combine multiple exposures to create stunning high dynamic range images with perfect exposure throughout.</div>
+                        </div>
+                        
+                        <!-- Genre-Specific Section -->
+                        <h3 style="font-size: 14px; font-weight: 600; margin: 20px 0 10px 0; color: #fff; transition: all 0.3s ease;" class="tutorial-section-title">🌟 Photography Genres</h3>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Portrait Photography</div>
+                            <div class="tip-content">Master lighting, posing, and connection techniques for compelling portrait photography.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Landscape Photography</div>
+                            <div class="tip-content">Capture breathtaking landscapes with proper planning, composition, and technical execution.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Street Photography</div>
+                            <div class="tip-content">Document life as it happens with candid street photography techniques and ethical considerations.</div>
+                        </div>
+                        <div class="tip-card" onclick="openTutorial()">
+                            <div class="tip-title">Macro Photography</div>
+                            <div class="tip-content">Explore the tiny world through macro photography, from equipment to technique and lighting.</div>
+                        </div>
                     </div>
                 </div>
             </div>
             
+
+            
             <!-- Bottom Navigation -->
             <div class="bottom-nav">
-                <button class="nav-button" onclick="openPage('info')">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="12" cy="12" r="10"/>
-                        <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">?</text>
-                    </svg>
-                    Info
-                </button>
-                <button class="nav-button" onclick="openPage('competition')">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                        <path d="M4 22h16"/>
-                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-                        <circle cx="12" cy="6" r="1.5" fill="currentColor"/>
-                    </svg>
-                    Competition
-                </button>
-                <button class="nav-button camera-button" onclick="openCamera()">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                        <circle cx="12" cy="13" r="3"/>
-                    </svg>
-                    Camera
-                </button>
-                <button class="nav-button" onclick="openPage('rewards')">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
-                    </svg>
-                    Rewards
-                </button>
-                <button class="nav-button" onclick="openPage('gallery')">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21,15 16,10 5,21"/>
-                        <text x="12" y="20" text-anchor="middle" font-size="6" font-weight="bold" fill="currentColor">LENS</text>
-                    </svg>
-                    LENS&nbsp;Gallery
-                </button>
+                <div class="nav-buttons-container">
+                    <button class="nav-button" onclick="openPage('info')">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">?</text>
+                        </svg>
+                        Info
+                    </button>
+                    <button class="nav-button" onclick="openPage('competition')">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                            <path d="M4 22h16"/>
+                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                            <circle cx="12" cy="6" r="1.5" fill="currentColor"/>
+                        </svg>
+                        Competition
+                    </button>
+                    <button class="nav-button camera-button" onclick="openCamera()">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                            <circle cx="12" cy="13" r="3"/>
+                        </svg>
+                        Camera
+                    </button>
+                    <button class="nav-button" onclick="openPage('rewards')">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                        </svg>
+                        Rewards
+                    </button>
+                    <button class="nav-button" onclick="openPage('gallery')">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21,15 16,10 5,21"/>
+                            <text x="12" y="20" text-anchor="middle" font-size="6" font-weight="bold" fill="currentColor">LENS</text>
+                        </svg>
+                        LENS&nbsp;Gallery
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -2426,6 +2797,25 @@
                         </svg>
                         <span>Mint</span>
                     </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spotlight Purchase Modal -->
+        <div class="spotlight-modal" id="spotlightModal">
+            <div class="spotlight-modal-content">
+                <div class="spotlight-modal-title">Buy Spotlight Spot</div>
+                <div class="spotlight-modal-subtitle">Promote your cast to the community</div>
+                <div class="spotlight-modal-price">$1.00</div>
+                <div class="spotlight-modal-duration">Duration: 6 hours</div>
+                <input type="url" 
+                       class="spotlight-modal-input" 
+                       id="castUrlInput" 
+                       placeholder="Enter your Farcaster cast URL (e.g., https://farcaster.xyz/username/0x123...)"
+                       required>
+                <div class="spotlight-modal-buttons">
+                    <button class="spotlight-modal-btn cancel" onclick="closeSpotlightModal()">Cancel</button>
+                    <button class="spotlight-modal-btn buy" onclick="buySpotlightSpot()">Buy</button>
                 </div>
             </div>
         </div>
@@ -3270,11 +3660,337 @@
             startCamera();
         }
         
+        // Spotlight Spots Management
+        let spotlightSpots = {};
+        let currentSpotlightSpot = null;
+        let usedCastUrls = new Set(); // Track used cast URLs across all spots
+        
+        function handleSpotlightClick(spotNumber) {
+            const spot = spotlightSpots[spotNumber];
+            
+            if (!spot || !spot.isOwned) {
+                // Spot is available for purchase
+                currentSpotlightSpot = spotNumber;
+                openSpotlightModal();
+            } else if (spot.isOwned && spot.owner !== 'photographer.eth') {
+                // Spot is owned by someone else - redirect to their cast
+                visitSpotlightCast(spotNumber);
+            } else if (spot.isOwned && spot.owner === 'photographer.eth') {
+                // User owns this spot - redirect to their promoted cast
+                visitSpotlightCast(spotNumber);
+            }
+        }
+        
+        function openSpotlightModal() {
+            const modal = document.getElementById('spotlightModal');
+            modal.classList.add('show');
+        }
+        
+        function closeSpotlightModal() {
+            const modal = document.getElementById('spotlightModal');
+            const castUrlInput = document.getElementById('castUrlInput');
+            modal.classList.remove('show');
+            castUrlInput.value = ''; // Clear input
+            currentSpotlightSpot = null;
+        }
+        
+        function buySpotlightSpot() {
+            if (!currentSpotlightSpot) return;
+            
+            const castUrlInput = document.getElementById('castUrlInput');
+            const castUrl = castUrlInput.value.trim();
+            
+            // Validate cast URL
+            if (!castUrl) {
+                alert('Please enter your Farcaster cast URL to promote.');
+                castUrlInput.focus();
+                return;
+            }
+            
+            // Basic URL validation
+            if (!castUrl.startsWith('https://farcaster.xyz/') && !castUrl.startsWith('https://warpcast.com/')) {
+                alert('Please enter a valid Farcaster cast URL.\n\nExample: https://farcaster.xyz/username/0x123...');
+                castUrlInput.focus();
+                return;
+            }
+            
+            // Check if cast URL is already used in any active spot
+            if (usedCastUrls.has(castUrl)) {
+                alert('⚠️ This cast has an active spotlight!\n\nThis cast is already being promoted in another spotlight spot. Each cast can only have one active spotlight at a time.\n\nPlease use a different cast or wait for the current spotlight to expire.');
+                castUrlInput.focus();
+                return;
+            }
+            
+            // Simulate transaction
+            const spotNumber = currentSpotlightSpot;
+            const expiresAt = Date.now() + (6 * 60 * 60 * 1000); // 6 hours from now
+            
+            // Update spot data
+            spotlightSpots[spotNumber] = {
+                isOwned: true,
+                owner: 'photographer.eth',
+                expiresAt: expiresAt,
+                castUrl: castUrl
+            };
+            
+            // Add cast URL to used set
+            usedCastUrls.add(castUrl);
+            
+            // Update UI
+            updateSpotlightSpotUI(spotNumber);
+            
+            // Start timer
+            startSpotlightTimer(spotNumber);
+            
+            // Close modal and show success
+            closeSpotlightModal();
+            alert(`🎉 Spotlight Spot #${spotNumber} purchased successfully!\n\nYour cast will be promoted for 6 hours.\nOthers can now click on this spot to visit your cast and earn points!`);
+        }
+        
+        async function updateSpotlightSpotUI(spotNumber) {
+            const spotElement = document.getElementById(`spotlight-${spotNumber}`);
+            const spot = spotlightSpots[spotNumber];
+            
+            if (spot && spot.isOwned) {
+                // Extract image from cast URL
+                const castImageUrl = await extractCastImage(spot.castUrl);
+                
+                if (spot.owner === 'photographer.eth') {
+                    // User owns this spot
+                    spotElement.classList.remove('spotlight-available', 'spotlight-locked');
+                    spotElement.classList.add('spotlight-owned');
+                    
+                    if (castImageUrl) {
+                        spotElement.innerHTML = `
+                            <img src="${castImageUrl}" 
+                                 alt="Your promoted cast" 
+                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="gallery-placeholder" style="display: none;">Your Spot<br>#${spotNumber}</div>
+                            <div class="spotlight-timer" id="timer-${spotNumber}"></div>
+                        `;
+                    } else {
+                        spotElement.innerHTML = `
+                            <div class="gallery-placeholder">Your Spot<br>#${spotNumber}</div>
+                            <div class="spotlight-timer" id="timer-${spotNumber}"></div>
+                        `;
+                    }
+                } else {
+                    // Someone else owns this spot
+                    spotElement.classList.remove('spotlight-owned', 'spotlight-available');
+                    spotElement.classList.add('spotlight-locked');
+                    
+                    if (castImageUrl) {
+                        spotElement.innerHTML = `
+                            <img src="${castImageUrl}" 
+                                 alt="@${spot.owner.split('.')[0]}'s cast" 
+                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="gallery-placeholder" style="display: none;">@${spot.owner.split('.')[0]}<br>Spot #${spotNumber}</div>
+                            <div class="spotlight-timer" id="timer-${spotNumber}"></div>
+                        `;
+                    } else {
+                        spotElement.innerHTML = `
+                            <div class="gallery-placeholder">@${spot.owner.split('.')[0]}<br>Spot #${spotNumber}</div>
+                            <div class="spotlight-timer" id="timer-${spotNumber}"></div>
+                        `;
+                    }
+                }
+            } else {
+                // Spot is available
+                spotElement.classList.remove('spotlight-owned', 'spotlight-locked');
+                spotElement.classList.add('spotlight-available');
+                spotElement.innerHTML = `<div class="gallery-placeholder">Available<br>Spot #${spotNumber}</div>`;
+            }
+        }
+        
+        function startSpotlightTimer(spotNumber) {
+            const spot = spotlightSpots[spotNumber];
+            if (!spot) return;
+            
+            const updateTimer = () => {
+                const timerElement = document.getElementById(`timer-${spotNumber}`);
+                if (!timerElement) return;
+                
+                const now = Date.now();
+                const remaining = spot.expiresAt - now;
+                
+                if (remaining <= 0) {
+                    // Spot expired - clean up
+                    const expiredSpot = spotlightSpots[spotNumber];
+                    if (expiredSpot && expiredSpot.castUrl) {
+                        usedCastUrls.delete(expiredSpot.castUrl); // Remove from used URLs
+                    }
+                    delete spotlightSpots[spotNumber];
+                    updateSpotlightSpotUI(spotNumber);
+                    return;
+                }
+                
+                timerElement.textContent = formatTimeRemaining(spot.expiresAt);
+            };
+            
+            // Update immediately to show timer right away
+            setTimeout(updateTimer, 100); // Small delay to ensure DOM is ready
+            
+            // Then update every minute
+            const interval = setInterval(() => {
+                updateTimer();
+                if (!spotlightSpots[spotNumber]) {
+                    clearInterval(interval);
+                }
+            }, 60000); // Update every minute
+        }
+        
+        function formatTimeRemaining(expiresAt) {
+            const now = Date.now();
+            const remaining = expiresAt - now;
+            
+            if (remaining <= 0) return '0h 0m';
+            
+            const hours = Math.floor(remaining / (1000 * 60 * 60));
+            const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            
+            return `${hours}h ${minutes}m`;
+        }
+        
+        async function extractCastImage(castUrl) {
+            if (!castUrl) return null;
+            
+            try {
+                // For demo purposes, we'll simulate extracting images from different cast URLs
+                // In a real implementation, you would:
+                // 1. Parse the cast URL to get the cast hash
+                // 2. Use Farcaster Hub API or Neynar API to fetch cast data
+                // 3. Extract the first image from the cast's embeds or attachments
+                
+                // Demo image extraction based on URL patterns - each user gets a unique image
+                const imageMap = {
+                    'artlens.eth': 'https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3',
+                    'streetphoto.eth': 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=400&fit=crop',
+                    'blackwhite.eth': 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=400&fit=crop',
+                    'urbanshot.eth': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&h=400&fit=crop',
+                    'nightcrawler.eth': 'https://images.unsplash.com/photo-1514539079130-25950c84af65?w=400&h=400&fit=crop',
+                    'photographer.eth': 'https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3',
+                    'nimaleophotos.eth': 'https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3'
+                };
+                
+                // Find matching user in the cast URL
+                for (const [user, imageUrl] of Object.entries(imageMap)) {
+                    if (castUrl.includes(user)) {
+                        return imageUrl;
+                    }
+                }
+                
+                // In a real implementation, this would be:
+                /*
+                const castHash = extractCastHashFromUrl(castUrl);
+                const response = await fetch(`https://api.neynar.com/v2/farcaster/cast?identifier=${castHash}`, {
+                    headers: {
+                        'api_key': 'YOUR_NEYNAR_API_KEY'
+                    }
+                });
+                const castData = await response.json();
+                
+                // Extract first image from embeds
+                if (castData.cast && castData.cast.embeds && castData.cast.embeds.length > 0) {
+                    for (const embed of castData.cast.embeds) {
+                        if (embed.url && (embed.url.includes('.jpg') || embed.url.includes('.png') || embed.url.includes('.gif'))) {
+                            return embed.url;
+                        }
+                    }
+                }
+                */
+                
+                return null;
+            } catch (error) {
+                console.error('Error extracting cast image:', error);
+                return null;
+            }
+        }
+        
+        function extractCastHashFromUrl(castUrl) {
+            // Extract cast hash from Farcaster URLs
+            // Format: https://farcaster.xyz/username/0x123abc...
+            // or: https://warpcast.com/username/0x123abc...
+            const match = castUrl.match(/\/(0x[a-fA-F0-9]+)$/);
+            return match ? match[1] : null;
+        }
+        
+        function visitSpotlightCast(spotNumber) {
+            const spot = spotlightSpots[spotNumber];
+            if (!spot || !spot.castUrl) return;
+            
+            // Simulate visiting the cast and earning points
+            alert(`🎯 Visiting @${spot.owner.split('.')[0]}'s cast!\n\n+50 $LENS points earned for engaging with spotlight content!\n\nRedirecting to their cast...`);
+            
+            // In a real app, this would redirect to the actual cast
+            setTimeout(() => {
+                window.open(spot.castUrl, '_blank');
+            }, 1000);
+        }
+        
+        // Initialize some demo spotlight spots
+        function initializeDemoSpotlights() {
+            // Initialize all spots as available first
+            for (let i = 1; i <= 9; i++) {
+                updateSpotlightSpotUI(i);
+            }
+            
+            // Demo cast URLs for different users
+            const demoCastUrls = [
+                'https://farcaster.xyz/artlens.eth/0x789abc123',
+                'https://farcaster.xyz/streetphoto.eth/0x456def789',
+                'https://farcaster.xyz/blackwhite.eth/0x123ghi456',
+                'https://farcaster.xyz/urbanshot.eth/0x789jkl012',
+                'https://farcaster.xyz/nightcrawler.eth/0x345mno678'
+            ];
+            
+            const demoUsers = [
+                'artlens.eth',
+                'streetphoto.eth', 
+                'blackwhite.eth',
+                'urbanshot.eth',
+                'nightcrawler.eth'
+            ];
+            
+            // Create some demo occupied spots with different expiration times
+            const demoSpots = [
+                { spot: 2, user: 0, hoursRemaining: 5.5 },
+                { spot: 3, user: 1, hoursRemaining: 4.2 },
+                { spot: 6, user: 2, hoursRemaining: 2.8 },
+                { spot: 8, user: 3, hoursRemaining: 1.5 }
+            ];
+            
+            demoSpots.forEach(({ spot, user, hoursRemaining }) => {
+                const expiresAt = Date.now() + (hoursRemaining * 60 * 60 * 1000);
+                const castUrl = demoCastUrls[user];
+                
+                spotlightSpots[spot] = {
+                    isOwned: true,
+                    owner: demoUsers[user],
+                    expiresAt: expiresAt,
+                    castUrl: castUrl
+                };
+                
+                // Add to used URLs
+                usedCastUrls.add(castUrl);
+                
+                updateSpotlightSpotUI(spot);
+                startSpotlightTimer(spot);
+            });
+        }
+        
+        function openFeaturedPhoto(spotNumber) {
+            // This function is now replaced by handleSpotlightClick
+            handleSpotlightClick(spotNumber);
+        }
+        
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             generateLeaderboard();
             animateSlogan();
+            initializeDemoSpotlights();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977acea3a594febb',t:'MTc1NjYyNTI2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9785e7c1a076a4bf',t:'MTc1Njc0MTYzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
