@@ -1470,11 +1470,11 @@
 
         /* Camera Styles */
         .camera-screen {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: #000;
             z-index: 2000;
             display: none;
@@ -1490,6 +1490,8 @@
             flex: 1;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            height: 100%;
         }
         
         .camera-video {
@@ -1647,9 +1649,9 @@
         
         .camera-controls-top {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
+            top: max(20px, env(safe-area-inset-top, 20px));
+            left: max(20px, env(safe-area-inset-left, 20px));
+            right: max(20px, env(safe-area-inset-right, 20px));
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -1671,14 +1673,70 @@
         
         .camera-controls-bottom {
             position: absolute;
-            bottom: 20px;
-            left: 15px;
-            right: 15px;
+            bottom: max(20px, env(safe-area-inset-bottom, 20px));
+            left: max(15px, env(safe-area-inset-left, 15px));
+            right: max(15px, env(safe-area-inset-right, 15px));
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
             z-index: 10;
+        }
+        
+        /* Responsive camera controls for different screen sizes */
+        @media (max-width: 480px) {
+            .camera-controls-top {
+                top: max(15px, env(safe-area-inset-top, 15px));
+                left: max(15px, env(safe-area-inset-left, 15px));
+                right: max(15px, env(safe-area-inset-right, 15px));
+            }
+            
+            .camera-controls-bottom {
+                bottom: max(15px, env(safe-area-inset-bottom, 15px));
+                left: max(10px, env(safe-area-inset-left, 10px));
+                right: max(10px, env(safe-area-inset-right, 10px));
+                gap: 12px;
+            }
+            
+            .camera-controls-left,
+            .camera-controls-right {
+                gap: 10px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .camera-controls-top {
+                top: max(30px, env(safe-area-inset-top, 30px));
+                left: max(30px, env(safe-area-inset-left, 30px));
+                right: max(30px, env(safe-area-inset-right, 30px));
+            }
+            
+            .camera-controls-bottom {
+                bottom: max(30px, env(safe-area-inset-bottom, 30px));
+                left: max(25px, env(safe-area-inset-left, 25px));
+                right: max(25px, env(safe-area-inset-right, 25px));
+                gap: 20px;
+            }
+            
+            .camera-controls-left,
+            .camera-controls-right {
+                gap: 15px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .camera-controls-top {
+                top: max(40px, env(safe-area-inset-top, 40px));
+                left: max(40px, env(safe-area-inset-left, 40px));
+                right: max(40px, env(safe-area-inset-right, 40px));
+            }
+            
+            .camera-controls-bottom {
+                bottom: max(40px, env(safe-area-inset-bottom, 40px));
+                left: max(35px, env(safe-area-inset-left, 35px));
+                right: max(35px, env(safe-area-inset-right, 35px));
+                gap: 25px;
+            }
         }
         
         .camera-btn {
@@ -1696,6 +1754,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        
+        /* Responsive camera button sizes */
+        @media (max-width: 480px) {
+            .camera-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 11px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .camera-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .camera-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 14px;
+            }
         }
         
         .camera-btn:hover {
@@ -1734,6 +1817,46 @@
             align-items: center;
             justify-content: center;
             position: relative;
+        }
+        
+        /* Responsive zoom controls */
+        @media (max-width: 480px) {
+            .zoom-controls {
+                gap: 10px;
+                height: 28px;
+            }
+            
+            .zoom-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 9px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .zoom-controls {
+                gap: 15px;
+                height: 36px;
+            }
+            
+            .zoom-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 11px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .zoom-controls {
+                gap: 18px;
+                height: 40px;
+            }
+            
+            .zoom-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
         }
         
         .zoom-btn.active {
@@ -1799,6 +1922,31 @@
             transform: scale(1.05);
         }
         
+        /* Responsive gallery button */
+        @media (max-width: 480px) {
+            .gallery-upload-btn {
+                width: 36px;
+                height: 36px;
+                border-width: 1.5px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-upload-btn {
+                width: 46px;
+                height: 46px;
+                border-width: 2.5px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .gallery-upload-btn {
+                width: 52px;
+                height: 52px;
+                border-width: 3px;
+            }
+        }
+        
         .capture-button {
             width: 70px;
             height: 70px;
@@ -1838,6 +1986,61 @@
             height: 40px;
         }
         
+        /* Responsive capture button sizes */
+        @media (max-width: 480px) {
+            .capture-button {
+                width: 60px;
+                height: 60px;
+                border-width: 3px;
+            }
+            
+            .capture-button::after {
+                width: 42px;
+                height: 42px;
+            }
+            
+            .capture-button:active::after {
+                width: 34px;
+                height: 34px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .capture-button {
+                width: 80px;
+                height: 80px;
+                border-width: 5px;
+            }
+            
+            .capture-button::after {
+                width: 58px;
+                height: 58px;
+            }
+            
+            .capture-button:active::after {
+                width: 46px;
+                height: 46px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .capture-button {
+                width: 90px;
+                height: 90px;
+                border-width: 6px;
+            }
+            
+            .capture-button::after {
+                width: 66px;
+                height: 66px;
+            }
+            
+            .capture-button:active::after {
+                width: 52px;
+                height: 52px;
+            }
+        }
+        
         .timer-display {
             position: absolute;
             top: 50%;
@@ -1849,6 +2052,25 @@
             text-shadow: 0 0 20px rgba(0,0,0,0.8);
             z-index: 100;
             display: none;
+        }
+        
+        /* Responsive timer display */
+        @media (max-width: 480px) {
+            .timer-display {
+                font-size: 56px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .timer-display {
+                font-size: 84px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .timer-display {
+                font-size: 96px;
+            }
         }
         
         .photo-preview {
@@ -2432,122 +2654,298 @@
                 <div style="width: 50px;"></div>
             </div>
             <div class="page-content">
-                <div class="info-section" style="text-align: center; background: rgba(0, 123, 255, 0.1); border-color: rgba(0, 123, 255, 0.3);">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
-                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #007BFF, #0056b3); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: white;">P</div>
-                        <div style="text-align: left;">
-                            <h3 style="margin: 0; font-size: 20px; color: #007BFF;">photographer.eth</h3>
-                            <p style="margin: 2px 0 0 0; font-size: 12px; color: #888;">Connected Wallet</p>
-                        </div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: 700; color: #FFD700;">8,420</div>
-                            <div style="font-size: 11px; color: #ccc;">$LENS Balance</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: 700; color: #007BFF;">247</div>
-                            <div style="font-size: 11px; color: #ccc;">Global Rank</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <h3>📊 Account Statistics</h3>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h4>📸 Photos Uploaded</h4>
-                            <p style="font-size: 18px; font-weight: 700; color: #fff; margin: 8px 0; transition: all 0.3s ease;" class="profile-stat">127</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>🏆 Competitions Won</h4>
-                            <p style="font-size: 18px; font-weight: 700; color: #FFD700; margin: 8px 0;">3</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>👥 Followers</h4>
-                            <p style="font-size: 18px; font-weight: 700; color: #007BFF; margin: 8px 0;">1,284</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>❤️ Total Likes</h4>
-                            <p style="font-size: 18px; font-weight: 700; color: #FF6B6B; margin: 8px 0;">5,672</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <h3>🎖️ Achievements Unlocked</h3>
-                    <div class="feature-grid">
-                        <div class="feature-card" style="background: rgba(255, 215, 0, 0.1); border-color: rgba(255, 215, 0, 0.3);">
-                            <h4>🥇 First Place Winner</h4>
-                            <p>Won daily competition on March 15th</p>
-                        </div>
-                        <div class="feature-card" style="background: rgba(0, 123, 255, 0.1); border-color: rgba(0, 123, 255, 0.3);">
-                            <h4>📱 Mobile Master</h4>
-                            <p>Uploaded 100+ mobile photos</p>
-                        </div>
-                        <div class="feature-card" style="background: rgba(40, 167, 69, 0.1); border-color: rgba(40, 167, 69, 0.3);">
-                            <h4>🔥 Week Streak</h4>
-                            <p>7-day consecutive login streak</p>
-                        </div>
-                        <div class="feature-card" style="background: rgba(220, 53, 69, 0.1); border-color: rgba(220, 53, 69, 0.3);">
-                            <h4>❤️ Community Favorite</h4>
-                            <p>Photo received 500+ likes</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <h3>💰 Wallet Details</h3>
-                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="font-size: 12px; color: #ccc;">ENS Domain</span>
-                            <span style="font-size: 12px; font-weight: 600; color: #007BFF;">photographer.eth</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="font-size: 12px; color: #ccc;">Wallet Address</span>
-                            <span style="font-size: 10px; font-weight: 600; color: #fff; transition: all 0.3s ease;" class="profile-text">0x742d...A8C3</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="font-size: 12px; color: #ccc;">Member Since</span>
-                            <span style="font-size: 12px; font-weight: 600; color: #fff; transition: all 0.3s ease;" class="profile-text">February 2024</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <span style="font-size: 12px; color: #ccc;">Network</span>
-                            <span style="font-size: 12px; font-weight: 600; color: #8B5CF6;">Base</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
-                            <span style="font-size: 12px; color: #ccc;">Status</span>
-                            <span style="font-size: 12px; font-weight: 600; color: #10B981;">✓ Verified</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <h3>🎯 Recent Activity</h3>
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div style="display: flex; align-items: center; gap: 10px; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 6px;">
-                            <div style="width: 6px; height: 6px; background: #10B981; border-radius: 50%;"></div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 11px; color: #fff; transition: all 0.3s ease;" class="activity-title">Uploaded new photo</div>
-                                <div style="font-size: 9px; color: #888;">2 hours ago</div>
+                <div class="info-section" style="background: rgba(0, 123, 255, 0.1); border-color: rgba(0, 123, 255, 0.3);">
+                    <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #007BFF, #0056b3); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: white; flex-shrink: 0;">P</div>
+                        <div style="flex: 1;">
+                            <h3 style="margin: 0 0 4px 0; font-size: 18px; color: #007BFF;">photographer.eth</h3>
+                            <p style="margin: 0 0 8px 0; font-size: 11px; color: #888;">Connected Wallet</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <span style="font-size: 11px; color: #ccc;">Wallet Address</span>
+                                <span style="font-size: 10px; font-weight: 600; color: #888; cursor: pointer; transition: all 0.3s ease;" onclick="copyAddress()" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#888'">0x742d...A8C3</span>
                             </div>
-                            <div style="font-size: 10px; color: #10B981;">+25 $LENS</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 10px; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 6px;">
-                            <div style="width: 6px; height: 6px; background: #FFD700; border-radius: 50%;"></div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 11px; color: #fff; transition: all 0.3s ease;" class="activity-title">Won daily competition</div>
-                                <div style="font-size: 9px; color: #888;">1 day ago</div>
-                            </div>
-                            <div style="font-size: 10px; color: #FFD700;">+100 $LENS</div>
+                    </div>
+                    
+                    <!-- Token Balances -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 16px; font-weight: 700; color: #fff;">8,420</div>
+                            <div style="font-size: 9px; color: #ccc;">Points</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 10px; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 6px;">
-                            <div style="width: 6px; height: 6px; background: #007BFF; border-radius: 50%;"></div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 11px; color: #fff; transition: all 0.3s ease;" class="activity-title">Daily login bonus</div>
-                                <div style="font-size: 9px; color: #888;">1 day ago</div>
+                        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 16px; font-weight: 700; color: #fff;">8,420</div>
+                            <div style="font-size: 9px; color: #ccc;">$LENS</div>
+                        </div>
+                        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 16px; font-weight: 700; color: #fff;">2.45</div>
+                            <div style="font-size: 9px; color: #ccc;">$ETH</div>
+                        </div>
+                        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 16px; font-weight: 700; color: #fff;">1,250</div>
+                            <div style="font-size: 9px; color: #ccc;">$USDC</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rankings -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 18px; font-weight: 700; color: #fff;">#247</div>
+                            <div style="font-size: 10px; color: #ccc;">Lens App Rank</div>
+                        </div>
+                        <div style="text-align: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 18px; font-weight: 700; color: #fff;">#1,842</div>
+                            <div style="font-size: 10px; color: #ccc;">Lens Empire Rank</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section" style="padding: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2">
+                            <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4"/>
+                            <polyline points="9,11 12,14 15,11"/>
+                            <line x1="12" y1="2" x2="12" y2="14"/>
+                        </svg>
+                        <h3 style="font-size: 14px; margin: 0;">Account Statistics</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px;">
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Photos Uploaded</span>
+                            <span style="font-weight: 700; color: #fff;">127</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Competitions Won</span>
+                            <span style="font-weight: 700; color: #fff;">3</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Followers</span>
+                            <span style="font-weight: 700; color: #fff;">1,284</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Spotlight Spots</span>
+                            <span style="font-weight: 700; color: #fff;">12</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Spotlight Likes</span>
+                            <span style="font-weight: 700; color: #fff;">2,847</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">USDC Spent</span>
+                            <span style="font-weight: 700; color: #fff;">$12.00 USDC</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Total Likes</span>
+                            <span style="font-weight: 700; color: #fff;">5,672</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: #ccc;">Profile Views</span>
+                            <span style="font-weight: 700; color: #fff;">8,934</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section" style="padding: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <circle cx="12" cy="12" r="4" fill="#FFD700" opacity="0.3"/>
+                        </svg>
+                        <h3 style="font-size: 13px; margin: 0;">Achievements Unlocked</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 10px;">
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 6px;">
+                            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
                             </div>
-                            <div style="font-size: 10px; color: #007BFF;">+10 $LENS</div>
+                            <div>
+                                <div style="font-weight: 700; color: #FFD700;">First Place Winner</div>
+                                <div style="color: #888; font-size: 9px;">Won daily competition</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(0, 123, 255, 0.1); border: 1px solid rgba(0, 123, 255, 0.3); border-radius: 6px;">
+                            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #007BFF, #0056b3); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                    <line x1="8" y1="21" x2="16" y2="21"/>
+                                    <line x1="12" y1="17" x2="12" y2="21"/>
+                                    <circle cx="9" cy="9" r="2"/>
+                                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #007BFF;">Mobile Master</div>
+                                <div style="color: #888; font-size: 9px;">100+ mobile photos</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(40, 167, 69, 0.1); border: 1px solid rgba(40, 167, 69, 0.3); border-radius: 6px;">
+                            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #28A745, #1e7e34); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12H9l4-8 4 8h-2a2.5 2.5 0 0 0 2.5 2.5"/>
+                                    <path d="M12 2v20"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #28A745;">Week Streak</div>
+                                <div style="color: #888; font-size: 9px;">7-day login streak</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); border-radius: 6px;">
+                            <div style="width: 24px; height: 24px; background: linear-gradient(135deg, #DC3545, #c82333); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #DC3545;">Community Favorite</div>
+                                <div style="color: #888; font-size: 9px;">500+ likes received</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="info-section">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2">
+                            <path d="M12 20h9"/>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                            <circle cx="12" cy="12" r="3" fill="#10B981" opacity="0.3"/>
+                        </svg>
+                        <h3 style="font-size: 13px; margin: 0;">Recent Activity</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Uploaded new photo</div>
+                                <div style="font-size: 8px; color: #888;">2 hours ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+25 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Won daily competition</div>
+                                <div style="font-size: 8px; color: #888;">1 day ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+100 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M9 12l2 2 4-4"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Daily login bonus</div>
+                                <div style="font-size: 8px; color: #888;">1 day ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+10 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Photo received 50 likes</div>
+                                <div style="font-size: 8px; color: #888;">2 days ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+15 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Gained 5 new followers</div>
+                                <div style="font-size: 8px; color: #888;">3 days ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+20 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5"/>
+                                    <path d="M6 9.5v6.5l6 3 6-3v-6.5"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Completed tutorial</div>
+                                <div style="font-size: 8px; color: #888;">4 days ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+30 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4"/>
+                                    <polyline points="9,11 12,14 15,11"/>
+                                    <line x1="12" y1="2" x2="12" y2="14"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Bought spotlight spot</div>
+                                <div style="font-size: 8px; color: #888;">5 days ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+5 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M8 3l4 8 5-5v11H3V6l5-3z"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Photo featured in gallery</div>
+                                <div style="font-size: 8px; color: #888;">6 days ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+50 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Reached 1000 followers</div>
+                                <div style="font-size: 8px; color: #888;">1 week ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+75 points</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 6px; background: rgba(255,255,255,0.05); border-radius: 6px;">
+                            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 10px; color: #fff; transition: all 0.3s ease;" class="activity-title">Profile customization</div>
+                                <div style="font-size: 8px; color: #888;">1 week ago</div>
+                            </div>
+                            <div style="font-size: 9px; color: #fff; font-weight: 600;">+12 points</div>
                         </div>
                     </div>
                 </div>
@@ -3992,5 +4390,5 @@
             initializeDemoSpotlights();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9785e7c1a076a4bf',t:'MTc1Njc0MTYzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978aad96e5511c95',t:'MTc1Njc5MTY4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
