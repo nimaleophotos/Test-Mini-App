@@ -1166,8 +1166,6 @@
         /* POD Styles */
         .pod-image {
             width: 100%;
-            max-height: 200px;
-            min-height: 150px;
             background: rgba(255,255,255,0.1);
             border-radius: 6px;
             margin-bottom: 16px;
@@ -1176,27 +1174,28 @@
             justify-content: center;
             border: 1px solid rgba(255,255,255,0.2);
             overflow: hidden;
+            min-height: 200px;
         }
         
         @media (min-width: 768px) {
             .pod-image {
-                max-height: 400px;
-                min-height: 320px;
                 border-radius: 8px;
                 margin-bottom: 20px;
+                min-height: 300px;
             }
         }
         
         @media (min-width: 1024px) {
             .pod-image {
-                max-height: 550px;
-                min-height: 450px;
+                min-height: 400px;
             }
         }
         
         .pod-image img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
             object-fit: contain;
             border-radius: 6px;
         }
@@ -1204,6 +1203,7 @@
         @media (min-width: 768px) {
             .pod-image img {
                 border-radius: 8px;
+                max-height: 70vh;
             }
         }
         
@@ -1212,21 +1212,21 @@
             line-height: 1.5;
             color: #ccc;
             transition: all 0.3s ease;
-            margin-bottom: 80px;
+            margin-bottom: 100px;
         }
         
         @media (min-width: 768px) {
             .pod-description {
                 font-size: 13px;
                 line-height: 1.6;
-                margin-bottom: 80px;
+                margin-bottom: 100px;
             }
         }
         
         @media (min-width: 1024px) {
             .pod-description {
                 font-size: 14px;
-                margin-bottom: 100px;
+                margin-bottom: 120px;
             }
         }
         
@@ -2207,6 +2207,9 @@
                     
                     <!-- POD Tab -->
                     <div class="tab-panel active" id="pod">
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <strong class="pod-main-title" style="font-weight: 700; font-size: 14px; line-height: 1.4;">Today's Featured Photo (Picture of The Day)</strong>
+                        </div>
                         <div class="pod-image" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xad23b3a2', '_blank')" style="cursor: pointer;">
                             <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3" 
                                  alt="Camel Rock by Nima Leo"
@@ -2220,11 +2223,10 @@
                             </div>
                         </div>
                         <div class="pod-description">
-                            <strong class="pod-main-title" style="font-weight: 700; font-size: 14px; line-height: 1.4;">Today's Featured Photo (Picture of The Day)</strong><br><br>
                             
-                            <strong class="pod-label" style="font-size: 12px;">Title:</strong> <span class="pod-text" style="font-size: 12px;">Camel Rock</span><br><br>
+                            <strong class="pod-label" style="font-size: 12px;">Title:</strong> <span class="pod-text" style="font-size: 12px;">Camel Rock</span><br>
                             
-                            <strong class="pod-label" style="font-size: 12px;">Artist Name:</strong> <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-link" style="color: #007BFF; text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(0, 123, 255, 0.3); transition: all 0.3s ease; font-size: 12px;" onmouseover="this.style.color='#0056b3'; this.style.borderBottomColor='rgba(0, 86, 179, 0.5)'" onmouseout="this.style.color='#007BFF'; this.style.borderBottomColor='rgba(0, 123, 255, 0.3)'">Nima Leo @nimaleophotos</a><br><br>
+                            <strong class="pod-label" style="font-size: 12px;">Artist Name:</strong> <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-link" style="color: #007BFF; text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(0, 123, 255, 0.3); transition: all 0.3s ease; font-size: 12px;" onmouseover="this.style.color='#0056b3'; this.style.borderBottomColor='rgba(0, 86, 179, 0.5)'" onmouseout="this.style.color='#007BFF'; this.style.borderBottomColor='rgba(0, 123, 255, 0.3)'">Nima Leo @nimaleophotos</a><br>
                             
                             <strong class="pod-label" style="font-size: 12px;">Description:</strong> <span class="pod-desc-text" style="font-size: 11px; line-height: 1.5;">A breathtaking capture of the iconic Camel Rock formation, showcasing the raw beauty and geological wonder of this natural landmark. The composition masterfully balances the rugged textures against the expansive sky, creating a powerful visual narrative.</span>
                         </div>
@@ -2865,5 +2867,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b525107ad0ae1',t:'MTc1Njc5ODQzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b5da332568477',t:'MTc1Njc5ODg5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
