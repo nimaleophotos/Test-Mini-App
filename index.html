@@ -30,13 +30,14 @@
         
         .app-container {
             width: 100%;
-            min-height: 100vh;
+            height: 100vh;
             margin: 0 auto;
             position: relative;
             background: #1a1a1a;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         
         body.light-theme .app-container {
@@ -128,6 +129,8 @@
             display: flex;
             flex-direction: column;
             padding: 12px;
+            min-height: 0;
+            overflow: hidden;
         }
         
         @media (min-width: 768px) {
@@ -403,12 +406,12 @@
             flex-direction: column;
             margin: 0;
             background: rgba(255,255,255,0.08);
-            border-radius: 12px 12px 0 0;
+            border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.15);
-            border-bottom: none;
             overflow: hidden;
             transition: all 0.3s ease;
             min-height: 0;
+            margin-bottom: 12px;
         }
         
         body.light-theme .tabs-container {
@@ -513,7 +516,7 @@
         
         .tab-content {
             flex: 1;
-            padding: 12px;
+            padding: 0;
             overflow: hidden;
             min-height: 0;
         }
@@ -528,24 +531,26 @@
             display: none;
             height: 100%;
             overflow-y: auto;
-            padding-right: 4px;
-            margin-right: -2px;
+            padding: 12px;
+            padding-right: 16px;
+            margin-right: -4px;
         }
         
         @media (min-width: 768px) {
             .tab-panel {
-                padding-right: 8px;
+                padding: 16px;
+                padding-right: 20px;
                 margin-right: -4px;
             }
         }
         
         .tab-panel::-webkit-scrollbar {
-            width: 2px;
+            width: 4px;
         }
         
         @media (min-width: 768px) {
             .tab-panel::-webkit-scrollbar {
-                width: 3px;
+                width: 6px;
             }
         }
         
@@ -586,8 +591,7 @@
             margin-top: 0;
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.15);
-            border-top: none;
-            border-radius: 0 0 12px 12px;
+            border-radius: 12px;
             padding: 8px;
             position: relative;
             transition: all 0.3s ease;
@@ -781,18 +785,12 @@
         
         /* Leaderboard Styles */
         .leaderboard-container {
-            height: 100%;
             display: flex;
             flex-direction: column;
-            min-height: 0;
         }
         
         .leaderboard-scrollable {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 4px;
-            margin-right: -2px;
-            min-height: 0;
+            margin-bottom: 16px;
         }
         
         @media (min-width: 768px) {
@@ -802,36 +800,9 @@
             }
         }
         
-        .leaderboard-scrollable::-webkit-scrollbar {
-            width: 2px;
-        }
-        
-        @media (min-width: 768px) {
-            .leaderboard-scrollable::-webkit-scrollbar {
-                width: 3px;
-            }
-        }
-        
-        .leaderboard-scrollable::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-        }
-        
-        .leaderboard-scrollable::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.3);
-            border-radius: 2px;
-        }
-        
-        body.light-theme .leaderboard-scrollable::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-        }
-        
-        body.light-theme .leaderboard-scrollable::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.3);
-        }
+
         
         .leaderboard-fixed-rank {
-            flex-shrink: 0;
             margin-top: 8px;
             padding-top: 8px;
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -2865,5 +2836,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b1f44542f9d31',t:'MTc1Njc5NjM0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b2823a205fe9b',t:'MTc1Njc5NjcwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
