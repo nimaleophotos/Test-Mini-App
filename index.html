@@ -1501,6 +1501,24 @@
             transform: scaleX(-1);
         }
         
+        /* Android and tablet: compress camera view vertically */
+        @media (max-width: 1023px) and (orientation: portrait) {
+            .camera-video {
+                height: 85vh;
+                width: 100vw;
+                object-fit: cover;
+            }
+        }
+        
+        /* Android landscape */
+        @media (max-width: 1023px) and (orientation: landscape) {
+            .camera-video {
+                height: 100vh;
+                width: 100vw;
+                object-fit: cover;
+            }
+        }
+        
         .camera-video.back-camera {
             transform: scaleX(1);
         }
@@ -1543,14 +1561,14 @@
                 linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
         }
         
-        /* Grid styles for 1:1 aspect ratio */
+        /* Mobile and tablet: Grid styles for 1:1 aspect ratio - vertical crop */
         .grid-3x3.grid-1-1 {
             border-top: 2px solid rgba(255,255,255,0.8);
             border-bottom: 2px solid rgba(255,255,255,0.8);
             border-left: none;
             border-right: none;
-            top: calc(50% - 25%);
-            height: 50%;
+            top: calc(50% - 42.5%);
+            height: 85%;
             background-image: 
                 linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px)),
                 linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px));
@@ -1561,21 +1579,21 @@
             border-bottom: 2px solid rgba(255,255,255,0.8);
             border-left: none;
             border-right: none;
-            top: calc(50% - 25%);
-            height: 50%;
+            top: calc(50% - 42.5%);
+            height: 85%;
             background-image: 
                 linear-gradient(to right, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px)),
                 linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
         }
         
-        /* Grid styles for 3:4 aspect ratio */
+        /* Mobile and tablet: Grid styles for 3:4 aspect ratio - vertical crop */
         .grid-3x3.grid-3-4 {
             border-top: 2px solid rgba(255,255,255,0.8);
             border-bottom: 2px solid rgba(255,255,255,0.8);
             border-left: none;
             border-right: none;
-            top: calc(50% - 37.5%);
-            height: 75%;
+            top: calc(50% - 31.875%);
+            height: 63.75%;
             background-image: 
                 linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px)),
                 linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px));
@@ -1586,11 +1604,70 @@
             border-bottom: 2px solid rgba(255,255,255,0.8);
             border-left: none;
             border-right: none;
-            top: calc(50% - 37.5%);
-            height: 75%;
+            top: calc(50% - 31.875%);
+            height: 63.75%;
             background-image: 
                 linear-gradient(to right, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px)),
                 linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
+        }
+        
+        /* Desktop: Grid styles for aspect ratios - horizontal crop */
+        @media (min-width: 1024px) {
+            .grid-3x3.grid-1-1 {
+                border-top: none;
+                border-bottom: none;
+                border-left: 2px solid rgba(255,255,255,0.8);
+                border-right: 2px solid rgba(255,255,255,0.8);
+                top: 0;
+                left: calc(50% - 25%);
+                width: 50%;
+                height: 100%;
+                background-image: 
+                    linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px)),
+                    linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px));
+            }
+            
+            .grid-symmetrical.grid-1-1 {
+                border-top: none;
+                border-bottom: none;
+                border-left: 2px solid rgba(255,255,255,0.8);
+                border-right: 2px solid rgba(255,255,255,0.8);
+                top: 0;
+                left: calc(50% - 25%);
+                width: 50%;
+                height: 100%;
+                background-image: 
+                    linear-gradient(to right, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px)),
+                    linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
+            }
+            
+            .grid-3x3.grid-3-4 {
+                border-top: none;
+                border-bottom: none;
+                border-left: 2px solid rgba(255,255,255,0.8);
+                border-right: 2px solid rgba(255,255,255,0.8);
+                top: 0;
+                left: calc(50% - 37.5%);
+                width: 75%;
+                height: 100%;
+                background-image: 
+                    linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px)),
+                    linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.8) calc(33.33% + 2px), transparent calc(33.33% + 2px), transparent 66.66%, rgba(255,255,255,0.8) 66.66%, rgba(255,255,255,0.8) calc(66.66% + 2px), transparent calc(66.66% + 2px));
+            }
+            
+            .grid-symmetrical.grid-3-4 {
+                border-top: none;
+                border-bottom: none;
+                border-left: 2px solid rgba(255,255,255,0.8);
+                border-right: 2px solid rgba(255,255,255,0.8);
+                top: 0;
+                left: calc(50% - 37.5%);
+                width: 75%;
+                height: 100%;
+                background-image: 
+                    linear-gradient(to right, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px)),
+                    linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) calc(50% + 2px), transparent calc(50% + 2px));
+            }
         }
         
 
@@ -1621,27 +1698,26 @@
             background: transparent;
         }
         
-        /* 1:1 square aspect ratio - vertical crop for tablets, horizontal for desktop */
+        /* Mobile and tablet: vertical crop for aspect ratios */
         .aspect-ratio-overlay.ratio-1-1 {
             background: 
                 linear-gradient(to bottom, 
                     rgba(0,0,0,1) 0%, 
-                    rgba(0,0,0,1) calc(50% - 25%), 
-                    transparent calc(50% - 25%), 
-                    transparent calc(50% + 25%), 
-                    rgba(0,0,0,1) calc(50% + 25%), 
+                    rgba(0,0,0,1) calc(50% - 42.5%), 
+                    transparent calc(50% - 42.5%), 
+                    transparent calc(50% + 42.5%), 
+                    rgba(0,0,0,1) calc(50% + 42.5%), 
                     rgba(0,0,0,1) 100%);
         }
         
-        /* 3:4 portrait aspect ratio - vertical crop for tablets, horizontal for desktop */
         .aspect-ratio-overlay.ratio-3-4 {
             background: 
                 linear-gradient(to bottom, 
                     rgba(0,0,0,1) 0%, 
-                    rgba(0,0,0,1) calc(50% - 37.5%), 
-                    transparent calc(50% - 37.5%), 
-                    transparent calc(50% + 37.5%), 
-                    rgba(0,0,0,1) calc(50% + 37.5%), 
+                    rgba(0,0,0,1) calc(50% - 31.875%), 
+                    transparent calc(50% - 31.875%), 
+                    transparent calc(50% + 31.875%), 
+                    rgba(0,0,0,1) calc(50% + 31.875%), 
                     rgba(0,0,0,1) 100%);
         }
         
@@ -4135,5 +4211,5 @@
             initializeDemoSpotlights();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978aca65d20166cf',t:'MTc1Njc5Mjg2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978ae19f654d0e08',t:'MTc1Njc5MzgxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
