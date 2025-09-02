@@ -419,7 +419,7 @@
         }
         
         .tab-button {
-            padding: 8px 4px;
+            padding: 8px 8px;
             background: rgba(255,255,255,0.05);
             border: none;
             border-right: 1px solid rgba(255,255,255,0.1);
@@ -439,7 +439,7 @@
         
         @media (min-width: 768px) {
             .tab-button {
-                padding: 12px 8px;
+                padding: 12px 16px;
                 font-size: 12px;
             }
         }
@@ -625,20 +625,20 @@
         
         .nav-button {
             flex: 1;
-            padding: 6px 3px;
+            padding: 8px 4px;
             background: transparent;
             border: none;
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            font-size: 8px;
+            font-size: 9px;
             font-weight: 500;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 3px;
             position: relative;
             white-space: nowrap;
             min-width: 0;
@@ -646,9 +646,9 @@
         
         @media (min-width: 768px) {
             .nav-button {
-                padding: 8px 6px;
-                font-size: 9px;
-                gap: 3px;
+                padding: 10px 8px;
+                font-size: 10px;
+                gap: 4px;
             }
         }
         
@@ -666,8 +666,8 @@
         }
         
         .camera-button {
-            width: 48px !important;
-            height: 48px !important;
+            width: 56px !important;
+            height: 56px !important;
             border-radius: 50% !important;
             background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%) !important;
             color: #000 !important;
@@ -686,8 +686,8 @@
         
         @media (min-width: 768px) {
             .camera-button {
-                width: 60px !important;
-                height: 60px !important;
+                width: 68px !important;
+                height: 68px !important;
                 font-size: 9px !important;
                 border: 3px solid rgba(255,255,255,0.9) !important;
                 box-shadow: 0 4px 16px rgba(255,255,255,0.4) !important;
@@ -730,16 +730,16 @@
         }
         
         .nav-icon {
-            width: 12px;
-            height: 12px;
+            width: 16px;
+            height: 16px;
             margin-bottom: 1px;
             flex-shrink: 0;
         }
         
         @media (min-width: 768px) {
             .nav-icon {
-                width: 16px;
-                height: 16px;
+                width: 20px;
+                height: 20px;
             }
         }
         
@@ -2152,23 +2152,21 @@
             <div class="tabs-container">
                 <div class="tab-buttons">
                     <button class="tab-button" onclick="switchTab('leaderboard')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="13" width="4" height="8" rx="1"/>
                             <rect x="10" y="9" width="4" height="12" rx="1"/>
                             <rect x="17" y="5" width="4" height="16" rx="1"/>
                             <line x1="1" y1="22" x2="23" y2="22"/>
                         </svg>
-                        <span>Ranks</span>
                     </button>
                     <button class="tab-button active" onclick="switchTab('pod')">P &nbsp; O &nbsp; D</button>
                     <button class="tab-button" onclick="switchTab('learning')">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                             <path d="M2 17l10 5 10-5"/>
                             <path d="M6 9.5v6.5l6 3 6-3v-6.5"/>
                             <circle cx="12" cy="12" r="1" fill="currentColor"/>
                         </svg>
-                        <span>Learn</span>
                     </button>
                 </div>
                 
@@ -2380,7 +2378,6 @@
                             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                             <circle cx="12" cy="13" r="3"/>
                         </svg>
-                        <span>Camera</span>
                     </button>
                     <button class="nav-button">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -2395,7 +2392,7 @@
                             <circle cx="8.5" cy="8.5" r="1.5"/>
                             <polyline points="21,15 16,10 5,21"/>
                         </svg>
-                        <span>Gallery</span>
+                        <span>LENS Gallery</span>
                     </button>
                 </div>
             </div>
@@ -2867,5 +2864,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b657740468477',t:'MTc1Njc5OTIxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b72f93512511b',t:'MTc1Njc5OTc2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
