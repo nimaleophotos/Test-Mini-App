@@ -3386,6 +3386,30 @@
             z-index: 1;
         }
         
+        /* Default 3:4 aspect ratio for mobile */
+        .aspect-overlay.portrait {
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(0,0,0,0.8) calc(50% - 37.5vw), 
+                transparent calc(50% - 37.5vw), 
+                transparent calc(50% + 37.5vw), 
+                rgba(0,0,0,0.8) calc(50% + 37.5vw), 
+                rgba(0,0,0,0.8) 100%);
+        }
+        
+        /* Desktop 3:4 aspect ratio - crop from sides */
+        @media (min-width: 768px) {
+            .aspect-overlay.portrait {
+                background: linear-gradient(to right, 
+                    rgba(0,0,0,0.8) 0%, 
+                    rgba(0,0,0,0.8) calc(50% - 37.5vh), 
+                    transparent calc(50% - 37.5vh), 
+                    transparent calc(50% + 37.5vh), 
+                    rgba(0,0,0,0.8) calc(50% + 37.5vh), 
+                    rgba(0,0,0,0.8) 100%);
+            }
+        }
+        
         .aspect-overlay.square {
             background: linear-gradient(to bottom, 
                 rgba(0,0,0,0.8) 0%, 
@@ -3396,14 +3420,17 @@
                 rgba(0,0,0,0.8) 100%);
         }
         
-        .aspect-overlay.portrait {
-            background: linear-gradient(to bottom, 
-                rgba(0,0,0,0.8) 0%, 
-                rgba(0,0,0,0.8) calc(50% - 37.5vw), 
-                transparent calc(50% - 37.5vw), 
-                transparent calc(50% + 37.5vw), 
-                rgba(0,0,0,0.8) calc(50% + 37.5vw), 
-                rgba(0,0,0,0.8) 100%);
+        /* Desktop square aspect ratio */
+        @media (min-width: 768px) {
+            .aspect-overlay.square {
+                background: linear-gradient(to right, 
+                    rgba(0,0,0,0.8) 0%, 
+                    rgba(0,0,0,0.8) calc(50% - 50vh), 
+                    transparent calc(50% - 50vh), 
+                    transparent calc(50% + 50vh), 
+                    rgba(0,0,0,0.8) calc(50% + 50vh), 
+                    rgba(0,0,0,0.8) 100%);
+            }
         }
         
         /* Grid Overlays */
@@ -3557,38 +3584,66 @@
             }
         }
         
-        .lens-btn {
-            width: 50px;
-            height: 35px;
+        /* Lens Options Container */
+        .lens-options-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .lens-options-container {
+                gap: 16px;
+                margin-bottom: 25px;
+            }
+        }
+        
+        .lens-option-btn {
+            width: 45px;
+            height: 45px;
             background: rgba(0,0,0,0.6);
             border: 2px solid rgba(255,255,255,0.8);
-            border-radius: 18px;
+            border-radius: 50%;
             color: #fff;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 700;
         }
         
         @media (min-width: 768px) {
-            .lens-btn {
-                width: 60px;
-                height: 40px;
-                font-size: 12px;
+            .lens-option-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 14px;
             }
         }
         
-        .lens-btn:hover {
+        .lens-option-btn:hover {
             background: rgba(0,0,0,0.8);
             transform: scale(1.1);
         }
         
-        .lens-btn.active {
+        .lens-option-btn.active {
             background: rgba(0, 123, 255, 0.8);
             border-color: #007BFF;
+        }
+        
+        /* Control Button Text */
+        .control-btn-text {
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        @media (min-width: 768px) {
+            .control-btn-text {
+                font-size: 12px;
+            }
         }
         
         .camera-bottom-controls {
@@ -4804,7 +4859,7 @@
                 <video class="camera-video" id="cameraVideo" autoplay muted playsinline></video>
                 
                 <!-- Aspect Ratio Overlay -->
-                <div class="aspect-overlay" id="aspectOverlay"></div>
+                <div class="aspect-overlay portrait" id="aspectOverlay"></div>
                 
                 <!-- Grid Overlays -->
                 <div class="grid-overlay grid-3x3" id="grid3x3"></div>
@@ -4831,17 +4886,11 @@
                     </button>
                     
                     <button class="camera-control-btn" id="timerBtn" onclick="toggleTimer()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12,6 12,12 16,14"></polyline>
-                        </svg>
+                        <span class="control-btn-text">OFF</span>
                     </button>
                     
                     <button class="camera-control-btn" id="aspectBtn" onclick="toggleAspectRatio()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="9" y1="9" x2="15" y2="15"></line>
-                        </svg>
+                        <span class="control-btn-text">3:4</span>
                     </button>
                     
                     <button class="camera-control-btn" id="gridBtn" onclick="toggleGrid()">
@@ -4856,18 +4905,23 @@
                 </div>
             </div>
             
-            <!-- Side Controls (Lens Selector) -->
+            <!-- Side Controls -->
             <div class="camera-side-controls">
-                <div class="lens-selector" id="lensSelector">
-                    <button class="lens-btn" data-lens="0.5" onclick="switchLens('0.5')">0.5x</button>
-                    <button class="lens-btn active" data-lens="1" onclick="switchLens('1')">1x</button>
-                    <button class="lens-btn" data-lens="2" onclick="switchLens('2')">2x</button>
-                    <button class="lens-btn" data-lens="macro" onclick="switchLens('macro')">📷</button>
-                </div>
+                <button class="camera-control-btn" onclick="switchCamera()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 8l4-4m0 0l-4-4m4 4H7a4 4 0 0 0-4 4v4"/>
+                        <path d="M7 16l-4 4m0 0l4 4m-4-4h14a4 4 0 0 0 4-4V12"/>
+                    </svg>
+                </button>
             </div>
             
             <!-- Bottom Controls -->
             <div class="camera-bottom-controls">
+                <!-- Lens Options (shown above shutter for back camera) -->
+                <div class="lens-options-container" id="lensContainer" style="display: none;">
+                    <!-- Lens buttons will be dynamically added here -->
+                </div>
+                
                 <div class="camera-shutter-container">
                     <button class="camera-gallery-btn" onclick="openGalleryPicker()">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -5315,7 +5369,7 @@
         let currentLens = '1';
         let flashEnabled = false;
         let timerSeconds = 0; // 0 = off, 3, 5, 10
-        let currentAspectRatio = 'full'; // 'full', 'square', 'portrait'
+        let currentAspectRatio = 'portrait'; // 'full', 'square', 'portrait' (default 3:4)
         let currentGrid = 'none'; // 'none', '3x3', 'symmetrical'
         let capturedImageData = null;
         let isFromGallery = false;
@@ -5325,6 +5379,12 @@
             try {
                 document.getElementById('cameraPage').classList.add('show');
                 await startCamera();
+                
+                // Initialize UI based on current camera
+                updateLensOptionsForCamera();
+                
+                // Set default aspect ratio button to active
+                document.getElementById('aspectBtn').classList.add('active');
             } catch (error) {
                 console.error('Error opening camera:', error);
                 alert('Unable to access camera. Please check permissions.');
@@ -5359,8 +5419,7 @@
                     video.classList.add('back-camera');
                 }
                 
-                // Update available lenses based on device capabilities
-                await updateAvailableLenses();
+
                 
             } catch (error) {
                 console.error('Error starting camera:', error);
@@ -5368,30 +5427,36 @@
             }
         }
 
-        // Update available lenses
-        async function updateAvailableLenses() {
-            try {
-                const devices = await navigator.mediaDevices.enumerateDevices();
-                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+
+        // Switch camera (front/back)
+        async function switchCamera() {
+            currentCamera = currentCamera === 'user' ? 'environment' : 'user';
+            await startCamera();
+            
+            // Update lens options based on camera
+            updateLensOptionsForCamera();
+        }
+
+        // Update lens options based on current camera
+        function updateLensOptionsForCamera() {
+            const lensContainer = document.getElementById('lensContainer');
+            
+            if (currentCamera === 'environment') {
+                // Back camera - show lens options above shutter
+                lensContainer.style.display = 'flex';
+                lensContainer.innerHTML = '';
                 
-                const lensSelector = document.getElementById('lensSelector');
-                lensSelector.innerHTML = '';
-                
-                // Add standard lens options
                 const lensOptions = [
                     { value: '0.5', label: '0.5x' },
                     { value: '1', label: '1x' },
-                    { value: '2', label: '2x' }
+                    { value: '2', label: '2x' },
+                    { value: 'macro', label: 'M' }
                 ];
-                
-                // Add macro if available (simulated)
-                if (videoDevices.length > 2) {
-                    lensOptions.push({ value: 'macro', label: '📷' });
-                }
                 
                 lensOptions.forEach(lens => {
                     const btn = document.createElement('button');
-                    btn.className = 'lens-btn';
+                    btn.className = 'lens-option-btn';
                     btn.setAttribute('data-lens', lens.value);
                     btn.textContent = lens.label;
                     btn.onclick = () => switchLens(lens.value);
@@ -5400,11 +5465,11 @@
                         btn.classList.add('active');
                     }
                     
-                    lensSelector.appendChild(btn);
+                    lensContainer.appendChild(btn);
                 });
-                
-            } catch (error) {
-                console.error('Error updating lenses:', error);
+            } else {
+                // Front camera - hide lens options
+                lensContainer.style.display = 'none';
             }
         }
 
@@ -5413,7 +5478,7 @@
             currentLens = lensType;
             
             // Update active lens button
-            document.querySelectorAll('.lens-btn').forEach(btn => {
+            document.querySelectorAll('.lens-option-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('data-lens') === lensType) {
                     btn.classList.add('active');
@@ -5468,46 +5533,42 @@
             timerSeconds = timerOptions[nextIndex];
             
             const timerBtn = document.getElementById('timerBtn');
+            const timerText = timerBtn.querySelector('.control-btn-text');
+            
             if (timerSeconds > 0) {
                 timerBtn.classList.add('active');
-                timerBtn.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12,6 12,12 16,14"></polyline>
-                    </svg>
-                    <span style="position: absolute; bottom: 2px; right: 2px; font-size: 8px;">${timerSeconds}</span>
-                `;
+                timerText.textContent = `${timerSeconds}s`;
             } else {
                 timerBtn.classList.remove('active');
-                timerBtn.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12,6 12,12 16,14"></polyline>
-                    </svg>
-                `;
+                timerText.textContent = 'OFF';
             }
         }
 
         // Toggle aspect ratio
         function toggleAspectRatio() {
-            const aspectOptions = ['full', 'square', 'portrait'];
+            const aspectOptions = ['portrait', 'square', 'full'];
+            const aspectLabels = ['3:4', '1:1', 'Full'];
             const currentIndex = aspectOptions.indexOf(currentAspectRatio);
             const nextIndex = (currentIndex + 1) % aspectOptions.length;
             currentAspectRatio = aspectOptions[nextIndex];
             
             const aspectOverlay = document.getElementById('aspectOverlay');
             const aspectBtn = document.getElementById('aspectBtn');
+            const aspectText = aspectBtn.querySelector('.control-btn-text');
             
             // Remove all aspect classes
             aspectOverlay.className = 'aspect-overlay';
             
-            // Add new aspect class
+            // Add new aspect class and update button
             if (currentAspectRatio !== 'full') {
                 aspectOverlay.classList.add(currentAspectRatio);
                 aspectBtn.classList.add('active');
             } else {
                 aspectBtn.classList.remove('active');
             }
+            
+            // Update button text
+            aspectText.textContent = aspectLabels[nextIndex];
             
             // Update grid to fit aspect ratio
             updateGridForAspectRatio();
@@ -5774,5 +5835,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793d4f4c7710e34',t:'MTc1Njg4NzY2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793e8f3627a5847',t:'MTc1Njg4ODQ4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
