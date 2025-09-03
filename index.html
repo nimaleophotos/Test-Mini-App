@@ -1421,12 +1421,12 @@
         .pod-info-row {
             display: flex;
             flex-direction: column;
-            gap: 0px;
+            gap: -3px;
         }
         
         @media (min-width: 768px) {
             .pod-info-row {
-                gap: 0px;
+                gap: -3px;
             }
         }
         
@@ -2180,7 +2180,7 @@
         .wallet-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 16px;
             margin-bottom: 24px;
             padding-bottom: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -2188,6 +2188,7 @@
         
         @media (min-width: 768px) {
             .wallet-header {
+                gap: 20px;
                 margin-bottom: 30px;
                 padding-bottom: 15px;
             }
@@ -2202,6 +2203,7 @@
             font-weight: 700;
             color: #fff;
             transition: all 0.3s ease;
+            flex: 1;
         }
         
         @media (min-width: 768px) {
@@ -2226,6 +2228,7 @@
             align-items: center;
             justify-content: center;
             color: #fff;
+            flex-shrink: 0;
         }
         
         @media (min-width: 768px) {
@@ -2490,6 +2493,802 @@
         .disconnect-button:hover {
             background: #c82333;
             transform: translateY(-1px);
+        }
+        
+        /* Gallery Page Styles */
+        .gallery-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .gallery-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-card {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-number {
+            color: #1a1a1a;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-label {
+            color: #666;
+        }
+        
+        .gallery-filters {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        body.light-theme .filter-btn {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+            color: #1a1a1a;
+        }
+        
+        .filter-btn.active {
+            background: #007BFF;
+            border-color: #007BFF;
+            color: #fff;
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        body.light-theme .filter-btn:hover:not(.active) {
+            background: rgba(0,0,0,0.06);
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .photo-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .photo-item {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.3);
+        }
+        
+        body.light-theme .photo-item:hover {
+            border-color: rgba(0,0,0,0.2);
+        }
+        
+        .photo-placeholder {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(255,255,255,0.02);
+        }
+        
+        body.light-theme .photo-placeholder {
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .photo-info {
+            padding: 8px;
+        }
+        
+        .photo-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .photo-title {
+            color: #1a1a1a;
+        }
+        
+        .photo-stats {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .photo-stats {
+            color: #666;
+        }
+        
+        /* Contest Page Styles */
+        .contest-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .current-contest {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .current-contest {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .contest-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .contest-icon {
+            font-size: 24px;
+        }
+        
+        .contest-info {
+            flex: 1;
+        }
+        
+        .contest-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .contest-title {
+            color: #1a1a1a;
+        }
+        
+        .contest-theme {
+            font-size: 12px;
+            color: #007BFF;
+            margin-bottom: 4px;
+        }
+        
+        .contest-timer {
+            font-size: 10px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .contest-timer {
+            color: #666;
+        }
+        
+        .contest-prize {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        body.light-theme .contest-prize {
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .prize-pool {
+            text-align: center;
+        }
+        
+        .prize-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #10B981;
+        }
+        
+        .prize-label {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .prize-label {
+            color: #666;
+        }
+        
+        .prize-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .prize-item {
+            font-size: 9px;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .prize-item {
+            color: #666;
+        }
+        
+        .contest-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .contest-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .contest-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .contest-btn.primary {
+            background: #007BFF;
+            color: #fff;
+        }
+        
+        .contest-btn.primary:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+        
+        .contest-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        body.light-theme .contest-btn.secondary {
+            background: rgba(0,0,0,0.05);
+            color: #1a1a1a;
+            border-color: rgba(0,0,0,0.2);
+        }
+        
+        .contest-btn.secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        body.light-theme .contest-btn.secondary:hover {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .section-title {
+            color: #1a1a1a;
+        }
+        
+        .contest-history {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .history-item {
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .history-item {
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .history-theme {
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .history-theme {
+            color: #1a1a1a;
+        }
+        
+        .history-winner {
+            font-size: 10px;
+            color: #007BFF;
+            margin-bottom: 2px;
+        }
+        
+        .history-date {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .history-date {
+            color: #666;
+        }
+        
+        /* Rewards Page Styles */
+        .rewards-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .rewards-balance {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .balance-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .balance-card {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .balance-icon {
+            font-size: 20px;
+        }
+        
+        .balance-amount {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .balance-amount {
+            color: #1a1a1a;
+        }
+        
+        .balance-label {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .balance-label {
+            color: #666;
+        }
+        
+        .achievements-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .achievement-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .achievement-item {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .achievement-item.earned {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .achievement-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .achievement-info {
+            flex: 1;
+        }
+        
+        .achievement-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .achievement-name {
+            color: #1a1a1a;
+        }
+        
+        .achievement-desc {
+            font-size: 10px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .achievement-desc {
+            color: #666;
+        }
+        
+        .achievement-status {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .daily-checkin {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .daily-checkin {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .checkin-streak {
+            text-align: center;
+        }
+        
+        .streak-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #10B981;
+        }
+        
+        .streak-label {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .streak-label {
+            color: #666;
+        }
+        
+        .checkin-reward {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .reward-amount {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .reward-amount {
+            color: #1a1a1a;
+        }
+        
+        .reward-label {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .reward-label {
+            color: #666;
+        }
+        
+        .checkin-btn {
+            padding: 8px 16px;
+            background: #10B981;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkin-btn:hover {
+            background: #059669;
+            transform: translateY(-1px);
+        }
+        
+        /* Info Page Styles */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .app-info {
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .app-info {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .app-logo-large {
+            margin-bottom: 16px;
+        }
+        
+        .lens-logo-large {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .lens-logo-large {
+            border-color: #2c2c2c;
+        }
+        
+        .lens-logo-large::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .lens-logo-large::before {
+            border-color: #2c2c2c;
+        }
+        
+        .app-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .app-name {
+            color: #1a1a1a;
+        }
+        
+        .app-version {
+            font-size: 11px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .app-version {
+            color: #666;
+        }
+        
+        .app-description {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .app-description {
+            color: #666;
+        }
+        
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .info-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .info-card {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .info-card-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .info-card-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .info-card-title {
+            color: #1a1a1a;
+        }
+        
+        .info-card-desc {
+            font-size: 10px;
+            color: #888;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .info-card-desc {
+            color: #666;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .social-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .social-link {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+            color: #1a1a1a;
+        }
+        
+        .social-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-1px);
+        }
+        
+        body.light-theme .social-link:hover {
+            background: rgba(0,0,0,0.06);
+        }
+        
+        .social-icon {
+            font-size: 16px;
+        }
+        
+        .social-name {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-item {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-value {
+            color: #1a1a1a;
+        }
+        
+        .stat-name {
+            font-size: 9px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .stat-name {
+            color: #666;
         }
         
         /* Responsive section titles */
@@ -2879,7 +3678,7 @@
             <!-- Bottom Navigation -->
             <div class="bottom-nav">
                 <div class="nav-buttons-container">
-                    <button class="nav-button">
+                    <button class="nav-button" onclick="showPage('galleryPage')">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
                             <circle cx="8.5" cy="8.5" r="1.5"/>
@@ -2887,7 +3686,7 @@
                         </svg>
                         <span>LENS Gallery</span>
                     </button>
-                    <button class="nav-button">
+                    <button class="nav-button" onclick="showPage('contestPage')">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
                             <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
@@ -2905,14 +3704,14 @@
                             <circle cx="12" cy="13" r="3"/>
                         </svg>
                     </button>
-                    <button class="nav-button">
+                    <button class="nav-button" onclick="showPage('rewardsPage')">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                             <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
                         </svg>
                         <span>Rewards</span>
                     </button>
-                    <button class="nav-button">
+                    <button class="nav-button" onclick="showPage('infoPage')">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="10"/>
                             <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">?</text>
@@ -2927,12 +3726,12 @@
     <!-- Wallet Connection Page -->
     <div class="wallet-page" id="walletPage">
         <div class="wallet-header">
-            <div class="wallet-title">Connect Wallet</div>
             <button class="back-button" onclick="hideWalletPage()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
             </button>
+            <div class="wallet-title">Connect Wallet</div>
         </div>
         
         <div class="wallet-content">
@@ -3017,6 +3816,376 @@
                     <div class="wallet-option-info">
                         <div class="wallet-option-name">Phantom</div>
                         <div class="wallet-option-desc">Solana wallet connection</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- LENS Gallery Page -->
+    <div class="wallet-page" id="galleryPage">
+        <div class="wallet-header">
+            <button class="back-button" onclick="hidePage('galleryPage')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <div class="wallet-title">LENS Gallery</div>
+        </div>
+        
+        <div class="wallet-content">
+            <div class="gallery-section">
+                <div class="gallery-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">1,247</div>
+                        <div class="stat-label">Photos Shared</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">89.2K</div>
+                        <div class="stat-label">Total Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3,456</div>
+                        <div class="stat-label">Likes Received</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-filters">
+                    <button class="filter-btn active">All Photos</button>
+                    <button class="filter-btn">Featured</button>
+                    <button class="filter-btn">Recent</button>
+                    <button class="filter-btn">Popular</button>
+                </div>
+                
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">📸</div>
+                        <div class="photo-info">
+                            <div class="photo-title">Sunset Landscape</div>
+                            <div class="photo-stats">👁️ 1.2K • ❤️ 89</div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">🌆</div>
+                        <div class="photo-info">
+                            <div class="photo-title">City Lights</div>
+                            <div class="photo-stats">👁️ 856 • ❤️ 67</div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">🌸</div>
+                        <div class="photo-info">
+                            <div class="photo-title">Spring Bloom</div>
+                            <div class="photo-stats">👁️ 2.1K • ❤️ 156</div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">🏔️</div>
+                        <div class="photo-info">
+                            <div class="photo-title">Mountain Peak</div>
+                            <div class="photo-stats">👁️ 934 • ❤️ 78</div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">🌊</div>
+                        <div class="photo-info">
+                            <div class="photo-title">Ocean Waves</div>
+                            <div class="photo-stats">👁️ 1.5K • ❤️ 123</div>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">🦋</div>
+                        <div class="photo-info">
+                            <div class="photo-title">Butterfly Macro</div>
+                            <div class="photo-stats">👁️ 678 • ❤️ 45</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contest Page -->
+    <div class="wallet-page" id="contestPage">
+        <div class="wallet-header">
+            <button class="back-button" onclick="hidePage('contestPage')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <div class="wallet-title">Photography Contest</div>
+        </div>
+        
+        <div class="wallet-content">
+            <div class="contest-section">
+                <div class="current-contest">
+                    <div class="contest-banner">
+                        <div class="contest-icon">🏆</div>
+                        <div class="contest-info">
+                            <div class="contest-title">Weekly Photography Challenge</div>
+                            <div class="contest-theme">"Golden Hour Magic"</div>
+                            <div class="contest-timer">⏰ 3 days, 14 hours left</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contest-prize">
+                        <div class="prize-pool">
+                            <div class="prize-amount">$500 USDC</div>
+                            <div class="prize-label">Total Prize Pool</div>
+                        </div>
+                        <div class="prize-breakdown">
+                            <div class="prize-item">🥇 1st: $250</div>
+                            <div class="prize-item">🥈 2nd: $150</div>
+                            <div class="prize-item">🥉 3rd: $100</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contest-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">234</div>
+                        <div class="stat-label">Submissions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1,567</div>
+                        <div class="stat-label">Total Votes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">Participants</div>
+                    </div>
+                </div>
+                
+                <div class="contest-actions">
+                    <button class="contest-btn primary">Submit Photo</button>
+                    <button class="contest-btn secondary">View Submissions</button>
+                    <button class="contest-btn secondary">Contest Rules</button>
+                </div>
+                
+                <div class="past-contests">
+                    <h3 class="section-title">Past Contests</h3>
+                    <div class="contest-history">
+                        <div class="history-item">
+                            <div class="history-theme">"Street Photography"</div>
+                            <div class="history-winner">Winner: @street.ninja</div>
+                            <div class="history-date">Ended 1 week ago</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-theme">"Nature's Beauty"</div>
+                            <div class="history-winner">Winner: @nature.eye</div>
+                            <div class="history-date">Ended 2 weeks ago</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-theme">"Urban Landscapes"</div>
+                            <div class="history-winner">Winner: @city.lens</div>
+                            <div class="history-date">Ended 3 weeks ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rewards Page -->
+    <div class="wallet-page" id="rewardsPage">
+        <div class="wallet-header">
+            <button class="back-button" onclick="hidePage('rewardsPage')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <div class="wallet-title">Rewards & Achievements</div>
+        </div>
+        
+        <div class="wallet-content">
+            <div class="rewards-section">
+                <div class="rewards-balance">
+                    <div class="balance-card">
+                        <div class="balance-icon">💎</div>
+                        <div class="balance-info">
+                            <div class="balance-amount">8,420</div>
+                            <div class="balance-label">LENS Points</div>
+                        </div>
+                    </div>
+                    <div class="balance-card">
+                        <div class="balance-icon">🪙</div>
+                        <div class="balance-info">
+                            <div class="balance-amount">$24.50</div>
+                            <div class="balance-label">Earned USDC</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="achievements-grid">
+                    <h3 class="section-title">Achievements</h3>
+                    <div class="achievement-item earned">
+                        <div class="achievement-icon">📸</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">First Shot</div>
+                            <div class="achievement-desc">Upload your first photo</div>
+                        </div>
+                        <div class="achievement-status">✅</div>
+                    </div>
+                    <div class="achievement-item earned">
+                        <div class="achievement-icon">❤️</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Popular Photo</div>
+                            <div class="achievement-desc">Get 100 likes on a photo</div>
+                        </div>
+                        <div class="achievement-status">✅</div>
+                    </div>
+                    <div class="achievement-item earned">
+                        <div class="achievement-icon">🔥</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Hot Streak</div>
+                            <div class="achievement-desc">Upload photos 7 days in a row</div>
+                        </div>
+                        <div class="achievement-status">✅</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Contest Winner</div>
+                            <div class="achievement-desc">Win a photography contest</div>
+                        </div>
+                        <div class="achievement-status">🔒</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">⭐</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Rising Star</div>
+                            <div class="achievement-desc">Reach top 100 on leaderboard</div>
+                        </div>
+                        <div class="achievement-status">🔒</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">💫</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">Lens Master</div>
+                            <div class="achievement-desc">Earn 50,000 LENS points</div>
+                        </div>
+                        <div class="achievement-status">🔒</div>
+                    </div>
+                </div>
+                
+                <div class="daily-rewards">
+                    <h3 class="section-title">Daily Rewards</h3>
+                    <div class="daily-checkin">
+                        <div class="checkin-streak">
+                            <div class="streak-number">7</div>
+                            <div class="streak-label">Day Streak</div>
+                        </div>
+                        <div class="checkin-reward">
+                            <div class="reward-amount">+50 Points</div>
+                            <div class="reward-label">Daily Bonus</div>
+                        </div>
+                        <button class="checkin-btn">Claim Reward</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Info Page -->
+    <div class="wallet-page" id="infoPage">
+        <div class="wallet-header">
+            <button class="back-button" onclick="hidePage('infoPage')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <div class="wallet-title">App Information</div>
+        </div>
+        
+        <div class="wallet-content">
+            <div class="info-section">
+                <div class="app-info">
+                    <div class="app-logo-large">
+                        <div class="lens-logo-large"></div>
+                        <div class="app-name">LENS APP</div>
+                        <div class="app-version">Version 1.2.0</div>
+                    </div>
+                    
+                    <div class="app-description">
+                        <p>LENS APP is a decentralized photography platform built on Farcaster, connecting photographers worldwide through the power of blockchain technology and community-driven content.</p>
+                    </div>
+                </div>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-card-icon">🌐</div>
+                        <div class="info-card-content">
+                            <div class="info-card-title">Built on Farcaster</div>
+                            <div class="info-card-desc">Leveraging decentralized social infrastructure for true ownership</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-icon">💎</div>
+                        <div class="info-card-content">
+                            <div class="info-card-title">LENS Token</div>
+                            <div class="info-card-desc">Earn rewards and participate in the photography economy</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-icon">🏆</div>
+                        <div class="info-card-content">
+                            <div class="info-card-title">Contests & Rewards</div>
+                            <div class="info-card-desc">Weekly contests with real USDC prizes for photographers</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-icon">📚</div>
+                        <div class="info-card-content">
+                            <div class="info-card-title">Learning Hub</div>
+                            <div class="info-card-desc">Comprehensive tutorials from basics to professional techniques</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <h3 class="section-title">Connect With Us</h3>
+                    <div class="social-grid">
+                        <a href="#" class="social-link">
+                            <div class="social-icon">🐦</div>
+                            <div class="social-name">Twitter</div>
+                        </a>
+                        <a href="#" class="social-link">
+                            <div class="social-icon">💬</div>
+                            <div class="social-name">Discord</div>
+                        </a>
+                        <a href="#" class="social-link">
+                            <div class="social-icon">📱</div>
+                            <div class="social-name">Farcaster</div>
+                        </a>
+                        <a href="#" class="social-link">
+                            <div class="social-icon">📧</div>
+                            <div class="social-name">Email</div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="app-stats">
+                    <h3 class="section-title">Community Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">12,847</div>
+                            <div class="stat-name">Active Users</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">89,234</div>
+                            <div class="stat-name">Photos Shared</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">$15,670</div>
+                            <div class="stat-name">Rewards Paid</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">156</div>
+                            <div class="stat-name">Contests Held</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3271,6 +4440,15 @@
         // Initialize spotlights on page load
         initializeSpotlights();
 
+        // Page navigation functionality
+        function showPage(pageId) {
+            document.getElementById(pageId).classList.add('show');
+        }
+
+        function hidePage(pageId) {
+            document.getElementById(pageId).classList.remove('show');
+        }
+
         // Wallet functionality
         let isWalletConnected = false;
         let connectedWalletType = '';
@@ -3388,6 +4566,46 @@
         window.addEventListener('orientationchange', handleResize);
         handleResize(); // Initial call
 
+        // Gallery filter functionality
+        function setGalleryFilter(filterType) {
+            // Remove active class from all filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Here you would typically filter the photos based on the filter type
+            console.log('Filtering gallery by:', filterType);
+        }
+
+        // Contest functionality
+        function submitToContest() {
+            alert('Contest submission feature coming soon! Connect your wallet to participate.');
+        }
+
+        function viewContestSubmissions() {
+            alert('Viewing contest submissions... This would show all current entries.');
+        }
+
+        function showContestRules() {
+            alert('Contest Rules:\n\n1. Photos must be original work\n2. Submit only one photo per contest\n3. Follow the weekly theme\n4. No inappropriate content\n5. Winners announced every Sunday');
+        }
+
+        // Rewards functionality
+        function claimDailyReward() {
+            const btn = event.target;
+            btn.textContent = 'Claimed!';
+            btn.style.background = '#059669';
+            btn.disabled = true;
+            
+            // Simulate reward claim
+            setTimeout(() => {
+                alert('Daily reward claimed! +50 LENS Points added to your balance.');
+                btn.textContent = 'Claim Tomorrow';
+                btn.style.background = '#6B7280';
+            }, 1000);
+        }
+
         // Add some interactive hover effects
         document.addEventListener('DOMContentLoaded', function() {
             // Add hover sound effect simulation
@@ -3397,7 +4615,27 @@
                     this.style.transition = 'all 0.2s ease';
                 });
             });
+
+            // Add click handlers for gallery filters
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('filter-btn')) {
+                    setGalleryFilter(e.target.textContent);
+                }
+            });
+
+            // Add click handlers for contest buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.textContent === 'Submit Photo') {
+                    submitToContest();
+                } else if (e.target.textContent === 'View Submissions') {
+                    viewContestSubmissions();
+                } else if (e.target.textContent === 'Contest Rules') {
+                    showContestRules();
+                } else if (e.target.textContent === 'Claim Reward') {
+                    claimDailyReward();
+                }
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97935051e22166ba',t:'MTc1Njg4MjIzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97935d1480c466ba',t:'MTc1Njg4Mjc1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
