@@ -464,14 +464,14 @@
         
         .tab-button:nth-child(2) {
             flex: 1.8;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 1px;
         }
         
         @media (min-width: 768px) {
             .tab-button:nth-child(2) {
-                font-size: 16px;
+                font-size: 18px;
             }
         }
         
@@ -774,26 +774,59 @@
         .leaderboard-container {
             display: flex;
             flex-direction: column;
+            height: 100%;
+        }
+        
+        .leaderboard-header {
+            flex-shrink: 0;
+            margin-bottom: 8px;
         }
         
         .leaderboard-scrollable {
-            margin-bottom: 16px;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 4px;
+            margin-right: -4px;
+            margin-bottom: 12px;
+        }
+        
+        .leaderboard-scrollable::-webkit-scrollbar {
+            width: 4px;
         }
         
         @media (min-width: 768px) {
-            .leaderboard-scrollable {
-                padding-right: 8px;
-                margin-right: -4px;
+            .leaderboard-scrollable::-webkit-scrollbar {
+                width: 6px;
             }
+        }
+        
+        .leaderboard-scrollable::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        
+        .leaderboard-scrollable::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        
+        body.light-theme .leaderboard-scrollable::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme .leaderboard-scrollable::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.3);
         }
         
 
         
         .leaderboard-fixed-rank {
-            margin-top: 8px;
+            flex-shrink: 0;
             padding-top: 8px;
             border-top: 1px solid rgba(255,255,255,0.1);
             transition: all 0.3s ease;
+            margin-top: 0;
         }
         
         body.light-theme .leaderboard-fixed-rank {
@@ -1388,22 +1421,12 @@
         .pod-info-row {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-        }
-        
-        .pod-info-row.pod-inline-row {
-            flex-direction: row;
-            align-items: center;
-            gap: 8px;
+            gap: 2px;
         }
         
         @media (min-width: 768px) {
             .pod-info-row {
-                gap: 6px;
-            }
-            
-            .pod-info-row.pod-inline-row {
-                gap: 10px;
+                gap: 3px;
             }
         }
         
@@ -1418,15 +1441,16 @@
         }
         
         .pod-label {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             color: #fff;
             transition: all 0.3s ease;
+            margin-bottom: 0;
         }
         
         @media (min-width: 768px) {
             .pod-label {
-                font-size: 13px;
+                font-size: 14px;
             }
         }
         
@@ -1435,14 +1459,15 @@
         }
         
         .pod-text {
-            font-size: 11px;
+            font-size: 13px;
             color: #e8e9ea;
             transition: all 0.3s ease;
+            margin-top: 0;
         }
         
         @media (min-width: 768px) {
             .pod-text {
-                font-size: 12px;
+                font-size: 14px;
             }
         }
         
@@ -1465,17 +1490,18 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
+            margin-top: 0;
         }
         
         @media (min-width: 768px) {
             .pod-link {
-                font-size: 12px;
+                font-size: 14px;
             }
             
             .pod-artist-link {
-                font-size: 12px;
+                font-size: 14px;
             }
         }
         
@@ -1493,15 +1519,16 @@
         }
         
         .pod-desc-text {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 1.5;
             color: #ccc;
             transition: all 0.3s ease;
+            margin-top: 0;
         }
         
         @media (min-width: 768px) {
             .pod-desc-text {
-                font-size: 11px;
+                font-size: 13px;
                 line-height: 1.6;
             }
         }
@@ -2619,10 +2646,13 @@
                     <!-- Leaderboard Tab -->
                     <div class="tab-panel" id="leaderboard">
                         <div class="leaderboard-container">
-                            <div class="leaderboard-scrollable">
+                            <div class="leaderboard-header">
                                 <div class="rank-separator">
                                     <span>LENS App Leaderboard</span>
                                 </div>
+                            </div>
+                            
+                            <div class="leaderboard-scrollable">
                                 <div id="leaderboardList">
                                     <!-- Top 100 users will be populated by JavaScript -->
                                 </div>
@@ -2672,19 +2702,19 @@
                                     </div>
                                     
                                     <div class="pod-info">
-                                        <div class="pod-info-row pod-inline-row">
-                                            <strong class="pod-label">Title:</strong> 
+                                        <div class="pod-info-row">
+                                            <strong class="pod-label">Title:</strong>
                                             <span class="pod-text">Camel Rock</span>
                                         </div>
                                         
-                                        <div class="pod-info-row pod-inline-row">
-                                            <strong class="pod-label">Artist:</strong> 
+                                        <div class="pod-info-row">
+                                            <strong class="pod-label">Artist:</strong>
                                             <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-artist-link">
                                                 Nima Leo
                                             </a>
                                         </div>
                                         
-                                        <div class="pod-info-row pod-description-row">
+                                        <div class="pod-info-row">
                                             <strong class="pod-label">Description:</strong>
                                             <span class="pod-desc-text">
                                                 A breathtaking capture of the iconic Camel Rock formation, showcasing the raw beauty and geological wonder of this natural landmark. The composition masterfully balances the rugged textures against the expansive sky, creating a powerful visual narrative.
@@ -3028,16 +3058,26 @@
 
         // Dynamic slogan functionality
         const slogans = [
-            "Capture the moment with $LENS",
-            "Share your vision with the world",
-            "Photography meets blockchain innovation",
-            "Every shot tells a story",
-            "Decentralized photography community",
-            "Your lens, your perspective, your $LENS",
-            "Building the future of photo sharing",
-            "Where creativity meets cryptocurrency",
-            "Snap, share, earn with $LENS",
-            "The social network for photographers"
+            "Photography comes alive through $LENS.",
+            "$LENS is where photographers find focus.",
+            "Through $LENS, every photo tells a story.",
+            "$LENS connects those who see the world differently.",
+            "Behind every great shot is a $LENS.",
+            "$LENS celebrates the art of photography.",
+            "Discover photography's beauty through $LENS.",
+            "$LENS brings photographers into focus.",
+            "Capture creativity together with $LENS.",
+            "$LENS is the home of visual storytellers.",
+            "Photography thrives through $LENS.",
+            "$LENS frames the vision of a community.",
+            "Share your perspective through $LENS.",
+            "$LENS is where photography meets community.",
+            "Through $LENS, we celebrate every frame.",
+            "$LENS inspires photographers to see more.",
+            "In every shot, $LENS finds meaning.",
+            "$LENS brings light to photographers everywhere.",
+            "Through $LENS, art finds its audience.",
+            "$LENS unites photographers with purpose."
         ];
 
         let currentSloganIndex = 0;
@@ -3354,5 +3394,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97932cc822b7f531',t:'MTc1Njg4MDc3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793404377cb66ba',t:'MTc1Njg4MTU3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
