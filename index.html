@@ -3328,6 +3328,557 @@
             }
         }
         
+        /* Camera Interface Styles */
+        .camera-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 4000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .camera-page.show {
+            display: flex;
+        }
+        
+        .camera-container {
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .camera-viewport {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .camera-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1); /* Mirror effect for front camera */
+        }
+        
+        .camera-video.back-camera {
+            transform: none; /* No mirror for back camera */
+        }
+        
+        /* Aspect Ratio Overlays */
+        .aspect-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .aspect-overlay.square {
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(0,0,0,0.8) calc(50% - 50vw), 
+                transparent calc(50% - 50vw), 
+                transparent calc(50% + 50vw), 
+                rgba(0,0,0,0.8) calc(50% + 50vw), 
+                rgba(0,0,0,0.8) 100%);
+        }
+        
+        .aspect-overlay.portrait {
+            background: linear-gradient(to bottom, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(0,0,0,0.8) calc(50% - 37.5vw), 
+                transparent calc(50% - 37.5vw), 
+                transparent calc(50% + 37.5vw), 
+                rgba(0,0,0,0.8) calc(50% + 37.5vw), 
+                rgba(0,0,0,0.8) 100%);
+        }
+        
+        /* Grid Overlays */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            display: none;
+        }
+        
+        .grid-overlay.show {
+            display: block;
+        }
+        
+        .grid-3x3 {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 33.333% 33.333%;
+        }
+        
+        .grid-symmetrical {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 50% 50%;
+        }
+        
+        /* Camera Controls */
+        .camera-top-controls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+        }
+        
+        @media (min-width: 768px) {
+            .camera-top-controls {
+                padding: 30px;
+            }
+        }
+        
+        .camera-close-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-close-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        .camera-close-btn:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+        
+        .camera-top-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-top-right {
+                gap: 16px;
+            }
+        }
+        
+        .camera-control-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-control-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+        
+        .camera-control-btn:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+        
+        .camera-control-btn.active {
+            background: rgba(0, 123, 255, 0.8);
+            border-color: #007BFF;
+        }
+        
+        .camera-side-controls {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-side-controls {
+                right: 30px;
+                gap: 16px;
+            }
+        }
+        
+        .lens-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        @media (min-width: 768px) {
+            .lens-selector {
+                gap: 12px;
+            }
+        }
+        
+        .lens-btn {
+            width: 50px;
+            height: 35px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 18px;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        
+        @media (min-width: 768px) {
+            .lens-btn {
+                width: 60px;
+                height: 40px;
+                font-size: 12px;
+            }
+        }
+        
+        .lens-btn:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+        
+        .lens-btn.active {
+            background: rgba(0, 123, 255, 0.8);
+            border-color: #007BFF;
+        }
+        
+        .camera-bottom-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            z-index: 10;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+        }
+        
+        @media (min-width: 768px) {
+            .camera-bottom-controls {
+                padding: 40px 30px;
+            }
+        }
+        
+        .camera-shutter-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-shutter-container {
+                gap: 30px;
+            }
+        }
+        
+        .camera-gallery-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border: 3px solid rgba(255,255,255,0.8);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-gallery-btn {
+                width: 60px;
+                height: 60px;
+                border-radius: 15px;
+            }
+        }
+        
+        .camera-gallery-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .camera-shutter-btn {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            border: 4px solid rgba(255,255,255,0.9);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.4);
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .camera-shutter-btn {
+                width: 100px;
+                height: 100px;
+                border: 5px solid rgba(255,255,255,0.9);
+                box-shadow: 0 6px 25px rgba(0, 123, 255, 0.4);
+            }
+        }
+        
+        .camera-shutter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 123, 255, 0.6);
+        }
+        
+        @media (min-width: 768px) {
+            .camera-shutter-btn:hover {
+                box-shadow: 0 8px 30px rgba(0, 123, 255, 0.6);
+            }
+        }
+        
+        .camera-shutter-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .camera-shutter-btn::before {
+            content: '';
+            width: 60%;
+            height: 60%;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        /* Timer Display */
+        .timer-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            z-index: 20;
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .timer-display {
+                font-size: 120px;
+            }
+        }
+        
+        .timer-display.show {
+            display: block;
+            animation: timerPulse 1s ease-in-out;
+        }
+        
+        @keyframes timerPulse {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        
+        /* Photo Preview Page */
+        .photo-preview-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 5000;
+            display: none;
+            flex-direction: column;
+        }
+        
+        .photo-preview-page.show {
+            display: flex;
+        }
+        
+        .photo-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+        
+        @media (min-width: 768px) {
+            .photo-preview-header {
+                padding: 30px;
+            }
+        }
+        
+        .photo-preview-back {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .photo-preview-back {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        .photo-preview-back:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+        
+        .photo-preview-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .photo-preview-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .photo-preview-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            flex-wrap: wrap;
+        }
+        
+        @media (min-width: 768px) {
+            .photo-preview-actions {
+                gap: 16px;
+                padding: 30px;
+            }
+        }
+        
+        .photo-action-btn {
+            padding: 12px 20px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 25px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        @media (min-width: 768px) {
+            .photo-action-btn {
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+        }
+        
+        .photo-action-btn:hover {
+            background: rgba(0,0,0,0.8);
+            transform: translateY(-2px);
+        }
+        
+        .photo-action-btn.primary {
+            background: rgba(0, 123, 255, 0.8);
+            border-color: #007BFF;
+        }
+        
+        .photo-action-btn.primary:hover {
+            background: rgba(0, 86, 179, 0.9);
+        }
+        
+        .photo-action-btn.success {
+            background: rgba(16, 185, 129, 0.8);
+            border-color: #10B981;
+        }
+        
+        .photo-action-btn.success:hover {
+            background: rgba(5, 150, 105, 0.9);
+        }
+        
+        .photo-action-btn.danger {
+            background: rgba(220, 53, 69, 0.8);
+            border-color: #DC3545;
+        }
+        
+        .photo-action-btn.danger:hover {
+            background: rgba(200, 35, 51, 0.9);
+        }
+        
+        /* Hidden file input */
+        .hidden-file-input {
+            display: none;
+        }
+        
         /* Responsive adjustments for very small screens */
         @media (max-width: 320px) {
             .content {
@@ -3363,6 +3914,28 @@
                 width: 40px !important;
                 height: 40px !important;
             }
+            
+            .camera-shutter-btn {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .camera-gallery-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .camera-control-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+            }
+            
+            .lens-btn {
+                width: 45px;
+                height: 30px;
+                font-size: 9px;
+            }
         }
         
         /* Landscape orientation adjustments for mobile */
@@ -3390,6 +3963,23 @@
             .camera-button {
                 width: 40px !important;
                 height: 40px !important;
+            }
+            
+            .camera-top-controls {
+                padding: 15px;
+            }
+            
+            .camera-bottom-controls {
+                padding: 20px 15px;
+            }
+            
+            .camera-shutter-btn {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .timer-display {
+                font-size: 60px;
             }
         }
     </style>
@@ -3698,7 +4288,7 @@
                         </svg>
                         <span>Contest</span>
                     </button>
-                    <button class="nav-button camera-button">
+                    <button class="nav-button camera-button" onclick="openCamera()">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                             <circle cx="12" cy="13" r="3"/>
@@ -4206,6 +4796,119 @@
             </div>
         </div>
     </div>
+    
+    <!-- Camera Interface -->
+    <div class="camera-page" id="cameraPage">
+        <div class="camera-container">
+            <div class="camera-viewport">
+                <video class="camera-video" id="cameraVideo" autoplay muted playsinline></video>
+                
+                <!-- Aspect Ratio Overlay -->
+                <div class="aspect-overlay" id="aspectOverlay"></div>
+                
+                <!-- Grid Overlays -->
+                <div class="grid-overlay grid-3x3" id="grid3x3"></div>
+                <div class="grid-overlay grid-symmetrical" id="gridSymmetrical"></div>
+                
+                <!-- Timer Display -->
+                <div class="timer-display" id="timerDisplay">3</div>
+            </div>
+            
+            <!-- Top Controls -->
+            <div class="camera-top-controls">
+                <button class="camera-close-btn" onclick="closeCamera()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                
+                <div class="camera-top-right">
+                    <button class="camera-control-btn" id="flashBtn" onclick="toggleFlash()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </button>
+                    
+                    <button class="camera-control-btn" id="timerBtn" onclick="toggleTimer()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12,6 12,12 16,14"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <button class="camera-control-btn" id="aspectBtn" onclick="toggleAspectRatio()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </button>
+                    
+                    <button class="camera-control-btn" id="gridBtn" onclick="toggleGrid()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                            <line x1="15" y1="3" x2="15" y2="21"></line>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="3" y1="15" x2="21" y2="15"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Side Controls (Lens Selector) -->
+            <div class="camera-side-controls">
+                <div class="lens-selector" id="lensSelector">
+                    <button class="lens-btn" data-lens="0.5" onclick="switchLens('0.5')">0.5x</button>
+                    <button class="lens-btn active" data-lens="1" onclick="switchLens('1')">1x</button>
+                    <button class="lens-btn" data-lens="2" onclick="switchLens('2')">2x</button>
+                    <button class="lens-btn" data-lens="macro" onclick="switchLens('macro')">📷</button>
+                </div>
+            </div>
+            
+            <!-- Bottom Controls -->
+            <div class="camera-bottom-controls">
+                <div class="camera-shutter-container">
+                    <button class="camera-gallery-btn" onclick="openGalleryPicker()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21,15 16,10 5,21"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <button class="camera-shutter-btn" onclick="capturePhoto()"></button>
+                    
+                    <div style="width: 50px;"></div> <!-- Spacer for symmetry -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Photo Preview Page -->
+    <div class="photo-preview-page" id="photoPreviewPage">
+        <div class="photo-preview-header">
+            <button class="photo-preview-back" onclick="backToCamera()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="photo-preview-container">
+            <img class="photo-preview-image" id="previewImage" src="" alt="Captured photo">
+        </div>
+        
+        <div class="photo-preview-actions">
+            <button class="photo-action-btn danger" onclick="retakePhoto()">Retake</button>
+            <button class="photo-action-btn" onclick="saveToGallery()">Save to Gallery</button>
+            <button class="photo-action-btn primary" onclick="shareOnFarcaster()">Share on Farcaster</button>
+            <button class="photo-action-btn success" onclick="mintToLensGallery()">Mint to LENS Gallery</button>
+        </div>
+    </div>
+    
+    <!-- Hidden file input for gallery selection -->
+    <input type="file" class="hidden-file-input" id="galleryInput" accept="image/*" onchange="handleGallerySelection(event)">
 
     <script>
         // Theme toggle functionality
@@ -4606,6 +5309,433 @@
             }, 1000);
         }
 
+        // Camera functionality
+        let cameraStream = null;
+        let currentCamera = 'user'; // 'user' for front, 'environment' for back
+        let currentLens = '1';
+        let flashEnabled = false;
+        let timerSeconds = 0; // 0 = off, 3, 5, 10
+        let currentAspectRatio = 'full'; // 'full', 'square', 'portrait'
+        let currentGrid = 'none'; // 'none', '3x3', 'symmetrical'
+        let capturedImageData = null;
+        let isFromGallery = false;
+
+        // Open camera
+        async function openCamera() {
+            try {
+                document.getElementById('cameraPage').classList.add('show');
+                await startCamera();
+            } catch (error) {
+                console.error('Error opening camera:', error);
+                alert('Unable to access camera. Please check permissions.');
+                closeCamera();
+            }
+        }
+
+        // Start camera stream
+        async function startCamera() {
+            try {
+                // Stop existing stream
+                if (cameraStream) {
+                    cameraStream.getTracks().forEach(track => track.stop());
+                }
+
+                const constraints = {
+                    video: {
+                        facingMode: currentCamera,
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    }
+                };
+
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                const video = document.getElementById('cameraVideo');
+                video.srcObject = cameraStream;
+                
+                // Update video class based on camera
+                if (currentCamera === 'user') {
+                    video.classList.remove('back-camera');
+                } else {
+                    video.classList.add('back-camera');
+                }
+                
+                // Update available lenses based on device capabilities
+                await updateAvailableLenses();
+                
+            } catch (error) {
+                console.error('Error starting camera:', error);
+                throw error;
+            }
+        }
+
+        // Update available lenses
+        async function updateAvailableLenses() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                
+                const lensSelector = document.getElementById('lensSelector');
+                lensSelector.innerHTML = '';
+                
+                // Add standard lens options
+                const lensOptions = [
+                    { value: '0.5', label: '0.5x' },
+                    { value: '1', label: '1x' },
+                    { value: '2', label: '2x' }
+                ];
+                
+                // Add macro if available (simulated)
+                if (videoDevices.length > 2) {
+                    lensOptions.push({ value: 'macro', label: '📷' });
+                }
+                
+                lensOptions.forEach(lens => {
+                    const btn = document.createElement('button');
+                    btn.className = 'lens-btn';
+                    btn.setAttribute('data-lens', lens.value);
+                    btn.textContent = lens.label;
+                    btn.onclick = () => switchLens(lens.value);
+                    
+                    if (lens.value === currentLens) {
+                        btn.classList.add('active');
+                    }
+                    
+                    lensSelector.appendChild(btn);
+                });
+                
+            } catch (error) {
+                console.error('Error updating lenses:', error);
+            }
+        }
+
+        // Switch lens/zoom
+        function switchLens(lensType) {
+            currentLens = lensType;
+            
+            // Update active lens button
+            document.querySelectorAll('.lens-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lens') === lensType) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Apply zoom effect (simulated)
+            const video = document.getElementById('cameraVideo');
+            switch(lensType) {
+                case '0.5':
+                    video.style.transform = currentCamera === 'user' ? 'scaleX(-1) scale(0.8)' : 'scale(0.8)';
+                    break;
+                case '1':
+                    video.style.transform = currentCamera === 'user' ? 'scaleX(-1) scale(1)' : 'scale(1)';
+                    break;
+                case '2':
+                    video.style.transform = currentCamera === 'user' ? 'scaleX(-1) scale(1.5)' : 'scale(1.5)';
+                    break;
+                case 'macro':
+                    video.style.transform = currentCamera === 'user' ? 'scaleX(-1) scale(2)' : 'scale(2)';
+                    break;
+            }
+        }
+
+        // Toggle flash
+        function toggleFlash() {
+            flashEnabled = !flashEnabled;
+            const flashBtn = document.getElementById('flashBtn');
+            
+            if (flashEnabled) {
+                flashBtn.classList.add('active');
+            } else {
+                flashBtn.classList.remove('active');
+            }
+            
+            // Apply flash to camera stream if supported
+            if (cameraStream) {
+                const track = cameraStream.getVideoTracks()[0];
+                if (track && track.getCapabilities && track.getCapabilities().torch) {
+                    track.applyConstraints({
+                        advanced: [{ torch: flashEnabled }]
+                    }).catch(err => console.log('Flash not supported:', err));
+                }
+            }
+        }
+
+        // Toggle timer
+        function toggleTimer() {
+            const timerOptions = [0, 3, 5, 10];
+            const currentIndex = timerOptions.indexOf(timerSeconds);
+            const nextIndex = (currentIndex + 1) % timerOptions.length;
+            timerSeconds = timerOptions[nextIndex];
+            
+            const timerBtn = document.getElementById('timerBtn');
+            if (timerSeconds > 0) {
+                timerBtn.classList.add('active');
+                timerBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12,6 12,12 16,14"></polyline>
+                    </svg>
+                    <span style="position: absolute; bottom: 2px; right: 2px; font-size: 8px;">${timerSeconds}</span>
+                `;
+            } else {
+                timerBtn.classList.remove('active');
+                timerBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12,6 12,12 16,14"></polyline>
+                    </svg>
+                `;
+            }
+        }
+
+        // Toggle aspect ratio
+        function toggleAspectRatio() {
+            const aspectOptions = ['full', 'square', 'portrait'];
+            const currentIndex = aspectOptions.indexOf(currentAspectRatio);
+            const nextIndex = (currentIndex + 1) % aspectOptions.length;
+            currentAspectRatio = aspectOptions[nextIndex];
+            
+            const aspectOverlay = document.getElementById('aspectOverlay');
+            const aspectBtn = document.getElementById('aspectBtn');
+            
+            // Remove all aspect classes
+            aspectOverlay.className = 'aspect-overlay';
+            
+            // Add new aspect class
+            if (currentAspectRatio !== 'full') {
+                aspectOverlay.classList.add(currentAspectRatio);
+                aspectBtn.classList.add('active');
+            } else {
+                aspectBtn.classList.remove('active');
+            }
+            
+            // Update grid to fit aspect ratio
+            updateGridForAspectRatio();
+        }
+
+        // Toggle grid
+        function toggleGrid() {
+            const gridOptions = ['none', '3x3', 'symmetrical'];
+            const currentIndex = gridOptions.indexOf(currentGrid);
+            const nextIndex = (currentIndex + 1) % gridOptions.length;
+            currentGrid = gridOptions[nextIndex];
+            
+            const gridBtn = document.getElementById('gridBtn');
+            const grid3x3 = document.getElementById('grid3x3');
+            const gridSymmetrical = document.getElementById('gridSymmetrical');
+            
+            // Hide all grids
+            grid3x3.classList.remove('show');
+            gridSymmetrical.classList.remove('show');
+            gridBtn.classList.remove('active');
+            
+            // Show selected grid
+            if (currentGrid === '3x3') {
+                grid3x3.classList.add('show');
+                gridBtn.classList.add('active');
+            } else if (currentGrid === 'symmetrical') {
+                gridSymmetrical.classList.add('show');
+                gridBtn.classList.add('active');
+            }
+            
+            updateGridForAspectRatio();
+        }
+
+        // Update grid positioning for current aspect ratio
+        function updateGridForAspectRatio() {
+            const grid3x3 = document.getElementById('grid3x3');
+            const gridSymmetrical = document.getElementById('gridSymmetrical');
+            
+            // Reset styles
+            [grid3x3, gridSymmetrical].forEach(grid => {
+                grid.style.top = '0';
+                grid.style.height = '100%';
+            });
+            
+            // Adjust for aspect ratios
+            if (currentAspectRatio === 'square') {
+                const offset = 'calc(50% - 50vw)';
+                const height = '100vw';
+                [grid3x3, gridSymmetrical].forEach(grid => {
+                    grid.style.top = offset;
+                    grid.style.height = height;
+                });
+            } else if (currentAspectRatio === 'portrait') {
+                const offset = 'calc(50% - 37.5vw)';
+                const height = '75vw';
+                [grid3x3, gridSymmetrical].forEach(grid => {
+                    grid.style.top = offset;
+                    grid.style.height = height;
+                });
+            }
+        }
+
+        // Capture photo
+        async function capturePhoto() {
+            if (timerSeconds > 0) {
+                await startTimer();
+            } else {
+                await takePhoto();
+            }
+        }
+
+        // Start countdown timer
+        function startTimer() {
+            return new Promise((resolve) => {
+                const timerDisplay = document.getElementById('timerDisplay');
+                let countdown = timerSeconds;
+                
+                timerDisplay.textContent = countdown;
+                timerDisplay.classList.add('show');
+                
+                const interval = setInterval(() => {
+                    countdown--;
+                    if (countdown > 0) {
+                        timerDisplay.textContent = countdown;
+                        // Trigger animation
+                        timerDisplay.classList.remove('show');
+                        setTimeout(() => timerDisplay.classList.add('show'), 50);
+                    } else {
+                        clearInterval(interval);
+                        timerDisplay.classList.remove('show');
+                        takePhoto();
+                        resolve();
+                    }
+                }, 1000);
+            });
+        }
+
+        // Take the actual photo
+        async function takePhoto() {
+            try {
+                const video = document.getElementById('cameraVideo');
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Set canvas size based on aspect ratio
+                let canvasWidth = video.videoWidth;
+                let canvasHeight = video.videoHeight;
+                
+                if (currentAspectRatio === 'square') {
+                    const size = Math.min(canvasWidth, canvasHeight);
+                    canvasWidth = size;
+                    canvasHeight = size;
+                } else if (currentAspectRatio === 'portrait') {
+                    canvasHeight = canvasWidth * 4 / 3;
+                }
+                
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                
+                // Calculate crop area
+                const cropX = (video.videoWidth - canvasWidth) / 2;
+                const cropY = (video.videoHeight - canvasHeight) / 2;
+                
+                // Draw video frame to canvas
+                if (currentCamera === 'user') {
+                    // Mirror front camera
+                    ctx.scale(-1, 1);
+                    ctx.drawImage(video, -cropX - canvasWidth, cropY, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+                } else {
+                    ctx.drawImage(video, cropX, cropY, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+                }
+                
+                // Convert to blob
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    capturedImageData = { blob, url };
+                    isFromGallery = false;
+                    showPhotoPreview(url);
+                }, 'image/jpeg', 0.9);
+                
+            } catch (error) {
+                console.error('Error taking photo:', error);
+                alert('Error capturing photo. Please try again.');
+            }
+        }
+
+        // Open gallery picker
+        function openGalleryPicker() {
+            document.getElementById('galleryInput').click();
+        }
+
+        // Handle gallery selection
+        function handleGallerySelection(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                capturedImageData = { blob: file, url };
+                isFromGallery = true;
+                showPhotoPreview(url);
+            }
+        }
+
+        // Show photo preview
+        function showPhotoPreview(imageUrl) {
+            document.getElementById('previewImage').src = imageUrl;
+            document.getElementById('photoPreviewPage').classList.add('show');
+            
+            // Update action buttons based on source
+            const actions = document.querySelector('.photo-preview-actions');
+            if (isFromGallery) {
+                actions.innerHTML = `
+                    <button class="photo-action-btn primary" onclick="shareOnFarcaster()">Share on Farcaster</button>
+                    <button class="photo-action-btn success" onclick="mintToLensGallery()">Mint to LENS Gallery</button>
+                `;
+            } else {
+                actions.innerHTML = `
+                    <button class="photo-action-btn danger" onclick="retakePhoto()">Retake</button>
+                    <button class="photo-action-btn" onclick="saveToGallery()">Save to Gallery</button>
+                    <button class="photo-action-btn primary" onclick="shareOnFarcaster()">Share on Farcaster</button>
+                    <button class="photo-action-btn success" onclick="mintToLensGallery()">Mint to LENS Gallery</button>
+                `;
+            }
+        }
+
+        // Back to camera
+        function backToCamera() {
+            document.getElementById('photoPreviewPage').classList.remove('show');
+            if (capturedImageData && capturedImageData.url) {
+                URL.revokeObjectURL(capturedImageData.url);
+            }
+        }
+
+        // Retake photo
+        function retakePhoto() {
+            backToCamera();
+        }
+
+        // Save to gallery
+        function saveToGallery() {
+            if (capturedImageData && capturedImageData.blob) {
+                const link = document.createElement('a');
+                link.href = capturedImageData.url;
+                link.download = `lens-photo-${Date.now()}.jpg`;
+                link.click();
+                
+                alert('Photo saved to your device!');
+            }
+        }
+
+        // Share on Farcaster
+        function shareOnFarcaster() {
+            alert('Sharing on Farcaster... This would integrate with Farcaster API to post your photo with LENS branding.');
+        }
+
+        // Mint to LENS Gallery
+        function mintToLensGallery() {
+            alert('Minting to LENS Gallery... This would create an NFT of your photo and add it to the LENS community gallery.');
+        }
+
+        // Close camera
+        function closeCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+            document.getElementById('cameraPage').classList.remove('show');
+        }
+
         // Add some interactive hover effects
         document.addEventListener('DOMContentLoaded', function() {
             // Add hover sound effect simulation
@@ -4635,7 +5765,14 @@
                     claimDailyReward();
                 }
             });
+            
+            // Handle device orientation changes
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    updateGridForAspectRatio();
+                }, 500);
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97936c41b6cf6640',t:'MTc1Njg4MzM3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793d4f4c7710e34',t:'MTc1Njg4NzY2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
