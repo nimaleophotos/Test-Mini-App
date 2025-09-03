@@ -1249,7 +1249,6 @@
         
         /* First Paper - Picture of the Day */
         .pod-paper-first {
-            min-height: calc(100vh - 200px);
         }
         
         .pod-title-section {
@@ -1392,9 +1391,19 @@
             gap: 4px;
         }
         
+        .pod-info-row.pod-inline-row {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }
+        
         @media (min-width: 768px) {
             .pod-info-row {
                 gap: 6px;
+            }
+            
+            .pod-info-row.pod-inline-row {
+                gap: 10px;
             }
         }
         
@@ -1451,15 +1460,36 @@
             display: inline-block;
         }
         
+        .pod-artist-link {
+            color: #e8e9ea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        
         @media (min-width: 768px) {
             .pod-link {
                 font-size: 12px;
             }
+            
+            .pod-artist-link {
+                font-size: 12px;
+            }
+        }
+        
+        body.light-theme .pod-artist-link {
+            color: #495057;
         }
         
         .pod-link:hover {
             color: #0056b3;
             border-bottom-color: rgba(0, 86, 179, 0.5);
+        }
+        
+        .pod-artist-link:hover {
+            color: #007BFF;
         }
         
         .pod-desc-text {
@@ -1478,6 +1508,78 @@
         
         body.light-theme .pod-desc-text {
             color: #495057;
+        }
+        
+        .pod-info-box {
+            margin-top: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-info-box {
+                margin-top: 20px;
+            }
+        }
+        
+        .pod-info-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-info-card {
+                border-radius: 10px;
+                padding: 16px;
+                gap: 12px;
+            }
+        }
+        
+        body.light-theme .pod-info-card {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .pod-info-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-info-icon {
+                font-size: 18px;
+            }
+        }
+        
+        .pod-info-text {
+            font-size: 10px;
+            line-height: 1.4;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-info-text {
+                font-size: 11px;
+                line-height: 1.5;
+            }
+        }
+        
+        body.light-theme .pod-info-text {
+            color: #495057;
+        }
+        
+        .pod-info-text strong {
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .pod-info-text strong {
+            color: #1a1a1a;
         }
         
         /* Second Paper - Spotlight Spots */
@@ -2553,8 +2655,7 @@
                             <div class="pod-paper pod-paper-first">
                                 <div class="pod-paper-content">
                                     <div class="pod-title-section">
-                                        <strong class="pod-main-title">Today's Featured Photo</strong>
-                                        <div class="pod-subtitle">(Picture of The Day)</div>
+                                        <strong class="pod-main-title">Picture of the Day</strong>
                                     </div>
                                     
                                     <div class="pod-image" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xad23b3a2', '_blank')">
@@ -2571,15 +2672,15 @@
                                     </div>
                                     
                                     <div class="pod-info">
-                                        <div class="pod-info-row">
+                                        <div class="pod-info-row pod-inline-row">
                                             <strong class="pod-label">Title:</strong> 
                                             <span class="pod-text">Camel Rock</span>
                                         </div>
                                         
-                                        <div class="pod-info-row">
+                                        <div class="pod-info-row pod-inline-row">
                                             <strong class="pod-label">Artist:</strong> 
-                                            <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-link">
-                                                Nima Leo @nimaleophotos
+                                            <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-artist-link">
+                                                Nima Leo
                                             </a>
                                         </div>
                                         
@@ -2588,6 +2689,15 @@
                                             <span class="pod-desc-text">
                                                 A breathtaking capture of the iconic Camel Rock formation, showcasing the raw beauty and geological wonder of this natural landmark. The composition masterfully balances the rugged textures against the expansive sky, creating a powerful visual narrative.
                                             </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="pod-info-box">
+                                        <div class="pod-info-card">
+                                            <div class="pod-info-icon">🏆</div>
+                                            <div class="pod-info-text">
+                                                <strong>Today's Featured Photo:</strong> We select the best photo that spotted in the spotlight in the last 24 hours to showcase for the next 24 hours as picture of the day and with a $50 prize.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -3244,5 +3354,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9792e670c4d60e34',t:'MTc1Njg3Nzg5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97932cc822b7f531',t:'MTc1Njg4MDc3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
