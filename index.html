@@ -1163,11 +1163,146 @@
             background: #ffffff;
         }
         
-        /* POD Styles */
+        /* POD Scrollable Paper Styles */
+        .pod-scroll-container {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-right: 4px;
+            margin-right: -4px;
+        }
+        
+        .pod-scroll-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-scroll-container::-webkit-scrollbar {
+                width: 6px;
+            }
+        }
+        
+        .pod-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        
+        .pod-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        
+        body.light-theme .pod-scroll-container::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        body.light-theme .pod-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .pod-paper {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        @media (min-width: 768px) {
+            .pod-paper {
+                border-radius: 16px;
+                margin-bottom: 20px;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            }
+        }
+        
+        body.light-theme .pod-paper {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        @media (min-width: 768px) {
+            body.light-theme .pod-paper {
+                box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+            }
+        }
+        
+        .pod-paper-content {
+            padding: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-paper-content {
+                padding: 20px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .pod-paper-content {
+                padding: 24px;
+            }
+        }
+        
+        /* First Paper - Picture of the Day */
+        .pod-paper-first {
+            min-height: calc(100vh - 200px);
+        }
+        
+        .pod-title-section {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-title-section {
+                margin-bottom: 20px;
+            }
+        }
+        
+        .pod-main-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-main-title {
+                font-size: 18px;
+                margin-bottom: 6px;
+            }
+        }
+        
+        body.light-theme .pod-main-title {
+            color: #1a1a1a;
+        }
+        
+        .pod-subtitle {
+            font-size: 11px;
+            color: #b8bcc8;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-subtitle {
+                font-size: 12px;
+            }
+        }
+        
+        body.light-theme .pod-subtitle {
+            color: #495057;
+        }
+        
         .pod-image {
             width: 100%;
             background: rgba(255,255,255,0.1);
-            border-radius: 6px;
+            border-radius: 8px;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
@@ -1175,25 +1310,37 @@
             border: 1px solid rgba(255,255,255,0.2);
             overflow: hidden;
             min-height: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         @media (min-width: 768px) {
             .pod-image {
-                border-radius: 8px;
+                border-radius: 10px;
                 margin-bottom: 20px;
-                min-height: 300px;
+                min-height: 250px;
             }
         }
         
         @media (min-width: 1024px) {
             .pod-image {
-                min-height: 400px;
+                min-height: 300px;
             }
+        }
+        
+        body.light-theme .pod-image {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.15);
+        }
+        
+        .pod-image:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         .pod-image img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 100%;
             width: auto;
             height: auto;
             object-fit: contain;
@@ -1203,62 +1350,258 @@
         @media (min-width: 768px) {
             .pod-image img {
                 border-radius: 8px;
-                max-height: 70vh;
             }
         }
         
-        .pod-description {
-            font-size: 11px;
-            line-height: 1.5;
-            color: #ccc;
-            transition: all 0.3s ease;
-            margin-bottom: 150px;
+        .pod-image-fallback {
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #888;
+        }
+        
+        .pod-image-fallback p {
+            margin-top: 6px;
+            font-size: 9px;
         }
         
         @media (min-width: 768px) {
-            .pod-description {
+            .pod-image-fallback p {
+                font-size: 10px;
+            }
+        }
+        
+        .pod-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-info {
+                gap: 16px;
+            }
+        }
+        
+        .pod-info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-info-row {
+                gap: 6px;
+            }
+        }
+        
+        .pod-description-row {
+            gap: 8px;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-description-row {
+                gap: 10px;
+            }
+        }
+        
+        .pod-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-label {
                 font-size: 13px;
-                line-height: 1.6;
-                margin-bottom: 120px;
             }
         }
         
-        @media (min-width: 1024px) {
-            .pod-description {
-                font-size: 14px;
-                margin-bottom: 140px;
+        body.light-theme .pod-label {
+            color: #1a1a1a;
+        }
+        
+        .pod-text {
+            font-size: 11px;
+            color: #e8e9ea;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .pod-text {
+                font-size: 12px;
             }
         }
         
-        body.light-theme .pod-description {
+        body.light-theme .pod-text {
             color: #495057;
         }
         
-        /* POD responsive font sizes */
-        .pod-main-title {
-            font-size: 14px !important;
-        }
-        
-        .pod-label, .pod-text, .pod-link {
-            font-size: 12px !important;
-        }
-        
-        .pod-desc-text {
-            font-size: 11px !important;
+        .pod-link {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            font-size: 11px;
+            display: inline-block;
         }
         
         @media (min-width: 768px) {
-            .pod-main-title {
-                font-size: 16px !important;
+            .pod-link {
+                font-size: 12px;
             }
-            
-            .pod-label, .pod-text, .pod-link {
-                font-size: 14px !important;
-            }
-            
+        }
+        
+        .pod-link:hover {
+            color: #0056b3;
+            border-bottom-color: rgba(0, 86, 179, 0.5);
+        }
+        
+        .pod-desc-text {
+            font-size: 10px;
+            line-height: 1.5;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
             .pod-desc-text {
-                font-size: 13px !important;
+                font-size: 11px;
+                line-height: 1.6;
             }
+        }
+        
+        body.light-theme .pod-desc-text {
+            color: #495057;
+        }
+        
+        /* Second Paper - Spotlight Spots */
+        .pod-paper-second {
+            margin-bottom: 0;
+        }
+        
+        .spotlight-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-header {
+                margin-bottom: 20px;
+            }
+        }
+        
+        .spotlight-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-title {
+                font-size: 18px;
+                margin-bottom: 6px;
+            }
+        }
+        
+        body.light-theme .spotlight-title {
+            color: #1a1a1a;
+        }
+        
+        .spotlight-subtitle {
+            font-size: 10px;
+            color: #b8bcc8;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-subtitle {
+                font-size: 11px;
+            }
+        }
+        
+        body.light-theme .spotlight-subtitle {
+            color: #495057;
+        }
+        
+        .spotlight-info {
+            margin-top: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-info {
+                margin-top: 20px;
+            }
+        }
+        
+        .spotlight-info-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-info-card {
+                border-radius: 10px;
+                padding: 16px;
+                gap: 12px;
+            }
+        }
+        
+        body.light-theme .spotlight-info-card {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .spotlight-info-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-info-icon {
+                font-size: 18px;
+            }
+        }
+        
+        .spotlight-info-text {
+            font-size: 10px;
+            line-height: 1.4;
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .spotlight-info-text {
+                font-size: 11px;
+                line-height: 1.5;
+            }
+        }
+        
+        body.light-theme .spotlight-info-text {
+            color: #495057;
+        }
+        
+        .spotlight-info-text strong {
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-theme .spotlight-info-text strong {
+            color: #1a1a1a;
         }
         
         /* Learning Styles */
@@ -2205,60 +2548,97 @@
                     
                     <!-- POD Tab -->
                     <div class="tab-panel active" id="pod">
-                        <div style="text-align: center; margin-bottom: 16px;">
-                            <strong class="pod-main-title" style="font-weight: 700; font-size: 14px; line-height: 1.4;">Today's Featured Photo (Picture of The Day)</strong>
-                        </div>
-                        <div class="pod-image" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xad23b3a2', '_blank')" style="cursor: pointer;">
-                            <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3" 
-                                 alt="Camel Rock by Nima Leo"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div style="width: 100%; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; color: #888;">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                                    <circle cx="12" cy="13" r="3"/>
-                                </svg>
-                                <p style="margin-top: 6px; font-size: 9px;">Image loading...</p>
+                        <div class="pod-scroll-container">
+                            <!-- First Paper - Picture of the Day -->
+                            <div class="pod-paper pod-paper-first">
+                                <div class="pod-paper-content">
+                                    <div class="pod-title-section">
+                                        <strong class="pod-main-title">Today's Featured Photo</strong>
+                                        <div class="pod-subtitle">(Picture of The Day)</div>
+                                    </div>
+                                    
+                                    <div class="pod-image" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xad23b3a2', '_blank')">
+                                        <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/2a24661e-4c3b-410d-2ae1-e64580a0e900/rectcontain3" 
+                                             alt="Camel Rock by Nima Leo"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div class="pod-image-fallback">
+                                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                                <circle cx="12" cy="13" r="3"/>
+                                            </svg>
+                                            <p>Image loading...</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="pod-info">
+                                        <div class="pod-info-row">
+                                            <strong class="pod-label">Title:</strong> 
+                                            <span class="pod-text">Camel Rock</span>
+                                        </div>
+                                        
+                                        <div class="pod-info-row">
+                                            <strong class="pod-label">Artist:</strong> 
+                                            <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-link">
+                                                Nima Leo @nimaleophotos
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="pod-info-row pod-description-row">
+                                            <strong class="pod-label">Description:</strong>
+                                            <span class="pod-desc-text">
+                                                A breathtaking capture of the iconic Camel Rock formation, showcasing the raw beauty and geological wonder of this natural landmark. The composition masterfully balances the rugged textures against the expansive sky, creating a powerful visual narrative.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="pod-description">
                             
-                            <strong class="pod-label" style="font-size: 12px;">Title:</strong> <span class="pod-text" style="font-size: 12px;">Camel Rock</span><br><br>
-                            
-                            <strong class="pod-label" style="font-size: 12px;">Artist Name:</strong> <a href="https://farcaster.xyz/nimaleophotos.eth" target="_blank" class="pod-link" style="color: #007BFF; text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(0, 123, 255, 0.3); transition: all 0.3s ease; font-size: 12px;" onmouseover="this.style.color='#0056b3'; this.style.borderBottomColor='rgba(0, 86, 179, 0.5)'" onmouseout="this.style.color='#007BFF'; this.style.borderBottomColor='rgba(0, 123, 255, 0.3)'">Nima Leo @nimaleophotos</a><br><br>
-                            
-                            <strong class="pod-label" style="font-size: 12px;">Description:</strong> <span class="pod-desc-text" style="font-size: 11px; line-height: 1.5;">A breathtaking capture of the iconic Camel Rock formation, showcasing the raw beauty and geological wonder of this natural landmark. The composition masterfully balances the rugged textures against the expansive sky, creating a powerful visual narrative.</span>
-                        </div>
-                        
-                        <!-- Featured Photos Section -->
-                        <div style="margin-top: 16px;">
-                            <h3 class="featured-spots-title" style="font-weight: 700; color: #fff; transition: all 0.3s ease;">Spotlight Spots</h3>
-                            <div class="gallery-grid">
-                                <div class="gallery-item" id="spotlight-1" onclick="handleSpotlightClick(1)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #1</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-2" onclick="handleSpotlightClick(2)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #2</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-3" onclick="handleSpotlightClick(3)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #3</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-4" onclick="handleSpotlightClick(4)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #4</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-5" onclick="handleSpotlightClick(5)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #5</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-6" onclick="handleSpotlightClick(6)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #6</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-7" onclick="handleSpotlightClick(7)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #7</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-8" onclick="handleSpotlightClick(8)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #8</div>
-                                </div>
-                                <div class="gallery-item" id="spotlight-9" onclick="handleSpotlightClick(9)" style="cursor: pointer;">
-                                    <div class="gallery-placeholder">Spotlight<br>Spot #9</div>
+                            <!-- Second Paper - Spotlight Spots -->
+                            <div class="pod-paper pod-paper-second">
+                                <div class="pod-paper-content">
+                                    <div class="spotlight-header">
+                                        <h3 class="spotlight-title">Spotlight Spots</h3>
+                                        <div class="spotlight-subtitle">Feature your photos in the community spotlight</div>
+                                    </div>
+                                    
+                                    <div class="gallery-grid">
+                                        <div class="gallery-item" id="spotlight-1" onclick="handleSpotlightClick(1)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #1</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-2" onclick="handleSpotlightClick(2)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #2</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-3" onclick="handleSpotlightClick(3)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #3</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-4" onclick="handleSpotlightClick(4)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #4</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-5" onclick="handleSpotlightClick(5)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #5</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-6" onclick="handleSpotlightClick(6)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #6</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-7" onclick="handleSpotlightClick(7)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #7</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-8" onclick="handleSpotlightClick(8)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #8</div>
+                                        </div>
+                                        <div class="gallery-item" id="spotlight-9" onclick="handleSpotlightClick(9)">
+                                            <div class="gallery-placeholder">Spotlight<br>Spot #9</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="spotlight-info">
+                                        <div class="spotlight-info-card">
+                                            <div class="spotlight-info-icon">💡</div>
+                                            <div class="spotlight-info-text">
+                                                <strong>How it works:</strong> Purchase a spotlight spot for $2 USDC to feature your photo for 24 hours in the community grid.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2864,5 +3244,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978b7867c03d312a',t:'MTc1Njc5OTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9792e670c4d60e34',t:'MTc1Njg3Nzg5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
