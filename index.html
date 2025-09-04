@@ -1,794 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LENS App - Photography Mini App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom CSS for enhanced styling */
-        .lens-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .dark .glass-effect {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .tab-active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .camera-btn {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-            transform: scale(1.2);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-        }
-        
-        .spot-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        
-        .spot-item {
-            aspect-ratio: 1;
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-            border: 2px dashed #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .spot-item:hover {
-            border-color: #667eea;
-            background: linear-gradient(45deg, #667eea20, #764ba220);
-        }
-        
-        .dark .spot-item {
-            background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
-            border-color: #555;
-        }
-        
-        .ranking-item {
-            transition: all 0.3s ease;
-        }
-        
-        .ranking-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .tutorial-box {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .tutorial-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(116, 185, 255, 0.3);
-        }
-
-        /* Camera styles */
-        #cameraModal video {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-        }
-        
-        .capture-btn {
-            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px auto;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .capture-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LENS App</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-    <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow-lg p-4">
-        <div class="flex items-center justify-between max-w-6xl mx-auto">
-            <!-- Logo and Title -->
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 lens-gradient rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 1L9 4h6l-3-3zM21 9v6l-3-3 3-3zM12 23l3-3H9l3 3zM3 15V9l3 3-3 3z"/>
-                        <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1"/>
-                    </svg>
-                </div>
-                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">LENS APP</h1>
-            </div>
-            
-            <!-- Controls -->
-            <div class="flex items-center space-x-3">
-                <!-- Theme Toggle -->
-                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path class="sun-icon" d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 1.5a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM12 2a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zM22 12a1 1 0 0 1-1 1h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zM5 12a1 1 0 0 1-1 1H2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1z"/>
-                        <path class="moon-icon hidden" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
-                
-                <!-- Connect Wallet Button -->
-                <button id="connectWallet" class="lens-gradient text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                    Connect Wallet
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto p-4">
-        <!-- Tabs -->
-        <div class="flex bg-white dark:bg-gray-800 rounded-lg shadow-lg mb-6 overflow-hidden">
-            <button class="tab-btn flex-1 py-4 px-6 font-semibold transition-all tab-active" data-tab="pod">POD</button>
-            <button class="tab-btn flex-1 py-4 px-6 font-semibold transition-all text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700" data-tab="leaderboard">Leaderboard</button>
-            <button class="tab-btn flex-1 py-4 px-6 font-semibold transition-all text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700" data-tab="tutorial">Tutorial</button>
-        </div>
-
-        <!-- Tab Contents -->
-        <div id="tabContents">
-            <!-- POD Tab (Default) -->
-            <div id="pod" class="tab-content">
-                <div class="grid md:grid-cols-1 gap-6">
-                    <!-- Picture of the Day -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">📸 Picture of the Day</h3>
-                        <div class="bg-gradient-to-br from-purple-400 to-blue-500 rounded-lg h-64 mb-4 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <svg class="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 2l1.17 1H15a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.17L9 2zm3 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-2a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                                </svg>
-                                <p class="text-lg font-semibold">Golden Hour Landscape</p>
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <p><strong>Name:</strong> Golden Hour Serenity</p>
-                            <p><strong>Artist:</strong> Alex Photography</p>
-                            <p><strong>Description:</strong> A breathtaking capture of the golden hour over rolling hills, showcasing the perfect balance of light and shadow.</p>
-                        </div>
-                    </div>
-
-                    <!-- Spotlight Spots -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">✨ Spotlight Spots</h3>
-                        <div class="spot-grid">
-                            <div class="spot-item" onclick="buySpot(1)">
-                                <span class="text-gray-500 font-semibold">Spot 1</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(2)">
-                                <span class="text-gray-500 font-semibold">Spot 2</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(3)">
-                                <span class="text-gray-500 font-semibold">Spot 3</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(4)">
-                                <span class="text-gray-500 font-semibold">Spot 4</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(5)">
-                                <span class="text-gray-500 font-semibold">Spot 5</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(6)">
-                                <span class="text-gray-500 font-semibold">Spot 6</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(7)">
-                                <span class="text-gray-500 font-semibold">Spot 7</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(8)">
-                                <span class="text-gray-500 font-semibold">Spot 8</span>
-                            </div>
-                            <div class="spot-item" onclick="buySpot(9)">
-                                <span class="text-gray-500 font-semibold">Spot 9</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">Click on any spot to purchase and showcase your photography!</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Leaderboard Tab -->
-            <div id="leaderboard" class="tab-content hidden">
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-6 text-gray-800 dark:text-white">🏆 Top 100 Photographers</h3>
-                    
-                    <!-- Current User Rank -->
-                    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg p-4 mb-6 text-white">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm opacity-90">Your Current Rank</p>
-                                <p class="text-2xl font-bold">#47</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-sm opacity-90">Points</p>
-                                <p class="text-xl font-semibold">2,847</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Top Rankings -->
-                    <div class="space-y-3 max-h-96 overflow-y-auto">
-                        <div class="ranking-item flex items-center justify-between p-4 bg-gradient-to-r from-yellow-100 to-yellow-50 dark:from-yellow-900 dark:to-yellow-800 rounded-lg">
-                            <div class="flex items-center space-x-4">
-                                <span class="text-2xl">🥇</span>
-                                <div>
-                                    <p class="font-semibold text-gray-800 dark:text-white">PhotoMaster_Pro</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300">15,847 points</p>
-                                </div>
-                            </div>
-                            <span class="text-xl font-bold text-yellow-600">#1</span>
-                        </div>
-                        
-                        <div class="ranking-item flex items-center justify-between p-4 bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-600 rounded-lg">
-                            <div class="flex items-center space-x-4">
-                                <span class="text-2xl">🥈</span>
-                                <div>
-                                    <p class="font-semibold text-gray-800 dark:text-white">LensArtist_99</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300">12,456 points</p>
-                                </div>
-                            </div>
-                            <span class="text-xl font-bold text-gray-600">#2</span>
-                        </div>
-                        
-                        <div class="ranking-item flex items-center justify-between p-4 bg-gradient-to-r from-orange-100 to-orange-50 dark:from-orange-900 dark:to-orange-800 rounded-lg">
-                            <div class="flex items-center space-x-4">
-                                <span class="text-2xl">🥉</span>
-                                <div>
-                                    <p class="font-semibold text-gray-800 dark:text-white">SnapShot_King</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300">9,823 points</p>
-                                </div>
-                            </div>
-                            <span class="text-xl font-bold text-orange-600">#3</span>
-                        </div>
-
-                        <!-- More rankings -->
-                        <div class="ranking-item flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <div class="flex items-center space-x-4">
-                                <span class="text-lg font-bold text-gray-500">#4</span>
-                                <div>
-                                    <p class="font-semibold text-gray-800 dark:text-white">NatureCapture</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300">8,567 points</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="ranking-item flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <div class="flex items-center space-x-4">
-                                <span class="text-lg font-bold text-gray-500">#5</span>
-                                <div>
-                                    <p class="font-semibold text-gray-800 dark:text-white">UrbanExplorer</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-300">7,234 points</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tutorial Tab -->
-            <div id="tutorial" class="tab-content hidden">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="tutorial-box rounded-lg p-6 text-white cursor-pointer" onclick="openTutorial('basics')">
-                        <h4 class="text-lg font-bold mb-2">📚 Photography Basics</h4>
-                        <p class="text-sm opacity-90 mb-4">Learn the fundamentals of photography</p>
-                        <div class="bg-white bg-opacity-20 rounded p-2">
-                            <p class="text-xs">Tasks: 5 | Completed: 0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-box rounded-lg p-6 text-white cursor-pointer" onclick="openTutorial('composition')">
-                        <h4 class="text-lg font-bold mb-2">🎨 Composition Rules</h4>
-                        <p class="text-sm opacity-90 mb-4">Master the art of composition</p>
-                        <div class="bg-white bg-opacity-20 rounded p-2">
-                            <p class="text-xs">Tasks: 7 | Completed: 0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-box rounded-lg p-6 text-white cursor-pointer" onclick="openTutorial('lighting')">
-                        <h4 class="text-lg font-bold mb-2">💡 Lighting Techniques</h4>
-                        <p class="text-sm opacity-90 mb-4">Understanding light and shadow</p>
-                        <div class="bg-white bg-opacity-20 rounded p-2">
-                            <p class="text-xs">Tasks: 6 | Completed: 0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-box rounded-lg p-6 text-white cursor-pointer" onclick="openTutorial('editing')">
-                        <h4 class="text-lg font-bold mb-2">✨ Photo Editing</h4>
-                        <p class="text-sm opacity-90 mb-4">Post-processing techniques</p>
-                        <div class="bg-white bg-opacity-20 rounded p-2">
-                            <p class="text-xs">Tasks: 8 | Completed: 0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-box rounded-lg p-6 text-white cursor-pointer" onclick="openTutorial('portrait')">
-                        <h4 class="text-lg font-bold mb-2">👤 Portrait Photography</h4>
-                        <p class="text-sm opacity-90 mb-4">Capturing stunning portraits</p>
-                        <div class="bg-white bg-opacity-20 rounded p-2">
-                            <p class="text-xs">Tasks: 9 | Completed: 0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tutorial-box rounded-lg p-6 text-white cursor-pointer" onclick="openTutorial('landscape')">
-                        <h4 class="text-lg font-bold mb-2">🏔️ Landscape Photography</h4>
-                        <p class="text-sm opacity-90 mb-4">Capturing nature's beauty</p>
-                        <div class="bg-white bg-opacity-20 rounded p-2">
-                            <p class="text-xs">Tasks: 6 | Completed: 0</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Navigation Footer -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
-        <div class="flex items-center justify-around py-2 max-w-md mx-auto">
-            <button class="nav-btn flex flex-col items-center p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" onclick="openPage('gallery')">
-                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                </svg>
-                <span class="text-xs">Gallery</span>
-            </button>
-            
-            <button class="nav-btn flex flex-col items-center p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" onclick="openPage('contest')">
-                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                <span class="text-xs">Contest</span>
-            </button>
-            
-            <!-- Camera Button (Center, Larger) -->
-            <button class="camera-btn flex flex-col items-center p-3 text-white rounded-full transition-all" onclick="openCamera()">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 2l1.17 1H15a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.17L9 2zm3 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-2a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                </svg>
-            </button>
-            
-            <button class="nav-btn flex flex-col items-center p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" onclick="openPage('rewards')">
-                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                <span class="text-xs">Rewards</span>
-            </button>
-            
-            <button class="nav-btn flex flex-col items-center p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" onclick="openPage('info')">
-                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                </svg>
-                <span class="text-xs">Info</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Camera Modal -->
-    <div id="cameraModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full">
-            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">📷 Camera</h3>
-                    <button onclick="closeCamera()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="p-4">
-                <video id="cameraVideo" autoplay playsinline class="w-full rounded-lg mb-4"></video>
-                <canvas id="cameraCanvas" class="hidden"></canvas>
-                <div class="text-center">
-                    <div class="capture-btn" onclick="capturePhoto()">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">Tap to capture</p>
-                </div>
-            </div>
-        </div>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand">
+      <!-- Simple lens logo (SVG) -->
+      <svg class="lens-logo" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="20" fill="none" stroke="currentColor" stroke-width="3"></circle>
+        <circle cx="32" cy="32" r="6" fill="currentColor"></circle>
+        <path d="M32 12 L40 24 L52 32 L40 40 L32 52 L24 40 L12 32 L24 24 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <h1 class="title">LENS APP</h1>
     </div>
 
-    <!-- Page Modals -->
-    <div id="pageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-40 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-                <div class="flex items-center justify-between">
-                    <h3 id="pageTitle" class="text-lg font-semibold text-gray-800 dark:text-white"></h3>
-                    <button onclick="closePage()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div id="pageContent" class="p-6">
-                <!-- Dynamic content will be loaded here -->
-            </div>
-        </div>
+    <div class="actions">
+      <!-- Theme Toggle -->
+      <label class="theme-toggle" aria-label="Toggle theme">
+        <input type="checkbox" id="themeToggle" />
+        <span class="toggle-ui" aria-hidden="true"></span>
+        <span class="toggle-label">Light/Dark</span>
+      </label>
+
+      <!-- Connect Wallet -->
+      <button class="btn primary" id="connectWalletBtn" aria-label="Connect Wallet">
+        Connect Wallet
+      </button>
     </div>
+  </header>
 
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            const sunIcon = themeToggle.querySelector('.sun-icon');
-            const moonIcon = themeToggle.querySelector('.moon-icon');
-            
-            if (html.classList.contains('dark')) {
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            } else {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            }
-        });
+  <!-- Tabs -->
+  <nav class="tabs" role="tablist" aria-label="Main tabs">
+    <button role="tab" aria-selected="false" aria-controls="tab-leaderboard" id="tabBtn-leaderboard" class="tab-btn">
+      Leaderboard
+    </button>
+    <button role="tab" aria-selected="true" aria-controls="tab-pod" id="tabBtn-pod" class="tab-btn is-active">
+      POD
+    </button>
+    <button role="tab" aria-selected="false" aria-controls="tab-tutorial" id="tabBtn-tutorial" class="tab-btn">
+      Tutorial
+    </button>
+  </nav>
 
-        // Tab Functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Leaderboard Tab -->
+    <section id="tab-leaderboard" role="tabpanel" aria-labelledby="tabBtn-leaderboard" hidden>
+      <div class="card">
+        <h2>Top 100</h2>
+        <ol class="leaderboard" id="leaderboardList" start="1"></ol>
+        <div class="current-rank" id="currentUserRank">
+          Your Rank: —
+        </div>
+      </div>
+    </section>
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetTab = button.getAttribute('data-tab');
-                
-                // Remove active class from all buttons
-                tabButtons.forEach(btn => {
-                    btn.classList.remove('tab-active');
-                    btn.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-100', 'dark:hover:bg-gray-700');
-                });
-                
-                // Add active class to clicked button
-                button.classList.add('tab-active');
-                button.classList.remove('text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-100', 'dark:hover:bg-gray-700');
-                
-                // Hide all tab contents
-                tabContents.forEach(content => {
-                    content.classList.add('hidden');
-                });
-                
-                // Show target tab content
-                document.getElementById(targetTab).classList.remove('hidden');
-            });
-        });
+    <!-- POD Tab (default) -->
+    <section id="tab-pod" role="tabpanel" aria-labelledby="tabBtn-pod">
+      <div class="stack">
+        <!-- Picture of the Day -->
+        <article class="card pod-card">
+          <div class="pod-image-wrap">
+            <img id="podImage" alt="Picture of the Day" />
+          </div>
+          <div class="pod-meta">
+            <h2 id="podTitle">Picture of the Day</h2>
+            <p class="muted">by <span id="podArtist">Artist Name</span></p>
+            <p id="podDesc">Description of today’s featured photograph.</p>
+          </div>
+        </article>
 
-        // Connect Wallet
-        document.getElementById('connectWallet').addEventListener('click', () => {
-            alert('🔗 Wallet connection feature coming soon! This will integrate with Farcaster wallet providers.');
-        });
+        <!-- Spotlight Spots 3×3 -->
+        <article class="card">
+          <div class="card-header">
+            <h2>Spotlight Spots</h2>
+            <p class="muted">9 premium spots people can buy</p>
+          </div>
+          <div class="spot-grid" id="spotGrid" aria-label="Spotlight 3 by 3 grid"></div>
+        </article>
+      </div>
+    </section>
 
-        // Spotlight Spots
-        function buySpot(spotNumber) {
-            alert(`💰 Purchase Spot ${spotNumber} for 100 $LENS tokens? This feature will be integrated with smart contracts.`);
-        }
+    <!-- Tutorial Tab -->
+    <section id="tab-tutorial" role="tabpanel" aria-labelledby="tabBtn-tutorial" hidden>
+      <div class="grid tutorials" id="tutorialGrid">
+        <!-- Tutorial cards injected by JS -->
+      </div>
+    </section>
+  </main>
 
-        // Tutorial Functions
-        function openTutorial(topic) {
-            const tutorials = {
-                basics: {
-                    title: '📚 Photography Basics',
-                    content: `
-                        <div class="space-y-4">
-                            <h4 class="font-semibold text-lg">Learn the Fundamentals</h4>
-                            <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
-                                <h5 class="font-semibold mb-2">Task 1: Understanding Aperture</h5>
-                                <p class="text-sm mb-3">Learn how aperture affects depth of field in your photos.</p>
-                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">Start Task</button>
-                            </div>
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h5 class="font-semibold mb-2">Task 2: Shutter Speed Basics</h5>
-                                <p class="text-sm mb-3">Master motion blur and freeze action with shutter speed.</p>
-                                <button class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors">Start Task</button>
-                            </div>
-                        </div>
-                    `
-                },
-                composition: {
-                    title: '🎨 Composition Rules',
-                    content: `
-                        <div class="space-y-4">
-                            <h4 class="font-semibold text-lg">Master Visual Composition</h4>
-                            <div class="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
-                                <h5 class="font-semibold mb-2">Task 1: Rule of Thirds</h5>
-                                <p class="text-sm mb-3">Practice placing subjects along the rule of thirds grid.</p>
-                                <button class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors">Start Task</button>
-                            </div>
-                        </div>
-                    `
-                },
-                lighting: {
-                    title: '💡 Lighting Techniques',
-                    content: `
-                        <div class="space-y-4">
-                            <h4 class="font-semibold text-lg">Understanding Light</h4>
-                            <div class="bg-yellow-50 dark:bg-yellow-900 p-4 rounded-lg">
-                                <h5 class="font-semibold mb-2">Task 1: Golden Hour Photography</h5>
-                                <p class="text-sm mb-3">Capture the magic of golden hour lighting.</p>
-                                <button class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 transition-colors">Start Task</button>
-                            </div>
-                        </div>
-                    `
-                }
-            };
+  <!-- Hidden camera input for native capture -->
+  <input id="cameraInput" type="file" accept="image/*" capture="environment" style="display:none" />
 
-            const tutorial = tutorials[topic] || {
-                title: '📖 Tutorial',
-                content: '<p>Tutorial content coming soon!</p>'
-            };
+  <!-- Footer Navigation -->
+  <footer class="nav-footer" role="navigation" aria-label="Primary">
+    <a class="nav-item" href="gallery.html" target="_blank" rel="noopener" aria-label="LENS Gallery">
+      <span class="icon" aria-hidden="true">🖼️</span>
+      <span class="label">LENS Gallery</span>
+    </a>
 
-            document.getElementById('pageTitle').textContent = tutorial.title;
-            document.getElementById('pageContent').innerHTML = tutorial.content;
-            document.getElementById('pageModal').classList.remove('hidden');
-        }
+    <a class="nav-item" href="contest.html" target="_blank" rel="noopener" aria-label="Contest">
+      <span class="icon" aria-hidden="true">🏆</span>
+      <span class="label">Contest</span>
+    </a>
 
-        // Camera Functions
-        let stream = null;
-        let video = null;
-        let canvas = null;
+    <button class="nav-item camera" id="cameraBtn" aria-label="Open Camera">
+      <!-- Camera SVG icon -->
+      <svg viewBox="0 0 24 24" class="camera-icon" aria-hidden="true">
+        <path d="M9 3h6l1.5 2H21a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5L9 3z" fill="currentColor" opacity="0.15"/>
+        <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-2.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z" fill="currentColor"/>
+      </svg>
+      <span class="label">Camera</span>
+    </button>
 
-        async function openCamera() {
-            const modal = document.getElementById('cameraModal');
-            video = document.getElementById('cameraVideo');
-            canvas = document.getElementById('cameraCanvas');
-            
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        facingMode: 'environment',
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    } 
-                });
-                video.srcObject = stream;
-                modal.classList.remove('hidden');
-            } catch (error) {
-                alert('📷 Camera access denied or not available. Please allow camera permissions and try again.');
-                console.error('Camera error:', error);
-            }
-        }
+    <a class="nav-item" href="rewards.html" target="_blank" rel="noopener" aria-label="Rewards">
+      <span class="icon" aria-hidden="true">🎁</span>
+      <span class="label">Rewards</span>
+    </a>
 
-        function closeCamera() {
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-                stream = null;
-            }
-            document.getElementById('cameraModal').classList.add('hidden');
-        }
+    <a class="nav-item" href="info.html" target="_blank" rel="noopener" aria-label="Info">
+      <span class="icon" aria-hidden="true">ℹ️</span>
+      <span class="label">Info</span>
+    </a>
+  </footer>
 
-        function capturePhoto() {
-            if (!video || !canvas) return;
-            
-            const context = canvas.getContext('2d');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            
-            context.drawImage(video, 0, 0);
-            
-            // Convert to blob and create download link
-            canvas.toBlob(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `lens-photo-${Date.now()}.jpg`;
-                a.click();
-                URL.revokeObjectURL(url);
-                
-                alert('📸 Photo captured and downloaded! Great shot!');
-                closeCamera();
-            }, 'image/jpeg', 0.9);
-        }
-
-        // Page Functions
-        function openPage(page) {
-            const pages = {
-                gallery: {
-                    title: '🖼️ LENS Gallery',
-                    content: `
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <div class="bg-gradient-to-br from-blue-400 to-purple-500 aspect-square rounded-lg flex items-center justify-center text-white font-semibold">
-                                Photo 1
-                            </div>
-                            <div class="bg-gradient-to-br from-green-400 to-blue-500 aspect-square rounded-lg flex items-center justify-center text-white font-semibold">
-                                Photo 2
-                            </div>
-                            <div class="bg-gradient-to-br from-purple-400 to-pink-500 aspect-square rounded-lg flex items-center justify-center text-white font-semibold">
-                                Photo 3
-                            </div>
-                            <div class="bg-gradient-to-br from-yellow-400 to-orange-500 aspect-square rounded-lg flex items-center justify-center text-white font-semibold">
-                                Photo 4
-                            </div>
-                            <div class="bg-gradient-to-br from-red-400 to-pink-500 aspect-square rounded-lg flex items-center justify-center text-white font-semibold">
-                                Photo 5
-                            </div>
-                            <div class="bg-gradient-to-br from-indigo-400 to-purple-500 aspect-square rounded-lg flex items-center justify-center text-white font-semibold">
-                                Photo 6
-                            </div>
-                        </div>
-                        <p class="text-center text-gray-600 dark:text-gray-400 mt-6">Your photography collection will appear here!</p>
-                    `
-                },
-                contest: {
-                    title: '🏆 Photography Contest',
-                    content: `
-                        <div class="space-y-6">
-                            <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-lg">
-                                <h4 class="text-xl font-bold mb-2">Current Contest: "Urban Landscapes"</h4>
-                                <p class="mb-4">Capture the beauty of city life and architecture</p>
-                                <div class="flex justify-between items-center">
-                                    <span>Ends in: 5 days</span>
-                                    <span>Prize: 1000 $LENS</span>
-                                </div>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                                    <h5 class="font-semibold mb-2">Contest Rules</h5>
-                                    <ul class="text-sm space-y-1 text-gray-600 dark:text-gray-300">
-                                        <li>• Original photos only</li>
-                                        <li>• Urban theme required</li>
-                                        <li>• Submit by deadline</li>
-                                        <li>• One entry per user</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                                    <h5 class="font-semibold mb-2">How to Enter</h5>
-                                    <ol class="text-sm space-y-1 text-gray-600 dark:text-gray-300">
-                                        <li>1. Take your photo</li>
-                                        <li>2. Upload via camera</li>
-                                        <li>3. Add contest hashtag</li>
-                                        <li>4. Submit entry</li>
-                                    </ol>
-                                </div>
-                            </div>
-                            
-                            <button class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                                Submit Your Entry
-                            </button>
-                        </div>
-                    `
-                },
-                rewards: {
-                    title: '🎁 Rewards & Achievements',
-                    content: `
-                        <div class="space-y-6">
-                            <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-6 rounded-lg">
-                                <h4 class="text-xl font-bold mb-2">Your $LENS Balance</h4>
-                                <p class="text-3xl font-bold">2,847 $LENS</p>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                                    <h5 class="font-semibold mb-3">🏅 Achievements</h5>
-                                    <div class="space-y-2">
-                                        <div class="flex items-center justify-between p-2 bg-yellow-100 dark:bg-yellow-900 rounded">
-                                            <span class="text-sm">First Photo</span>
-                                            <span class="text-xs">✅</span>
-                                        </div>
-                                        <div class="flex items-center justify-between p-2 bg-blue-100 dark:bg-blue-900 rounded">
-                                            <span class="text-sm">10 Photos</span>
-                                            <span class="text-xs">✅</span>
-                                        </div>
-                                        <div class="flex items-center justify-between p-2 bg-gray-100 dark:bg-gray-600 rounded">
-                                            <span class="text-sm">Contest Winner</span>
-                                            <span class="text-xs">🔒</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                                    <h5 class="font-semibold mb-3">💰 Earn More</h5>
-                                    <div class="space-y-2 text-sm">
-                                        <p>• Daily photo: +50 $LENS</p>
-                                        <p>• Contest entry: +100 $LENS</p>
-                                        <p>• Tutorial completion: +25 $LENS</p>
-                                        <p>• Spot purchase: +200 $LENS</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button class="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                                Claim Daily Reward
-                            </button>
-                        </div>
-                    `
-                },
-                info: {
-                    title: 'ℹ️ About LENS App',
-                    content: `
-                        <div class="space-y-6">
-                            <div class="text-center">
-                                <div class="w-20 h-20 lens-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="3"/>
-                                        <path d="M12 1L9 4h6l-3-3zM21 9v6l-3-3 3-3zM12 23l3-3H9l3 3zM3 15V9l3 3-3 3z"/>
-                                        <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1"/>
-                                    </svg>
-                                </div>
-                                <h4 class="text-2xl font-bold mb-2">LENS App</h4>
-                                <p class="text-gray-600 dark:text-gray-400">Photography Mini App for Farcaster</p>
-                            </div>
-                            
-                            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
-                                <h5 class="font-semibold mb-3">🎯 Features</h5>
-                                <ul class="space-y-2 text-sm">
-                                    <li>• 📸 Built-in camera functionality</li>
-                                    <li>• 🏆 Photography contests and leaderboards</li>
-                                    <li>• 📚 Educational tutorials and tasks</li>
-                                    <li>• 💰 $LENS token rewards system</li>
-                                    <li>• 🖼️ Personal photo gallery</li>
-                                    <li>• ✨ Spotlight spots marketplace</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow">
-                                <h5 class="font-semibold mb-3">📱 About</h5>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                                    LENS App is a comprehensive photography platform built for the Farcaster ecosystem. 
-                                    Capture, learn, compete, and earn $LENS tokens while improving your photography skills.
-                                </p>
-                                <div class="text-xs text-gray-500 dark:text-gray-400">
-                                    <p>Version 1.0.0</p>
-                                    <p>Built with ❤️ for photographers</p>
-                                </div>
-                            </div>
-                        </div>
-                    `
-                }
-            };
-
-            const pageData = pages[page] || {
-                title: 'Page',
-                content: '<p>Content coming soon!</p>'
-            };
-
-            document.getElementById('pageTitle').textContent = pageData.title;
-            document.getElementById('pageContent').innerHTML = pageData.content;
-            document.getElementById('pageModal').classList.remove('hidden');
-        }
-
-        function closePage() {
-            document.getElementById('pageModal').classList.add('hidden');
-        }
-
-        // Close modals when clicking outside
-        document.getElementById('cameraModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                closeCamera();
-            }
-        });
-
-        document.getElementById('pageModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                closePage();
-            }
-        });
-
-        // Add padding to main content to account for fixed navigation
-        document.querySelector('main').style.paddingBottom = '100px';
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979be1036778e568',t:'MTc1Njk3MjA0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  <script src="app.js"></script>
+</body>
 </html>
