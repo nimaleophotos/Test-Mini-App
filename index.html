@@ -29,11 +29,18 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo and Title -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-gray-700 dark:bg-gray-300 rounded-full flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white dark:text-gray-900" fill="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 1L9 4h6l-3-3zM21 9v6l-3-3 3-3zM12 23l3-3H9l3 3zM3 15V9l3 3-3 3z"/>
-                            <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    <div class="w-10 h-10 bg-gray-700 dark:bg-gray-300 rounded-full flex items-center justify-center relative">
+                        <svg class="w-7 h-7 text-white dark:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Outer lens ring -->
+                            <circle cx="12" cy="12" r="9" stroke-width="1.5"/>
+                            <!-- Middle lens ring -->
+                            <circle cx="12" cy="12" r="6" stroke-width="1"/>
+                            <!-- Inner lens aperture -->
+                            <circle cx="12" cy="12" r="3" stroke-width="1.5"/>
+                            <!-- Lens markings -->
+                            <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke-width="1"/>
+                            <!-- Aperture blades -->
+                            <path d="M15.5 8.5L14 10M8.5 8.5L10 10M8.5 15.5L10 14M15.5 15.5L14 14" stroke-width="0.8"/>
                         </svg>
                     </div>
                     <h1 class="text-xl font-bold text-gray-900 dark:text-white">LENS APP</h1>
@@ -42,26 +49,33 @@
                 <!-- Controls -->
                 <div class="flex items-center space-x-4">
                     <!-- Dark Mode Toggle -->
-                    <button id="darkModeToggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-lens-primary focus:ring-offset-2">
+                    <button id="darkModeToggle" class="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-lens-primary focus:ring-offset-2">
                         <span class="sr-only">Toggle dark mode</span>
-                        <span id="toggleIndicator" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform dark:translate-x-6 translate-x-1 shadow-lg">
-                            <svg class="w-3 h-3 text-yellow-500 dark:hidden absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
-                            </svg>
-                            <svg class="w-3 h-3 text-blue-400 hidden dark:block absolute top-0.5 left-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                            </svg>
-                        </span>
+                        <svg class="w-4 h-4 text-gray-600 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                        <svg class="w-4 h-4 text-gray-600 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                        </svg>
                     </button>
                     
                     <!-- Connect Wallet Button -->
-                    <button onclick="openPage('wallet')" class="bg-gray-700 hover:bg-gray-800 dark:bg-gray-300 dark:hover:bg-gray-200 text-white dark:text-gray-900 px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                    <button onclick="openPage('wallet')" class="bg-gray-700 hover:bg-gray-800 dark:bg-gray-300 dark:hover:bg-gray-200 text-white dark:text-gray-900 px-3 py-1.5 rounded-full text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                         Connect Wallet
                     </button>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Animated Slogan -->
+    <div class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="slogan" class="text-xs text-gray-600 dark:text-gray-400 font-medium h-4 overflow-hidden">
+                <span id="sloganText"></span>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24">
@@ -412,8 +426,8 @@
         const darkModeToggle = document.getElementById('darkModeToggle');
         const html = document.documentElement;
         
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
         if (currentTheme === 'dark') {
             html.classList.add('dark');
         }
@@ -469,8 +483,80 @@
             alert(`Opening ${pageName} page... In a real app, this would navigate to the ${pageName} section.`);
         }
 
+        // Slogan animation
+        const slogans = [
+            "Photography comes alive through $LENS.",
+            "$LENS is where photographers find focus.",
+            "Through $LENS, every photo tells a story.",
+            "$LENS connects those who see the world differently.",
+            "Behind every great shot is a $LENS.",
+            "$LENS celebrates the art of photography.",
+            "Discover photography's beauty through $LENS.",
+            "$LENS brings photographers into focus.",
+            "Capture creativity together with $LENS.",
+            "$LENS is the home of visual storytellers.",
+            "Photography thrives through $LENS.",
+            "$LENS frames the vision of a community.",
+            "Share your perspective through $LENS.",
+            "$LENS is where photography meets community.",
+            "Through $LENS, we celebrate every frame.",
+            "$LENS inspires photographers to see more.",
+            "In every shot, $LENS finds meaning.",
+            "$LENS brings light to photographers everywhere.",
+            "Through $LENS, art finds its audience.",
+            "$LENS unites photographers with purpose."
+        ];
+
+        let currentSloganIndex = 0;
+        const sloganText = document.getElementById('sloganText');
+
+        function animateSlogan(text) {
+            sloganText.innerHTML = '';
+            const words = text.split(' ');
+            let wordIndex = 0;
+
+            function showNextWord() {
+                if (wordIndex < words.length) {
+                    const span = document.createElement('span');
+                    span.textContent = (wordIndex > 0 ? ' ' : '') + words[wordIndex];
+                    span.style.opacity = '0';
+                    span.style.animation = 'fadeInSlide 0.3s ease-out forwards';
+                    span.style.animationDelay = `${wordIndex * 0.1}s`;
+                    sloganText.appendChild(span);
+                    wordIndex++;
+                    setTimeout(showNextWord, 100);
+                }
+            }
+            showNextWord();
+        }
+
+        function nextSlogan() {
+            animateSlogan(slogans[currentSloganIndex]);
+            currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+        }
+
+        // Add CSS animation for slogan
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInSlide {
+                from {
+                    opacity: 0;
+                    transform: translateX(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Start slogan animation
+        nextSlogan();
+        setInterval(nextSlogan, 20000);
+
         // Initialize with POD tab active
         switchTab('pod');
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979c0f3ba704dde3',t:'MTc1Njk3Mzk0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979c1e2ce18edde3',t:'MTc1Njk3NDU1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
