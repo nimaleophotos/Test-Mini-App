@@ -71,38 +71,38 @@
         </div>
     </div>
 
-    <!-- Tab Navigation -->
-    <div class="fixed top-24 left-0 right-0 z-40 bg-white dark:bg-[#202020] py-4">
-        <div class="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
-            <div class="flex space-x-1 bg-white dark:bg-[#303030] border border-[#4c4c4c] dark:border-[#4c4c4c] p-1 rounded-lg mx-[15px]">
-            <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-1 px-4 rounded-md text-sm font-medium transition-colors focus:outline-none">
-                <svg class="w-4 h-4 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
-                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
-                </svg>
-                Leaderboard
-            </button>
-            <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-1 px-4 rounded-md text-sm font-medium transition-colors focus:outline-none bg-black dark:bg-white text-white dark:text-black">
-                <svg class="w-4 h-4 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
-                </svg>
-                POD
-            </button>
-            <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-1 px-4 rounded-md text-sm font-medium transition-colors focus:outline-none">
-                <svg class="w-4 h-4 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                </svg>
-                Tutorial
-            </button>
+    <!-- Unified Tab Container -->
+    <div class="fixed top-28 bottom-40 left-0 right-0 px-1 py-4">
+        <div class="max-w-7xl mx-auto mx-[15px] h-full">
+            <!-- Tab Navigation -->
+            <div class="bg-white dark:bg-[#303030] border border-[#4c4c4c] dark:border-[#4c4c4c] rounded-t-lg">
+                <div class="flex space-x-1 p-1">
+                    <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-1 px-4 rounded-md text-sm font-medium transition-colors focus:outline-none">
+                        <svg class="w-4 h-4 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
+                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+                        </svg>
+                        Leaderboard
+                    </button>
+                    <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-1 px-4 rounded-md text-sm font-medium transition-colors focus:outline-none bg-black dark:bg-white text-white dark:text-black">
+                        <svg class="w-4 h-4 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                        </svg>
+                        POD
+                    </button>
+                    <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-1 px-4 rounded-md text-sm font-medium transition-colors focus:outline-none">
+                        <svg class="w-4 h-4 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                        Tutorial
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Content Container -->
-    <div class="fixed top-40 bottom-32 left-0 right-0 px-1 py-4">
-        <div class="max-w-7xl mx-auto bg-white dark:bg-[#303030] border border-[#4c4c4c] dark:border-[#4c4c4c] rounded-lg mx-[15px] h-full overflow-hidden">
-            <!-- Main Content -->
-            <main class="h-full overflow-y-auto p-6">
+            
+            <!-- Content Container -->
+            <div class="bg-white dark:bg-[#303030] border-l border-r border-b border-[#4c4c4c] dark:border-[#4c4c4c] rounded-b-lg h-full overflow-hidden">
+                <!-- Main Content -->
+                <main class="h-full overflow-y-auto p-6">
         <!-- Tab Content -->
         <div id="content-leaderboard" class="tab-content hidden">
             <div class="bg-white dark:bg-[#202020] rounded-xl shadow-sm border border-black dark:border-white p-6">
@@ -377,8 +377,9 @@
                     </div>
                 </div>
             </div>
+                </div>
+                </main>
             </div>
-            </main>
         </div>
     </div>
 
@@ -562,5 +563,5 @@
         // Initialize with POD tab active
         switchTab('pod');
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a4655541fceeb7',t:'MTc1NzA2MTM1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a46c57c22eeeb7',t:'MTc1NzA2MTY0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
