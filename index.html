@@ -49,8 +49,8 @@
     </style>
 </head>
 <body class="min-h-screen text-white">
-    <!-- Top Section - 5% -->
-    <div class="flex items-center justify-between max-w-md mx-auto px-4" style="height: 5vh;">
+    <!-- Top Section - 2.5% -->
+    <div class="flex items-center justify-between max-w-md mx-auto px-4" style="height: 2.5vh;">
         <!-- Logo and Title -->
         <div class="flex items-center space-x-3">
             <div class="relative">
@@ -76,9 +76,9 @@
         </div>
     </div>
 
-    <!-- Slogan Section - 5% -->
-    <div class="flex items-center justify-center max-w-md mx-auto px-4" style="height: 5vh;">
-        <p id="slogan" class="text-sm text-gray-300 font-medium text-center"></p>
+    <!-- Slogan Section - 7.5% -->
+    <div class="flex items-center max-w-md mx-auto px-4" style="height: 7.5vh;">
+        <p id="slogan" class="text-xs text-gray-300 font-medium"></p>
     </div>
 
     <!-- Tabs Container Section - 75% -->
@@ -369,9 +369,9 @@
     </main>
 
     <!-- Bottom Navigation Section - 15% -->
-    <div class="flex items-center justify-center max-w-md mx-auto px-4" style="height: 15vh;">
-        <div class="bg-[#353535] border border-[#6e6e6e] rounded-xl px-4 py-2 w-full">
-            <div class="flex items-center justify-around">
+    <div class="max-w-md mx-auto px-4" style="height: 15vh;">
+        <div class="bg-[#353535] border border-[#6e6e6e] rounded-xl px-4 py-2 w-full h-full flex items-center">
+            <div class="flex items-center justify-around w-full">
                 <button onclick="openPage('gallery')" class="flex flex-col items-center space-y-1 p-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
@@ -451,22 +451,13 @@
                     currentCharIndex++;
                     setTimeout(typeSlogan, 50); // Typing speed
                 } else {
-                    // Finished typing, wait then start erasing
+                    // Finished typing, wait then clear and start next slogan
                     setTimeout(() => {
-                        isTyping = false;
-                        typeSlogan();
-                    }, 3000); // Wait 3 seconds before erasing
-                }
-            } else {
-                if (currentCharIndex > 0) {
-                    sloganElement.textContent = currentSlogan.substring(0, currentCharIndex - 1);
-                    currentCharIndex--;
-                    setTimeout(typeSlogan, 30); // Erasing speed (faster)
-                } else {
-                    // Finished erasing, move to next slogan
-                    currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
-                    isTyping = true;
-                    setTimeout(typeSlogan, 500); // Brief pause before next slogan
+                        sloganElement.textContent = '';
+                        currentCharIndex = 0;
+                        currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+                        setTimeout(typeSlogan, 500); // Brief pause before next slogan
+                    }, 3000); // Wait 3 seconds before clearing
                 }
             }
         }
@@ -553,5 +544,5 @@
 
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acae9ce7e77aa7',t:'MTc1NzE0ODI0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acb5a2f55b7aa7',t:'MTc1NzE0ODUyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
