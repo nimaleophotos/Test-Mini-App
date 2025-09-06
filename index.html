@@ -79,6 +79,500 @@
     </div>
 
     <!-- Main Content -->
+    <main class="max-w-md mx-auto pb-5">
+        <!-- Unified Tab and Content Container -->
+        <div class="mx-4 mt-4 mb-1 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden" style="height: calc(100vh - 135px);">
+            <!-- Tab Navigation -->
+            <nav class="border-b border-[#6e6e6e]">
+                <div class="flex">
+                    <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
+                        Leaderboard
+                    </button>
+                    <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-4 text-center text-sm font-medium tab-active">
+                        POD
+                    </button>
+                    <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
+                        Tutorial
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <div class="h-full overflow-y-auto p-4" style="height: calc(100% - 64px);">
+                <!-- Leaderboard Tab -->
+                <div id="content-leaderboard" class="hidden">
+                    <h2 class="text-xl font-bold mb-4">Top 100 Photographers</h2>
+                    <div class="space-y-2">
+                        <div class="leaderboard-item current-user rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-yellow-400 font-bold">#47</span>
+                                <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                <div>
+                                    <p class="font-medium">You</p>
+                                    <p class="text-xs text-gray-400">2,340 $LENS</p>
+                                </div>
+                            </div>
+                            <span class="text-green-400 text-sm">↗ +3</span>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-yellow-400 font-bold">#1</span>
+                                <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                <div>
+                                    <p class="font-medium">Alex Chen</p>
+                                    <p class="text-xs text-gray-400">15,890 $LENS</p>
+                                </div>
+                            </div>
+                            <span class="text-green-400 text-sm">↗ +1</span>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-gray-400 font-bold">#2</span>
+                                <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                <div>
+                                    <p class="font-medium">Maria Santos</p>
+                                    <p class="text-xs text-gray-400">14,230 $LENS</p>
+                                </div>
+                            </div>
+                            <span class="text-red-400 text-sm">↘ -1</span>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-orange-400 font-bold">#3</span>
+                                <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                <div>
+                                    <p class="font-medium">David Kim</p>
+                                    <p class="text-xs text-gray-400">12,567 $LENS</p>
+                                </div>
+                            </div>
+                            <span class="text-gray-400 text-sm">—</span>
+                        </div>
+                        
+                        <!-- Additional leaderboard entries for scrolling -->
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-gray-400 font-bold">#4</span>
+                                <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                <div>
+                                    <p class="font-medium">Emma Wilson</p>
+                                    <p class="text-xs text-gray-400">11,234 $LENS</p>
+                                </div>
+                            </div>
+                            <span class="text-green-400 text-sm">↗ +2</span>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-gray-400 font-bold">#5</span>
+                                <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                <div>
+                                    <p class="font-medium">James Rodriguez</p>
+                                    <p class="text-xs text-gray-400">10,890 $LENS</p>
+                                </div>
+                            </div>
+                            <span class="text-red-400 text-sm">↘ -1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POD Tab (Default) -->
+                <div id="content-pod">
+                    <h2 class="text-xl font-bold mb-4">Picture of the Day</h2>
+                    
+                    <!-- Featured Photo -->
+                    <div class="leaderboard-item rounded-lg p-4 mb-4">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-10 h-10 bg-gray-600 rounded-full"></div>
+                            <div>
+                                <p class="font-medium">Sarah Mitchell</p>
+                                <p class="text-xs text-gray-400">Today's Winner</p>
+                            </div>
+                            <div class="ml-auto text-right">
+                                <p class="text-sm font-bold text-green-400">+500 $LENS</p>
+                                <p class="text-xs text-gray-400">Reward</p>
+                            </div>
+                        </div>
+                        <div class="aspect-square bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold mb-1">Urban Reflections</h3>
+                        <p class="text-xs text-gray-400">A stunning capture of city lights reflecting on wet pavement after rain.</p>
+                    </div>
+
+                    <h3 class="text-lg font-bold mb-3">Spotlight Spots</h3>
+                    <div class="space-y-2">
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Golden Hour Bridge</p>
+                                    <p class="text-xs text-gray-400">Premium Location</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-green-400">50 $LENS</p>
+                                <button class="bg-white text-black text-xs px-3 py-1 rounded font-medium mt-1">Buy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">City Skyline View</p>
+                                    <p class="text-xs text-gray-400">You own this spot</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-gray-400">Owned</p>
+                                <button class="bg-gray-600 text-gray-400 text-xs px-3 py-1 rounded font-medium mt-1" disabled>Owned</button>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Sunset Beach</p>
+                                    <p class="text-xs text-gray-400">Popular Spot</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-yellow-400">75 $LENS</p>
+                                <button class="bg-white text-black text-xs px-3 py-1 rounded font-medium mt-1">Buy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Mountain Peak</p>
+                                    <p class="text-xs text-gray-400">Exclusive Location</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-blue-400">100 $LENS</p>
+                                <button class="bg-white text-black text-xs px-3 py-1 rounded font-medium mt-1">Buy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item rounded-lg p-3 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Forest Trail</p>
+                                    <p class="text-xs text-gray-400">Nature Spot</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-purple-400">150 $LENS</p>
+                                <button class="bg-white text-black text-xs px-3 py-1 rounded font-medium mt-1">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutorial Tab -->
+                <div id="content-tutorial" class="hidden space-y-4">
+                    <h2 class="text-xl font-bold mb-4">Photography Tutorials</h2>
+                    
+                    <div class="tutorial-box rounded-xl p-4 cursor-pointer hover:bg-gray-800 transition-colors" onclick="openTutorial('composition')">
+                        <h3 class="font-semibold mb-2">📐 Composition Basics</h3>
+                        <p class="text-sm text-gray-400 mb-3">Learn the rule of thirds, leading lines, and framing techniques.</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Practice rule of thirds with 5 photos</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Find 3 examples of leading lines</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-box rounded-xl p-4 cursor-pointer hover:bg-gray-800 transition-colors" onclick="openTutorial('lighting')">
+                        <h3 class="font-semibold mb-2">💡 Lighting Mastery</h3>
+                        <p class="text-sm text-gray-400 mb-3">Master natural and artificial lighting for stunning photos.</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Shoot during golden hour</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Practice backlighting techniques</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-box rounded-xl p-4 cursor-pointer hover:bg-gray-800 transition-colors" onclick="openTutorial('editing')">
+                        <h3 class="font-semibold mb-2">✨ Post-Processing</h3>
+                        <p class="text-sm text-gray-400 mb-3">Enhance your photos with professional editing techniques.</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Learn basic color correction</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Master exposure adjustments</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-box rounded-xl p-4 cursor-pointer hover:bg-gray-800 transition-colors" onclick="openTutorial('portrait')">
+                        <h3 class="font-semibold mb-2">👤 Portrait Photography</h3>
+                        <p class="text-sm text-gray-400 mb-3">Capture stunning portraits with professional techniques.</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Master depth of field control</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs">
+                                <input type="checkbox" class="rounded">
+                                <span>Learn posing techniques</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 p-4">
+        <div class="max-w-md mx-auto bg-[#353535] border border-[#6e6e6e] rounded-xl px-4 py-2">
+            <div class="flex items-center justify-around">
+                <button onclick="openPage('gallery')" class="flex flex-col items-center space-y-1 p-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-xs">Gallery</span>
+                </button>
+                
+                <button onclick="openPage('contest')" class="flex flex-col items-center space-y-1 p-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-xs">Contest</span>
+                </button>
+                
+                <button onclick="openCamera()" class="camera-btn flex flex-col items-center space-y-1 p-3 bg-white text-black rounded-full">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.414-1.414A1 1 0 0011.586 3H8.414a1 1 0 00-.707.293L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+                
+                <button onclick="openPage('rewards')" class="flex flex-col items-center space-y-1 p-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-xs">Rewards</span>
+                </button>
+                
+                <button onclick="openPage('info')" class="flex flex-col items-center space-y-1 p-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-xs">Info</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isDarkMode = true;
+
+        function switchTab(tabName) {
+            // Hide all content
+            document.getElementById('content-leaderboard').classList.add('hidden');
+            document.getElementById('content-pod').classList.add('hidden');
+            document.getElementById('content-tutorial').classList.add('hidden');
+            
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            
+            // Update tab styles
+            document.getElementById('tab-leaderboard').className = 'flex-1 py-4 text-center text-sm font-medium tab-inactive';
+            document.getElementById('tab-pod').className = 'flex-1 py-4 text-center text-sm font-medium tab-inactive';
+            document.getElementById('tab-tutorial').className = 'flex-1 py-4 text-center text-sm font-medium tab-inactive';
+            
+            document.getElementById('tab-' + tabName).className = 'flex-1 py-4 text-center text-sm font-medium tab-active';
+        }
+
+        function toggleTheme() {
+            const toggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            isDarkMode = !isDarkMode;
+            
+            if (isDarkMode) {
+                toggle.style.transform = 'translateX(0)';
+                body.className = body.className.replace('light-mode', 'dark-mode');
+            } else {
+                toggle.style.transform = 'translateX(24px)';
+                body.className = body.className.replace('dark-mode', 'light-mode');
+            }
+        }
+
+        function connectWallet() {
+            alert('🔗 Wallet connection feature coming soon! This will integrate with popular crypto wallets to manage your $LENS tokens.');
+        }
+
+        function openCamera() {
+            // Attempt to access device camera
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        alert('📸 Camera access granted! In the full app, this would open your device camera for taking photos.');
+                        // Stop the stream since we're just demonstrating
+                        stream.getTracks().forEach(track => track.stop());
+                    })
+                    .catch(function(error) {
+                        alert('📱 Camera access not available in this demo. In the full app, this would open your device camera!');
+                    });
+            } else {
+                alert('📱 Camera access not available in this demo. In the full app, this would open your device camera!');
+            }
+        }
+
+        function openPage(pageName) {
+            const pageNames = {
+                'gallery': 'LENS Gallery - Browse and showcase your photography collection',
+                'contest': 'Photography Contest - Compete with other photographers for $LENS rewards',
+                'rewards': 'Rewards Center - Claim your $LENS tokens and view earning opportunities',
+                'info': 'App Info - Learn more about LENS App and $LENS tokenomics'
+            };
+            
+            alert(`🚀 Opening ${pageNames[pageName]}. This would navigate to a new page in the full app!`);
+        }
+
+        function openTutorial(tutorialType) {
+            const tutorials = {
+                'composition': 'Composition Basics Tutorial - Interactive lessons on photography composition',
+                'lighting': 'Lighting Mastery Course - Learn professional lighting techniques',
+                'editing': 'Post-Processing Workshop - Master photo editing skills'
+            };
+            
+            alert(`📚 Opening ${tutorials[tutorialType]}. This would launch an interactive tutorial in the full app!`);
+        }
+
+        // Initialize with POD tab active
+        document.addEventListener('DOMContentLoaded', function() {
+            switchTab('pod');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac9b9905987aa7',t:'MTc1NzE0NzQ2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENS App - Photography & $LENS Token</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+        }
+        .lens-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
+        }
+        .dark-mode {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+        }
+        .light-mode {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+        .tab-active {
+            border-bottom: 2px solid #ffffff;
+            color: #ffffff;
+        }
+        .tab-inactive {
+            color: #888888;
+        }
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .camera-btn {
+            transform: scale(1.2);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+        .tutorial-box {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border: 1px solid #333;
+        }
+        .leaderboard-item {
+            background: linear-gradient(90deg, #1f1f1f 0%, #2a2a2a 100%);
+        }
+        .current-user {
+            background: linear-gradient(90deg, #333 0%, #444 100%);
+            border: 1px solid #666;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <!-- Top Controls -->
+    <div class="sticky top-0 z-50 px-4 py-3">
+        <div class="flex items-center justify-between max-w-md mx-auto">
+            <!-- Logo and Title -->
+            <div class="flex items-center space-x-3">
+                <div class="relative">
+                    <!-- Custom Lens Logo -->
+                    <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
+                        <div class="w-4 h-4 rounded-full border border-white"></div>
+                    </div>
+                </div>
+                <h1 class="text-lg font-bold tracking-wide">LENS APP</h1>
+            </div>
+            
+            <!-- Right Controls -->
+            <div class="flex items-center space-x-3">
+                <!-- Light/Dark Toggle -->
+                <div class="flex items-center bg-gray-800 rounded-full p-1">
+                    <button id="themeToggle" class="w-6 h-6 bg-white rounded-full transition-transform duration-200 transform translate-x-0" onclick="toggleTheme()"></button>
+                </div>
+                
+                <!-- Connect Wallet Button -->
+                <button onclick="connectWallet()" class="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <main class="max-w-md mx-auto pb-20">
         <!-- Unified Tab and Content Container -->
         <div class="mx-4 mt-4 mb-1 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden" style="height: calc(100vh - 200px);">
