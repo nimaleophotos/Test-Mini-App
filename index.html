@@ -38,18 +38,18 @@
         }
         
         .slogan-container {
-            height: 60px;
+            height: 40px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
         
         .slogan-text {
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 300;
             color: white;
-            text-align: center;
-            min-height: 2rem;
+            text-align: left;
+            min-height: 1.5rem;
         }
         
         .letter {
@@ -141,9 +141,10 @@
     </style>
 </head>
 <body class="min-h-screen text-white">
-    <div class="container mx-auto px-4 py-6 max-w-4xl">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-8">
+    <!-- Fixed Header -->
+    <div class="fixed top-0 left-0 right-0 bg-black border-b border-gray-700 z-50">
+        <div class="container mx-auto px-4 py-4 max-w-4xl">
+            <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="lens-icon">
                     <div class="lens-outer"></div>
@@ -164,6 +165,11 @@
                 </button>
             </div>
         </div>
+        </div>
+    </div>
+    
+    <!-- Main Content Container -->
+    <div class="container mx-auto px-4 max-w-4xl" style="padding-top: 100px; padding-bottom: 120px;">
         
         <!-- Animated Slogan -->
         <div class="slogan-container mb-8">
@@ -171,7 +177,7 @@
         </div>
         
         <!-- Main Content Box -->
-        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 mb-8">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 mb-8" style="height: calc(100vh - 280px);">
             <!-- Tabs -->
             <div class="flex space-x-1 mb-6 bg-gray-800 p-1 rounded-xl">
                 <button id="tab-leaderboard" class="flex-1 py-3 px-4 rounded-lg font-medium transition-all tab-active">
@@ -186,9 +192,9 @@
             </div>
             
             <!-- Tab Content -->
-            <div id="content-leaderboard" class="tab-content">
+            <div id="content-leaderboard" class="tab-content overflow-y-auto" style="height: calc(100% - 80px);">
                 <h3 class="text-lg font-semibold mb-4">Top 100 Users</h3>
-                <div class="space-y-2 max-h-96 overflow-y-auto">
+                <div class="space-y-2">
                     <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <span class="text-white font-bold">#1</span>
@@ -216,7 +222,7 @@
                 </div>
             </div>
             
-            <div id="content-pod" class="tab-content hidden">
+            <div id="content-pod" class="tab-content hidden overflow-y-auto" style="height: calc(100% - 80px);">
                 <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
                 <div class="bg-gray-800 rounded-xl p-4 mb-6">
                     <div class="aspect-video bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
@@ -257,7 +263,7 @@
                 </div>
             </div>
             
-            <div id="content-tutorial" class="tab-content hidden">
+            <div id="content-tutorial" class="tab-content hidden overflow-y-auto" style="height: calc(100% - 80px);">
                 <h3 class="text-lg font-semibold mb-4">Educational Content</h3>
                 <div class="space-y-4">
                     <div class="bg-gray-800 p-4 rounded-xl">
@@ -276,8 +282,12 @@
             </div>
         </div>
         
-        <!-- Bottom Navigation -->
-        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-4">
+    </div>
+    
+    <!-- Fixed Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 bg-black border-t border-gray-700 z-50">
+        <div class="container mx-auto px-4 py-4 max-w-4xl">
+            <div class="bg-gray-900 border border-gray-700 rounded-2xl p-4">
             <div class="flex items-center justify-between">
                 <button class="nav-button flex flex-col items-center space-y-1 px-4 py-2 rounded-xl">
                     <span class="text-lg">🖼️</span>
@@ -304,6 +314,11 @@
                 </button>
             </div>
         </div>
+        </div>
+    </div>
+    
+    <!-- Main Content Container -->
+    <div class="container mx-auto px-4 max-w-4xl" style="padding-top: 100px; padding-bottom: 120px;">
     </div>
 
     <script>
@@ -405,5 +420,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acda08d7aa7aa7',t:'MTc1NzE1MDAyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acdd1ba1e897c7',t:'MTc1NzE1MDE0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
