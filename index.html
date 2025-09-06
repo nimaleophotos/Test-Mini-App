@@ -23,56 +23,12 @@
     </script>
 </head>
 <body class="bg-white dark:bg-[#202020] text-black dark:text-white transition-colors duration-300 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white dark:bg-[#202020] shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo and Title -->
-                <div class="flex items-center -ml-2">
-                    <div class="w-12 h-12 bg-transparent rounded-full flex items-center justify-center relative">
-                        <svg class="w-9 h-9 text-[#e7e8e9]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
-                            <!-- Outer circle -->
-                            <circle cx="12" cy="12" r="9"/>
-                            <!-- Inner circle -->
-                            <circle cx="12" cy="12" r="4"/>
-                        </svg>
-                    </div>
-                    <h1 class="text-xl font-bold text-[#e7e8e9] dark:text-[#e7e8e9] -ml-1">LENS APP</h1>
-                </div>
-                
-                <!-- Controls -->
-                <div class="flex items-center space-x-2">
-                    <!-- Dark Mode Toggle -->
-                    <button id="darkModeToggle" class="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500 dark:bg-[#353535] border border-[#6e6e6e] dark:border-[#6e6e6e] transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                        <span class="sr-only">Toggle dark mode</span>
-                        <svg class="w-4 h-4 text-white hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
-                        </svg>
-                        <svg class="w-4 h-4 text-white dark:hidden" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                        </svg>
-                    </button>
-                    
-                    <!-- Connect Wallet Button -->
-                    <button onclick="openPage('wallet')" class="bg-gray-500 hover:bg-gray-600 dark:bg-[#353535] dark:hover:bg-gray-600 text-white dark:text-white px-3 py-1.5 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 border border-[#6e6e6e] dark:border-[#6e6e6e]">
-                        Connect Wallet
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <!-- Animated Slogan -->
-    <div class="bg-white dark:bg-[#202020] py-1 fixed top-[64px] left-0 right-0 z-40">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-            <div id="slogan" class="text-xs text-black dark:text-[#b3b6c1] font-medium h-4 overflow-hidden ml-[6px]">
-                <span id="sloganText"></span>
-            </div>
-        </div>
-    </div>
+
+
 
     <!-- Unified Tab Container -->
-    <div class="fixed top-[80px] bottom-32 left-[20px] right-[20px] py-4">
+    <div class="fixed top-4 bottom-32 left-[20px] right-[20px] py-4">
         <div class="max-w-7xl mx-auto h-full">
             <!-- Tab Navigation -->
             <div class="bg-white dark:bg-[#303030] border border-[#4c4c4c] dark:border-[#4c4c4c] rounded-t-lg">
@@ -386,6 +342,42 @@
     <!-- Footer Navigation -->
     <footer class="fixed bottom-4 left-[20px] right-[20px] py-4">
         <div class="bg-[#303030] dark:bg-[#303030] border border-[#4c4c4c] dark:border-[#4c4c4c] rounded-2xl">
+            <!-- Header Section in Footer -->
+            <div class="flex items-center justify-between px-4 py-2 border-b border-[#4c4c4c]">
+                <!-- Logo and Title -->
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-transparent rounded-full flex items-center justify-center relative">
+                        <svg class="w-6 h-6 text-[#e7e8e9]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                            <!-- Outer circle -->
+                            <circle cx="12" cy="12" r="9"/>
+                            <!-- Inner circle -->
+                            <circle cx="12" cy="12" r="4"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-sm font-bold text-[#e7e8e9] dark:text-[#e7e8e9] ml-1">LENS APP</h1>
+                </div>
+                
+                <!-- Controls -->
+                <div class="flex items-center space-x-2">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="relative inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-500 dark:bg-[#353535] border border-[#6e6e6e] dark:border-[#6e6e6e] transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                        <span class="sr-only">Toggle dark mode</span>
+                        <svg class="w-3 h-3 text-white hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                        </svg>
+                        <svg class="w-3 h-3 text-white dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Connect Wallet Button -->
+                    <button onclick="openPage('wallet')" class="bg-gray-500 hover:bg-gray-600 dark:bg-[#353535] dark:hover:bg-gray-600 text-white dark:text-white px-2 py-1 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 border border-[#6e6e6e] dark:border-[#6e6e6e]">
+                        Connect
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Navigation Icons -->
             <div class="flex items-center justify-around py-1">
                 <button onclick="openPage('gallery')" class="flex flex-col items-center space-y-1 p-2 text-white dark:text-white hover:text-gray-200 dark:hover:text-gray-200 transition-colors">
                     <svg class="w-5 h-5" fill="#d7d7d6" viewBox="0 0 20 20">
@@ -589,5 +581,5 @@
         // Initialize with POD tab active
         switchTab('pod');
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac4b67f0881cb1',t:'MTc1NzE0NDE3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac4ecdf2cb1cb1',t:'MTc1NzE0NDMxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
