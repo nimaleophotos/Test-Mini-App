@@ -53,14 +53,20 @@
     <div class="sticky top-0 z-50 px-4 py-3">
         <div class="flex items-center justify-between max-w-md mx-auto">
             <!-- Logo and Title -->
-            <div class="flex items-center space-x-3">
-                <div class="relative">
-                    <!-- Custom Lens Logo -->
-                    <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
-                        <div class="w-4 h-4 rounded-full border border-white"></div>
+            <div class="flex flex-col items-start">
+                <div class="flex items-center space-x-3 mb-1">
+                    <div class="relative">
+                        <!-- Custom Lens Logo -->
+                        <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
+                            <div class="w-4 h-4 rounded-full border border-white"></div>
+                        </div>
                     </div>
+                    <h1 class="text-lg font-bold tracking-wide">LENS APP</h1>
                 </div>
-                <h1 class="text-lg font-bold tracking-wide">LENS APP</h1>
+                <!-- Animated Slogan -->
+                <div class="ml-11 h-4">
+                    <p id="slogan" class="text-xs text-gray-300 font-medium"></p>
+                </div>
             </div>
             
             <!-- Right Controls -->
@@ -81,7 +87,7 @@
     <!-- Main Content -->
     <main class="max-w-md mx-auto pb-20">
         <!-- Unified Tab and Content Container -->
-        <div class="mx-4 mt-4 mb-1 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden" style="height: calc(100vh - 200px);">
+        <div class="mx-4 mt-8 mb-1 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden" style="height: calc(100vh - 240px);">
             <!-- Tab Navigation -->
             <nav class="border-b border-[#6e6e6e]">
                 <div class="flex">
@@ -410,6 +416,70 @@
 
     <script>
         let isDarkMode = true;
+        
+        // Slogan animation
+        const slogans = [
+            "Photography comes alive through $LENS.",
+            "$LENS is where photographers find focus.",
+            "Through $LENS, every photo tells a story.",
+            "$LENS connects those who see the world differently.",
+            "Behind every great shot is a $LENS.",
+            "$LENS celebrates the art of photography.",
+            "Discover photography's beauty through $LENS.",
+            "$LENS brings photographers into focus.",
+            "Capture creativity together with $LENS.",
+            "$LENS is the home of visual storytellers.",
+            "Photography thrives through $LENS.",
+            "$LENS frames the vision of a community.",
+            "Share your perspective through $LENS.",
+            "$LENS is where photography meets community.",
+            "Through $LENS, we celebrate every frame.",
+            "$LENS inspires photographers to see more.",
+            "In every shot, $LENS finds meaning.",
+            "$LENS brings light to photographers everywhere.",
+            "Through $LENS, art finds its audience.",
+            "$LENS unites photographers with purpose."
+        ];
+        
+        let currentSloganIndex = 0;
+        let currentCharIndex = 0;
+        let isTyping = true;
+        
+        function typeSlogan() {
+            const sloganElement = document.getElementById('slogan');
+            const currentSlogan = slogans[currentSloganIndex];
+            
+            if (isTyping) {
+                if (currentCharIndex < currentSlogan.length) {
+                    sloganElement.textContent = currentSlogan.substring(0, currentCharIndex + 1);
+                    currentCharIndex++;
+                    setTimeout(typeSlogan, 50); // Typing speed
+                } else {
+                    // Finished typing, wait then start erasing
+                    setTimeout(() => {
+                        isTyping = false;
+                        typeSlogan();
+                    }, 3000); // Wait 3 seconds before erasing
+                }
+            } else {
+                if (currentCharIndex > 0) {
+                    sloganElement.textContent = currentSlogan.substring(0, currentCharIndex - 1);
+                    currentCharIndex--;
+                    setTimeout(typeSlogan, 30); // Erasing speed (faster)
+                } else {
+                    // Finished erasing, move to next slogan
+                    currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+                    isTyping = true;
+                    setTimeout(typeSlogan, 500); // Brief pause before next slogan
+                }
+            }
+        }
+        
+        // Start slogan animation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            typeSlogan();
+            switchTab('pod');
+        });
 
         function switchTab(tabName) {
             // Hide all content
@@ -485,10 +555,7 @@
             alert(`📚 Opening ${tutorials[tutorialType]}. This would launch an interactive tutorial in the full app!`);
         }
 
-        // Initialize with POD tab active
-        document.addEventListener('DOMContentLoaded', function() {
-            switchTab('pod');
-        });
+
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac9e48717a7aa7',t:'MTc1NzE0NzU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aca3f9b3b77aa7',t:'MTc1NzE0NzgwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
