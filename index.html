@@ -81,16 +81,18 @@
     <!-- Main Content -->
     <main class="max-w-md mx-auto pb-20">
         <!-- Tab Navigation -->
-        <nav class="flex border-b border-gray-800 px-4">
-            <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
-                Leaderboard
-            </button>
-            <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-4 text-center text-sm font-medium tab-active">
-                POD
-            </button>
-            <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
-                Tutorial
-            </button>
+        <nav class="mx-4 mt-4 mb-0 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden">
+            <div class="flex">
+                <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
+                    Leaderboard
+                </button>
+                <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-4 text-center text-sm font-medium tab-active">
+                    POD
+                </button>
+                <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
+                    Tutorial
+                </button>
+            </div>
         </nav>
 
         <!-- Tab Content -->
@@ -304,8 +306,8 @@
     </main>
 
     <!-- Footer Navigation -->
-    <footer class="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800">
-        <div class="max-w-md mx-auto px-4 py-2">
+    <footer class="fixed bottom-0 left-0 right-0 p-4">
+        <div class="max-w-md mx-auto bg-[#353535] border border-[#6e6e6e] rounded-xl px-4 py-2">
             <div class="flex items-center justify-around">
                 <button onclick="openPage('gallery')" class="flex flex-col items-center space-y-1 p-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -427,5 +429,5 @@
             switchTab('pod');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac686f62e3669a',t:'MTc1NzE0NTM2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac7761a109669a',t:'MTc1NzE0NTk3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
