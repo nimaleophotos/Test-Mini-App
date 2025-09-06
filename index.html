@@ -49,45 +49,41 @@
     </style>
 </head>
 <body class="min-h-screen text-white">
-    <!-- Top Controls -->
-    <div class="sticky top-0 z-50 px-4 py-3">
-        <div class="flex items-center justify-between max-w-md mx-auto">
-            <!-- Logo and Title -->
-            <div class="flex flex-col items-start">
-                <div class="flex items-center space-x-3 mb-1">
-                    <div class="relative">
-                        <!-- Custom Lens Logo -->
-                        <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
-                            <div class="w-4 h-4 rounded-full border border-white"></div>
-                        </div>
-                    </div>
-                    <h1 class="text-lg font-bold tracking-wide">LENS APP</h1>
+    <!-- Top Section - 15% -->
+    <div class="flex items-center justify-between max-w-md mx-auto px-4" style="height: 15vh;">
+        <!-- Logo and Title -->
+        <div class="flex items-center space-x-3">
+            <div class="relative">
+                <!-- Custom Lens Logo -->
+                <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
+                    <div class="w-4 h-4 rounded-full border border-white"></div>
                 </div>
-                <!-- Animated Slogan -->
-                <div class="ml-11 h-4">
-                    <p id="slogan" class="text-xs text-gray-300 font-medium"></p>
-                </div>
+            </div>
+            <h1 class="text-lg font-bold tracking-wide">LENS APP</h1>
+        </div>
+        
+        <!-- Right Controls -->
+        <div class="flex items-center space-x-3">
+            <!-- Light/Dark Toggle -->
+            <div class="flex items-center bg-gray-800 rounded-full p-1">
+                <button id="themeToggle" class="w-6 h-6 bg-white rounded-full transition-transform duration-200 transform translate-x-0" onclick="toggleTheme()"></button>
             </div>
             
-            <!-- Right Controls -->
-            <div class="flex items-center space-x-3">
-                <!-- Light/Dark Toggle -->
-                <div class="flex items-center bg-gray-800 rounded-full p-1">
-                    <button id="themeToggle" class="w-6 h-6 bg-white rounded-full transition-transform duration-200 transform translate-x-0" onclick="toggleTheme()"></button>
-                </div>
-                
-                <!-- Connect Wallet Button -->
-                <button onclick="connectWallet()" class="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                    Connect Wallet
-                </button>
-            </div>
+            <!-- Connect Wallet Button -->
+            <button onclick="connectWallet()" class="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                Connect Wallet
+            </button>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-md mx-auto pb-20">
-        <!-- Unified Tab and Content Container -->
-        <div class="mx-4 mt-8 mb-1 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden" style="height: calc(100vh - 240px);">
+    <!-- Slogan Section - 10% -->
+    <div class="flex items-center justify-center max-w-md mx-auto px-4" style="height: 10vh;">
+        <p id="slogan" class="text-sm text-gray-300 font-medium text-center"></p>
+    </div>
+
+    <!-- Tabs Container Section - 60% -->
+    <div class="max-w-md mx-auto px-4" style="height: 60vh;">
+        <div class="bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden h-full">
             <!-- Tab Navigation -->
             <nav class="border-b border-[#6e6e6e]">
                 <div class="flex">
@@ -372,9 +368,9 @@
         </div>
     </main>
 
-    <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 p-4">
-        <div class="max-w-md mx-auto bg-[#353535] border border-[#6e6e6e] rounded-xl px-4 py-2">
+    <!-- Bottom Navigation Section - 15% -->
+    <div class="flex items-center justify-center max-w-md mx-auto px-4" style="height: 15vh;">
+        <div class="bg-[#353535] border border-[#6e6e6e] rounded-xl px-4 py-2 w-full">
             <div class="flex items-center justify-around">
                 <button onclick="openPage('gallery')" class="flex flex-col items-center space-y-1 p-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -557,5 +553,5 @@
 
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aca3f9b3b77aa7',t:'MTc1NzE0NzgwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acaa6ac04e7aa7',t:'MTc1NzE0ODA2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
