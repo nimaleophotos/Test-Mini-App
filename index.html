@@ -10,13 +10,11 @@
         body { font-family: 'Inter', sans-serif; }
         
         .tab-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            display: none;
         }
         
         .tab-content.active {
-            max-height: 500px;
+            display: block;
         }
         
         .nav-item {
@@ -55,48 +53,53 @@
     </style>
 </head>
 <body class="bg-black text-white min-h-screen">
-    <!-- Header -->
-    <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+    <!-- HEADER SECTION -->
+    <header class="fixed top-0 left-0 right-0 z-50 py-6 bg-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
                         <span class="text-2xl text-black">📷</span>
                     </div>
-                    <h1 class="text-2xl font-bold gradient-text">LENS APP</h1>
+                    <div>
+                        <h1 class="text-3xl font-bold gradient-text">LENS APP</h1>
+                        <p class="text-sm text-gray-400 -mt-1">Capture. Create. Compete.</p>
+                    </div>
                 </div>
                 
                 <!-- Connect Wallet Button -->
-                <button id="connectWallet" class="wallet-btn text-black px-6 py-2 rounded-lg font-semibold text-sm">
+                <button id="connectWallet" class="wallet-btn text-black px-6 py-3 rounded-lg font-semibold text-sm">
                     Connect Wallet
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Tabs -->
-    <div class="bg-gray-900 border-b border-gray-800 sticky top-16 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center space-x-2 sm:space-x-4 py-4 overflow-x-auto">
-                <button class="tab-btn bg-white text-black px-4 sm:px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors whitespace-nowrap flex-shrink-0" data-tab="leaderboard">
-                    📊 Leaderboard
-                </button>
-                <button class="tab-btn bg-gray-800 text-white px-4 sm:px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors whitespace-nowrap flex-shrink-0" data-tab="pod">
-                    ⭐ Picture of the Day
-                </button>
-                <button class="tab-btn bg-gray-800 text-white px-4 sm:px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors whitespace-nowrap flex-shrink-0" data-tab="tutorial">
-                    🎓 Tutorial
-                </button>
+    <!-- BODY SECTION -->
+    <main class="fixed top-24 bottom-32 left-0 right-0 flex flex-col">
+        <!-- Main Tabs -->
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl mx-4 sm:mx-6 lg:mx-8 mb-4 flex-shrink-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-center space-x-2 sm:space-x-4 py-6 overflow-x-auto">
+                    <button class="tab-btn bg-white text-black px-4 sm:px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors whitespace-nowrap flex-shrink-0" data-tab="leaderboard">
+                        📊 Leaderboard
+                    </button>
+                    <button class="tab-btn bg-gray-800 text-white px-4 sm:px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors whitespace-nowrap flex-shrink-0" data-tab="pod">
+                        ⭐ Picture of the Day
+                    </button>
+                    <button class="tab-btn bg-gray-800 text-white px-4 sm:px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors whitespace-nowrap flex-shrink-0" data-tab="tutorial">
+                        🎓 Tutorial
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24">
+        <!-- Content Area -->
+        <div class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
         <!-- Hero Section -->
         <div class="text-center mb-12">
-            <h2 class="text-4xl sm:text-5xl font-bold mb-4 gradient-text">Capture. Create. Compete.</h2>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
                 The ultimate platform for professional photographers to showcase their art, compete in challenges, and earn rewards through blockchain technology.
             </p>
@@ -110,7 +113,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold text-lg">1</div>
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black font-bold text-lg">1</div>
                                 <div>
                                     <h4 class="font-semibold">alex.lens</h4>
                                     <p class="text-sm text-gray-400">Street Photography Master</p>
@@ -123,7 +126,7 @@
                         </div>
                         <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center text-black font-bold text-lg">2</div>
+                                <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-black font-bold text-lg">2</div>
                                 <div>
                                     <h4 class="font-semibold">maya.photo</h4>
                                     <p class="text-sm text-gray-400">Nature Specialist</p>
@@ -136,7 +139,7 @@
                         </div>
                         <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg">3</div>
+                                <div class="w-12 h-12 bg-gray-500 rounded-full flex items-center justify-center text-white font-bold text-lg">3</div>
                                 <div>
                                     <h4 class="font-semibold">sam.capture</h4>
                                     <p class="text-sm text-gray-400">Portrait Expert</p>
@@ -288,36 +291,39 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </main>
 
-    <!-- Bottom Navigation -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 z-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex items-center justify-around py-3">
-                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">🏆</span>
-                    <span class="text-xs font-medium">Rewards</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">🎯</span>
-                    <span class="text-xs font-medium">Contest</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">🖼️</span>
-                    <span class="text-xs font-medium">Gallery</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">📸</span>
-                    <span class="text-xs font-medium">Camera</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">ℹ️</span>
-                    <span class="text-xs font-medium">Info</span>
-                </button>
+    <!-- FOOTER SECTION -->
+    <footer class="fixed bottom-0 left-0 right-0 z-50 bg-black py-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl mx-4 sm:mx-6 lg:mx-8 p-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-around">
+                    <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0 transition-colors">
+                        <span class="text-xl mb-1">🏆</span>
+                        <span class="text-xs font-medium">Rewards</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0 transition-colors">
+                        <span class="text-xl mb-1">🎯</span>
+                        <span class="text-xs font-medium">Contest</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0 transition-colors">
+                        <span class="text-xl mb-1">🖼️</span>
+                        <span class="text-xs font-medium">Gallery</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0 transition-colors">
+                        <span class="text-xl mb-1">📸</span>
+                        <span class="text-xs font-medium">Camera</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0 transition-colors">
+                        <span class="text-xl mb-1">ℹ️</span>
+                        <span class="text-xs font-medium">Info</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </nav>
+    </footer>
 
     <script>
         // Tab functionality
@@ -367,7 +373,7 @@
                     
                     // Show success message
                     const successMsg = document.createElement('div');
-                    successMsg.className = 'fixed top-20 right-4 bg-green-600 text-white px-4 py-2 rounded-lg z-50';
+                    successMsg.className = 'fixed top-20 right-4 bg-gray-700 text-white px-4 py-2 rounded-lg z-50';
                     successMsg.textContent = 'Wallet connected successfully!';
                     document.body.appendChild(successMsg);
                     
@@ -401,5 +407,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acee06937fde32',t:'MTc1NzE1MDgzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97acf72ca104de32',t:'MTc1NzE1MTIxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
