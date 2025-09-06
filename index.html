@@ -75,47 +75,10 @@
         </div>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav class="bg-gray-900 border-b border-gray-800">
+    <!-- Main Tabs -->
+    <div class="bg-gray-900 border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center space-x-1 sm:space-x-4 py-4 overflow-x-auto">
-                <button class="nav-item flex flex-col items-center p-3 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">🏆</span>
-                    <span class="text-xs font-medium">Rewards</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-3 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">🎯</span>
-                    <span class="text-xs font-medium">Contest</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-3 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">🖼️</span>
-                    <span class="text-xs font-medium">Gallery</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-3 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">📸</span>
-                    <span class="text-xs font-medium">Camera</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-3 rounded-lg hover:bg-gray-800 min-w-0">
-                    <span class="text-xl mb-1">ℹ️</span>
-                    <span class="text-xs font-medium">Info</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Hero Section -->
-        <div class="text-center mb-12">
-            <h2 class="text-4xl sm:text-5xl font-bold mb-4 gradient-text">Capture. Create. Compete.</h2>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                The ultimate platform for professional photographers to showcase their art, compete in challenges, and earn rewards through blockchain technology.
-            </p>
-        </div>
-
-        <!-- Tabs Section -->
-        <div class="mb-12">
-            <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 mb-8">
+            <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 py-4">
                 <button class="tab-btn bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors" data-tab="leaderboard">
                     📊 Leaderboard
                 </button>
@@ -126,8 +89,20 @@
                     🎓 Tutorial
                 </button>
             </div>
+        </div>
+    </div>
 
-            <!-- Tab Contents -->
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl sm:text-5xl font-bold mb-4 gradient-text">Capture. Create. Compete.</h2>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                The ultimate platform for professional photographers to showcase their art, compete in challenges, and earn rewards through blockchain technology.
+            </p>
+        </div>
+
+        <!-- Tab Contents -->
             <div class="space-y-6">
                 <!-- Leaderboard Tab -->
                 <div id="leaderboard" class="tab-content active bg-gray-900 rounded-2xl p-6">
@@ -316,6 +291,34 @@
         </div>
     </main>
 
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-around py-3">
+                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
+                    <span class="text-xl mb-1">🏆</span>
+                    <span class="text-xs font-medium">Rewards</span>
+                </button>
+                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
+                    <span class="text-xl mb-1">🎯</span>
+                    <span class="text-xs font-medium">Contest</span>
+                </button>
+                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
+                    <span class="text-xl mb-1">🖼️</span>
+                    <span class="text-xs font-medium">Gallery</span>
+                </button>
+                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
+                    <span class="text-xl mb-1">📸</span>
+                    <span class="text-xs font-medium">Camera</span>
+                </button>
+                <button class="nav-item flex flex-col items-center p-2 rounded-lg hover:bg-gray-800 min-w-0">
+                    <span class="text-xl mb-1">ℹ️</span>
+                    <span class="text-xs font-medium">Info</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <script>
         // Tab functionality
         const tabButtons = document.querySelectorAll('.tab-btn');
@@ -398,5 +401,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ace7bd11d8de32',t:'MTc1NzE1MDU4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aceb9cc3d7de32',t:'MTc1NzE1MDc0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
