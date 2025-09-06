@@ -80,24 +80,25 @@
 
     <!-- Main Content -->
     <main class="max-w-md mx-auto pb-20">
-        <!-- Tab Navigation -->
-        <nav class="mx-4 mt-4 mb-0 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden">
-            <div class="flex">
-                <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
-                    Leaderboard
-                </button>
-                <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-4 text-center text-sm font-medium tab-active">
-                    POD
-                </button>
-                <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
-                    Tutorial
-                </button>
-            </div>
-        </nav>
+        <!-- Unified Tab and Content Container -->
+        <div class="mx-4 mt-4 mb-15 bg-[#353535] border border-[#6e6e6e] rounded-xl overflow-hidden" style="height: calc(100vh - 200px);">
+            <!-- Tab Navigation -->
+            <nav class="border-b border-[#6e6e6e]">
+                <div class="flex">
+                    <button onclick="switchTab('leaderboard')" id="tab-leaderboard" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
+                        Leaderboard
+                    </button>
+                    <button onclick="switchTab('pod')" id="tab-pod" class="flex-1 py-4 text-center text-sm font-medium tab-active">
+                        POD
+                    </button>
+                    <button onclick="switchTab('tutorial')" id="tab-tutorial" class="flex-1 py-4 text-center text-sm font-medium tab-inactive">
+                        Tutorial
+                    </button>
+                </div>
+            </nav>
 
-        <!-- Unified Content Area -->
-        <div class="mx-4 bg-[#353535] border border-[#6e6e6e] rounded-b-xl border-t-0 overflow-hidden mb-24" style="height: calc(100vh - 240px);">
-            <div class="h-full overflow-y-auto p-4">
+            <!-- Content Area -->
+            <div class="h-full overflow-y-auto p-4" style="height: calc(100% - 64px);">
                 <!-- Leaderboard Tab -->
                 <div id="content-leaderboard" class="hidden">
                     <h2 class="text-xl font-bold mb-4">Top 100 Photographers</h2>
@@ -489,5 +490,5 @@
             switchTab('pod');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac8784301e7aa7',t:'MTc1NzE0NjY0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ac8ca1e5637aa7',t:'MTc1NzE0Njg0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
