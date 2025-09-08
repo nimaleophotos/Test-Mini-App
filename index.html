@@ -93,17 +93,15 @@
         }
         
         .camera-button {
-            width: 60px;
-            height: 60px;
             background: linear-gradient(135deg, #444 0%, #666 100%);
             border: 2px solid #888;
             transition: all 0.3s ease;
         }
         
-        .camera-button:hover {
+        .camera-button:active {
             background: linear-gradient(135deg, #555 0%, #777 100%);
             border-color: #aaa;
-            transform: scale(1.1);
+            transform: scale(0.95);
         }
         
         .spotlight-grid {
@@ -142,57 +140,61 @@
 </head>
 <body class="min-h-screen text-white">
     <!-- Fixed Header -->
-    <div class="fixed top-0 left-0 right-0 bg-black border-b border-gray-700 z-50">
-        <div class="container mx-auto px-4 py-4 max-w-4xl">
-            <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+    <div class="fixed top-0 left-0 right-0 bg-gray-900 z-50">
+        <div class="px-4 py-3">
+            <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center space-x-2">
                 <div class="lens-icon">
                     <div class="lens-outer"></div>
                     <div class="lens-inner"></div>
                 </div>
-                <h1 class="text-xl font-semibold">LENS APP</h1>
+                <h1 class="text-lg font-semibold">LENS APP</h1>
             </div>
             
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
                 <!-- Theme Toggle -->
-                <button id="themeToggle" class="w-10 h-10 rounded-full border-2 border-gray-400 bg-gray-800 flex items-center justify-center hover:border-gray-300 transition-all">
-                    <span id="themeIcon" class="text-white text-sm">☀️</span>
+                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 border-gray-400 bg-gray-800 flex items-center justify-center transition-all">
+                    <span id="themeIcon" class="text-white text-xs">☀️</span>
                 </button>
                 
                 <!-- Connect Wallet Button -->
-                <button class="px-6 py-2 bg-transparent border-2 border-gray-400 text-white rounded-full hover:border-gray-300 hover:bg-gray-800 transition-all font-medium">
-                    Connect Wallet
+                <button class="px-3 py-1 bg-transparent border-2 border-gray-400 text-white rounded-full transition-all font-medium text-sm">
+                    Connect
                 </button>
             </div>
+        </div>
+        
+        <!-- Animated Slogan in Header -->
+        <div class="slogan-container px-1">
+            <div id="sloganText" class="slogan-text"></div>
         </div>
         </div>
     </div>
     
-    <!-- Main Content Container -->
-    <div class="container mx-auto px-4 max-w-4xl" style="padding-top: 100px; padding-bottom: 120px;">
-        
-        <!-- Animated Slogan -->
-        <div class="slogan-container mb-8">
-            <div id="sloganText" class="slogan-text"></div>
-        </div>
-        
-        <!-- Main Content Box -->
-        <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 mb-8" style="height: calc(100vh - 280px);">
-            <!-- Tabs -->
-            <div class="flex space-x-1 mb-6 bg-gray-800 p-1 rounded-xl">
-                <button id="tab-leaderboard" class="flex-1 py-3 px-4 rounded-lg font-medium transition-all tab-active">
+    <!-- Fixed Tabs -->
+    <div class="fixed left-0 right-0 bg-gray-900 z-40" style="top: 120px;">
+        <div class="px-4">
+            <div class="flex space-x-1 bg-gray-800 p-1 rounded-xl">
+                <button id="tab-leaderboard" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-active text-sm">
                     Leaderboard
                 </button>
-                <button id="tab-pod" class="flex-1 py-3 px-4 rounded-lg font-medium transition-all tab-inactive">
+                <button id="tab-pod" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
                     POD
                 </button>
-                <button id="tab-tutorial" class="flex-1 py-3 px-4 rounded-lg font-medium transition-all tab-inactive">
+                <button id="tab-tutorial" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
                     Tutorial
                 </button>
             </div>
-            
+        </div>
+    </div>
+    
+    <!-- Main Content Container -->
+    <div class="px-4" style="padding-top: 170px; padding-bottom: 100px;">
+        
+        <!-- Main Content Box -->
+        <div class="bg-gray-900 p-4 mb-8" style="height: calc(100vh - 320px);">
             <!-- Tab Content -->
-            <div id="content-leaderboard" class="tab-content overflow-y-auto" style="height: calc(100% - 80px);">
+            <div id="content-leaderboard" class="tab-content overflow-y-auto" style="height: 100%;">
                 <h3 class="text-lg font-semibold mb-4">Top 100 Users</h3>
                 <div class="space-y-2">
                     <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
@@ -222,7 +224,7 @@
                 </div>
             </div>
             
-            <div id="content-pod" class="tab-content hidden overflow-y-auto" style="height: calc(100% - 80px);">
+            <div id="content-pod" class="tab-content hidden overflow-y-auto" style="height: 100%;">
                 <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
                 <div class="bg-gray-800 rounded-xl p-4 mb-6">
                     <div class="aspect-video bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
@@ -263,7 +265,7 @@
                 </div>
             </div>
             
-            <div id="content-tutorial" class="tab-content hidden overflow-y-auto" style="height: calc(100% - 80px);">
+            <div id="content-tutorial" class="tab-content hidden overflow-y-auto" style="height: 100%;">
                 <h3 class="text-lg font-semibold mb-4">Educational Content</h3>
                 <div class="space-y-4">
                     <div class="bg-gray-800 p-4 rounded-xl">
@@ -285,31 +287,31 @@
     </div>
     
     <!-- Fixed Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-black border-t border-gray-700 z-50">
-        <div class="container mx-auto px-4 py-4 max-w-4xl">
-            <div class="bg-gray-900 border border-gray-700 rounded-2xl p-4">
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 z-50">
+        <div class="px-4 py-3">
+            <div class="bg-gray-900 p-3">
             <div class="flex items-center justify-between">
-                <button class="nav-button flex flex-col items-center space-y-1 px-4 py-2 rounded-xl">
-                    <span class="text-lg">🖼️</span>
+                <button class="nav-button flex flex-col items-center space-y-1 px-2 py-1 rounded-xl">
+                    <span class="text-base">🖼️</span>
                     <span class="text-xs">Gallery</span>
                 </button>
                 
-                <button class="nav-button flex flex-col items-center space-y-1 px-4 py-2 rounded-xl">
-                    <span class="text-lg">🏆</span>
+                <button class="nav-button flex flex-col items-center space-y-1 px-2 py-1 rounded-xl">
+                    <span class="text-base">🏆</span>
                     <span class="text-xs">Contest</span>
                 </button>
                 
-                <button class="camera-button rounded-full flex items-center justify-center">
-                    <span class="text-2xl">📷</span>
+                <button class="camera-button rounded-full flex items-center justify-center" style="width: 50px; height: 50px;">
+                    <span class="text-xl">📷</span>
                 </button>
                 
-                <button class="nav-button flex flex-col items-center space-y-1 px-4 py-2 rounded-xl">
-                    <span class="text-lg">🎁</span>
+                <button class="nav-button flex flex-col items-center space-y-1 px-2 py-1 rounded-xl">
+                    <span class="text-base">🎁</span>
                     <span class="text-xs">Rewards</span>
                 </button>
                 
-                <button class="nav-button flex flex-col items-center space-y-1 px-4 py-2 rounded-xl">
-                    <span class="text-lg">👤</span>
+                <button class="nav-button flex flex-col items-center space-y-1 px-2 py-1 rounded-xl">
+                    <span class="text-base">👤</span>
                     <span class="text-xs">Profile</span>
                 </button>
             </div>
@@ -317,9 +319,7 @@
         </div>
     </div>
     
-    <!-- Main Content Container -->
-    <div class="container mx-auto px-4 max-w-4xl" style="padding-top: 100px; padding-bottom: 120px;">
-    </div>
+
 
     <script>
         // Slogans for animation
@@ -420,5 +420,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bcd50281fd1cb1',t:'MTc1NzMxNzU4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bce15fe0651cb1',t:'MTc1NzMxODA5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
