@@ -80,9 +80,9 @@
     </header>
 
     <!-- BODY SECTION -->
-    <main class="fixed top-20 bottom-0 left-0 right-0 flex flex-col px-4 sm:px-6 lg:px-8 py-1.5 gap-1.5">
+    <main class="fixed top-20 bottom-1.5 left-0 right-0 flex flex-col px-4 sm:px-6 lg:px-8 py-1.5">
         <!-- Main Content Box -->
-        <div class="bg-gray-900 border border-gray-800 rounded-3xl flex-1 flex flex-col overflow-hidden">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl flex-1 flex flex-col overflow-hidden relative">
             <!-- Tab Buttons -->
             <div class="grid grid-cols-3 border-b border-gray-800 flex-shrink-0">
                 <button class="tab-btn bg-white text-black py-4 font-semibold hover:bg-gray-200 transition-colors text-center rounded-tl-3xl" data-tab="leaderboard">
@@ -97,7 +97,7 @@
             </div>
             
             <!-- Tab Content Area -->
-            <div class="flex-1 overflow-y-auto p-6">
+            <div class="flex-1 overflow-y-auto p-6 pb-24">
                 <!-- Hero Section -->
                 <div class="text-center mb-12">
                     <p class="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -291,31 +291,31 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Navigation Bar -->
-        <div class="bg-gray-800 border border-gray-700 rounded-3xl p-2 sm:p-4 flex-shrink-0">
-            <div class="flex items-center justify-around">
-                <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
-                    <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">🏆</span>
-                    <span class="text-xs font-medium">Rewards</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
-                    <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">🎯</span>
-                    <span class="text-xs font-medium">Contest</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
-                    <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">🖼️</span>
-                    <span class="text-xs font-medium">Gallery</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
-                    <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">📸</span>
-                    <span class="text-xs font-medium">Camera</span>
-                </button>
-                <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
-                    <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">ℹ️</span>
-                    <span class="text-xs font-medium">Info</span>
-                </button>
+            
+            <!-- Navigation Bar - Fixed at bottom inside unified box -->
+            <div class="absolute bottom-1.25 left-6 right-6 bg-gray-800 border border-gray-700 rounded-3xl p-2 sm:p-4">
+                <div class="flex items-center justify-around">
+                    <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
+                        <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">🏆</span>
+                        <span class="text-xs font-medium">Rewards</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
+                        <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">🎯</span>
+                        <span class="text-xs font-medium">Contest</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
+                        <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">🖼️</span>
+                        <span class="text-xs font-medium">Gallery</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
+                        <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">📸</span>
+                        <span class="text-xs font-medium">Camera</span>
+                    </button>
+                    <button class="nav-item flex flex-col items-center p-1 sm:p-2 rounded-lg hover:bg-gray-700 min-w-0 transition-colors">
+                        <span class="text-lg sm:text-xl mb-0.5 sm:mb-1">ℹ️</span>
+                        <span class="text-xs font-medium">Info</span>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
@@ -404,5 +404,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bcab1f102c0bba',t:'MTc1NzMxNTg3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bcb3d9460e49b6',t:'MTc1NzMxNjIyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
