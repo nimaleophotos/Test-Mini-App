@@ -171,119 +171,117 @@
         </div>
     </div>
     
-    <!-- Fixed Tabs -->
-    <div class="fixed left-0 right-0 z-40" style="top: 120px;">
-        <div class="px-4">
-            <div class="flex space-x-1 p-1 rounded-xl">
-                <button id="tab-leaderboard" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-active text-sm">
-                    Leaderboard
-                </button>
-                <button id="tab-pod" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
-                    POD
-                </button>
-                <button id="tab-tutorial" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
-                    Tutorial
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Main Content Container -->
-    <div class="px-4" style="padding-top: 170px; padding-bottom: 100px;">
-        
-        <!-- Main Content Box -->
-        <div class="p-4 mb-8" style="height: calc(100vh - 320px);">
-            <!-- Tab Content -->
-            <div id="content-leaderboard" class="tab-content overflow-y-auto" style="height: 100%;">
-                <h3 class="text-lg font-semibold mb-4">Top 100 Users</h3>
-                <div class="space-y-2">
-                    <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <span class="text-white font-bold">#1</span>
-                            <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
-                            <span class="font-medium">photographer.eth</span>
-                        </div>
-                        <span class="text-gray-300">2,450 pts</span>
-                    </div>
-                    <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <span class="text-gray-400 font-bold">#2</span>
-                            <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
-                            <span class="font-medium">lens_master</span>
-                        </div>
-                        <span class="text-gray-300">2,180 pts</span>
-                    </div>
-                    <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <span class="text-gray-300 font-bold">#3</span>
-                            <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
-                            <span class="font-medium">crypto_shooter</span>
-                        </div>
-                        <span class="text-gray-300">1,920 pts</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="content-pod" class="tab-content hidden overflow-y-auto" style="height: 100%;">
-                <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
-                <div class="bg-gray-800 rounded-xl p-4 mb-6">
-                    <div class="aspect-video bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
-                        <span class="text-gray-400">📸 Featured Photo</span>
-                    </div>
-                    <p class="text-sm text-gray-300">"Sunset over the blockchain" by @crypto_artist</p>
+    <!-- Fixed Tabs and Content Container -->
+    <div class="fixed left-0 right-0 z-40" style="top: 120px; bottom: 100px;">
+        <div class="px-4 h-full">
+            <div class="border border-gray-500 border-opacity-30 rounded-2xl p-4 h-full flex flex-col">
+                <!-- Tabs -->
+                <div class="flex space-x-1 p-1 rounded-xl mb-4">
+                    <button id="tab-leaderboard" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-active text-sm">
+                        Leaderboard
+                    </button>
+                    <button id="tab-pod" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
+                        POD
+                    </button>
+                    <button id="tab-tutorial" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
+                        Tutorial
+                    </button>
                 </div>
                 
-                <h4 class="font-semibold mb-3">Spotlight Spots</h4>
-                <div class="spotlight-grid">
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
+                <!-- Content Area -->
+                <div class="flex-1 overflow-hidden">
+                    <!-- Tab Content -->
+                    <div id="content-leaderboard" class="tab-content overflow-y-auto h-full">
+                        <h3 class="text-lg font-semibold mb-4">Top 100 Users</h3>
+                        <div class="space-y-2">
+                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-white font-bold">#1</span>
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                    <span class="font-medium">photographer.eth</span>
+                                </div>
+                                <span class="text-gray-300">2,450 pts</span>
+                            </div>
+                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-gray-400 font-bold">#2</span>
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                    <span class="font-medium">lens_master</span>
+                                </div>
+                                <span class="text-gray-300">2,180 pts</span>
+                            </div>
+                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-gray-300 font-bold">#3</span>
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                    <span class="font-medium">crypto_shooter</span>
+                                </div>
+                                <span class="text-gray-300">1,920 pts</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
+                    
+                    <div id="content-pod" class="tab-content hidden overflow-y-auto h-full">
+                        <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
+                        <div class="bg-gray-800 rounded-xl p-4 mb-6">
+                            <div class="aspect-video bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
+                                <span class="text-gray-400">📸 Featured Photo</span>
+                            </div>
+                            <p class="text-sm text-gray-300">"Sunset over the blockchain" by @crypto_artist</p>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-3">Spotlight Spots</h4>
+                        <div class="spotlight-grid">
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                    <div class="spotlight-spot">
-                        <span class="text-xs text-gray-400">0.1 ETH</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="content-tutorial" class="tab-content hidden overflow-y-auto" style="height: 100%;">
-                <h3 class="text-lg font-semibold mb-4">Educational Content</h3>
-                <div class="space-y-4">
-                    <div class="bg-gray-800 p-4 rounded-xl">
-                        <h4 class="font-medium mb-2">📚 Photography Basics</h4>
-                        <p class="text-sm text-gray-300">Learn the fundamentals of composition, lighting, and exposure.</p>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-xl">
-                        <h4 class="font-medium mb-2">🔗 Blockchain & NFTs</h4>
-                        <p class="text-sm text-gray-300">Understanding how to mint and trade your photography as NFTs.</p>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-xl">
-                        <h4 class="font-medium mb-2">🏆 Contest Guidelines</h4>
-                        <p class="text-sm text-gray-300">Rules and tips for participating in photography contests.</p>
+                    
+                    <div id="content-tutorial" class="tab-content hidden overflow-y-auto h-full">
+                        <h3 class="text-lg font-semibold mb-4">Educational Content</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-800 p-4 rounded-xl">
+                                <h4 class="font-medium mb-2">📚 Photography Basics</h4>
+                                <p class="text-sm text-gray-300">Learn the fundamentals of composition, lighting, and exposure.</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-xl">
+                                <h4 class="font-medium mb-2">🔗 Blockchain & NFTs</h4>
+                                <p class="text-sm text-gray-300">Understanding how to mint and trade your photography as NFTs.</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-xl">
+                                <h4 class="font-medium mb-2">🏆 Contest Guidelines</h4>
+                                <p class="text-sm text-gray-300">Rules and tips for participating in photography contests.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
     
     <!-- Fixed Bottom Navigation -->
@@ -420,5 +418,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bceed1b2b41cb1',t:'MTc1NzMxODY0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bcf69ce6d57aa7',t:'MTc1NzMxODk2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
