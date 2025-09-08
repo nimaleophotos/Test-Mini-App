@@ -10,7 +10,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #374151;
+            background: #0f0f0f;
         }
         
         .lens-icon {
@@ -74,13 +74,13 @@
         }
         
         .tab-active {
-            background: linear-gradient(135deg, #333 0%, #444 100%);
-            border: 1px solid #666;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 1px solid #444;
         }
         
         .tab-inactive {
             background: transparent;
-            border: 1px solid #333;
+            border: 1px solid #222;
         }
         
         .nav-button {
@@ -93,14 +93,14 @@
         }
         
         .camera-button {
-            background: linear-gradient(135deg, #444 0%, #666 100%);
-            border: 2px solid #888;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 2px solid #444;
             transition: all 0.3s ease;
         }
         
         .camera-button:active {
-            background: linear-gradient(135deg, #555 0%, #777 100%);
-            border-color: #aaa;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+            border-color: #555;
             transform: scale(0.95);
         }
         
@@ -112,8 +112,8 @@
         
         .spotlight-spot {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #222 0%, #333 100%);
-            border: 1px solid #444;
+            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+            border: 1px solid #333;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -123,18 +123,18 @@
         }
         
         .spotlight-spot:hover {
-            border-color: #666;
-            background: linear-gradient(135deg, #333 0%, #444 100%);
+            border-color: #444;
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
         }
         
         .leaderboard-item {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            border: 1px solid #333;
+            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+            border: 1px solid #222;
         }
         
         .leaderboard-item:hover {
-            border-color: #555;
-            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+            border-color: #333;
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
         }
     </style>
 </head>
@@ -153,12 +153,12 @@
             
             <div class="flex items-center space-x-2">
                 <!-- Theme Toggle -->
-                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 border-gray-400 bg-gray-800 flex items-center justify-center transition-all">
+                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 border-gray-600 bg-gray-900 flex items-center justify-center transition-all">
                     <span id="themeIcon" class="text-white text-xs">☀️</span>
                 </button>
                 
                 <!-- Connect Wallet Button -->
-                <button class="px-3 py-1 bg-transparent border-2 border-gray-400 text-white rounded-full transition-all font-medium text-sm">
+                <button class="px-3 py-1 bg-transparent border-2 border-gray-600 text-white rounded-full transition-all font-medium text-sm">
                     Connect
                 </button>
             </div>
@@ -174,7 +174,7 @@
     <!-- Fixed Tabs and Content Container -->
     <div class="fixed left-0 right-0 z-40" style="top: 100px; bottom: 105px;">
         <div class="px-4 h-full">
-            <div class="border border-gray-500 border-opacity-30 rounded-2xl p-4 h-full flex flex-col">
+            <div class="border border-gray-700 border-opacity-40 rounded-2xl p-4 h-full flex flex-col bg-gray-900 bg-opacity-50">
                 <!-- Tabs -->
                 <div class="flex space-x-1 p-1 rounded-xl mb-4">
                     <button id="tab-leaderboard" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-active text-sm">
@@ -197,7 +197,7 @@
                             <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-white font-bold">#1</span>
-                                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
                                     <span class="font-medium">photographer.eth</span>
                                 </div>
                                 <span class="text-gray-300">2,450 pts</span>
@@ -205,7 +205,7 @@
                             <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-gray-400 font-bold">#2</span>
-                                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
                                     <span class="font-medium">lens_master</span>
                                 </div>
                                 <span class="text-gray-300">2,180 pts</span>
@@ -213,7 +213,7 @@
                             <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-gray-300 font-bold">#3</span>
-                                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
                                     <span class="font-medium">crypto_shooter</span>
                                 </div>
                                 <span class="text-gray-300">1,920 pts</span>
@@ -223,8 +223,8 @@
                     
                     <div id="content-pod" class="tab-content hidden overflow-y-auto h-full">
                         <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
-                        <div class="bg-gray-800 rounded-xl p-4 mb-6">
-                            <div class="aspect-video bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
+                        <div class="bg-gray-900 rounded-xl p-4 mb-6">
+                            <div class="aspect-video bg-gray-800 rounded-lg mb-3 flex items-center justify-center">
                                 <span class="text-gray-400">📸 Featured Photo</span>
                             </div>
                             <p class="text-sm text-gray-300">"Sunset over the blockchain" by @crypto_artist</p>
@@ -265,15 +265,15 @@
                     <div id="content-tutorial" class="tab-content hidden overflow-y-auto h-full">
                         <h3 class="text-lg font-semibold mb-4">Educational Content</h3>
                         <div class="space-y-4">
-                            <div class="bg-gray-800 p-4 rounded-xl">
+                            <div class="bg-gray-900 p-4 rounded-xl">
                                 <h4 class="font-medium mb-2">📚 Photography Basics</h4>
                                 <p class="text-sm text-gray-300">Learn the fundamentals of composition, lighting, and exposure.</p>
                             </div>
-                            <div class="bg-gray-800 p-4 rounded-xl">
+                            <div class="bg-gray-900 p-4 rounded-xl">
                                 <h4 class="font-medium mb-2">🔗 Blockchain & NFTs</h4>
                                 <p class="text-sm text-gray-300">Understanding how to mint and trade your photography as NFTs.</p>
                             </div>
-                            <div class="bg-gray-800 p-4 rounded-xl">
+                            <div class="bg-gray-900 p-4 rounded-xl">
                                 <h4 class="font-medium mb-2">🏆 Contest Guidelines</h4>
                                 <p class="text-sm text-gray-300">Rules and tips for participating in photography contests.</p>
                             </div>
@@ -287,7 +287,7 @@
     <!-- Fixed Bottom Navigation -->
     <div class="fixed bottom-0 left-0 right-0 z-50">
         <div class="px-4 py-4">
-            <div class="border border-gray-600 rounded-3xl p-4 shadow-2xl backdrop-blur-sm">
+            <div class="border border-gray-700 rounded-3xl p-4 shadow-2xl backdrop-blur-sm bg-gray-900 bg-opacity-80">
             <div class="flex items-center justify-between">
                 <button class="nav-button flex flex-col items-center space-y-1 px-2 py-1 rounded-xl">
                     <span class="text-base">🖼️</span>
@@ -418,5 +418,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bcf92bd2ab7aa7',t:'MTc1NzMxOTA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bd09b642c9f5b2',t:'MTc1NzMxOTc0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
