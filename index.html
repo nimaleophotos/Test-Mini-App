@@ -10,7 +10,12 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #0f0f0f;
+            background: #212121;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode {
+            background: #ffffff;
         }
         
         .lens-icon {
@@ -22,19 +27,26 @@
         .lens-outer {
             width: 32px;
             height: 32px;
-            border: 2px solid white;
+            border: 2px solid #ffffff;
             border-radius: 50%;
             position: absolute;
+            transition: all 0.3s ease;
         }
         
         .lens-inner {
             width: 18px;
             height: 18px;
-            border: 2px solid white;
+            border: 2px solid #ffffff;
             border-radius: 50%;
             position: absolute;
             top: 5px;
             left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode .lens-outer,
+        body.light-mode .lens-inner {
+            border-color: #212121;
         }
         
         .slogan-container {
@@ -47,9 +59,14 @@
         .slogan-text {
             font-size: 0.875rem;
             font-weight: 300;
-            color: white;
+            color: #ffffff;
             text-align: left;
             min-height: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode .slogan-text {
+            color: #212121;
         }
         
         .letter {
@@ -75,18 +92,33 @@
         
         .tab-active {
             background: transparent;
-            color: white;
-            border-bottom-color: white !important;
+            color: #ffffff;
+            border-bottom-color: #ffffff !important;
+            transition: all 0.3s ease;
         }
         
         .tab-inactive {
             background: transparent;
-            color: #9ca3af;
+            color: #888888;
             border-bottom-color: transparent !important;
+            transition: all 0.3s ease;
         }
         
         .tab-inactive:hover {
-            color: white;
+            color: #ffffff;
+        }
+        
+        body.light-mode .tab-active {
+            color: #212121;
+            border-bottom-color: #212121 !important;
+        }
+        
+        body.light-mode .tab-inactive {
+            color: #555555;
+        }
+        
+        body.light-mode .tab-inactive:hover {
+            color: #212121;
         }
         
         .nav-button {
@@ -94,20 +126,34 @@
         }
         
         .nav-button:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: #303030;
             transform: translateY(-2px);
         }
         
         .camera-button {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            border: 2px solid #444;
+            background: #303030;
+            border: 2px solid #555555;
             transition: all 0.3s ease;
         }
         
         .camera-button:active {
-            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
-            border-color: #555;
+            background: #555555;
+            border-color: #888888;
             transform: scale(0.95);
+        }
+        
+        body.light-mode .nav-button:hover {
+            background: #9d9d9d;
+        }
+        
+        body.light-mode .camera-button {
+            background: #9d9d9d;
+            border-color: #555555;
+        }
+        
+        body.light-mode .camera-button:active {
+            background: #555555;
+            border-color: #303030;
         }
         
         .spotlight-grid {
@@ -118,8 +164,8 @@
         
         .spotlight-spot {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-            border: 1px solid #333;
+            background: #303030;
+            border: 1px solid #555555;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -129,22 +175,43 @@
         }
         
         .spotlight-spot:hover {
-            border-color: #444;
-            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            border-color: #888888;
+            background: #555555;
+        }
+        
+        body.light-mode .spotlight-spot {
+            background: #9d9d9d;
+            border-color: #555555;
+        }
+        
+        body.light-mode .spotlight-spot:hover {
+            border-color: #303030;
+            background: #555555;
         }
         
         .leaderboard-item {
-            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-            border: 1px solid #222;
+            background: #303030;
+            border: 1px solid #555555;
+            transition: all 0.3s ease;
         }
         
         .leaderboard-item:hover {
-            border-color: #333;
-            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            border-color: #888888;
+            background: #555555;
+        }
+        
+        body.light-mode .leaderboard-item {
+            background: #9d9d9d;
+            border-color: #555555;
+        }
+        
+        body.light-mode .leaderboard-item:hover {
+            border-color: #303030;
+            background: #555555;
         }
     </style>
 </head>
-<body class="min-h-screen text-white">
+<body class="min-h-screen" style="color: #ffffff; transition: all 0.3s ease;">
     <!-- Fixed Header -->
     <div class="fixed top-0 left-0 right-0 z-50">
         <div class="px-4 py-3">
@@ -159,12 +226,12 @@
             
             <div class="flex items-center space-x-2">
                 <!-- Theme Toggle -->
-                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 border-gray-600 bg-gray-900 flex items-center justify-center transition-all">
-                    <span id="themeIcon" class="text-white text-xs">☀️</span>
+                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all" style="border-color: #555555; background-color: #303030;">
+                    <span id="themeIcon" class="text-xs" style="color: #ffffff;">☀️</span>
                 </button>
                 
                 <!-- Connect Wallet Button -->
-                <button class="px-3 py-1 bg-transparent border-2 border-gray-600 text-white rounded-full transition-all font-medium text-sm">
+                <button class="px-3 py-1 bg-transparent border-2 rounded-full transition-all font-medium text-sm" style="border-color: #555555; color: #ffffff;">
                     Connect
                 </button>
             </div>
@@ -180,16 +247,16 @@
     <!-- Fixed Tabs and Content Container -->
     <div class="fixed left-0 right-0 z-40" style="top: 92px; bottom: 115px;">
         <div class="px-4 h-full">
-            <div class="border border-gray-700 border-opacity-40 rounded-2xl p-4 h-full flex flex-col bg-gray-900 bg-opacity-50">
+            <div class="border rounded-2xl p-4 h-full flex flex-col transition-all" style="border-color: #555555; background-color: #303030;">
                 <!-- Tabs -->
-                <div class="flex -mx-4 -mt-4 mb-4 border-b border-gray-700 border-opacity-40">
-                    <button id="tab-leaderboard" class="flex-1 py-3 px-4 font-medium transition-all tab-inactive text-sm border-b-2 border-transparent">
+                <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
+                    <button id="tab-leaderboard" class="flex-1 py-3 px-4 font-medium transition-all tab-inactive text-sm border-b-2" style="border-color: transparent;">
                         Leaderboard
                     </button>
-                    <button id="tab-pod" class="flex-1 py-3 px-4 font-medium transition-all tab-active text-sm border-b-2 border-white">
-                        POD
+                    <button id="tab-pod" class="flex-1 py-3 px-4 font-bold transition-all tab-active text-lg border-b-2" style="border-color: #ffffff; letter-spacing: 0.2em;">
+                        P O D
                     </button>
-                    <button id="tab-tutorial" class="flex-1 py-3 px-4 font-medium transition-all tab-inactive text-sm border-b-2 border-transparent">
+                    <button id="tab-tutorial" class="flex-1 py-3 px-4 font-medium transition-all tab-inactive text-sm border-b-2" style="border-color: transparent;">
                         Tutorial
                     </button>
                 </div>
@@ -228,42 +295,64 @@
                     </div>
                     
                     <div id="content-pod" class="tab-content overflow-y-auto h-full">
-                        <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
-                        <div class="bg-gray-900 rounded-xl p-4 mb-6">
-                            <div class="aspect-video bg-gray-800 rounded-lg mb-3 flex items-center justify-center">
-                                <span class="text-gray-400">📸 Featured Photo</span>
+                        <h3 class="text-lg font-semibold mb-4 text-center">Picture of the Day</h3>
+                        <div class="rounded-xl p-4 mb-6 cursor-pointer transition-all hover:opacity-90" style="background-color: #303030; border: 1px solid #555555;" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xe11e588f', '_blank')">
+                            <div class="aspect-video rounded-lg mb-3 flex items-center justify-center relative overflow-hidden" style="background-color: #212121;">
+                                <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/933ce9bf-65ad-4c45-121a-d612c68a0500/original" alt="Featured Photo" class="w-full h-full object-cover rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center" style="display: none;">
+                                    <span style="color: #888888;">📸 Featured Photo</span>
+                                </div>
                             </div>
-                            <p class="text-sm text-gray-300">"Sunset over the blockchain" by @crypto_artist</p>
+                            <div class="flex items-center justify-between mb-2">
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #ffffff;">"Mountain Reflection at Dawn"</p>
+                                    <p class="text-xs" style="color: #888888;">by nimaleophotos.eth</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs" style="color: #888888;">
+                                <div class="flex items-center space-x-1">
+                                    <span>❤️</span>
+                                    <span>24</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span>🔄</span>
+                                    <span>8</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span>💬</span>
+                                    <span>12</span>
+                                </div>
+                            </div>
                         </div>
                         
                         <h4 class="font-semibold mb-3">Spotlight Spots</h4>
                         <div class="spotlight-grid">
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                             <div class="spotlight-spot">
-                                <span class="text-xs text-gray-400">0.1 ETH</span>
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
                             </div>
                         </div>
                     </div>
@@ -273,7 +362,7 @@
                         <div class="space-y-4">
                             <div class="bg-gray-900 p-4 rounded-xl">
                                 <h4 class="font-medium mb-2">📚 Photography Basics</h4>
-                                <p class="text-sm text-gray-300">Learn the fundamentals of composition, lighting, and exposure.</p>
+                                <p class="text-sm" style="color: #888888;">Learn the fundamentals of composition, lighting, and exposure.</p>
                             </div>
                             <div class="bg-gray-900 p-4 rounded-xl">
                                 <h4 class="font-medium mb-2">🔗 Blockchain & NFTs</h4>
@@ -424,5 +513,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c4390ba1070bce',t:'MTc1NzM5NTA4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c469abd37ff54e',t:'MTc1NzM5NzA3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
