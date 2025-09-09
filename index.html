@@ -273,7 +273,7 @@
             <div class="border rounded-2xl p-4 h-full flex flex-col transition-all" style="border-color: #555555; background-color: #303030;">
                 <!-- Tabs -->
                 <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
-                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20" style="border-color: transparent;">
+                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tl-2xl" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="4" y="14" width="3" height="6" fill="#888888"/>
@@ -285,7 +285,7 @@
                     <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.2em;">
                         P O D
                     </button>
-                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20" style="border-color: transparent;">
+                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <ellipse cx="12" cy="18" rx="8" ry="2" fill="#888888"/>
@@ -300,32 +300,106 @@
                 <!-- Content Area -->
                 <div class="flex-1 overflow-hidden">
                     <!-- Tab Content -->
-                    <div id="content-leaderboard" class="tab-content hidden overflow-y-auto h-full">
-                        <h3 class="text-lg font-semibold mb-4">Top 100 Users</h3>
-                        <div class="space-y-2">
-                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-white font-bold">#1</span>
-                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                    <span class="font-medium">photographer.eth</span>
+                    <div id="content-leaderboard" class="tab-content hidden h-full flex flex-col">
+                        <!-- Lens App Leaderboard Section -->
+                        <div class="flex-1 overflow-hidden">
+                            <h3 class="text-lg font-semibold mb-4">Lens App Leaderboard</h3>
+                            <div class="overflow-y-auto h-full space-y-2 pb-4">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-white font-bold">#1</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">photographer.eth</span>
+                                    </div>
+                                    <span class="text-gray-300">2,450 pts</span>
                                 </div>
-                                <span class="text-gray-300">2,450 pts</span>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-400 font-bold">#2</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">lens_master</span>
+                                    </div>
+                                    <span class="text-gray-300">2,180 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#3</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">crypto_shooter</span>
+                                    </div>
+                                    <span class="text-gray-300">1,920 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#4</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">visual_artist</span>
+                                    </div>
+                                    <span class="text-gray-300">1,850 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#5</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">frame_wizard</span>
+                                    </div>
+                                    <span class="text-gray-300">1,720 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#6</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">pixel_master</span>
+                                    </div>
+                                    <span class="text-gray-300">1,650 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#7</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">light_chaser</span>
+                                    </div>
+                                    <span class="text-gray-300">1,580 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#8</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">focus_finder</span>
+                                    </div>
+                                    <span class="text-gray-300">1,520 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#9</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">shutter_speed</span>
+                                    </div>
+                                    <span class="text-gray-300">1,480 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#10</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">aperture_ace</span>
+                                    </div>
+                                    <span class="text-gray-300">1,420 pts</span>
+                                </div>
                             </div>
-                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                        </div>
+                        
+                        <!-- Your Rank Section (Fixed at bottom) -->
+                        <div class="border-t pt-4 mt-4" style="border-color: #555555;">
+                            <h4 class="text-sm font-semibold mb-3" style="color: #888888;">Your Rank</h4>
+                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: #555555; border-color: #888888;">
                                 <div class="flex items-center space-x-3">
-                                    <span class="text-gray-400 font-bold">#2</span>
-                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                    <span class="font-medium">lens_master</span>
+                                    <span class="text-white font-bold">#47</span>
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                                        <span class="text-xs text-white">👤</span>
+                                    </div>
+                                    <span class="font-medium text-white">your_username</span>
                                 </div>
-                                <span class="text-gray-300">2,180 pts</span>
-                            </div>
-                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-gray-300 font-bold">#3</span>
-                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                    <span class="font-medium">crypto_shooter</span>
-                                </div>
-                                <span class="text-gray-300">1,920 pts</span>
+                                <span class="text-white">890 pts</span>
                             </div>
                         </div>
                     </div>
@@ -549,5 +623,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c481b835820bce',t:'MTc1NzM5ODA2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c48b4841980bce',t:'MTc1NzM5ODQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
