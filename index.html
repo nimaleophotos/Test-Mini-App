@@ -74,13 +74,19 @@
         }
         
         .tab-active {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            border: 1px solid #444;
+            background: transparent;
+            color: white;
+            border-bottom-color: white !important;
         }
         
         .tab-inactive {
             background: transparent;
-            border: 1px solid #222;
+            color: #9ca3af;
+            border-bottom-color: transparent !important;
+        }
+        
+        .tab-inactive:hover {
+            color: white;
         }
         
         .nav-button {
@@ -176,14 +182,14 @@
         <div class="px-4 h-full">
             <div class="border border-gray-700 border-opacity-40 rounded-2xl p-4 h-full flex flex-col bg-gray-900 bg-opacity-50">
                 <!-- Tabs -->
-                <div class="flex space-x-1 p-1 rounded-xl mb-4">
-                    <button id="tab-leaderboard" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-active text-sm">
+                <div class="flex -mx-4 -mt-4 mb-4 border-b border-gray-700 border-opacity-40">
+                    <button id="tab-leaderboard" class="flex-1 py-3 px-4 font-medium transition-all tab-inactive text-sm border-b-2 border-transparent">
                         Leaderboard
                     </button>
-                    <button id="tab-pod" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
+                    <button id="tab-pod" class="flex-1 py-3 px-4 font-medium transition-all tab-active text-sm border-b-2 border-white">
                         POD
                     </button>
-                    <button id="tab-tutorial" class="flex-1 py-2 px-2 rounded-lg font-medium transition-all tab-inactive text-sm">
+                    <button id="tab-tutorial" class="flex-1 py-3 px-4 font-medium transition-all tab-inactive text-sm border-b-2 border-transparent">
                         Tutorial
                     </button>
                 </div>
@@ -191,7 +197,7 @@
                 <!-- Content Area -->
                 <div class="flex-1 overflow-hidden">
                     <!-- Tab Content -->
-                    <div id="content-leaderboard" class="tab-content overflow-y-auto h-full">
+                    <div id="content-leaderboard" class="tab-content hidden overflow-y-auto h-full">
                         <h3 class="text-lg font-semibold mb-4">Top 100 Users</h3>
                         <div class="space-y-2">
                             <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
@@ -221,7 +227,7 @@
                         </div>
                     </div>
                     
-                    <div id="content-pod" class="tab-content hidden overflow-y-auto h-full">
+                    <div id="content-pod" class="tab-content overflow-y-auto h-full">
                         <h3 class="text-lg font-semibold mb-4">Picture of the Day</h3>
                         <div class="bg-gray-900 rounded-xl p-4 mb-6">
                             <div class="aspect-video bg-gray-800 rounded-lg mb-3 flex items-center justify-center">
@@ -418,5 +424,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97bd10cc3333f5b2',t:'MTc1NzMyMDAzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c4390ba1070bce',t:'MTc1NzM5NTA4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
