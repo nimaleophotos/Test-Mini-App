@@ -124,6 +124,16 @@
             color: #212121;
         }
         
+        .flex-2 {
+            flex: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .flex-2 {
+                flex: 3;
+            }
+        }
+        
         .tab-icon svg {
             stroke: #888888;
             fill: #888888;
@@ -263,7 +273,7 @@
             <div class="border rounded-2xl p-4 h-full flex flex-col transition-all" style="border-color: #555555; background-color: #303030;">
                 <!-- Tabs -->
                 <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
-                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center rounded-t-lg" style="border-color: transparent; flex: 0 0 80px;">
+                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="4" y="14" width="3" height="6" fill="#888888"/>
@@ -272,10 +282,10 @@
                             </svg>
                         </div>
                     </button>
-                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center rounded-t-lg" style="border-color: #ffffff; letter-spacing: 0.2em; flex: 0 0 200px;">
+                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.2em;">
                         P O D
                     </button>
-                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center rounded-t-lg" style="border-color: transparent; flex: 0 0 80px;">
+                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <ellipse cx="12" cy="18" rx="8" ry="2" fill="#888888"/>
@@ -539,5 +549,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c47aa3d4980bce',t:'MTc1NzM5Nzc3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c481b835820bce',t:'MTc1NzM5ODA2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
