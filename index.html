@@ -91,15 +91,10 @@
         }
         
         .tab-active {
-            background: transparent;
+            background: #555555;
             color: #ffffff;
             border-bottom-color: #ffffff !important;
             transition: all 0.3s ease;
-        }
-        
-        .tab-active svg {
-            stroke: #ffffff;
-            fill: #ffffff;
         }
         
         .tab-inactive {
@@ -109,46 +104,34 @@
             transition: all 0.3s ease;
         }
         
-        .tab-inactive svg {
-            stroke: #888888;
-            fill: #888888;
-        }
-        
         .tab-inactive:hover {
+            background: #303030;
             color: #ffffff;
         }
         
-        .tab-inactive:hover svg {
-            stroke: #ffffff;
-            fill: #ffffff;
-        }
-        
         body.light-mode .tab-active {
+            background: #9d9d9d;
             color: #212121;
             border-bottom-color: #212121 !important;
-        }
-        
-        body.light-mode .tab-active svg {
-            stroke: #212121;
-            fill: #212121;
         }
         
         body.light-mode .tab-inactive {
             color: #555555;
         }
         
-        body.light-mode .tab-inactive svg {
-            stroke: #555555;
-            fill: #555555;
-        }
-        
         body.light-mode .tab-inactive:hover {
+            background: #e0e0e0;
             color: #212121;
         }
         
-        body.light-mode .tab-inactive:hover svg {
-            stroke: #212121;
-            fill: #212121;
+        .tab-icon svg {
+            stroke: #888888;
+            fill: #888888;
+        }
+        
+        body.light-mode .tab-icon svg {
+            stroke: #555555;
+            fill: #555555;
         }
         
         .nav-button {
@@ -280,22 +263,27 @@
             <div class="border rounded-2xl p-4 h-full flex flex-col transition-all" style="border-color: #555555; background-color: #303030;">
                 <!-- Tabs -->
                 <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
-                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center" style="border-color: transparent; flex: 0 0 80px;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="4" width="18" height="18" rx="2" stroke="#888888" stroke-width="2" fill="none"/>
-                            <path d="M16 8l-4 4-2-2-4 4" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="16" cy="8" r="1" fill="#888888"/>
-                        </svg>
+                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center rounded-t-lg" style="border-color: transparent; flex: 0 0 80px;">
+                        <div class="tab-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="14" width="3" height="6" fill="#888888"/>
+                                <rect x="10.5" y="10" width="3" height="10" fill="#888888"/>
+                                <rect x="17" y="6" width="3" height="14" fill="#888888"/>
+                            </svg>
+                        </div>
                     </button>
-                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center" style="border-color: #ffffff; letter-spacing: 0.2em; flex: 1;">
+                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center rounded-t-lg" style="border-color: #ffffff; letter-spacing: 0.2em; flex: 0 0 200px;">
                         P O D
                     </button>
-                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center" style="border-color: transparent; flex: 0 0 80px;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <rect x="8" y="6" width="8" height="4" rx="2" fill="#888888"/>
-                            <rect x="9" y="4" width="6" height="2" rx="1" fill="#888888"/>
-                        </svg>
+                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center rounded-t-lg" style="border-color: transparent; flex: 0 0 80px;">
+                        <div class="tab-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <ellipse cx="12" cy="18" rx="8" ry="2" fill="#888888"/>
+                                <path d="M4 18c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#888888" stroke-width="1.5" fill="none"/>
+                                <rect x="10" y="6" width="4" height="2" rx="1" fill="#888888"/>
+                                <rect x="9" y="8" width="6" height="1" rx="0.5" fill="#888888"/>
+                            </svg>
+                        </div>
                     </button>
                 </div>
                 
@@ -551,5 +539,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c4734b34f9f54e',t:'MTc1NzM5NzQ3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c47aa3d4980bce',t:'MTc1NzM5Nzc3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
