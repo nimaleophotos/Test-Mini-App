@@ -345,10 +345,10 @@
                     <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <ellipse cx="12" cy="18" rx="8" ry="2" fill="#888888"/>
-                                <path d="M4 18c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#888888" stroke-width="1.5" fill="none"/>
-                                <rect x="10" y="6" width="4" height="2" rx="1" fill="#888888"/>
-                                <rect x="9" y="8" width="6" height="1" rx="0.5" fill="#888888"/>
+                                <path d="M12 3L2 8l10 5 10-5-10-5z" fill="#888888"/>
+                                <path d="M2 17l10 5 10-5" stroke="#888888" stroke-width="1.5" fill="none"/>
+                                <path d="M6 14v3c0 1 2 2 6 2s6-1 6-2v-3" stroke="#888888" stroke-width="1.5" fill="none"/>
+                                <circle cx="12" cy="8" r="1" fill="#888888"/>
                             </svg>
                         </div>
                     </button>
@@ -525,19 +525,165 @@
                     </div>
                     
                     <div id="content-tutorial" class="tab-content hidden overflow-y-auto h-full">
-                        <h3 class="text-lg font-semibold mb-4">Educational Content</h3>
+                        <h3 class="text-lg font-semibold mb-4 text-center">Photography Learning Courses</h3>
                         <div class="space-y-4">
-                            <div class="bg-gray-900 p-4 rounded-xl">
-                                <h4 class="font-medium mb-2">📚 Photography Basics</h4>
-                                <p class="text-sm" style="color: #888888;">Learn the fundamentals of composition, lighting, and exposure.</p>
+                            <!-- Mobile Photography Course -->
+                            <div class="course-container">
+                                <div class="course-header bg-gray-400 p-4 rounded-xl cursor-pointer transition-all hover:bg-gray-300" onclick="toggleCourse('mobile')">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium mb-2">📱 Mobile Photography Course</h4>
+                                            <p class="text-sm" style="color: #888888;">Master photography using your smartphone camera.</p>
+                                        </div>
+                                        <svg id="mobile-arrow" class="w-5 h-5 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="mobile-content" class="course-content hidden mt-2 space-y-2">
+                                    <div class="flex flex-col gap-3">
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 1: The Magic of Light 🌞</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 2: Angles & Perspectives 🔄</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 3: Composition Basics 🎯</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 4: Orientation & Framing Choices ↔️ ↕️</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 5: Focus & Sharpness 🔍</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 6: Background Control 🖼️</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 7: Color & Mood 🎨</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 8: Storytelling with Photos 📖</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 9: Motion & Timing 🏃‍♂️</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <span class="text-base font-medium">Week 10: Depth & Layers 🏞️</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="bg-gray-900 p-4 rounded-xl">
-                                <h4 class="font-medium mb-2">🔗 Blockchain & NFTs</h4>
-                                <p class="text-sm text-gray-300">Understanding how to mint and trade your photography as NFTs.</p>
+
+                            <!-- Intermediate Photography Course -->
+                            <div class="course-container">
+                                <div class="course-header bg-gray-400 p-4 rounded-xl cursor-pointer transition-all hover:bg-gray-300" onclick="toggleCourse('intermediate')">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium mb-2">📷 Intermediate Photography Course</h4>
+                                            <p class="text-sm" style="color: #888888;">Advanced techniques for serious photographers.</p>
+                                        </div>
+                                        <svg id="intermediate-arrow" class="w-5 h-5 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="intermediate-content" class="course-content hidden mt-2 space-y-2">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">⚙️ Manual Mode</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🔍 Depth of Field</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">⚡ Flash Photography</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🎨 Advanced Composition</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">📊 Histogram Reading</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🔄 RAW Processing</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🌟 Long Exposure</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🔧 Lens Selection</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">💡 Studio Lighting</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🎭 Creative Effects</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">📈 Post-Processing</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">💼 Portfolio Building</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="bg-gray-900 p-4 rounded-xl">
-                                <h4 class="font-medium mb-2">🏆 Contest Guidelines</h4>
-                                <p class="text-sm text-gray-300">Rules and tips for participating in photography contests.</p>
+
+                            <!-- Extra Courses -->
+                            <div class="course-container">
+                                <div class="course-header bg-gray-400 p-4 rounded-xl cursor-pointer transition-all hover:bg-gray-300" onclick="toggleCourse('extra')">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium mb-2">🎓 Extra Courses</h4>
+                                            <p class="text-sm" style="color: #888888;">Specialized topics and blockchain integration.</p>
+                                        </div>
+                                        <svg id="extra-arrow" class="w-5 h-5 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="extra-content" class="course-content hidden mt-2 space-y-2">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🔗 NFT Basics</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">💰 Crypto Wallets</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🎯 Minting Guide</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">📊 Market Analysis</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🏆 Contest Strategy</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🌐 Web3 Platforms</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">💎 Rare Collections</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🤝 Community Building</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">📱 Social Media</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">⚖️ Copyright Law</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">💼 Business Tips</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-sm">🚀 Future Trends</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1100,6 +1246,25 @@
                 alert(`Connecting to ${walletName}... (Demo)`);
             });
         });
+        
+        // Course dropdown functionality
+        function toggleCourse(courseId) {
+            const content = document.getElementById(`${courseId}-content`);
+            const arrow = document.getElementById(`${courseId}-arrow`);
+            
+            if (content.classList.contains('hidden')) {
+                // Show content
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                // Hide content
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        // Make toggleCourse function globally available
+        window.toggleCourse = toggleCourse;
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cd1d2c54331717',t:'MTc1NzQ4ODMxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cf7f76d4d91717',t:'MTc1NzUxMzMxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
