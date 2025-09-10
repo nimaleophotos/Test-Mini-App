@@ -345,10 +345,9 @@
                     <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 3L2 8l10 5 10-5-10-5z" fill="#888888"/>
-                                <path d="M2 17l10 5 10-5" stroke="#888888" stroke-width="1.5" fill="none"/>
-                                <path d="M6 14v3c0 1 2 2 6 2s6-1 6-2v-3" stroke="#888888" stroke-width="1.5" fill="none"/>
-                                <circle cx="12" cy="8" r="1" fill="#888888"/>
+                                <circle cx="12" cy="12" r="8" stroke="#888888" stroke-width="1.5" fill="none"/>
+                                <path d="M6 8h12c1 0 2 1 2 2v2c0 1-1 2-2 2H6c-1 0-2-1-2-2v-2c0-1 1-2 2-2z" fill="#888888"/>
+                                <circle cx="12" cy="10" r="1" fill="#ffffff"/>
                             </svg>
                         </div>
                     </button>
@@ -529,48 +528,118 @@
                         <div class="space-y-4">
                             <!-- Mobile Photography Course -->
                             <div class="course-container">
-                                <div class="course-header bg-gray-400 p-4 rounded-xl cursor-pointer transition-all hover:bg-gray-300" onclick="toggleCourse('mobile')">
+                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('mobile')">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <h4 class="font-medium mb-2">📱 Mobile Photography Course</h4>
-                                            <p class="text-sm" style="color: #888888;">Master photography using your smartphone camera.</p>
+                                            <h4 class="font-medium mb-1 text-sm">📱 Mobile Photography Course</h4>
+                                            <p class="text-xs" style="color: #888888;">Master photography using your smartphone camera.</p>
                                         </div>
-                                        <svg id="mobile-arrow" class="w-5 h-5 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                        <svg id="mobile-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                         </svg>
                                     </div>
                                 </div>
                                 <div id="mobile-content" class="course-content hidden mt-2 space-y-2">
-                                    <div class="flex flex-col gap-3">
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 1: The Magic of Light 🌞</span>
+                                    <div class="flex flex-col gap-2">
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 1: The Magic of Light 🌞</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 4</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 2: Angles & Perspectives 🔄</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 2: Angles & Perspectives 🔄</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 2: Angles & Perspectives')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 7</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 3: Composition Basics 🎯</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 3: Composition Basics 🎯</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 3: Composition Basics')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 14</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 4: Orientation & Framing Choices ↔️ ↕️</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 4: Orientation & Framing Choices ↔️ ↕️</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 21</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 5: Focus & Sharpness 🔍</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 5: Focus & Sharpness 🔍</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 28</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 6: Background Control 🖼️</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 6: Background Control 🖼️</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 4</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 7: Color & Mood 🎨</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 7: Color & Mood 🎨</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 11</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 8: Storytelling with Photos 📖</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 8: Storytelling with Photos 📖</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 18</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 9: Motion & Timing 🏃‍♂️</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 9: Motion & Timing 🏃‍♂️</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 25</span>
+                                                <span></span>
+                                            </div>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-4 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <span class="text-base font-medium">Week 10: Depth & Layers 🏞️</span>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 10: Depth & Layers 🏞️</span>
+                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Mar 4</span>
+                                                <span></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -578,54 +647,54 @@
 
                             <!-- Intermediate Photography Course -->
                             <div class="course-container">
-                                <div class="course-header bg-gray-400 p-4 rounded-xl cursor-pointer transition-all hover:bg-gray-300" onclick="toggleCourse('intermediate')">
+                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('intermediate')">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <h4 class="font-medium mb-2">📷 Intermediate Photography Course</h4>
-                                            <p class="text-sm" style="color: #888888;">Advanced techniques for serious photographers.</p>
+                                            <h4 class="font-medium mb-1 text-sm">📷 Intermediate Photography Course</h4>
+                                            <p class="text-xs" style="color: #888888;">Advanced techniques for serious photographers.</p>
                                         </div>
-                                        <svg id="intermediate-arrow" class="w-5 h-5 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                        <svg id="intermediate-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                         </svg>
                                     </div>
                                 </div>
                                 <div id="intermediate-content" class="course-content hidden mt-2 space-y-2">
                                     <div class="grid grid-cols-2 gap-2">
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">⚙️ Manual Mode</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">⚙️ Manual Mode</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🔍 Depth of Field</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔍 Depth of Field</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">⚡ Flash Photography</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">⚡ Flash Photography</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🎨 Advanced Composition</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🎨 Advanced Composition</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">📊 Histogram Reading</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📊 Histogram Reading</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🔄 RAW Processing</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔄 RAW Processing</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🌟 Long Exposure</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🌟 Long Exposure</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🔧 Lens Selection</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔧 Lens Selection</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">💡 Studio Lighting</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💡 Studio Lighting</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🎭 Creative Effects</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🎭 Creative Effects</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">📈 Post-Processing</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📈 Post-Processing</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">💼 Portfolio Building</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💼 Portfolio Building</span>
                                         </div>
                                     </div>
                                 </div>
@@ -633,54 +702,54 @@
 
                             <!-- Extra Courses -->
                             <div class="course-container">
-                                <div class="course-header bg-gray-400 p-4 rounded-xl cursor-pointer transition-all hover:bg-gray-300" onclick="toggleCourse('extra')">
+                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('extra')">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <h4 class="font-medium mb-2">🎓 Extra Courses</h4>
-                                            <p class="text-sm" style="color: #888888;">Specialized topics and blockchain integration.</p>
+                                            <h4 class="font-medium mb-1 text-sm">🎓 Extra Courses</h4>
+                                            <p class="text-xs" style="color: #888888;">Specialized topics and blockchain integration.</p>
                                         </div>
-                                        <svg id="extra-arrow" class="w-5 h-5 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                        <svg id="extra-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                         </svg>
                                     </div>
                                 </div>
                                 <div id="extra-content" class="course-content hidden mt-2 space-y-2">
                                     <div class="grid grid-cols-2 gap-2">
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🔗 NFT Basics</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔗 NFT Basics</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">💰 Crypto Wallets</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💰 Crypto Wallets</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🎯 Minting Guide</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🎯 Minting Guide</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">📊 Market Analysis</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📊 Market Analysis</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🏆 Contest Strategy</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🏆 Contest Strategy</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🌐 Web3 Platforms</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🌐 Web3 Platforms</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">💎 Rare Collections</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💎 Rare Collections</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🤝 Community Building</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🤝 Community Building</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">📱 Social Media</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📱 Social Media</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">⚖️ Copyright Law</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">⚖️ Copyright Law</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">💼 Business Tips</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💼 Business Tips</span>
                                         </div>
-                                        <div class="lesson-box bg-gray-800 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-sm">🚀 Future Trends</span>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🚀 Future Trends</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1045,6 +1114,34 @@
         </div>
     </div>
 
+    <!-- Questions Modal -->
+    <div id="questionsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="text-lg font-semibold">Lesson Questions</h3>
+                <button id="closeModal" class="text-gray-400 hover:text-white">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="questionsContainer">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <div class="mt-6 flex justify-between">
+                <button id="submitAnswers" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium disabled:bg-gray-600 disabled:cursor-not-allowed" disabled>
+                    Submit Answers
+                </button>
+                <div class="text-sm text-gray-400">
+                    <span id="answeredCount">0</span>/3 answered
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // Slogans for animation
@@ -1265,6 +1362,150 @@
         
         // Make toggleCourse function globally available
         window.toggleCourse = toggleCourse;
+        
+        // Questions functionality
+        const lessonQuestions = {
+            'Week 1: The Magic of Light': [
+                {
+                    question: "What is the best time of day for natural lighting?",
+                    options: ["Noon", "Golden hour", "Midnight", "Any time"],
+                    correct: 1
+                },
+                {
+                    question: "Which direction provides the softest light?",
+                    options: ["Direct sunlight", "Window light", "Overhead light", "Flash light"],
+                    correct: 1
+                },
+                {
+                    question: "What creates dramatic shadows in photography?",
+                    options: ["Soft light", "Hard light", "No light", "Colored light"],
+                    correct: 1
+                }
+            ],
+            'Week 2: Angles & Perspectives': [
+                {
+                    question: "What angle creates a sense of power in portraits?",
+                    options: ["Eye level", "Low angle", "High angle", "Side angle"],
+                    correct: 1
+                },
+                {
+                    question: "Which perspective makes subjects appear smaller?",
+                    options: ["Worm's eye view", "Bird's eye view", "Eye level", "Close-up"],
+                    correct: 1
+                },
+                {
+                    question: "What creates depth in a photograph?",
+                    options: ["Flat lighting", "Leading lines", "Center composition", "Small aperture"],
+                    correct: 1
+                }
+            ],
+            'Week 3: Composition Basics': [
+                {
+                    question: "What is the rule of thirds?",
+                    options: ["Divide frame into 3 parts", "Use 3 colors only", "Take 3 photos", "Wait 3 seconds"],
+                    correct: 0
+                },
+                {
+                    question: "What creates visual balance in composition?",
+                    options: ["Centering everything", "Symmetry or asymmetry", "Using one color", "Bright lighting"],
+                    correct: 1
+                },
+                {
+                    question: "What draws the viewer's eye into the photo?",
+                    options: ["Leading lines", "Blurred background", "Small subjects", "Dark corners"],
+                    correct: 0
+                }
+            ]
+        };
+        
+        let currentAnswers = {};
+        let currentLesson = '';
+        
+        function showQuestions(lessonName) {
+            currentLesson = lessonName;
+            currentAnswers = {};
+            
+            const modal = document.getElementById('questionsModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const questionsContainer = document.getElementById('questionsContainer');
+            const answeredCount = document.getElementById('answeredCount');
+            const submitButton = document.getElementById('submitAnswers');
+            
+            modalTitle.textContent = lessonName + ' - Quiz';
+            
+            const questions = lessonQuestions[lessonName] || lessonQuestions['Week 1: The Magic of Light'];
+            
+            questionsContainer.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-6';
+                questionDiv.innerHTML = `
+                    <h4 class="font-medium mb-3 text-sm">Question ${index + 1}: ${q.question}</h4>
+                    <div class="space-y-2">
+                        ${q.options.map((option, optIndex) => `
+                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 p-2 rounded">
+                                <input type="radio" name="question${index}" value="${optIndex}" class="text-blue-600">
+                                <span class="text-sm">${option}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            // Add event listeners for radio buttons
+            questionsContainer.addEventListener('change', updateAnswerCount);
+            
+            answeredCount.textContent = '0';
+            submitButton.disabled = true;
+            modal.classList.remove('hidden');
+        }
+        
+        function updateAnswerCount() {
+            const answeredQuestions = new Set();
+            const radioButtons = document.querySelectorAll('#questionsContainer input[type="radio"]:checked');
+            
+            radioButtons.forEach(radio => {
+                const questionIndex = radio.name.replace('question', '');
+                answeredQuestions.add(questionIndex);
+                currentAnswers[questionIndex] = parseInt(radio.value);
+            });
+            
+            const count = answeredQuestions.size;
+            document.getElementById('answeredCount').textContent = count;
+            document.getElementById('submitAnswers').disabled = count < 3;
+        }
+        
+        function closeQuestionsModal() {
+            document.getElementById('questionsModal').classList.add('hidden');
+        }
+        
+        // Modal event listeners
+        document.getElementById('closeModal').addEventListener('click', closeQuestionsModal);
+        document.getElementById('questionsModal').addEventListener('click', (e) => {
+            if (e.target.id === 'questionsModal') {
+                closeQuestionsModal();
+            }
+        });
+        
+        document.getElementById('submitAnswers').addEventListener('click', () => {
+            const questions = lessonQuestions[currentLesson] || lessonQuestions['Week 1: The Magic of Light'];
+            let correctCount = 0;
+            
+            questions.forEach((q, index) => {
+                if (currentAnswers[index] === q.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const points = correctCount * 50;
+            alert(`Quiz completed! You got ${correctCount}/3 questions correct and earned ${points} points!`);
+            closeQuestionsModal();
+        });
+        
+        // Make showQuestions globally available
+        window.showQuestions = showQuestions;
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cf7f76d4d91717',t:'MTc1NzUxMzMxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cf9f1b9442845a',t:'MTc1NzUxNDYwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
