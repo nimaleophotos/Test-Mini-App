@@ -552,7 +552,7 @@
             <div class="border rounded-3xl p-3 shadow-2xl backdrop-blur-sm transition-all" style="border-color: #555555; background-color: #303030;">
             <div class="flex items-center justify-center w-full relative">
                 <!-- Left side buttons -->
-                <div class="absolute left-0 flex space-x-4" style="transform: translateY(5px);">
+                <div class="absolute left-0 flex space-x-4" style="transform: translateY(-5px);">
                     <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Camera sticker icon -->
@@ -585,7 +585,7 @@
                 </button>
                 
                 <!-- Right side buttons -->
-                <div class="absolute right-0 flex space-x-4" style="transform: translateY(5px);">
+                <div class="absolute right-0 flex space-x-4" style="transform: translateY(-5px);">
                     <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Gift box sticker icon -->
@@ -974,9 +974,22 @@
         let isDark = true;
         document.getElementById('themeToggle').addEventListener('click', () => {
             const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            const connectWalletBtn = document.getElementById('connectWalletBtn');
+            
             isDark = !isDark;
             
             if (isDark) {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                body.style.color = '#ffffff';
+                themeToggle.style.borderColor = '#555555';
+                themeToggle.style.backgroundColor = '#303030';
+                connectWalletBtn.style.borderColor = '#555555';
+                connectWalletBtn.style.backgroundColor = '#303030';
+                connectWalletBtn.style.color = '#ffffff';
+                
                 // Sun icon for dark mode
                 themeIcon.innerHTML = `
                     <circle cx="12" cy="12" r="5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
@@ -990,9 +1003,18 @@
                     <path d="M18.36 5.64L19.78 4.22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
                 `;
             } else {
+                // Switch to light mode
+                body.classList.add('light-mode');
+                body.style.color = '#212121';
+                themeToggle.style.borderColor = '#cccccc';
+                themeToggle.style.backgroundColor = '#f0f0f0';
+                connectWalletBtn.style.borderColor = '#cccccc';
+                connectWalletBtn.style.backgroundColor = '#f0f0f0';
+                connectWalletBtn.style.color = '#212121';
+                
                 // Moon icon for light mode
                 themeIcon.innerHTML = `
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="#212121" stroke-width="1.5" fill="none"/>
                 `;
             }
         });
@@ -1079,5 +1101,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cd15afd3ef06cc',t:'MTc1NzQ4ODAwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cd1d2c54331717',t:'MTc1NzQ4ODMxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
