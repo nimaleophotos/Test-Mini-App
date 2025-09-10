@@ -135,8 +135,8 @@
         }
         
         .tab-icon svg {
-            stroke: #888888;
-            fill: #888888;
+            stroke: #666666;
+            fill: #666666;
         }
         
         body.light-mode .tab-icon svg {
@@ -345,9 +345,18 @@
                     <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
                         <div class="tab-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="8" stroke="#888888" stroke-width="1.5" fill="none"/>
-                                <path d="M6 8h12c1 0 2 1 2 2v2c0 1-1 2-2 2H6c-1 0-2-1-2-2v-2c0-1 1-2 2-2z" fill="#888888"/>
-                                <circle cx="12" cy="10" r="1" fill="#ffffff"/>
+                                <!-- Main mortar board (flat square top) - made taller -->
+                                <path d="M4 8L12 5L20 8L12 11L4 8Z" fill="#666666" stroke="#888888" stroke-width="1"/>
+                                <!-- Cap band around head - positioned lower for taller look -->
+                                <ellipse cx="12" cy="14" rx="6" ry="2.5" fill="none" stroke="#666666" stroke-width="1.5"/>
+                                <!-- Tassel cord from left corner -->
+                                <line x1="8" y1="8.5" x2="8" y2="16" stroke="#666666" stroke-width="1"/>
+                                <!-- Tassel top knot at left -->
+                                <circle cx="8" cy="16" r="0.8" fill="#666666"/>
+                                <!-- Tassel strands from left corner -->
+                                <path d="M7 16.8L6.5 18.5M8 16.8L8 18.5M9 16.8L9.5 18.5" stroke="#666666" stroke-width="1" stroke-linecap="round"/>
+                                <!-- Square academic cap outline for clarity - taller -->
+                                <rect x="7" y="6.5" width="10" height="4" rx="0.5" fill="none" stroke="#888888" stroke-width="0.8"/>
                             </svg>
                         </div>
                     </button>
@@ -359,27 +368,27 @@
                     <div id="content-leaderboard" class="tab-content hidden h-full flex flex-col">
                         <!-- Lens App Leaderboard Section -->
                         <div class="flex-1 overflow-hidden">
-                            <h3 class="text-lg font-semibold mb-4">Lens App Leaderboard</h3>
+                            <h3 class="text-lg font-semibold mb-4 text-center">Lens App Leaderboard</h3>
                             <div class="overflow-y-auto h-full space-y-2 pb-4">
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(255, 215, 0, 0.15); border-color: rgba(255, 215, 0, 0.3);">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-white font-bold">#1</span>
+                                        <span class="text-yellow-300 font-bold">#1</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
                                         <span class="font-medium">photographer.eth</span>
                                     </div>
                                     <span class="text-gray-300">2,450 pts</span>
                                 </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(192, 192, 192, 0.15); border-color: rgba(192, 192, 192, 0.3);">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-400 font-bold">#2</span>
+                                        <span class="text-gray-300 font-bold">#2</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
                                         <span class="font-medium">lens_master</span>
                                     </div>
                                     <span class="text-gray-300">2,180 pts</span>
                                 </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(205, 127, 50, 0.15); border-color: rgba(205, 127, 50, 0.3);">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#3</span>
+                                        <span class="text-orange-300 font-bold">#3</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
                                         <span class="font-medium">crypto_shooter</span>
                                     </div>
@@ -446,8 +455,8 @@
                         
                         <!-- Your Rank Section (Fixed at bottom) -->
                         <div class="border-t pt-4 mt-4" style="border-color: #555555;">
-                            <h4 class="text-sm font-semibold mb-3" style="color: #888888;">Your Rank</h4>
-                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: #555555; border-color: #888888;">
+                            <h4 class="text-sm font-semibold mb-3 text-center" style="color: #888888;">Your Rank</h4>
+                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3)); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-white font-bold">#47</span>
                                     <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
@@ -544,7 +553,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 1: The Magic of Light 🌞</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Jan 4</span>
@@ -554,7 +562,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 2: Angles & Perspectives 🔄</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 2: Angles & Perspectives')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Jan 7</span>
@@ -564,7 +571,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 3: Composition Basics 🎯</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 3: Composition Basics')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Jan 14</span>
@@ -574,7 +580,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 4: Orientation & Framing Choices ↔️ ↕️</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Jan 21</span>
@@ -584,7 +589,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 5: Focus & Sharpness 🔍</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Jan 28</span>
@@ -594,7 +598,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 6: Background Control 🖼️</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Feb 4</span>
@@ -604,7 +607,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 7: Color & Mood 🎨</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Feb 11</span>
@@ -614,7 +616,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 8: Storytelling with Photos 📖</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Feb 18</span>
@@ -624,7 +625,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 9: Motion & Timing 🏃‍♂️</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Feb 25</span>
@@ -634,7 +634,6 @@
                                         <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
                                             <div class="flex justify-between items-center mb-2">
                                                 <span class="text-sm font-medium">Week 10: Depth & Layers 🏞️</span>
-                                                <button class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-xs text-white" onclick="event.stopPropagation(); showQuestions('Week 1: The Magic of Light')">Claim Points</button>
                                             </div>
                                             <div class="flex justify-between items-center">
                                                 <span class="text-xs text-gray-400">⏰ Available Mar 4</span>
@@ -770,23 +769,19 @@
                 <div class="absolute left-0 flex space-x-4" style="transform: translateY(-5px);">
                     <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Camera sticker icon -->
-                            <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
-                            <rect x="8" y="9" width="8" height="6" rx="1" fill="#ffffff"/>
-                            <circle cx="12" cy="12" r="2" fill="#212121"/>
-                            <rect x="10" y="7" width="4" height="1" rx="0.5" fill="#ffffff"/>
+                            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#666666" stroke-width="2" fill="none"/>
+                            <circle cx="8.5" cy="8.5" r="1.5" fill="#666666"/>
+                            <path d="M21 15l-5-5L5 21" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                     
                     <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Trophy sticker icon -->
-                            <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
-                            <path d="M8 18H16" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-                            <path d="M12 15V18" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-                            <path d="M9 15H15C15.5 15 16 14.5 16 14V8C16 7.5 15.5 7 15 7H9C8.5 7 8 7.5 8 8V14C8 14.5 8.5 15 9 15Z" fill="#ffffff"/>
-                            <path d="M8 9C7 9 6 9.5 6 10.5S7 12 8 12" stroke="#ffffff" stroke-width="1" fill="none"/>
-                            <path d="M16 9C17 9 18 9.5 18 10.5S17 12 16 12" stroke="#ffffff" stroke-width="1" fill="none"/>
+                            <path d="M6 9H4.5C3.12 9 2 10.12 2 11.5S3.12 14 4.5 14H6" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18 9h1.5c1.38 0 2.5 1.12 2.5 2.5S20.88 14 19.5 14H18" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="6" y="7" width="12" height="10" rx="1" stroke="#666666" stroke-width="2" fill="none"/>
+                            <path d="M12 17v4" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M8 21h8" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </button>
                 </div>
@@ -803,25 +798,18 @@
                 <div class="absolute right-0 flex space-x-4" style="transform: translateY(-5px);">
                     <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Gift box sticker icon -->
-                            <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
-                            <rect x="8" y="11" width="8" height="7" rx="1" fill="#ffffff"/>
-                            <path d="M8 11H16" stroke="#212121" stroke-width="1"/>
-                            <path d="M12 11V18" stroke="#212121" stroke-width="1"/>
-                            <!-- Ribbon bow -->
-                            <path d="M10 11C10 9.5 10.5 8 12 8C13.5 8 14 9.5 14 11" stroke="#ffffff" stroke-width="1" fill="none"/>
-                            <circle cx="10.5" cy="9" r="1" fill="#ffffff"/>
-                            <circle cx="13.5" cy="9" r="1" fill="#ffffff"/>
+                            <rect x="3" y="11" width="18" height="9" rx="2" stroke="#666666" stroke-width="2" fill="none"/>
+                            <path d="M12 11V20" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 15h18" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M9 11C9 8 10 4 12 4s3 4 3 7" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </button>
                     
                     <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Info question sticker icon -->
-                            <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
-                            <circle cx="12" cy="12" r="6" fill="#ffffff"/>
-                            <path d="M10 10C10 9 10.5 8 12 8S14 9 14 10C14 11 13 11.5 12 12" stroke="#212121" stroke-width="1" stroke-linecap="round" fill="none"/>
-                            <circle cx="12" cy="15" r="0.5" fill="#212121"/>
+                            <circle cx="12" cy="12" r="10" stroke="#666666" stroke-width="2"/>
+                            <path d="M12 16v-4" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="12" cy="8" r="1" fill="#666666"/>
                         </svg>
                     </button>
                 </div>
@@ -1114,33 +1102,7 @@
         </div>
     </div>
 
-    <!-- Questions Modal -->
-    <div id="questionsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="modalTitle" class="text-lg font-semibold">Lesson Questions</h3>
-                <button id="closeModal" class="text-gray-400 hover:text-white">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="questionsContainer">
-                <!-- Questions will be dynamically inserted here -->
-            </div>
-            
-            <div class="mt-6 flex justify-between">
-                <button id="submitAnswers" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium disabled:bg-gray-600 disabled:cursor-not-allowed" disabled>
-                    Submit Answers
-                </button>
-                <div class="text-sm text-gray-400">
-                    <span id="answeredCount">0</span>/3 answered
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
     <script>
@@ -1363,149 +1325,7 @@
         // Make toggleCourse function globally available
         window.toggleCourse = toggleCourse;
         
-        // Questions functionality
-        const lessonQuestions = {
-            'Week 1: The Magic of Light': [
-                {
-                    question: "What is the best time of day for natural lighting?",
-                    options: ["Noon", "Golden hour", "Midnight", "Any time"],
-                    correct: 1
-                },
-                {
-                    question: "Which direction provides the softest light?",
-                    options: ["Direct sunlight", "Window light", "Overhead light", "Flash light"],
-                    correct: 1
-                },
-                {
-                    question: "What creates dramatic shadows in photography?",
-                    options: ["Soft light", "Hard light", "No light", "Colored light"],
-                    correct: 1
-                }
-            ],
-            'Week 2: Angles & Perspectives': [
-                {
-                    question: "What angle creates a sense of power in portraits?",
-                    options: ["Eye level", "Low angle", "High angle", "Side angle"],
-                    correct: 1
-                },
-                {
-                    question: "Which perspective makes subjects appear smaller?",
-                    options: ["Worm's eye view", "Bird's eye view", "Eye level", "Close-up"],
-                    correct: 1
-                },
-                {
-                    question: "What creates depth in a photograph?",
-                    options: ["Flat lighting", "Leading lines", "Center composition", "Small aperture"],
-                    correct: 1
-                }
-            ],
-            'Week 3: Composition Basics': [
-                {
-                    question: "What is the rule of thirds?",
-                    options: ["Divide frame into 3 parts", "Use 3 colors only", "Take 3 photos", "Wait 3 seconds"],
-                    correct: 0
-                },
-                {
-                    question: "What creates visual balance in composition?",
-                    options: ["Centering everything", "Symmetry or asymmetry", "Using one color", "Bright lighting"],
-                    correct: 1
-                },
-                {
-                    question: "What draws the viewer's eye into the photo?",
-                    options: ["Leading lines", "Blurred background", "Small subjects", "Dark corners"],
-                    correct: 0
-                }
-            ]
-        };
-        
-        let currentAnswers = {};
-        let currentLesson = '';
-        
-        function showQuestions(lessonName) {
-            currentLesson = lessonName;
-            currentAnswers = {};
-            
-            const modal = document.getElementById('questionsModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const questionsContainer = document.getElementById('questionsContainer');
-            const answeredCount = document.getElementById('answeredCount');
-            const submitButton = document.getElementById('submitAnswers');
-            
-            modalTitle.textContent = lessonName + ' - Quiz';
-            
-            const questions = lessonQuestions[lessonName] || lessonQuestions['Week 1: The Magic of Light'];
-            
-            questionsContainer.innerHTML = '';
-            
-            questions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'mb-6';
-                questionDiv.innerHTML = `
-                    <h4 class="font-medium mb-3 text-sm">Question ${index + 1}: ${q.question}</h4>
-                    <div class="space-y-2">
-                        ${q.options.map((option, optIndex) => `
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 p-2 rounded">
-                                <input type="radio" name="question${index}" value="${optIndex}" class="text-blue-600">
-                                <span class="text-sm">${option}</span>
-                            </label>
-                        `).join('')}
-                    </div>
-                `;
-                questionsContainer.appendChild(questionDiv);
-            });
-            
-            // Add event listeners for radio buttons
-            questionsContainer.addEventListener('change', updateAnswerCount);
-            
-            answeredCount.textContent = '0';
-            submitButton.disabled = true;
-            modal.classList.remove('hidden');
-        }
-        
-        function updateAnswerCount() {
-            const answeredQuestions = new Set();
-            const radioButtons = document.querySelectorAll('#questionsContainer input[type="radio"]:checked');
-            
-            radioButtons.forEach(radio => {
-                const questionIndex = radio.name.replace('question', '');
-                answeredQuestions.add(questionIndex);
-                currentAnswers[questionIndex] = parseInt(radio.value);
-            });
-            
-            const count = answeredQuestions.size;
-            document.getElementById('answeredCount').textContent = count;
-            document.getElementById('submitAnswers').disabled = count < 3;
-        }
-        
-        function closeQuestionsModal() {
-            document.getElementById('questionsModal').classList.add('hidden');
-        }
-        
-        // Modal event listeners
-        document.getElementById('closeModal').addEventListener('click', closeQuestionsModal);
-        document.getElementById('questionsModal').addEventListener('click', (e) => {
-            if (e.target.id === 'questionsModal') {
-                closeQuestionsModal();
-            }
-        });
-        
-        document.getElementById('submitAnswers').addEventListener('click', () => {
-            const questions = lessonQuestions[currentLesson] || lessonQuestions['Week 1: The Magic of Light'];
-            let correctCount = 0;
-            
-            questions.forEach((q, index) => {
-                if (currentAnswers[index] === q.correct) {
-                    correctCount++;
-                }
-            });
-            
-            const points = correctCount * 50;
-            alert(`Quiz completed! You got ${correctCount}/3 questions correct and earned ${points} points!`);
-            closeQuestionsModal();
-        });
-        
-        // Make showQuestions globally available
-        window.showQuestions = showQuestions;
+
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cf9f1b9442845a',t:'MTc1NzUxNDYwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cfcc8101c31717',t:'MTc1NzUxNjQ2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
