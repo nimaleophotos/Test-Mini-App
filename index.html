@@ -766,6 +766,1330 @@
             <div class="border rounded-3xl p-3 shadow-2xl backdrop-blur-sm transition-all" style="border-color: #555555; background-color: #303030;">
             <div class="flex items-center justify-center w-full relative">
                 <!-- Left side buttons -->
+                <div class="absolute left-0 flex space-x-4" style="transform: translateY(-5px);">
+                    <button class="nav-button flex items-center justify-center px-1 py-1 rounded-lg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+                            <circle cx="12" cy="13" r="4" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </button>
+                    
+                    <button class="nav-button flex items-center justify-center px-1 py-1 rounded-lg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#ff6b35" stroke-width="1.5" fill="none"/>
+                            <circle cx="12" cy="13" r="4" stroke="#ff6b35" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Center camera button -->
+                <button class="camera-button rounded-full flex items-center justify-center" style="width: 68px; height: 68px; transform: translateY(0px);">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-2px);">
+                        <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#303030" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="13" r="4" stroke="#303030" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </button>
+                
+                <!-- Right side buttons -->
+                <div class="absolute right-0 flex space-x-4" style="transform: translateY(-5px);">
+                    <button class="nav-button flex items-center justify-center px-1 py-1 rounded-lg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#32d74b" stroke-width="1.5" fill="none"/>
+                            <circle cx="12" cy="13" r="4" stroke="#32d74b" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </button>
+                    
+                    <button class="nav-button flex items-center justify-center px-1 py-1 rounded-lg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#bf5af2" stroke-width="1.5" fill="none"/>
+                            <circle cx="12" cy="13" r="4" stroke="#bf5af2" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Gallery Page -->
+    <div id="galleryPage" class="app-page hidden">
+        <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+            <div class="flex items-center space-x-3 mb-4">
+                <button id="backFromGallery" class="w-10 h-10 rounded-full flex items-center justify-center transition-all" style="background-color: #303030; border: 1px solid #555555;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="text-xl font-semibold">Gallery</h2>
+            </div>
+        </div>
+        
+        <div class="pt-20 px-4 pb-20">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="aspect-square bg-gray-800 rounded-xl flex items-center justify-center">
+                    <span class="text-4xl">📸</span>
+                </div>
+                <div class="aspect-square bg-gray-800 rounded-xl flex items-center justify-center">
+                    <span class="text-4xl">🌅</span>
+                </div>
+                <div class="aspect-square bg-gray-800 rounded-xl flex items-center justify-center">
+                    <span class="text-4xl">🏔️</span>
+                </div>
+                <div class="aspect-square bg-gray-800 rounded-xl flex items-center justify-center">
+                    <span class="text-4xl">🌊</span>
+                </div>
+                <div class="aspect-square bg-gray-800 rounded-xl flex items-center justify-center">
+                    <span class="text-4xl">🌸</span>
+                </div>
+                <div class="aspect-square bg-gray-800 rounded-xl flex items-center justify-center">
+                    <span class="text-4xl">🌙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contest Page -->
+    <div id="contestPage" class="app-page hidden">
+        <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+            <div class="flex items-center space-x-3 mb-4">
+                <button id="backFromContest" class="w-10 h-10 rounded-full flex items-center justify-center transition-all" style="background-color: #303030; border: 1px solid #555555;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="text-xl font-semibold">Photography Contest</h2>
+            </div>
+        </div>
+        
+        <div class="pt-20 px-4 pb-20">
+            <div class="space-y-4">
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-600 hover:border-blue-400 transition-all">
+                    <h3 class="text-lg font-semibold mb-2">🏆 Weekly Challenge</h3>
+                    <p class="text-gray-300 mb-4">Theme: "Urban Landscapes"</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-400">Ends in 3 days</span>
+                        <button class="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-full text-white font-medium text-sm transition-all transform hover:scale-105 shadow-lg">Join Contest</button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-600 hover:border-green-400 transition-all">
+                    <h3 class="text-lg font-semibold mb-2">🎯 Daily Challenge</h3>
+                    <p class="text-gray-300 mb-4">Theme: "Golden Hour"</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-400">Ends in 8 hours</span>
+                        <button class="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-full text-white font-medium text-sm transition-all transform hover:scale-105 shadow-lg">Submit Photo</button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-600 hover:border-purple-400 transition-all">
+                    <h3 class="text-lg font-semibold mb-2">💎 Premium Contest</h3>
+                    <p class="text-gray-300 mb-4">Theme: "Abstract Art"</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-400">Prize: 1 ETH</span>
+                        <button class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 rounded-full text-white font-medium text-sm transition-all transform hover:scale-105 shadow-lg">Enter (0.1 ETH)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rewards Page -->
+    <div id="rewardsPage" class="app-page hidden">
+        <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+            <div class="flex items-center space-x-3 mb-4">
+                <button id="backFromRewards" class="w-10 h-10 rounded-full flex items-center justify-center transition-all" style="background-color: #303030; border: 1px solid #555555;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="text-xl font-semibold">Rewards</h2>
+            </div>
+        </div>
+        
+        <div class="pt-20 px-4 pb-20">
+            <div class="bg-gray-800 p-6 rounded-xl mb-6">
+                <h3 class="text-lg font-semibold mb-4">Your Balance</h3>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-300">LENS Tokens</span>
+                    <span class="text-2xl font-bold">1,250</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-300">ETH Earned</span>
+                    <span class="text-2xl font-bold">0.45</span>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-semibold mb-4">Available Rewards</h4>
+            <div class="space-y-3">
+                <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center border border-gray-600 hover:border-cyan-400 transition-all">
+                    <div>
+                        <h5 class="font-medium">Premium Filter Pack</h5>
+                        <p class="text-sm text-gray-400">500 LENS</p>
+                    </div>
+                    <button class="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-full text-white font-medium text-sm transition-all transform hover:scale-105 shadow-lg">Claim</button>
+                </div>
+                
+                <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center border border-gray-600 hover:border-orange-400 transition-all">
+                    <div>
+                        <h5 class="font-medium">NFT Frame Border</h5>
+                        <p class="text-sm text-gray-400">1,000 LENS</p>
+                    </div>
+                    <button class="px-5 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 rounded-full text-white font-medium text-sm transition-all transform hover:scale-105 shadow-lg">Claim</button>
+                </div>
+                
+                <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center border border-gray-600">
+                    <div>
+                        <h5 class="font-medium">Exclusive Badge</h5>
+                        <p class="text-sm text-gray-400">2,000 LENS</p>
+                    </div>
+                    <button class="px-5 py-2 bg-gray-600 rounded-full text-gray-400 font-medium text-sm cursor-not-allowed">Not Enough</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Page -->
+    <div id="infoPage" class="app-page hidden">
+        <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+            <div class="flex items-center space-x-3 mb-4">
+                <button id="backFromInfo" class="w-10 h-10 rounded-full flex items-center justify-center transition-all" style="background-color: #303030; border: 1px solid #555555;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="text-xl font-semibold">App Info</h2>
+            </div>
+        </div>
+        
+        <div class="pt-20 px-4 pb-20">
+            <div class="space-y-6">
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-3">About Lens App</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Lens App is a decentralized photography platform built on Farcaster. 
+                        Capture, share, and monetize your photography while connecting with a 
+                        vibrant community of creators.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-3">Features</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Daily photography contests</li>
+                        <li>• NFT minting and trading</li>
+                        <li>• Community leaderboards</li>
+                        <li>• Educational tutorials</li>
+                        <li>• Reward system with LENS tokens</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-3">Contact & Support</h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p>📧 support@lensapp.xyz</p>
+                        <p>🐦 @LensAppOfficial</p>
+                        <p>💬 Discord Community</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold mb-3">Version</h3>
+                    <p class="text-gray-300">Lens App v1.2.0</p>
+                    <p class="text-sm text-gray-400">Built on Farcaster Protocol</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connect Wallet Page -->
+    <div id="walletPage" class="app-page hidden">
+        <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+            <div class="flex items-center space-x-3 mb-4">
+                <button id="backFromWallet" class="w-10 h-10 rounded-full flex items-center justify-center transition-all" style="background-color: #303030; border: 1px solid #555555;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="text-xl font-semibold">Connect Wallet</h2>
+            </div>
+        </div>
+        
+        <div class="pt-20 px-4 pb-20">
+            <div class="space-y-6">
+                <div class="text-center mb-8">
+                    <h3 class="text-lg font-semibold mb-2">Choose Your Wallet</h3>
+                    <p class="text-gray-400 text-sm">Connect your wallet to start using Lens App</p>
+                </div>
+                
+                <!-- Wallet Options -->
+                <div class="space-y-4">
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">MetaMask</h4>
+                            <p class="text-sm text-gray-400">Connect using browser extension</p>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">WalletConnect</h4>
+                            <p class="text-sm text-gray-400">Scan with mobile wallet</p>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8M12 8v8" stroke="#1e40af" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Coinbase Wallet</h4>
+                            <p class="text-sm text-gray-400">Connect with Coinbase</p>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Rainbow</h4>
+                            <p class="text-sm text-gray-400">Fun, simple, secure</p>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Security Info -->
+                <div class="bg-gray-800 p-4 rounded-xl border border-gray-600 mt-8">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Secure Connection</h4>
+                            <p class="text-xs text-gray-400">Your wallet information is never stored on our servers. We only request permission to view your wallet address.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        // Slogans for animation
+        const slogans = [
+            "Capture moments, mint memories",
+            "Where photography meets blockchain",
+            "Your lens, your legacy, your NFT",
+            "Decentralized photography community",
+            "Frame the future of digital art"
+        ];
+        
+        let currentSloganIndex = 0;
+        let isAnimating = false;
+        
+        function animateSlogan(text) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const sloganElement = document.getElementById('sloganText');
+            sloganElement.innerHTML = '';
+            
+            const letters = text.split('');
+            letters.forEach((letter, index) => {
+                const span = document.createElement('span');
+                span.textContent = letter === ' ' ? '\u00A0' : letter;
+                span.className = 'letter';
+                span.style.animationDelay = `${index * 0.05}s`;
+                sloganElement.appendChild(span);
+            });
+            
+            setTimeout(() => {
+                isAnimating = false;
+            }, letters.length * 50 + 500);
+        }
+        
+        function fadeOutSlogan() {
+            const sloganElement = document.getElementById('sloganText');
+            sloganElement.classList.add('fade-out');
+            
+            setTimeout(() => {
+                sloganElement.classList.remove('fade-out');
+                currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+                animateSlogan(slogans[currentSloganIndex]);
+            }, 500);
+        }
+        
+        // Start slogan animation
+        animateSlogan(slogans[0]);
+        setInterval(fadeOutSlogan, 10000);
+        
+        // Tab functionality
+        const tabs = ['leaderboard', 'pod', 'tutorial'];
+        
+        tabs.forEach(tab => {
+            document.getElementById(`tab-${tab}`).addEventListener('click', () => {
+                // Update tab styles
+                tabs.forEach(t => {
+                    const tabElement = document.getElementById(`tab-${t}`);
+                    const contentElement = document.getElementById(`content-${t}`);
+                    
+                    if (t === tab) {
+                        tabElement.className = tabElement.className.replace('tab-inactive', 'tab-active');
+                        contentElement.classList.remove('hidden');
+                    } else {
+                        tabElement.className = tabElement.className.replace('tab-active', 'tab-inactive');
+                        contentElement.classList.add('hidden');
+                    }
+                });
+            });
+        });
+        
+        // Theme toggle functionality
+        let isDark = true;
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            const connectWalletBtn = document.getElementById('connectWalletBtn');
+            
+            isDark = !isDark;
+            
+            if (isDark) {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                body.style.color = '#ffffff';
+                themeToggle.style.borderColor = '#555555';
+                themeToggle.style.backgroundColor = '#303030';
+                connectWalletBtn.style.borderColor = '#555555';
+                connectWalletBtn.style.backgroundColor = '#303030';
+                connectWalletBtn.style.color = '#ffffff';
+                
+                // Sun icon for dark mode
+                themeIcon.innerHTML = `
+                    <circle cx="12" cy="12" r="5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                    <path d="M12 1V3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M12 21V23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M4.22 4.22L5.64 5.64" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M18.36 18.36L19.78 19.78" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M1 12H3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M21 12H23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M4.22 19.78L5.64 18.36" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M18.36 5.64L19.78 4.22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                `;
+            } else {
+                // Switch to light mode
+                body.classList.add('light-mode');
+                body.style.color = '#212121';
+                themeToggle.style.borderColor = '#cccccc';
+                themeToggle.style.backgroundColor = '#f0f0f0';
+                connectWalletBtn.style.borderColor = '#cccccc';
+                connectWalletBtn.style.backgroundColor = '#f0f0f0';
+                connectWalletBtn.style.color = '#212121';
+                
+                // Moon icon for light mode
+                themeIcon.innerHTML = `
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="#212121" stroke-width="1.5" fill="none"/>
+                `;
+            }
+        });
+        
+        // Spotlight spot purchase functionality
+        document.querySelectorAll('.spotlight-spot').forEach(spot => {
+            spot.addEventListener('click', () => {
+                if (spot.textContent.includes('ETH')) {
+                    spot.innerHTML = '<span class="text-xs text-white">Purchased!</span>';
+                    spot.style.borderColor = '#ffffff';
+                }
+            });
+        });
+        
+        // Page navigation functions
+        function showPage(pageId) {
+            // Hide main app
+            document.getElementById('mainApp').classList.add('hidden');
+            // Show target page
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+        
+        function showMainApp() {
+            // Hide all pages
+            document.querySelectorAll('.app-page').forEach(page => {
+                if (page.id !== 'mainApp') {
+                    page.classList.add('hidden');
+                }
+            });
+            // Show main app
+            document.getElementById('mainApp').classList.remove('hidden');
+        }
+        
+        // Navigation button interactions
+        document.querySelectorAll('.nav-button').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                // Add click feedback
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 150);
+                
+                // Navigate to appropriate page
+                const pages = ['galleryPage', 'contestPage', 'rewardsPage', 'infoPage'];
+                if (pages[index]) {
+                    showPage(pages[index]);
+                }
+            });
+        });
+        
+        // Connect Wallet Button
+        document.getElementById('connectWalletBtn').addEventListener('click', () => {
+            showPage('walletPage');
+        });
+        
+        // Camera button (no navigation, just feedback)
+        document.querySelector('.camera-button').addEventListener('click', () => {
+            const button = document.querySelector('.camera-button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 150);
+        });
+        
+        // Back button functionality
+        document.getElementById('backFromGallery').addEventListener('click', showMainApp);
+        document.getElementById('backFromContest').addEventListener('click', showMainApp);
+        document.getElementById('backFromRewards').addEventListener('click', showMainApp);
+        document.getElementById('backFromInfo').addEventListener('click', showMainApp);
+        document.getElementById('backFromWallet').addEventListener('click', showMainApp);
+        
+        // Wallet connection buttons
+        document.querySelectorAll('#walletPage button[class*="w-full"]').forEach(button => {
+            button.addEventListener('click', () => {
+                // Add click feedback
+                button.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 150);
+                
+                // Simulate connection process
+                const walletName = button.querySelector('h4').textContent;
+                alert(`Connecting to ${walletName}... (Demo)`);
+            });
+        });
+        
+        // Course dropdown functionality
+        function toggleCourse(courseId) {
+            const content = document.getElementById(`${courseId}-content`);
+            const arrow = document.getElementById(`${courseId}-arrow`);
+            
+            if (content.classList.contains('hidden')) {
+                // Show content
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                // Hide content
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        // Make toggleCourse function globally available
+        window.toggleCourse = toggleCourse;
+        
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cfd7e7d55e1717',t:'MTc1NzUxNjkzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lens App - Photography on Farcaster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #212121;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode {
+            background: #ffffff;
+        }
+        
+        .lens-icon {
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+        
+        .lens-outer {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+        
+        .lens-inner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode .lens-outer,
+        body.light-mode .lens-inner {
+            border-color: #212121;
+        }
+        
+        .slogan-container {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .slogan-text {
+            font-size: 0.875rem;
+            font-weight: 300;
+            color: #ffffff;
+            text-align: left;
+            min-height: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode .slogan-text {
+            color: #212121;
+        }
+        
+        .letter {
+            opacity: 0;
+            animation: fadeInLetter 0.5s ease-in-out forwards;
+        }
+        
+        @keyframes fadeInLetter {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out forwards;
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+        
+        .tab-active {
+            background: #555555;
+            color: #ffffff;
+            border-bottom-color: #ffffff !important;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-inactive {
+            background: transparent;
+            color: #888888;
+            border-bottom-color: transparent !important;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-inactive:hover {
+            background: #303030;
+            color: #ffffff;
+        }
+        
+        body.light-mode .tab-active {
+            background: #9d9d9d;
+            color: #212121;
+            border-bottom-color: #212121 !important;
+        }
+        
+        body.light-mode .tab-inactive {
+            color: #555555;
+        }
+        
+        body.light-mode .tab-inactive:hover {
+            background: #e0e0e0;
+            color: #212121;
+        }
+        
+        .flex-2 {
+            flex: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .flex-2 {
+                flex: 3;
+            }
+        }
+        
+        .tab-icon svg {
+            stroke: #666666;
+            fill: #666666;
+        }
+        
+        body.light-mode .tab-icon svg {
+            stroke: #555555;
+            fill: #555555;
+        }
+        
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #303030;
+            transform: translateY(-2px);
+        }
+        
+        .camera-button {
+            background: #ffffff;
+            border: 2px solid #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+        
+        .camera-button:hover {
+            background: #f0f0f0;
+            border-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+        }
+        
+        .camera-button:active {
+            background: #e0e0e0;
+            border-color: #e0e0e0;
+            transform: scale(0.95);
+        }
+        
+        .camera-button svg {
+            stroke: #303030;
+        }
+        
+        body.light-mode .nav-button:hover {
+            background: #9d9d9d;
+        }
+        
+        body.light-mode .camera-button {
+            background: #303030;
+            border-color: #303030;
+            box-shadow: 0 4px 12px rgba(48, 48, 48, 0.3);
+        }
+        
+        body.light-mode .camera-button:hover {
+            background: #404040;
+            border-color: #404040;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(48, 48, 48, 0.4);
+        }
+        
+        body.light-mode .camera-button:active {
+            background: #555555;
+            border-color: #555555;
+        }
+        
+        body.light-mode .camera-button svg {
+            stroke: #ffffff;
+        }
+        
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .spotlight-spot {
+            aspect-ratio: 1;
+            background: #303030;
+            border: 1px solid #555555;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .spotlight-spot:hover {
+            border-color: #888888;
+            background: #555555;
+        }
+        
+        body.light-mode .spotlight-spot {
+            background: #9d9d9d;
+            border-color: #555555;
+        }
+        
+        body.light-mode .spotlight-spot:hover {
+            border-color: #303030;
+            background: #555555;
+        }
+        
+        .leaderboard-item {
+            background: #303030;
+            border: 1px solid #555555;
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item:hover {
+            border-color: #888888;
+            background: #555555;
+        }
+        
+        body.light-mode .leaderboard-item {
+            background: #9d9d9d;
+            border-color: #555555;
+        }
+        
+        body.light-mode .leaderboard-item:hover {
+            border-color: #303030;
+            background: #555555;
+        }
+        
+        .app-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #212121;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        body.light-mode .app-page {
+            background: #ffffff;
+        }
+        
+        .app-page.hidden {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen" style="color: #ffffff; transition: all 0.3s ease;">
+    <!-- Main App Container -->
+    <div id="mainApp" class="app-page">
+    <!-- Fixed Header -->
+    <div class="fixed top-0 left-0 right-0 z-50">
+        <div class="px-4 py-3">
+            <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center space-x-2">
+                <div class="lens-icon">
+                    <div class="lens-outer"></div>
+                    <div class="lens-inner"></div>
+                </div>
+                <h1 class="text-lg font-semibold">LENS APP</h1>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all" style="border-color: #555555; background-color: #303030;">
+                    <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                        <path d="M12 1V3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M12 21V23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M4.22 4.22L5.64 5.64" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M18.36 18.36L19.78 19.78" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M1 12H3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M21 12H23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M4.22 19.78L5.64 18.36" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M18.36 5.64L19.78 4.22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                
+                <!-- Connect Wallet Button -->
+                <button id="connectWalletBtn" class="px-3 py-1 border-2 rounded-full transition-all font-medium text-sm" style="border-color: #555555; background-color: #303030; color: #ffffff;">
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
+        
+        <!-- Animated Slogan in Header -->
+        <div class="slogan-container px-1" style="margin-top: -5px;">
+            <div id="sloganText" class="slogan-text"></div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Fixed Tabs and Content Container -->
+    <div class="fixed left-0 right-0 z-40" style="top: 92px; bottom: 115px;">
+        <div class="px-4 h-full">
+            <div class="border rounded-2xl p-4 h-full flex flex-col transition-all" style="border-color: #555555; background-color: #303030;">
+                <!-- Tabs -->
+                <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
+                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tl-2xl" style="border-color: transparent;">
+                        <div class="tab-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="14" width="3" height="6" fill="#888888"/>
+                                <rect x="10.5" y="10" width="3" height="10" fill="#888888"/>
+                                <rect x="17" y="6" width="3" height="14" fill="#888888"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.2em;">
+                        P O D
+                    </button>
+                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
+                        <div class="tab-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Main mortar board (flat square top) - made taller -->
+                                <path d="M4 8L12 5L20 8L12 11L4 8Z" fill="#666666" stroke="#888888" stroke-width="1"/>
+                                <!-- Cap band around head - positioned lower for taller look -->
+                                <ellipse cx="12" cy="14" rx="6" ry="2.5" fill="none" stroke="#666666" stroke-width="1.5"/>
+                                <!-- Tassel cord from left corner -->
+                                <line x1="8" y1="8.5" x2="8" y2="16" stroke="#666666" stroke-width="1"/>
+                                <!-- Tassel top knot at left -->
+                                <circle cx="8" cy="16" r="0.8" fill="#666666"/>
+                                <!-- Tassel strands from left corner -->
+                                <path d="M7 16.8L6.5 18.5M8 16.8L8 18.5M9 16.8L9.5 18.5" stroke="#666666" stroke-width="1" stroke-linecap="round"/>
+                                <!-- Square academic cap outline for clarity - taller -->
+                                <rect x="7" y="6.5" width="10" height="4" rx="0.5" fill="none" stroke="#888888" stroke-width="0.8"/>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Content Area -->
+                <div class="flex-1 overflow-hidden">
+                    <!-- Tab Content -->
+                    <div id="content-leaderboard" class="tab-content hidden h-full flex flex-col">
+                        <!-- Lens App Leaderboard Section -->
+                        <div class="flex-1 overflow-hidden">
+                            <h3 class="text-lg font-semibold mb-4 text-center">Lens App Leaderboard</h3>
+                            <div class="overflow-y-auto h-full space-y-2 pb-4">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(255, 215, 0, 0.15); border-color: rgba(255, 215, 0, 0.3);">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-yellow-300 font-bold">#1</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">photographer.eth</span>
+                                    </div>
+                                    <span class="text-gray-300">2,450 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(192, 192, 192, 0.15); border-color: rgba(192, 192, 192, 0.3);">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#2</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">lens_master</span>
+                                    </div>
+                                    <span class="text-gray-300">2,180 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(205, 127, 50, 0.15); border-color: rgba(205, 127, 50, 0.3);">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-orange-300 font-bold">#3</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">crypto_shooter</span>
+                                    </div>
+                                    <span class="text-gray-300">1,920 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#4</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">visual_artist</span>
+                                    </div>
+                                    <span class="text-gray-300">1,850 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#5</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">frame_wizard</span>
+                                    </div>
+                                    <span class="text-gray-300">1,720 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#6</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">pixel_master</span>
+                                    </div>
+                                    <span class="text-gray-300">1,650 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#7</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">light_chaser</span>
+                                    </div>
+                                    <span class="text-gray-300">1,580 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#8</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">focus_finder</span>
+                                    </div>
+                                    <span class="text-gray-300">1,520 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#9</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">shutter_speed</span>
+                                    </div>
+                                    <span class="text-gray-300">1,480 pts</span>
+                                </div>
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-gray-300 font-bold">#10</span>
+                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                        <span class="font-medium">aperture_ace</span>
+                                    </div>
+                                    <span class="text-gray-300">1,420 pts</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Your Rank Section (Fixed at bottom) -->
+                        <div class="border-t pt-4 mt-4" style="border-color: #555555;">
+                            <h4 class="text-sm font-semibold mb-3 text-center" style="color: #888888;">Your Rank</h4>
+                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3)); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-white font-bold">#47</span>
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                                        <span class="text-xs text-white">👤</span>
+                                    </div>
+                                    <span class="font-medium text-white">your_username</span>
+                                </div>
+                                <span class="text-white">890 pts</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="content-pod" class="tab-content overflow-y-auto h-full">
+                        <h3 class="text-sm font-medium mb-2 text-center">Picture of the Day</h3>
+                        <div class="rounded-xl p-4 mb-6 cursor-pointer transition-all hover:opacity-90" style="background-color: #303030; border: 1px solid #555555;" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xe11e588f', '_blank')">
+                            <div class="aspect-video rounded-lg mb-3 flex items-center justify-center relative overflow-hidden" style="background-color: #212121;">
+                                <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/933ce9bf-65ad-4c45-121a-d612c68a0500/original" alt="Featured Photo" class="w-full h-full object-cover rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-full h-full flex items-center justify-center" style="display: none;">
+                                    <span style="color: #888888;">📸 Featured Photo</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div>
+                                    <p class="text-sm font-medium" style="color: #ffffff;">"Mountain Reflection at Dawn"</p>
+                                    <p class="text-xs" style="color: #888888;">by nimaleophotos.eth</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs" style="color: #888888;">
+                                <div class="flex items-center space-x-1">
+                                    <span>❤️</span>
+                                    <span>24</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span>🔄</span>
+                                    <span>8</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <span>💬</span>
+                                    <span>12</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-3">Spotlight Spots</h4>
+                        <div class="spotlight-grid">
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="spotlight-spot">
+                                <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="content-tutorial" class="tab-content hidden overflow-y-auto h-full">
+                        <h3 class="text-lg font-semibold mb-4 text-center">Photography Learning Courses</h3>
+                        <div class="space-y-4">
+                            <!-- Mobile Photography Course -->
+                            <div class="course-container">
+                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('mobile')">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium mb-1 text-sm">📱 Mobile Photography Course</h4>
+                                            <p class="text-xs" style="color: #888888;">Master photography using your smartphone camera.</p>
+                                        </div>
+                                        <svg id="mobile-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="mobile-content" class="course-content hidden mt-2 space-y-2">
+                                    <div class="flex flex-col gap-2">
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 1: The Magic of Light 🌞</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 4</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 2: Angles & Perspectives 🔄</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 7</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 3: Composition Basics 🎯</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 14</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 4: Orientation & Framing Choices ↔️ ↕️</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 21</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 5: Focus & Sharpness 🔍</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Jan 28</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 6: Background Control 🖼️</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 4</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 7: Color & Mood 🎨</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 11</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 8: Storytelling with Photos 📖</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 18</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 9: Motion & Timing 🏃‍♂️</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Feb 25</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-sm font-medium">Week 10: Depth & Layers 🏞️</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-xs text-gray-400">⏰ Available Mar 4</span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Intermediate Photography Course -->
+                            <div class="course-container">
+                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('intermediate')">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium mb-1 text-sm">📷 Intermediate Photography Course</h4>
+                                            <p class="text-xs" style="color: #888888;">Advanced techniques for serious photographers.</p>
+                                        </div>
+                                        <svg id="intermediate-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="intermediate-content" class="course-content hidden mt-2 space-y-2">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">⚙️ Manual Mode</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔍 Depth of Field</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">⚡ Flash Photography</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🎨 Advanced Composition</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📊 Histogram Reading</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔄 RAW Processing</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🌟 Long Exposure</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔧 Lens Selection</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💡 Studio Lighting</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🎭 Creative Effects</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📈 Post-Processing</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💼 Portfolio Building</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Extra Courses -->
+                            <div class="course-container">
+                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('extra')">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium mb-1 text-sm">🎓 Extra Courses</h4>
+                                            <p class="text-xs" style="color: #888888;">Specialized topics and blockchain integration.</p>
+                                        </div>
+                                        <svg id="extra-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="extra-content" class="course-content hidden mt-2 space-y-2">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🔗 NFT Basics</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💰 Crypto Wallets</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🎯 Minting Guide</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📊 Market Analysis</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🏆 Contest Strategy</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🌐 Web3 Platforms</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💎 Rare Collections</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🤝 Community Building</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">📱 Social Media</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">⚖️ Copyright Law</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">💼 Business Tips</span>
+                                        </div>
+                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
+                                            <span class="text-xs">🚀 Future Trends</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Fixed Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 z-50">
+        <div class="px-4 py-3">
+            <div class="border rounded-3xl p-3 shadow-2xl backdrop-blur-sm transition-all" style="border-color: #555555; background-color: #303030;">
+            <div class="flex items-center justify-center w-full relative">
+                <!-- Left side buttons -->
                 <div class="absolute left-0 flex space-x-3" style="transform: translateY(-5px);">
                     <button class="nav-button flex items-center justify-center px-1 py-1 rounded-lg">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
