@@ -311,7 +311,7 @@
                 </button>
                 
                 <!-- Connect Wallet Button -->
-                <button class="px-3 py-1 border-2 rounded-full transition-all font-medium text-sm" style="border-color: #555555; background-color: #303030; color: #ffffff;">
+                <button id="connectWalletBtn" class="px-3 py-1 border-2 rounded-full transition-all font-medium text-sm" style="border-color: #555555; background-color: #303030; color: #ffffff;">
                     Connect Wallet
                 </button>
             </div>
@@ -553,19 +553,18 @@
             <div class="flex items-center justify-center w-full relative">
                 <!-- Left side buttons -->
                 <div class="absolute left-0 flex space-x-4" style="transform: translateY(5px);">
-                    <button class="nav-button flex flex-col items-center space-y-0.5 px-1 py-1 rounded-lg">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Camera sticker icon -->
                             <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
                             <rect x="8" y="9" width="8" height="6" rx="1" fill="#ffffff"/>
                             <circle cx="12" cy="12" r="2" fill="#212121"/>
                             <rect x="10" y="7" width="4" height="1" rx="0.5" fill="#ffffff"/>
                         </svg>
-                        <span style="font-size: 10px; font-weight: 400;">Gallery</span>
                     </button>
                     
-                    <button class="nav-button flex flex-col items-center space-y-0.5 px-1 py-1 rounded-lg">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Trophy sticker icon -->
                             <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
                             <path d="M8 18H16" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
@@ -574,7 +573,6 @@
                             <path d="M8 9C7 9 6 9.5 6 10.5S7 12 8 12" stroke="#ffffff" stroke-width="1" fill="none"/>
                             <path d="M16 9C17 9 18 9.5 18 10.5S17 12 16 12" stroke="#ffffff" stroke-width="1" fill="none"/>
                         </svg>
-                        <span style="font-size: 10px; font-weight: 400;">Contest</span>
                     </button>
                 </div>
                 
@@ -588,8 +586,8 @@
                 
                 <!-- Right side buttons -->
                 <div class="absolute right-0 flex space-x-4" style="transform: translateY(5px);">
-                    <button class="nav-button flex flex-col items-center space-y-0.5 px-1 py-1 rounded-lg">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Gift box sticker icon -->
                             <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
                             <rect x="8" y="11" width="8" height="7" rx="1" fill="#ffffff"/>
@@ -600,18 +598,16 @@
                             <circle cx="10.5" cy="9" r="1" fill="#ffffff"/>
                             <circle cx="13.5" cy="9" r="1" fill="#ffffff"/>
                         </svg>
-                        <span style="font-size: 10px; font-weight: 400;">Rewards</span>
                     </button>
                     
-                    <button class="nav-button flex flex-col items-center space-y-0.5 px-1 py-1 rounded-lg">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button class="nav-button flex items-center justify-center px-2 py-2 rounded-lg">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Info question sticker icon -->
                             <circle cx="12" cy="12" r="10" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-width="1"/>
                             <circle cx="12" cy="12" r="6" fill="#ffffff"/>
                             <path d="M10 10C10 9 10.5 8 12 8S14 9 14 10C14 11 13 11.5 12 12" stroke="#212121" stroke-width="1" stroke-linecap="round" fill="none"/>
                             <circle cx="12" cy="15" r="0.5" fill="#212121"/>
                         </svg>
-                        <span style="font-size: 10px; font-weight: 400;">Info</span>
                     </button>
                 </div>
             </div>
@@ -810,6 +806,99 @@
         </div>
     </div>
 
+    <!-- Connect Wallet Page -->
+    <div id="walletPage" class="app-page hidden">
+        <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+            <div class="flex items-center space-x-3 mb-4">
+                <button id="backFromWallet" class="w-10 h-10 rounded-full flex items-center justify-center transition-all" style="background-color: #303030; border: 1px solid #555555;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="text-xl font-semibold">Connect Wallet</h2>
+            </div>
+        </div>
+        
+        <div class="pt-20 px-4 pb-20">
+            <div class="space-y-6">
+                <div class="text-center mb-8">
+                    <h3 class="text-lg font-semibold mb-2">Choose Your Wallet</h3>
+                    <p class="text-gray-400 text-sm">Connect your wallet to start using Lens App</p>
+                </div>
+                
+                <!-- Wallet Options -->
+                <div class="space-y-4">
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">MetaMask</h4>
+                            <p class="text-sm text-gray-400">Connect using browser extension</p>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">WalletConnect</h4>
+                            <p class="text-sm text-gray-400">Scan with mobile wallet</p>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8M12 8v8" stroke="#1e40af" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Coinbase Wallet</h4>
+                            <p class="text-sm text-gray-400">Connect with Coinbase</p>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-gray-800 hover:bg-gray-700 p-4 rounded-xl flex items-center space-x-4 transition-all border border-gray-600 hover:border-gray-500">
+                        <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Rainbow</h4>
+                            <p class="text-sm text-gray-400">Fun, simple, secure</p>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Security Info -->
+                <div class="bg-gray-800 p-4 rounded-xl border border-gray-600 mt-8">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Secure Connection</h4>
+                            <p class="text-xs text-gray-400">Your wallet information is never stored on our servers. We only request permission to view your wallet address.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // Slogans for animation
@@ -954,6 +1043,11 @@
             });
         });
         
+        // Connect Wallet Button
+        document.getElementById('connectWalletBtn').addEventListener('click', () => {
+            showPage('walletPage');
+        });
+        
         // Camera button (no navigation, just feedback)
         document.querySelector('.camera-button').addEventListener('click', () => {
             const button = document.querySelector('.camera-button');
@@ -968,6 +1062,22 @@
         document.getElementById('backFromContest').addEventListener('click', showMainApp);
         document.getElementById('backFromRewards').addEventListener('click', showMainApp);
         document.getElementById('backFromInfo').addEventListener('click', showMainApp);
+        document.getElementById('backFromWallet').addEventListener('click', showMainApp);
+        
+        // Wallet connection buttons
+        document.querySelectorAll('#walletPage button[class*="w-full"]').forEach(button => {
+            button.addEventListener('click', () => {
+                // Add click feedback
+                button.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 150);
+                
+                // Simulate connection process
+                const walletName = button.querySelector('h4').textContent;
+                alert(`Connecting to ${walletName}... (Demo)`);
+            });
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cd0b08a34906cc',t:'MTc1NzQ4NzU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cd15afd3ef06cc',t:'MTc1NzQ4ODAwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
