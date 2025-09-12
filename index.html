@@ -15,7 +15,7 @@
         }
         
         body.light-mode {
-            background: #ffffff;
+            background: #f5f5f5;
         }
         
         .lens-icon {
@@ -110,17 +110,17 @@
         }
         
         body.light-mode .tab-active {
-            background: #9d9d9d;
+            background: #c8c8c8;
             color: #212121;
             border-bottom-color: #212121 !important;
         }
         
         body.light-mode .tab-inactive {
-            color: #555555;
+            color: #666666;
         }
         
         body.light-mode .tab-inactive:hover {
-            background: #e0e0e0;
+            background: #f0f0f0;
             color: #212121;
         }
         
@@ -135,13 +135,26 @@
         }
         
         .tab-icon svg {
-            stroke: #666666;
-            fill: #666666;
+            stroke: #b0b0b0;
+            fill: #b0b0b0;
         }
         
         body.light-mode .tab-icon svg {
-            stroke: #555555;
-            fill: #555555;
+            stroke: #b0b0b0;
+            fill: #b0b0b0;
+        }
+        
+        /* Light mode SVG icons */
+        body.light-mode svg[stroke="#888888"] {
+            stroke: #b0b0b0 !important;
+        }
+        
+        body.light-mode svg[stroke="#b0b0b0"] {
+            stroke: #b0b0b0 !important;
+        }
+        
+        body.light-mode svg[stroke="#ffffff"] {
+            stroke: #212121 !important;
         }
         
         .nav-button {
@@ -178,29 +191,42 @@
         }
         
         body.light-mode .nav-button:hover {
-            background: #9d9d9d;
+            background: #e0e0e0;
+        }
+        
+        /* Light mode container styles */
+        body.light-mode .border {
+            border-color: #555555 !important;
+        }
+        
+        body.light-mode div[style*="background-color: #303030"] {
+            background-color: #d8d8d8 !important;
+        }
+        
+        body.light-mode div[style*="border-color: #555555"] {
+            border-color: #555555 !important;
         }
         
         body.light-mode .camera-button {
-            background: #ffffff;
-            border-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+            background: #212121;
+            border-color: #212121;
+            box-shadow: 0 4px 12px rgba(33, 33, 33, 0.3);
         }
         
         body.light-mode .camera-button:hover {
-            background: #f0f0f0;
-            border-color: #f0f0f0;
+            background: #303030;
+            border-color: #303030;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 6px 16px rgba(33, 33, 33, 0.4);
         }
         
         body.light-mode .camera-button:active {
-            background: #e0e0e0;
-            border-color: #e0e0e0;
+            background: #404040;
+            border-color: #404040;
         }
         
         body.light-mode .camera-button svg {
-            stroke: #303030;
+            stroke: #ffffff !important;
         }
         
         .your-rank-bg {
@@ -209,6 +235,14 @@
         
         body.light-mode .your-rank-bg {
             background-color: #ffffff;
+        }
+        
+        .your-rank-text {
+            color: #ffffff;
+        }
+        
+        body.light-mode .your-rank-text {
+            color: #212121 !important;
         }
         
         .spotlight-grid {
@@ -235,13 +269,13 @@
         }
         
         body.light-mode .spotlight-spot {
-            background: #9d9d9d;
+            background: #f0f0f0;
             border-color: #555555;
         }
         
         body.light-mode .spotlight-spot:hover {
-            border-color: #303030;
-            background: #555555;
+            border-color: #808080;
+            background: #e8e8e8;
         }
         
         .leaderboard-item {
@@ -256,13 +290,13 @@
         }
         
         body.light-mode .leaderboard-item {
-            background: #9d9d9d;
+            background: #f0f0f0;
             border-color: #555555;
         }
         
         body.light-mode .leaderboard-item:hover {
-            border-color: #303030;
-            background: #555555;
+            border-color: #808080;
+            background: #e8e8e8;
         }
         
         .app-page {
@@ -277,7 +311,52 @@
         }
         
         body.light-mode .app-page {
-            background: #ffffff;
+            background: #f5f5f5;
+        }
+        
+        /* Light mode text colors */
+        body.light-mode .text-white {
+            color: #212121 !important;
+        }
+        
+        body.light-mode .text-gray-300 {
+            color: #555555 !important;
+        }
+        
+        body.light-mode .text-gray-400 {
+            color: #666666 !important;
+        }
+        
+        body.light-mode .text-gray-500 {
+            color: #777777 !important;
+        }
+        
+        body.light-mode .bg-gray-800 {
+            background-color: #f0f0f0 !important;
+        }
+        
+        body.light-mode .bg-gray-700 {
+            background-color: #e8e8e8 !important;
+        }
+        
+        body.light-mode .bg-gray-600 {
+            background-color: #d8d8d8 !important;
+        }
+        
+        body.light-mode .border-gray-600 {
+            border-color: #555555 !important;
+        }
+        
+        body.light-mode .border-gray-700 {
+            border-color: #555555 !important;
+        }
+        
+        /* Light mode rewards tab styles */
+        body.light-mode #rewards-tab-daily.py-2.px-4.font-medium.text-xs.border-b-2.border-white.bg-gray-700.text-white.flex-1.rounded-tl-lg,
+        body.light-mode button[class*="border-white"][class*="bg-gray-700"][class*="text-white"] {
+            background-color: #c8c8c8 !important;
+            color: #212121 !important;
+            border-bottom-color: #212121 !important;
         }
         
         .app-page.hidden {
@@ -340,9 +419,9 @@
                 <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
                     <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tl-2xl" style="border-color: transparent;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="12" width="4" height="9" rx="1" stroke="#888888" stroke-width="1.5" fill="none"/>
-                            <rect x="10" y="8" width="4" height="13" rx="1" stroke="#888888" stroke-width="1.5" fill="none"/>
-                            <rect x="17" y="4" width="4" height="17" rx="1" stroke="#888888" stroke-width="1.5" fill="none"/>
+                            <rect x="3" y="12" width="4" height="9" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
+                            <rect x="10" y="8" width="4" height="13" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
+                            <rect x="17" y="4" width="4" height="17" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
                         </svg>
                     </button>
                     <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.3em;">
@@ -351,33 +430,33 @@
                     <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Back cover (perspective) -->
-                            <path d="M4 5L6 3H18L20 5V18L18 20H6L4 18V5Z" stroke="#888888" stroke-width="1" fill="none" opacity="0.4"/>
+                            <path d="M4 5L6 3H18L20 5V18L18 20H6L4 18V5Z" stroke="#b0b0b0" stroke-width="1" fill="none" opacity="0.4"/>
                             
                             <!-- Left page with perspective -->
-                            <path d="M3 6L5 4H11L12 5V19L11 20H5L3 18V6Z" stroke="#888888" stroke-width="1.2" fill="none"/>
+                            <path d="M3 6L5 4H11L12 5V19L11 20H5L3 18V6Z" stroke="#b0b0b0" stroke-width="1.2" fill="none"/>
                             
                             <!-- Right page with perspective -->
-                            <path d="M12 5L13 4H19L21 6V18L19 20H13L12 19V5Z" stroke="#888888" stroke-width="1.2" fill="none"/>
+                            <path d="M12 5L13 4H19L21 6V18L19 20H13L12 19V5Z" stroke="#b0b0b0" stroke-width="1.2" fill="none"/>
                             
                             <!-- Binding spine -->
-                            <line x1="12" y1="5" x2="12" y2="19" stroke="#888888" stroke-width="1.5"/>
+                            <line x1="12" y1="5" x2="12" y2="19" stroke="#b0b0b0" stroke-width="1.5"/>
                             
                             <!-- Spiral rings with perspective -->
-                            <ellipse cx="12" cy="7" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="9.5" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="12" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="14.5" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="17" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="7" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="9.5" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="12" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="14.5" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="17" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
                             
                             <!-- Text lines on left page (angled) -->
-                            <line x1="5" y1="8" x2="10" y2="7.5" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="5" y1="10" x2="9.5" y2="9.5" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="5" y1="12" x2="10" y2="11.5" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="5" y1="8" x2="10" y2="7.5" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="5" y1="10" x2="9.5" y2="9.5" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="5" y1="12" x2="10" y2="11.5" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
                             
                             <!-- Text lines on right page (angled) -->
-                            <line x1="14" y1="7.5" x2="19" y2="8" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="14" y1="9.5" x2="18.5" y2="10" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="14" y1="11.5" x2="19" y2="12" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="14" y1="7.5" x2="19" y2="8" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="14" y1="9.5" x2="18.5" y2="10" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="14" y1="11.5" x2="19" y2="12" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
                         </svg>
                     </button>
                 </div>
@@ -390,7 +469,7 @@
                         <div class="flex-1 overflow-hidden">
                             <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Lens App Leaderboard</h3>
                             <div class="overflow-y-auto h-full space-y-2 pb-4">
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(255, 215, 0, 0.15); border-color: rgba(255, 215, 0, 0.3);">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(255, 215, 0, 0.15);">
                                     <div class="flex items-center space-x-3">
                                         <span class="text-yellow-300 font-bold text-sm">#1</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
@@ -398,7 +477,7 @@
                                     </div>
                                     <span class="text-gray-300 text-sm">2,450 pts</span>
                                 </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(192, 192, 192, 0.15); border-color: rgba(192, 192, 192, 0.3);">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(192, 192, 192, 0.15);">
                                     <div class="flex items-center space-x-3">
                                         <span class="text-gray-300 font-bold text-sm">#2</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
@@ -406,7 +485,7 @@
                                     </div>
                                     <span class="text-gray-300 text-sm">2,180 pts</span>
                                 </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(205, 127, 50, 0.15); border-color: rgba(205, 127, 50, 0.3);">
+                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(205, 127, 50, 0.15);">
                                     <div class="flex items-center space-x-3">
                                         <span class="text-orange-300 font-bold text-sm">#3</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
@@ -476,7 +555,7 @@
                         <!-- Your Rank Section (Fixed at bottom) -->
                         <div class="border-t pt-6 mt-4 relative" style="border-color: #555555;">
                             <div class="absolute left-1/2 transform -translate-x-1/2 -top-3 px-3 py-1 rounded text-center transition-all your-rank-bg">
-                                <h4 class="text-sm font-medium transition-all" style="letter-spacing: 0.1em; color: #ffffff;">Your Rank</h4>
+                                <h4 class="text-sm font-medium transition-all your-rank-text" style="letter-spacing: 0.1em;">Your Rank</h4>
                             </div>
                             <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3)); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);">
                                 <div class="flex items-center space-x-3">
@@ -816,8 +895,8 @@
                 <!-- Center camera button -->
                 <button class="camera-button rounded-full flex items-center justify-center" style="width: 64px; height: 64px;">
                     <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-2px);">
-                        <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#303030" stroke-width="2.2" fill="none"/>
-                        <circle cx="12" cy="13" r="4" stroke="#303030" stroke-width="2.2" fill="none"/>
+                        <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#303030" stroke-width="2.2" fill="white"/>
+                        <circle cx="12" cy="13" r="4" stroke="#303030" stroke-width="2.2" fill="white"/>
                     </svg>
                 </button>
                 
@@ -1589,5 +1668,5 @@
         });
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97defe4a978b95ab',t:'MTc1NzY3NTc5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df1cbbd6c0d3f4',t:'MTc1NzY3NzA0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
