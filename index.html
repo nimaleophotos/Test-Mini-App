@@ -57,7 +57,7 @@
         }
         
         .slogan-text {
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 300;
             color: #ffffff;
             text-align: left;
@@ -203,6 +203,14 @@
             stroke: #303030;
         }
         
+        .your-rank-bg {
+            background-color: #212121;
+        }
+        
+        body.light-mode .your-rank-bg {
+            background-color: #ffffff;
+        }
+        
         .spotlight-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -331,34 +339,46 @@
                 <!-- Tabs -->
                 <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
                     <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tl-2xl" style="border-color: transparent;">
-                        <div class="tab-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="4" y="14" width="3" height="6" fill="#888888"/>
-                                <rect x="10.5" y="10" width="3" height="10" fill="#888888"/>
-                                <rect x="17" y="6" width="3" height="14" fill="#888888"/>
-                            </svg>
-                        </div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="12" width="4" height="9" rx="1" stroke="#888888" stroke-width="1.5" fill="none"/>
+                            <rect x="10" y="8" width="4" height="13" rx="1" stroke="#888888" stroke-width="1.5" fill="none"/>
+                            <rect x="17" y="4" width="4" height="17" rx="1" stroke="#888888" stroke-width="1.5" fill="none"/>
+                        </svg>
                     </button>
-                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.2em;">
+                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.3em;">
                         P O D
                     </button>
                     <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
-                        <div class="tab-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Main mortar board (flat square top) - made taller -->
-                                <path d="M4 8L12 5L20 8L12 11L4 8Z" fill="#666666" stroke="#888888" stroke-width="1"/>
-                                <!-- Cap band around head - positioned lower for taller look -->
-                                <ellipse cx="12" cy="14" rx="6" ry="2.5" fill="none" stroke="#666666" stroke-width="1.5"/>
-                                <!-- Tassel cord from left corner -->
-                                <line x1="8" y1="8.5" x2="8" y2="16" stroke="#666666" stroke-width="1"/>
-                                <!-- Tassel top knot at left -->
-                                <circle cx="8" cy="16" r="0.8" fill="#666666"/>
-                                <!-- Tassel strands from left corner -->
-                                <path d="M7 16.8L6.5 18.5M8 16.8L8 18.5M9 16.8L9.5 18.5" stroke="#666666" stroke-width="1" stroke-linecap="round"/>
-                                <!-- Square academic cap outline for clarity - taller -->
-                                <rect x="7" y="6.5" width="10" height="4" rx="0.5" fill="none" stroke="#888888" stroke-width="0.8"/>
-                            </svg>
-                        </div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Back cover (perspective) -->
+                            <path d="M4 5L6 3H18L20 5V18L18 20H6L4 18V5Z" stroke="#888888" stroke-width="1" fill="none" opacity="0.4"/>
+                            
+                            <!-- Left page with perspective -->
+                            <path d="M3 6L5 4H11L12 5V19L11 20H5L3 18V6Z" stroke="#888888" stroke-width="1.2" fill="none"/>
+                            
+                            <!-- Right page with perspective -->
+                            <path d="M12 5L13 4H19L21 6V18L19 20H13L12 19V5Z" stroke="#888888" stroke-width="1.2" fill="none"/>
+                            
+                            <!-- Binding spine -->
+                            <line x1="12" y1="5" x2="12" y2="19" stroke="#888888" stroke-width="1.5"/>
+                            
+                            <!-- Spiral rings with perspective -->
+                            <ellipse cx="12" cy="7" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="9.5" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="12" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="14.5" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
+                            <ellipse cx="12" cy="17" rx="0.8" ry="0.5" stroke="#888888" stroke-width="0.8" fill="none"/>
+                            
+                            <!-- Text lines on left page (angled) -->
+                            <line x1="5" y1="8" x2="10" y2="7.5" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="5" y1="10" x2="9.5" y2="9.5" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="5" y1="12" x2="10" y2="11.5" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            
+                            <!-- Text lines on right page (angled) -->
+                            <line x1="14" y1="7.5" x2="19" y2="8" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="14" y1="9.5" x2="18.5" y2="10" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                            <line x1="14" y1="11.5" x2="19" y2="12" stroke="#888888" stroke-width="0.6" stroke-linecap="round"/>
+                        </svg>
                     </button>
                 </div>
                 
@@ -368,109 +388,111 @@
                     <div id="content-leaderboard" class="tab-content hidden h-full flex flex-col">
                         <!-- Lens App Leaderboard Section -->
                         <div class="flex-1 overflow-hidden">
-                            <h3 class="text-lg font-semibold mb-4 text-center">Lens App Leaderboard</h3>
+                            <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Lens App Leaderboard</h3>
                             <div class="overflow-y-auto h-full space-y-2 pb-4">
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(255, 215, 0, 0.15); border-color: rgba(255, 215, 0, 0.3);">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-yellow-300 font-bold">#1</span>
+                                        <span class="text-yellow-300 font-bold text-sm">#1</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">photographer.eth</span>
+                                        <span class="font-medium text-sm">photographer.eth</span>
                                     </div>
-                                    <span class="text-gray-300">2,450 pts</span>
+                                    <span class="text-gray-300 text-sm">2,450 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(192, 192, 192, 0.15); border-color: rgba(192, 192, 192, 0.3);">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#2</span>
+                                        <span class="text-gray-300 font-bold text-sm">#2</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">lens_master</span>
+                                        <span class="font-medium text-sm">lens_master</span>
                                     </div>
-                                    <span class="text-gray-300">2,180 pts</span>
+                                    <span class="text-gray-300 text-sm">2,180 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(205, 127, 50, 0.15); border-color: rgba(205, 127, 50, 0.3);">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-orange-300 font-bold">#3</span>
+                                        <span class="text-orange-300 font-bold text-sm">#3</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">crypto_shooter</span>
+                                        <span class="font-medium text-sm">crypto_shooter</span>
                                     </div>
-                                    <span class="text-gray-300">1,920 pts</span>
+                                    <span class="text-gray-300 text-sm">1,920 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#4</span>
+                                        <span class="text-gray-300 font-bold text-sm">#4</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">visual_artist</span>
+                                        <span class="font-medium text-sm">visual_artist</span>
                                     </div>
-                                    <span class="text-gray-300">1,850 pts</span>
+                                    <span class="text-gray-300 text-sm">1,850 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#5</span>
+                                        <span class="text-gray-300 font-bold text-sm">#5</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">frame_wizard</span>
+                                        <span class="font-medium text-sm">frame_wizard</span>
                                     </div>
-                                    <span class="text-gray-300">1,720 pts</span>
+                                    <span class="text-gray-300 text-sm">1,720 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#6</span>
+                                        <span class="text-gray-300 font-bold text-sm">#6</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">pixel_master</span>
+                                        <span class="font-medium text-sm">pixel_master</span>
                                     </div>
-                                    <span class="text-gray-300">1,650 pts</span>
+                                    <span class="text-gray-300 text-sm">1,650 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#7</span>
+                                        <span class="text-gray-300 font-bold text-sm">#7</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">light_chaser</span>
+                                        <span class="font-medium text-sm">light_chaser</span>
                                     </div>
-                                    <span class="text-gray-300">1,580 pts</span>
+                                    <span class="text-gray-300 text-sm">1,580 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#8</span>
+                                        <span class="text-gray-300 font-bold text-sm">#8</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">focus_finder</span>
+                                        <span class="font-medium text-sm">focus_finder</span>
                                     </div>
-                                    <span class="text-gray-300">1,520 pts</span>
+                                    <span class="text-gray-300 text-sm">1,520 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#9</span>
+                                        <span class="text-gray-300 font-bold text-sm">#9</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">shutter_speed</span>
+                                        <span class="font-medium text-sm">shutter_speed</span>
                                     </div>
-                                    <span class="text-gray-300">1,480 pts</span>
+                                    <span class="text-gray-300 text-sm">1,480 pts</span>
                                 </div>
                                 <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold">#10</span>
+                                        <span class="text-gray-300 font-bold text-sm">#10</span>
                                         <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium">aperture_ace</span>
+                                        <span class="font-medium text-sm">aperture_ace</span>
                                     </div>
-                                    <span class="text-gray-300">1,420 pts</span>
+                                    <span class="text-gray-300 text-sm">1,420 pts</span>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Your Rank Section (Fixed at bottom) -->
-                        <div class="border-t pt-4 mt-4" style="border-color: #555555;">
-                            <h4 class="text-sm font-semibold mb-3 text-center" style="color: #888888;">Your Rank</h4>
+                        <div class="border-t pt-6 mt-4 relative" style="border-color: #555555;">
+                            <div class="absolute left-1/2 transform -translate-x-1/2 -top-3 px-3 py-1 rounded text-center transition-all your-rank-bg">
+                                <h4 class="text-sm font-medium transition-all" style="letter-spacing: 0.1em; color: #ffffff;">Your Rank</h4>
+                            </div>
                             <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3)); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);">
                                 <div class="flex items-center space-x-3">
-                                    <span class="text-white font-bold">#47</span>
+                                    <span class="text-white font-bold text-sm">#47</span>
                                     <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
                                         <span class="text-xs text-white">👤</span>
                                     </div>
-                                    <span class="font-medium text-white">your_username</span>
+                                    <span class="font-medium text-white text-sm">your_username</span>
                                 </div>
-                                <span class="text-white">890 pts</span>
+                                <span class="text-white text-sm">890 pts</span>
                             </div>
                         </div>
                     </div>
                     
                     <div id="content-pod" class="tab-content overflow-y-auto h-full">
-                        <h3 class="text-sm font-medium mb-2 text-center">Picture of the Day</h3>
+                        <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Picture of the Day</h3>
                         <div class="rounded-xl p-4 mb-6 cursor-pointer transition-all hover:opacity-90" style="background-color: #303030; border: 1px solid #555555;" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xe11e588f', '_blank')">
                             <div class="aspect-video rounded-lg mb-3 flex items-center justify-center relative overflow-hidden" style="background-color: #212121;">
                                 <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/933ce9bf-65ad-4c45-121a-d612c68a0500/original" alt="Featured Photo" class="w-full h-full object-cover rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -533,7 +555,7 @@
                     </div>
                     
                     <div id="content-tutorial" class="tab-content hidden overflow-y-auto h-full">
-                        <h3 class="text-lg font-semibold mb-4 text-center">Photography Learning Courses</h3>
+                        <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Photography Learning Courses</h3>
                         <div class="space-y-4">
                             <!-- Mobile Photography Course -->
                             <div class="course-container">
@@ -1311,11 +1333,11 @@
     <script>
         // Slogans for animation
         const slogans = [
-            "Capture moments, mint memories",
-            "Where photography meets blockchain",
-            "Your lens, your legacy, your NFT",
-            "Decentralized photography community",
-            "Frame the future of digital art"
+            "Photography comes alive through $LENS",
+            "Through $LENS, every photo tells a story!",
+            "$LENS celebrates the art of photography",
+            "Discover photography's beauty through $LENS",
+            "Through $LENS, we celebrate every frame!"
         ];
         
         let currentSloganIndex = 0;
@@ -1565,5 +1587,5 @@
         });
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97dea38c563de5e0',t:'MTc1NzY3MjA3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97deea9d052a95ab',t:'MTc1NzY3NDk4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
