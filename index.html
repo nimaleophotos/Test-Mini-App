@@ -1241,6 +1241,129 @@
         </div>
     </div>
 
+    <!-- Camera Page -->
+    <div id="cameraPage" class="app-page hidden">
+        <!-- Camera Interface -->
+        <div class="relative w-full h-full bg-black overflow-hidden">
+            <!-- Video Stream -->
+            <video id="cameraVideo" class="w-full h-full object-cover" autoplay muted playsinline></video>
+            
+            <!-- Grid Overlay -->
+            <div id="gridOverlay" class="absolute inset-0 pointer-events-none hidden">
+                <!-- 3x3 Grid -->
+                <div id="grid3x3" class="w-full h-full hidden">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <!-- Vertical lines -->
+                        <line x1="33.33" y1="0" x2="33.33" y2="100" stroke="rgba(255,255,255,0.3)" stroke-width="0.2"/>
+                        <line x1="66.67" y1="0" x2="66.67" y2="100" stroke="rgba(255,255,255,0.3)" stroke-width="0.2"/>
+                        <!-- Horizontal lines -->
+                        <line x1="0" y1="33.33" x2="100" y2="33.33" stroke="rgba(255,255,255,0.3)" stroke-width="0.2"/>
+                        <line x1="0" y1="66.67" x2="100" y2="66.67" stroke="rgba(255,255,255,0.3)" stroke-width="0.2"/>
+                    </svg>
+                </div>
+                
+                <!-- Center Grid -->
+                <div id="gridCenter" class="w-full h-full hidden">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <!-- Center cross -->
+                        <line x1="50" y1="45" x2="50" y2="55" stroke="rgba(255,255,255,0.4)" stroke-width="0.3"/>
+                        <line x1="45" y1="50" x2="55" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="0.3"/>
+                        <!-- Center circle -->
+                        <circle cx="50" cy="50" r="8" stroke="rgba(255,255,255,0.2)" stroke-width="0.2" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Top Controls -->
+            <div class="absolute top-0 left-0 right-0 z-50 p-4">
+                <div class="flex items-center justify-between">
+                    <!-- Back Button -->
+                    <button id="backFromCamera" class="w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 12H5M12 19L5 12L12 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Top Right Controls -->
+                    <div class="flex items-center space-x-3">
+                        <!-- Flash Button -->
+                        <button id="flashButton" class="w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Timer Button -->
+                        <button id="timerButton" class="w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                                <path d="M12 6V12L16 14" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Grid Button -->
+                        <button id="gridButton" class="w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="7" height="7" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                                <rect x="14" y="3" width="7" height="7" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                                <rect x="3" y="14" width="7" height="7" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                                <rect x="14" y="14" width="7" height="7" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Side Controls -->
+            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 z-50">
+                <div class="flex flex-col space-y-3">
+                    <!-- Aspect Ratio Button -->
+                    <button id="aspectButton" class="w-12 h-12 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                        <div class="text-white text-xs font-medium" id="aspectText">FULL</div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Bottom Controls -->
+            <div class="absolute bottom-0 left-0 right-0 z-50 p-6">
+                <div class="flex items-center justify-between">
+                    <!-- Zoom Controls -->
+                    <div class="flex items-center space-x-2">
+                        <button id="zoom05x" class="zoom-button px-3 py-2 rounded-full text-white text-sm font-medium transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                            0.5x
+                        </button>
+                        <button id="zoom1x" class="zoom-button px-3 py-2 rounded-full text-white text-sm font-medium transition-all bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-50">
+                            1x
+                        </button>
+                        <button id="zoom2x" class="zoom-button px-3 py-2 rounded-full text-white text-sm font-medium transition-all bg-black bg-opacity-50 backdrop-blur-sm">
+                            2x
+                        </button>
+                    </div>
+                    
+                    <!-- Shutter Button -->
+                    <button id="shutterButton" class="w-20 h-20 rounded-full flex items-center justify-center transition-all bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-2xl">
+                        <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                        </div>
+                    </button>
+                    
+                    <!-- Gallery Thumbnail -->
+                    <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center cursor-pointer transition-all hover:scale-105">
+                        <span class="text-white text-xs">📷</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timer Countdown -->
+            <div id="timerCountdown" class="absolute inset-0 flex items-center justify-center z-60 hidden bg-black bg-opacity-50">
+                <div class="text-white text-8xl font-bold" id="countdownNumber">3</div>
+            </div>
+            
+            <!-- Flash Effect -->
+            <div id="flashEffect" class="absolute inset-0 bg-white opacity-0 pointer-events-none z-70"></div>
+        </div>
+    </div>
+
     <!-- Info Page -->
     <div id="infoPage" class="app-page hidden">
         <div class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
@@ -1581,12 +1704,13 @@
             showPage('walletPage');
         });
         
-        // Camera button (no navigation, just feedback)
+        // Camera button functionality
         document.querySelector('.camera-button').addEventListener('click', () => {
             const button = document.querySelector('.camera-button');
             button.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 button.style.transform = '';
+                showPage('cameraPage');
             }, 150);
         });
         
@@ -1596,6 +1720,10 @@
         document.getElementById('backFromRewards').addEventListener('click', showMainApp);
         document.getElementById('backFromInfo').addEventListener('click', showMainApp);
         document.getElementById('backFromWallet').addEventListener('click', showMainApp);
+        document.getElementById('backFromCamera').addEventListener('click', () => {
+            stopCamera();
+            showMainApp();
+        });
         
         // Wallet connection buttons
         document.querySelectorAll('#walletPage button[class*="w-full"]').forEach(button => {
@@ -1641,6 +1769,268 @@
         // Make claimPoints function globally available
         window.claimPoints = claimPoints;
         
+        // Camera functionality
+        let cameraStream = null;
+        let currentZoom = 1;
+        let flashEnabled = false;
+        let timerSeconds = 0;
+        let gridMode = 0; // 0: off, 1: 3x3, 2: center
+        let aspectRatio = 0; // 0: full, 1: 1:1, 2: 4:3, 3: 16:9
+        const aspectRatios = ['FULL', '1:1', '4:3', '16:9'];
+        
+        async function startCamera() {
+            try {
+                const constraints = {
+                    video: {
+                        facingMode: 'environment',
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    }
+                };
+                
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                const video = document.getElementById('cameraVideo');
+                video.srcObject = cameraStream;
+                
+                // Apply initial zoom
+                applyZoom(currentZoom);
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('Camera access denied or not available. Using demo mode.');
+                // Show demo placeholder
+                const video = document.getElementById('cameraVideo');
+                video.style.background = 'linear-gradient(45deg, #1a1a1a, #2a2a2a)';
+                video.style.display = 'flex';
+                video.style.alignItems = 'center';
+                video.style.justifyContent = 'center';
+                video.innerHTML = '<div class="text-white text-center"><div class="text-4xl mb-2">📷</div><div>Camera Demo Mode</div></div>';
+            }
+        }
+        
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+        }
+        
+        function applyZoom(zoom) {
+            const video = document.getElementById('cameraVideo');
+            video.style.transform = `scale(${zoom})`;
+            
+            // Update zoom button styles
+            document.querySelectorAll('.zoom-button').forEach(btn => {
+                btn.className = 'zoom-button px-3 py-2 rounded-full text-white text-sm font-medium transition-all bg-black bg-opacity-50 backdrop-blur-sm';
+            });
+            
+            const activeZoomBtn = document.getElementById(`zoom${zoom === 0.5 ? '05x' : zoom + 'x'}`);
+            if (activeZoomBtn) {
+                activeZoomBtn.className = 'zoom-button px-3 py-2 rounded-full text-white text-sm font-medium transition-all bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-50';
+            }
+        }
+        
+        function toggleFlash() {
+            flashEnabled = !flashEnabled;
+            const flashButton = document.getElementById('flashButton');
+            
+            if (flashEnabled) {
+                flashButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-yellow-500 bg-opacity-80 backdrop-blur-sm';
+                flashButton.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#ffffff" stroke-width="1.5" fill="#ffffff"/>
+                    </svg>
+                `;
+            } else {
+                flashButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm';
+                flashButton.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                    </svg>
+                `;
+            }
+        }
+        
+        function cycleTimer() {
+            const timers = [0, 2, 5, 10];
+            const currentIndex = timers.indexOf(timerSeconds);
+            timerSeconds = timers[(currentIndex + 1) % timers.length];
+            
+            const timerButton = document.getElementById('timerButton');
+            const timerText = timerSeconds === 0 ? '' : `${timerSeconds}s`;
+            
+            if (timerSeconds > 0) {
+                timerButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-blue-500 bg-opacity-80 backdrop-blur-sm';
+                timerButton.innerHTML = `
+                    <div class="text-white text-xs font-bold">${timerSeconds}s</div>
+                `;
+            } else {
+                timerButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm';
+                timerButton.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+                        <path d="M12 6V12L16 14" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                `;
+            }
+        }
+        
+        function toggleGrid() {
+            gridMode = (gridMode + 1) % 3;
+            const gridOverlay = document.getElementById('gridOverlay');
+            const grid3x3 = document.getElementById('grid3x3');
+            const gridCenter = document.getElementById('gridCenter');
+            const gridButton = document.getElementById('gridButton');
+            
+            // Hide all grids first
+            gridOverlay.classList.add('hidden');
+            grid3x3.classList.add('hidden');
+            gridCenter.classList.add('hidden');
+            
+            if (gridMode === 1) {
+                // Show 3x3 grid
+                gridOverlay.classList.remove('hidden');
+                grid3x3.classList.remove('hidden');
+                gridButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-50';
+            } else if (gridMode === 2) {
+                // Show center grid
+                gridOverlay.classList.remove('hidden');
+                gridCenter.classList.remove('hidden');
+                gridButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-blue-500 bg-opacity-80 backdrop-blur-sm';
+            } else {
+                // No grid
+                gridButton.className = 'w-10 h-10 rounded-full flex items-center justify-center transition-all bg-black bg-opacity-50 backdrop-blur-sm';
+            }
+        }
+        
+        function cycleAspectRatio() {
+            aspectRatio = (aspectRatio + 1) % aspectRatios.length;
+            const aspectText = document.getElementById('aspectText');
+            const video = document.getElementById('cameraVideo');
+            
+            aspectText.textContent = aspectRatios[aspectRatio];
+            
+            // Apply aspect ratio styling
+            switch (aspectRatio) {
+                case 0: // Full
+                    video.style.aspectRatio = 'auto';
+                    video.style.objectFit = 'cover';
+                    break;
+                case 1: // 1:1
+                    video.style.aspectRatio = '1/1';
+                    video.style.objectFit = 'cover';
+                    break;
+                case 2: // 4:3
+                    video.style.aspectRatio = '4/3';
+                    video.style.objectFit = 'cover';
+                    break;
+                case 3: // 16:9
+                    video.style.aspectRatio = '16/9';
+                    video.style.objectFit = 'cover';
+                    break;
+            }
+        }
+        
+        function showFlashEffect() {
+            const flashEffect = document.getElementById('flashEffect');
+            flashEffect.style.opacity = '0.8';
+            setTimeout(() => {
+                flashEffect.style.opacity = '0';
+            }, 100);
+        }
+        
+        function startCountdown(seconds) {
+            return new Promise((resolve) => {
+                const countdown = document.getElementById('timerCountdown');
+                const countdownNumber = document.getElementById('countdownNumber');
+                
+                countdown.classList.remove('hidden');
+                
+                let remaining = seconds;
+                countdownNumber.textContent = remaining;
+                
+                const interval = setInterval(() => {
+                    remaining--;
+                    if (remaining > 0) {
+                        countdownNumber.textContent = remaining;
+                    } else {
+                        clearInterval(interval);
+                        countdown.classList.add('hidden');
+                        resolve();
+                    }
+                }, 1000);
+            });
+        }
+        
+        async function takePhoto() {
+            // Start timer if set
+            if (timerSeconds > 0) {
+                await startCountdown(timerSeconds);
+            }
+            
+            // Flash effect
+            if (flashEnabled) {
+                showFlashEffect();
+            }
+            
+            // Shutter animation
+            const shutterButton = document.getElementById('shutterButton');
+            shutterButton.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                shutterButton.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Simulate photo capture
+            console.log('Photo captured!');
+            
+            // In a real implementation, you would capture the video frame here
+            // const canvas = document.createElement('canvas');
+            // const ctx = canvas.getContext('2d');
+            // const video = document.getElementById('cameraVideo');
+            // canvas.width = video.videoWidth;
+            // canvas.height = video.videoHeight;
+            // ctx.drawImage(video, 0, 0);
+            // const imageData = canvas.toDataURL('image/jpeg');
+        }
+        
+        // Camera event listeners
+        document.getElementById('zoom05x').addEventListener('click', () => {
+            currentZoom = 0.5;
+            applyZoom(currentZoom);
+        });
+        
+        document.getElementById('zoom1x').addEventListener('click', () => {
+            currentZoom = 1;
+            applyZoom(currentZoom);
+        });
+        
+        document.getElementById('zoom2x').addEventListener('click', () => {
+            currentZoom = 2;
+            applyZoom(currentZoom);
+        });
+        
+        document.getElementById('flashButton').addEventListener('click', toggleFlash);
+        document.getElementById('timerButton').addEventListener('click', cycleTimer);
+        document.getElementById('gridButton').addEventListener('click', toggleGrid);
+        document.getElementById('aspectButton').addEventListener('click', cycleAspectRatio);
+        document.getElementById('shutterButton').addEventListener('click', takePhoto);
+        
+        // Start camera when camera page is shown
+        function showCameraPage() {
+            showPage('cameraPage');
+            startCamera();
+        }
+        
+        // Update camera button to use new function
+        document.querySelector('.camera-button').removeEventListener('click', () => {});
+        document.querySelector('.camera-button').addEventListener('click', () => {
+            const button = document.querySelector('.camera-button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+                showCameraPage();
+            }, 150);
+        });
+        
         // Rewards page tab functionality
         const rewardsTabs = ['daily', 'quests', 'achievements'];
         
@@ -1668,5 +2058,5 @@
         });
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df1cbbd6c0d3f4',t:'MTc1NzY3NzA0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df2be0239e1c95',t:'MTc1NzY3NzY2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
