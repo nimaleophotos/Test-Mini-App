@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lens App - Photography on Farcaster</title>
+    <title>Rewards & Achievements - Lens App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -18,76 +18,15 @@
             background: #f5f5f5;
         }
         
-        .lens-icon {
-            width: 32px;
-            height: 32px;
-            position: relative;
-        }
-        
-        .lens-outer {
-            width: 32px;
-            height: 32px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            position: absolute;
-            transition: all 0.3s ease;
-        }
-        
-        .lens-inner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        body.light-mode .lens-outer,
-        body.light-mode .lens-inner {
-            border-color: #212121;
-        }
-        
-        .slogan-container {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        
-        .slogan-text {
-            font-size: 0.75rem;
-            font-weight: 300;
-            color: #ffffff;
-            text-align: left;
-            min-height: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        body.light-mode .slogan-text {
-            color: #212121;
-        }
-        
-        .letter {
-            opacity: 0;
-            animation: fadeInLetter 0.5s ease-in-out forwards;
-        }
-        
-        @keyframes fadeInLetter {
-            to {
-                opacity: 1;
-            }
-        }
-        
-        .fade-out {
-            animation: fadeOut 0.5s ease-in-out forwards;
-        }
-        
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-            }
+        .rewards-interface {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #212121;
+            z-index: 100;
+            display: block;
         }
         
         .tab-active {
@@ -124,243 +63,95 @@
             color: #212121;
         }
         
-        .flex-2 {
-            flex: 2;
-        }
-        
-        @media (min-width: 768px) {
-            .flex-2 {
-                flex: 3;
-            }
-        }
-        
-        .tab-icon svg {
-            stroke: #b0b0b0;
-            fill: #b0b0b0;
-        }
-        
-        body.light-mode .tab-icon svg {
-            stroke: #b0b0b0;
-            fill: #b0b0b0;
-        }
-        
-        /* Light mode SVG icons */
-        body.light-mode svg[stroke="#888888"] {
-            stroke: #b0b0b0 !important;
-        }
-        
-        body.light-mode svg[stroke="#b0b0b0"] {
-            stroke: #b0b0b0 !important;
-        }
-        
-        body.light-mode svg[stroke="#ffffff"] {
-            stroke: #212121 !important;
-        }
-        
-        .nav-button {
-            transition: all 0.3s ease;
-        }
-        
-        .nav-button:hover {
-            background: #303030;
-            transform: translateY(-2px);
-        }
-        
-        .camera-button {
-            background: #ffffff;
-            border: 2px solid #ffffff;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-        }
-        
-        .camera-button:hover {
-            background: #f0f0f0;
-            border-color: #f0f0f0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
-        }
-        
-        .camera-button:active {
-            background: #e0e0e0;
-            border-color: #e0e0e0;
-            transform: scale(0.95);
-        }
-        
-        .camera-button svg {
-            stroke: #303030;
-        }
-        
-        body.light-mode .nav-button:hover {
-            background: #e0e0e0;
-        }
-        
-        /* Light mode container styles */
-        body.light-mode .border {
-            border-color: #555555 !important;
-        }
-        
-        body.light-mode div[style*="background-color: #303030"] {
-            background-color: #d8d8d8 !important;
-        }
-        
-        body.light-mode div[style*="border-color: #555555"] {
-            border-color: #555555 !important;
-        }
-        
-        body.light-mode .camera-button {
-            background: #212121;
-            border-color: #212121;
-            box-shadow: 0 4px 12px rgba(33, 33, 33, 0.3);
-        }
-        
-        body.light-mode .camera-button:hover {
-            background: #303030;
-            border-color: #303030;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(33, 33, 33, 0.4);
-        }
-        
-        body.light-mode .camera-button:active {
-            background: #404040;
-            border-color: #404040;
-        }
-        
-        body.light-mode .camera-button svg {
-            stroke: #ffffff !important;
-        }
-        
-        .your-rank-bg {
-            background-color: #212121;
-        }
-        
-        body.light-mode .your-rank-bg {
-            background-color: #ffffff;
-        }
-        
-        .your-rank-text {
-            color: #ffffff;
-        }
-        
-        body.light-mode .your-rank-text {
-            color: #212121 !important;
-        }
-        
-        .spotlight-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        
-        .spotlight-spot {
-            aspect-ratio: 1;
+        .reward-card {
             background: #303030;
             border: 1px solid #555555;
-            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .reward-card:hover {
+            border-color: #888888;
+            background: #404040;
+        }
+        
+        .reward-card.completed {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.3));
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+        
+        .reward-card.locked {
+            background: #252525;
+            border-color: #444444;
+            opacity: 0.6;
+        }
+        
+        body.light-mode .reward-card {
+            background: #f0f0f0;
+            border-color: #555555;
+        }
+        
+        body.light-mode .reward-card:hover {
+            border-color: #808080;
+            background: #e8e8e8;
+        }
+        
+        body.light-mode .reward-card.completed {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.2));
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+        
+        .progress-bar {
+            background: #404040;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-fill.completed {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+        }
+        
+        body.light-mode .progress-bar {
+            background: #e0e0e0;
+        }
+        
+        .reward-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 18px;
         }
         
-        .spotlight-spot:hover {
-            border-color: #888888;
-            background: #555555;
+        .daily-task {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.2));
+            border-color: rgba(59, 130, 246, 0.3);
         }
         
-        body.light-mode .spotlight-spot {
-            background: #f0f0f0;
-            border-color: #555555;
+        .quest-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(147, 51, 234, 0.2));
+            border-color: rgba(168, 85, 247, 0.3);
         }
         
-        body.light-mode .spotlight-spot:hover {
-            border-color: #808080;
-            background: #e8e8e8;
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.2));
+            border-color: rgba(245, 158, 11, 0.3);
         }
         
-        .leaderboard-item {
-            background: #303030;
-            border: 1px solid #555555;
-            transition: all 0.3s ease;
-        }
-        
-        .leaderboard-item:hover {
-            border-color: #888888;
-            background: #555555;
-        }
-        
-        body.light-mode .leaderboard-item {
-            background: #f0f0f0;
-            border-color: #555555;
-        }
-        
-        body.light-mode .leaderboard-item:hover {
-            border-color: #808080;
-            background: #e8e8e8;
-        }
-
-        /* Camera Interface Styles */
-        .camera-interface {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #000000;
-            z-index: 100;
-            display: none;
-        }
-
-        .camera-viewfinder {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            overflow: hidden;
-        }
-
-        .camera-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .camera-controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            padding: 20px;
-        }
-
-        .camera-top-controls {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            z-index: 10;
-        }
-
-        .camera-side-controls {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 10;
-        }
-
-        .camera-control-btn {
+        .close-btn {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -368,878 +159,457 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
-
-        .camera-control-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .camera-control-btn.active {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: #ffffff;
-        }
-
-        .camera-control-btn.active svg {
-            stroke: #000000 !important;
-        }
-
-        .shutter-btn {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .shutter-btn:active {
-            transform: scale(0.9);
-        }
-
-        .shutter-btn::after {
-            content: '';
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 2px solid #000000;
-        }
-
-        .grid-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .grid-overlay.active {
-            opacity: 1;
-        }
-
-        .grid-line {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .grid-line.vertical {
-            width: 1px;
-            height: 100%;
-            top: 0;
-        }
-
-        .grid-line.horizontal {
-            height: 1px;
-            width: 100%;
-            left: 0;
-        }
-
-        .aspect-ratio-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .aspect-btn {
-            padding: 8px 12px;
-            border-radius: 20px;
+        
+        .close-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .claim-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .aspect-btn.active {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .timer-display {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 120px;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
-            display: none;
-            z-index: 20;
-        }
-
-        .lens-selector {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .lens-btn {
-            width: 60px;
-            height: 40px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        .lens-btn.active {
-            background: #ffffff;
-            color: #000000;
+        
+        .claim-btn:hover {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            transform: translateY(-1px);
         }
-
-        .flash-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #ffffff;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 30;
+        
+        .claim-btn:disabled {
+            background: #404040;
+            color: #888888;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        .flash-effect.active {
-            animation: flashAnimation 0.3s ease-out;
+        
+        .streak-counter {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
         }
-
-        @keyframes flashAnimation {
-            0% { opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { opacity: 0; }
+        
+        .xp-badge {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .coin-badge {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body class="min-h-screen" style="color: #ffffff; transition: all 0.3s ease;">
-    <!-- Camera Interface -->
-    <div id="cameraInterface" class="camera-interface">
-        <div class="camera-viewfinder">
-            <video id="cameraVideo" class="camera-video" autoplay muted playsinline></video>
-            
-            <!-- Grid Overlay -->
-            <div id="gridOverlay" class="grid-overlay">
-                <div class="grid-line vertical" style="left: 33.33%;"></div>
-                <div class="grid-line vertical" style="left: 66.66%;"></div>
-                <div class="grid-line horizontal" style="top: 33.33%;"></div>
-                <div class="grid-line horizontal" style="top: 66.66%;"></div>
-            </div>
-
-            <!-- Flash Effect -->
-            <div id="flashEffect" class="flash-effect"></div>
-
-            <!-- Timer Display -->
-            <div id="timerDisplay" class="timer-display">3</div>
-
-            <!-- Top Controls -->
-            <div class="camera-top-controls">
-                <div class="flex justify-between items-center">
-                    <button id="closeCameraBtn" class="camera-control-btn">
+    <!-- Rewards Interface -->
+    <div id="rewardsInterface" class="rewards-interface">
+        <div class="h-full flex flex-col">
+            <!-- Header -->
+            <div class="px-4 py-6 border-b" style="border-color: #555555;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="reward-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                            🏆
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold">Rewards & Achievements</h1>
+                            <p class="text-sm text-gray-400">Earn XP, coins, and unlock exclusive rewards</p>
+                        </div>
+                    </div>
+                    <button id="closeRewardsBtn" class="close-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18 6L6 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                             <path d="M6 6L18 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </button>
-                    
-                    <div class="aspect-ratio-controls">
-                        <button class="aspect-btn active" data-aspect="4:3">4:3</button>
-                        <button class="aspect-btn" data-aspect="16:9">16:9</button>
-                        <button class="aspect-btn" data-aspect="1:1">1:1</button>
-                        <button class="aspect-btn" data-aspect="9:16">9:16</button>
+                </div>
+                
+                <!-- Stats Bar -->
+                <div class="flex items-center justify-between mt-4 p-3 rounded-xl" style="background: #303030; border: 1px solid #555555;">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">⚡</span>
+                            <div>
+                                <p class="text-sm font-medium">Level 12</p>
+                                <p class="text-xs text-gray-400">2,450 XP</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🪙</span>
+                            <div>
+                                <p class="text-sm font-medium">1,250</p>
+                                <p class="text-xs text-gray-400">Coins</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🔥</span>
+                            <div>
+                                <p class="text-sm font-medium">7 Days</p>
+                                <p class="text-xs text-gray-400">Streak</p>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div style="width: 48px;"></div>
                 </div>
-            </div>
-
-            <!-- Lens Selector -->
-            <div class="lens-selector">
-                <button class="lens-btn" data-zoom="0.5x">0.5x</button>
-                <button class="lens-btn active" data-zoom="1x">1x</button>
-                <button class="lens-btn" data-zoom="2x">2x</button>
-                <button class="lens-btn" data-zoom="3x">3x</button>
-            </div>
-
-            <!-- Side Controls -->
-            <div class="camera-side-controls">
-                <button id="swapCameraBtn" class="camera-control-btn" title="Swap Camera">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 2L21 6L17 10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M3 6H21" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M7 22L3 18L7 14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M21 18H3" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                
-                <button id="gridBtn" class="camera-control-btn" title="Grid Lines">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="3" y="3" width="18" height="18" rx="2" stroke="#ffffff" stroke-width="2" fill="none"/>
-                        <path d="M9 3V21" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-                        <path d="M15 3V21" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-                        <path d="M3 9H21" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-                        <path d="M3 15H21" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                
-                <button id="timerBtn" class="camera-control-btn" title="Timer">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="2" fill="none"/>
-                        <path d="M12 6V12L16 14" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Bottom Controls -->
-            <div class="camera-controls">
-                <div class="flex justify-center items-center">
-                    <button id="shutterBtn" class="shutter-btn"></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fixed Header -->
-    <div class="fixed top-0 left-0 right-0 z-50">
-        <div class="px-4 py-3">
-            <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center space-x-2">
-                <div class="lens-icon">
-                    <div class="lens-outer"></div>
-                    <div class="lens-inner"></div>
-                </div>
-                <h1 class="text-lg font-semibold">LENS APP</h1>
             </div>
             
-            <div class="flex items-center space-x-2">
-                <!-- Theme Toggle -->
-                <button id="themeToggle" class="w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all" style="border-color: #555555; background-color: #303030;">
-                    <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
-                        <path d="M12 1V3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M12 21V23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M4.22 4.22L5.64 5.64" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M18.36 18.36L19.78 19.78" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M1 12H3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M21 12H23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M4.22 19.78L5.64 18.36" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M18.36 5.64L19.78 4.22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
+            <!-- Tabs -->
+            <div class="flex border-b" style="border-color: #555555;">
+                <button id="tab-daily" class="py-3 px-6 font-medium transition-all tab-active text-sm border-b-2 flex-1" style="border-color: #ffffff;">
+                    Daily Tasks
                 </button>
-                
-                <!-- Connect Wallet Button -->
-                <button class="px-3 py-1 border-2 rounded-full transition-all font-medium text-sm" style="border-color: #555555; background-color: #303030; color: #ffffff;">
-                    Connect Wallet
+                <button id="tab-quests" class="py-3 px-6 font-medium transition-all tab-inactive text-sm border-b-2 flex-1" style="border-color: transparent;">
+                    Quests
+                </button>
+                <button id="tab-achievements" class="py-3 px-6 font-medium transition-all tab-inactive text-sm border-b-2 flex-1" style="border-color: transparent;">
+                    Achievements
                 </button>
             </div>
-        </div>
-        
-        <!-- Animated Slogan in Header -->
-        <div class="slogan-container px-1" style="margin-top: -5px;">
-            <div id="sloganText" class="slogan-text"></div>
-        </div>
-        </div>
-    </div>
-    
-    <!-- Fixed Tabs and Content Container -->
-    <div class="fixed left-0 right-0 z-40" style="top: 92px; bottom: 115px;">
-        <div class="px-4 h-full">
-            <div class="border rounded-2xl p-4 h-full flex flex-col transition-all" style="border-color: #555555; background-color: #303030;">
-                <!-- Tabs -->
-                <div class="flex -mx-4 -mt-4 mb-4 border-b transition-all" style="border-color: #555555;">
-                    <button id="tab-leaderboard" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tl-2xl" style="border-color: transparent;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="12" width="4" height="9" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <rect x="10" y="8" width="4" height="13" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <rect x="17" y="4" width="4" height="17" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                        </svg>
-                    </button>
-                    <button id="tab-pod" class="py-2 px-4 font-bold transition-all tab-active text-lg border-b-2 flex items-center justify-center flex-2 md:flex-1" style="border-color: #ffffff; letter-spacing: 0.3em;">
-                        P O D
-                    </button>
-                    <button id="tab-tutorial" class="py-2 px-4 font-medium transition-all tab-inactive text-sm border-b-2 flex items-center justify-center flex-1 md:flex-none md:w-20 rounded-tr-2xl" style="border-color: transparent;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Back cover (perspective) -->
-                            <path d="M4 5L6 3H18L20 5V18L18 20H6L4 18V5Z" stroke="#b0b0b0" stroke-width="1" fill="none" opacity="0.4"/>
-                            
-                            <!-- Left page with perspective -->
-                            <path d="M3 6L5 4H11L12 5V19L11 20H5L3 18V6Z" stroke="#b0b0b0" stroke-width="1.2" fill="none"/>
-                            
-                            <!-- Right page with perspective -->
-                            <path d="M12 5L13 4H19L21 6V18L19 20H13L12 19V5Z" stroke="#b0b0b0" stroke-width="1.2" fill="none"/>
-                            
-                            <!-- Binding spine -->
-                            <line x1="12" y1="5" x2="12" y2="19" stroke="#b0b0b0" stroke-width="1.5"/>
-                            
-                            <!-- Spiral rings with perspective -->
-                            <ellipse cx="12" cy="7" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="9.5" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="12" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="14.5" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
-                            <ellipse cx="12" cy="17" rx="0.8" ry="0.5" stroke="#b0b0b0" stroke-width="0.8" fill="none"/>
-                            
-                            <!-- Text lines on left page (angled) -->
-                            <line x1="5" y1="8" x2="10" y2="7.5" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="5" y1="10" x2="9.5" y2="9.5" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="5" y1="12" x2="10" y2="11.5" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
-                            
-                            <!-- Text lines on right page (angled) -->
-                            <line x1="14" y1="7.5" x2="19" y2="8" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="14" y1="9.5" x2="18.5" y2="10" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
-                            <line x1="14" y1="11.5" x2="19" y2="12" stroke="#b0b0b0" stroke-width="0.6" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Content Area -->
-                <div class="flex-1 overflow-hidden">
-                    <!-- Tab Content -->
-                    <div id="content-leaderboard" class="tab-content hidden h-full flex flex-col">
-                        <!-- Lens App Leaderboard Section -->
-                        <div class="flex-1 overflow-hidden">
-                            <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Lens App Leaderboard</h3>
-                            <div class="overflow-y-auto h-full space-y-2 pb-4">
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(255, 215, 0, 0.15);">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-yellow-300 font-bold text-sm">#1</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">photographer.eth</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">2,450 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(192, 192, 192, 0.15);">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#2</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">lens_master</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">2,180 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background-color: rgba(205, 127, 50, 0.15);">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-orange-300 font-bold text-sm">#3</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">crypto_shooter</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,920 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#4</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">visual_artist</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,850 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#5</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">frame_wizard</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,720 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#6</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">pixel_master</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,650 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#7</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">light_chaser</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,580 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#8</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">focus_finder</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,520 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#9</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">shutter_speed</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,480 pts</span>
-                                </div>
-                                <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-gray-300 font-bold text-sm">#10</span>
-                                        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
-                                        <span class="font-medium text-sm">aperture_ace</span>
-                                    </div>
-                                    <span class="text-gray-300 text-sm">1,420 pts</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Your Rank Section (Fixed at bottom) -->
-                        <div class="border-t pt-6 mt-4 relative" style="border-color: #555555;">
-                            <div class="absolute left-1/2 transform -translate-x-1/2 -top-3 px-3 py-1 rounded text-center transition-all your-rank-bg">
-                                <h4 class="text-sm font-medium transition-all your-rank-text" style="letter-spacing: 0.1em;">Your Rank</h4>
-                            </div>
-                            <div class="leaderboard-item p-4 rounded-xl flex items-center justify-between" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3)); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);">
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-white font-bold text-sm">#47</span>
-                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                                        <span class="text-xs text-white">👤</span>
-                                    </div>
-                                    <span class="font-medium text-white text-sm">your_username</span>
-                                </div>
-                                <span class="text-white text-sm">890 pts</span>
-                            </div>
+            
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Daily Tasks Tab -->
+                <div id="content-daily" class="tab-content space-y-3">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">Today's Tasks</h3>
+                        <div class="streak-counter">
+                            🔥 7 Day Streak
                         </div>
                     </div>
                     
-                    <div id="content-pod" class="tab-content overflow-y-auto h-full">
-                        <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Picture of the Day</h3>
-                        <div class="rounded-xl p-4 mb-6 cursor-pointer transition-all hover:opacity-90" style="background-color: #303030; border: 1px solid #555555;" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0xe11e588f', '_blank')">
-                            <div class="rounded-lg mb-3 relative overflow-hidden" style="background-color: #212121; height: 280px;">
-                                <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/933ce9bf-65ad-4c45-121a-d612c68a0500/original" alt="Featured Photo" class="w-full h-full object-cover rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="w-full h-full flex items-center justify-center absolute inset-0" style="display: none;">
-                                    <span style="color: #888888;">📸 Featured Photo</span>
+                    <!-- Daily Task Cards -->
+                    <div class="reward-card daily-task p-4 rounded-xl completed">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                    ✓
                                 </div>
-                            </div>
-                            <div class="flex items-center justify-between mb-2">
                                 <div>
-                                    <p class="text-sm font-medium" style="color: #ffffff;">"Mountain Reflection at Dawn"</p>
-                                    <p class="text-xs" style="color: #888888;">by nimaleophotos.eth</p>
+                                    <h4 class="font-medium">Take Your First Photo</h4>
+                                    <p class="text-xs text-gray-400">Capture and share a photo today</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+50 XP</span>
+                                        <span class="coin-badge">+25 Coins</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-4 text-xs" style="color: #888888;">
-                                <div class="flex items-center space-x-1">
-                                    <span>❤️</span>
-                                    <span>24</span>
+                            <button class="claim-btn" disabled>Claimed</button>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill completed" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card daily-task p-4 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+                                    📸
                                 </div>
-                                <div class="flex items-center space-x-1">
-                                    <span>🔄</span>
-                                    <span>8</span>
+                                <div>
+                                    <h4 class="font-medium">Upload 3 Photos</h4>
+                                    <p class="text-xs text-gray-400">Share 3 photos to the community</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+100 XP</span>
+                                        <span class="coin-badge">+50 Coins</span>
+                                    </div>
                                 </div>
-                                <div class="flex items-center space-x-1">
-                                    <span>💬</span>
-                                    <span>12</span>
+                            </div>
+                            <button class="claim-btn" disabled>1/3</button>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 33%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card daily-task p-4 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                    ❤️
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Like 5 Photos</h4>
+                                    <p class="text-xs text-gray-400">Show love to community photos</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+25 XP</span>
+                                        <span class="coin-badge">+15 Coins</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="claim-btn">Claim</button>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill completed" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card daily-task p-4 rounded-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="reward-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                💬
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Comment on 2 Photos</h4>
+                                <p class="text-xs text-gray-400">Engage with the community</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="xp-badge">+30 XP</span>
+                                    <span class="coin-badge">+20 Coins</span>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="rounded-xl p-4 cursor-pointer transition-all hover:opacity-90" style="background-color: #303030; border: 1px solid #555555;">
-                            <h4 class="text-sm font-medium mb-3 text-center" style="letter-spacing: 0.1em;">Spotlight Spots</h4>
-                            <div class="spotlight-grid">
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quests Tab -->
+                <div id="content-quests" class="tab-content hidden space-y-3">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">Weekly Quests</h3>
+                        <p class="text-sm text-gray-400">Resets in 3 days</p>
+                    </div>
+                    
+                    <div class="reward-card quest-card p-4 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
+                                    🌟
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                                <div>
+                                    <h4 class="font-medium">Photography Master</h4>
+                                    <p class="text-xs text-gray-400">Upload 20 high-quality photos this week</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+500 XP</span>
+                                        <span class="coin-badge">+200 Coins</span>
+                                    </div>
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium">12/20</p>
+                                <p class="text-xs text-gray-400">Photos</p>
+                            </div>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card quest-card p-4 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">
+                                    🎯
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                                <div>
+                                    <h4 class="font-medium">Community Favorite</h4>
+                                    <p class="text-xs text-gray-400">Get 100 likes on your photos</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+300 XP</span>
+                                        <span class="coin-badge">+150 Coins</span>
+                                    </div>
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium">67/100</p>
+                                <p class="text-xs text-gray-400">Likes</p>
+                            </div>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 67%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card quest-card p-4 rounded-xl completed">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                                    ✓
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                                <div>
+                                    <h4 class="font-medium">Social Butterfly</h4>
+                                    <p class="text-xs text-gray-400">Comment on 50 different photos</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+200 XP</span>
+                                        <span class="coin-badge">+100 Coins</span>
+                                    </div>
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                            <button class="claim-btn">Claim</button>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill completed" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card quest-card p-4 rounded-xl locked">
+                        <div class="flex items-center space-x-3">
+                            <div class="reward-icon" style="background: #404040;">
+                                🔒
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Lens Legend</h4>
+                                <p class="text-xs text-gray-400">Reach Level 15 to unlock</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="xp-badge">+1000 XP</span>
+                                    <span class="coin-badge">+500 Coins</span>
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Achievements Tab -->
+                <div id="content-achievements" class="tab-content hidden space-y-3">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">Achievements</h3>
+                        <p class="text-sm text-gray-400">8/24 Unlocked</p>
+                    </div>
+                    
+                    <div class="reward-card achievement-card p-4 rounded-xl completed">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                                    🥇
                                 </div>
-                                <div class="spotlight-spot">
-                                    <span class="text-xs" style="color: #888888;">0.1 ETH</span>
+                                <div>
+                                    <h4 class="font-medium">First Steps</h4>
+                                    <p class="text-xs text-gray-400">Upload your first photo</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+100 XP</span>
+                                        <span class="coin-badge">+50 Coins</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-green-400 font-medium text-sm">Unlocked</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card achievement-card p-4 rounded-xl completed">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                                    📱
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Mobile Master</h4>
+                                    <p class="text-xs text-gray-400">Take 100 photos with mobile camera</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+300 XP</span>
+                                        <span class="coin-badge">+150 Coins</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-green-400 font-medium text-sm">Unlocked</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card achievement-card p-4 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="reward-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                    🏆
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Community Champion</h4>
+                                    <p class="text-xs text-gray-400">Get featured in Picture of the Day</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="xp-badge">+500 XP</span>
+                                        <span class="coin-badge">+250 Coins</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium">0/1</p>
+                                <p class="text-xs text-gray-400">Features</p>
+                            </div>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reward-card achievement-card p-4 rounded-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="reward-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                🔥
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Streak Master</h4>
+                                <p class="text-xs text-gray-400">Maintain a 30-day login streak</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="xp-badge">+750 XP</span>
+                                    <span class="coin-badge">+300 Coins</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress-bar mt-3">
+                            <div class="progress-fill" style="width: 23%;"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">7/30 days</p>
+                    </div>
+                    
+                    <div class="reward-card achievement-card p-4 rounded-xl locked">
+                        <div class="flex items-center space-x-3">
+                            <div class="reward-icon" style="background: #404040;">
+                                🔒
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Lens Legendary</h4>
+                                <p class="text-xs text-gray-400">Reach Level 50</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="xp-badge">+2000 XP</span>
+                                    <span class="coin-badge">+1000 Coins</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div id="content-tutorial" class="tab-content hidden overflow-y-auto h-full">
-                        <h3 class="text-sm font-medium mb-2 text-center" style="letter-spacing: 0.1em;">Photography Learning Courses</h3>
-                        <div class="space-y-4">
-                            <!-- Mobile Photography Course -->
-                            <div class="course-container">
-                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('mobile')">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h4 class="font-medium mb-1 text-sm">📱 Mobile Photography Course</h4>
-                                            <p class="text-xs" style="color: #888888;">Master photography using your smartphone camera.</p>
-                                        </div>
-                                        <svg id="mobile-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div id="mobile-content" class="course-content hidden mt-2 space-y-2">
-                                    <div class="flex flex-col gap-2">
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 1: The Magic of Light 🌞</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Jan 4</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 2: Angles & Perspectives 🔄</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Jan 7</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 3: Composition Basics 🎯</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Jan 14</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 4: Orientation & Framing Choices ↔️ ↕️</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Jan 21</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 5: Focus & Sharpness 🔍</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Jan 28</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 6: Background Control 🖼️</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Feb 4</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 7: Color & Mood 🎨</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Feb 11</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 8: Storytelling with Photos 📖</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Feb 18</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 9: Motion & Timing 🏃‍♂️</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Feb 25</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-3 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all" onclick="window.open('https://paragraph.com/@nimaleophotos/welcome-to-the-time-channel', '_blank')">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-sm font-medium">Week 10: Depth & Layers 🏞️</span>
-                                            </div>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-xs text-gray-400">⏰ Available Mar 4</span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="reward-card achievement-card p-4 rounded-xl locked">
+                        <div class="flex items-center space-x-3">
+                            <div class="reward-icon" style="background: #404040;">
+                                🔒
                             </div>
-
-                            <!-- Intermediate Photography Course -->
-                            <div class="course-container">
-                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('intermediate')">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h4 class="font-medium mb-1 text-sm">📷 Intermediate Photography Course</h4>
-                                            <p class="text-xs" style="color: #888888;">Advanced techniques for serious photographers.</p>
-                                        </div>
-                                        <svg id="intermediate-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div id="intermediate-content" class="course-content hidden mt-2 space-y-2">
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">⚙️ Manual Mode</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🔍 Depth of Field</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">⚡ Flash Photography</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🎨 Advanced Composition</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">📊 Histogram Reading</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🔄 RAW Processing</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🌟 Long Exposure</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🔧 Lens Selection</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">💡 Studio Lighting</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🎭 Creative Effects</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">📈 Post-Processing</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">💼 Portfolio Building</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Extra Courses -->
-                            <div class="course-container">
-                                <div class="course-header p-3 rounded-xl cursor-pointer transition-all" style="background-color: #1e3a5f; border: 1px solid #2d4a6b;" onclick="toggleCourse('extra')">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h4 class="font-medium mb-1 text-sm">🎓 Extra Courses</h4>
-                                            <p class="text-xs" style="color: #888888;">Specialized topics and blockchain integration.</p>
-                                        </div>
-                                        <svg id="extra-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="#888888" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div id="extra-content" class="course-content hidden mt-2 space-y-2">
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🔗 NFT Basics</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">💰 Crypto Wallets</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🎯 Minting Guide</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">📊 Market Analysis</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🏆 Contest Strategy</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🌐 Web3 Platforms</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">💎 Rare Collections</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🤝 Community Building</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">📱 Social Media</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">⚖️ Copyright Law</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">💼 Business Tips</span>
-                                        </div>
-                                        <div class="lesson-box bg-gray-700 p-2 rounded-lg border border-gray-600 hover:border-gray-500 cursor-pointer transition-all">
-                                            <span class="text-xs">🚀 Future Trends</span>
-                                        </div>
-                                    </div>
+                            <div>
+                                <h4 class="font-medium">NFT Pioneer</h4>
+                                <p class="text-xs text-gray-400">Mint your first photo NFT</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="xp-badge">+1500 XP</span>
+                                    <span class="coin-badge">+750 Coins</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Fixed Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 z-50">
-        <div class="px-4 py-3">
-            <div class="border rounded-xl p-3 shadow-2xl backdrop-blur-sm transition-all relative" style="border-color: #555555; background-color: #303030;">
-                <!-- Inner border -->
-                <div class="absolute inset-2 border rounded-3xl pointer-events-none" style="border-color: #666666;"></div>
-            <div class="flex items-center justify-center w-full">
-                <!-- Left side buttons -->
-                <div class="flex space-x-3 mr-4">
-                    <button class="nav-button flex items-center justify-center w-12 h-12 rounded-full">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Simple star icon -->
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                        </svg>
-                    </button>
-                    
-                    <button class="nav-button flex items-center justify-center w-12 h-12 rounded-full">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Trophy cup icon -->
-                            <path d="M6 9H4C3.44772 9 3 9.44772 3 10V11C3 12.6569 4.34315 14 6 14H7" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <path d="M18 9H20C20.5523 9 21 9.44772 21 10V11C21 12.6569 19.6569 14 18 14H17" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <path d="M7 9V6C7 4.89543 7.89543 4 9 4H15C16.1046 4 17 4.89543 17 6V14C17 16.2091 15.2091 18 13 18H11C8.79086 18 7 16.2091 7 14V9Z" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <path d="M9 22H15" stroke="#b0b0b0" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M10 18V22" stroke="#b0b0b0" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M14 18V22" stroke="#b0b0b0" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Center camera button -->
-                <button id="cameraButton" class="camera-button rounded-full flex items-center justify-center" style="width: 64px; height: 64px;">
-                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-2px);">
-                        <path d="M23 19C23 19.5304 22.7893 20.0391 22.4142 20.4142C22.0391 20.7893 21.5304 21 21 21H3C2.46957 21 1.96086 20.7893 1.58579 20.4142C1.21071 20.0391 1 19.5304 1 19V8C1 7.46957 1.21071 6.96086 1.58579 6.58579C1.96086 6.21071 2.46957 6 3 6H7L9 3H15L17 6H21C21.5304 6 22.0391 6.21071 22.4142 6.58579C22.7893 6.96086 23 7.46957 23 8V19Z" stroke="#303030" stroke-width="2.2" fill="white"/>
-                        <circle cx="12" cy="13" r="4" stroke="#303030" stroke-width="2.2" fill="white"/>
-                    </svg>
-                </button>
-                
-                <!-- Right side buttons -->
-                <div class="flex space-x-3 ml-4">
-                    <button class="nav-button flex items-center justify-center w-12 h-12 rounded-full">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Gallery grid icon -->
-                            <rect x="3" y="3" width="7" height="7" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <rect x="14" y="3" width="7" height="7" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <rect x="3" y="14" width="7" height="7" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <rect x="14" y="14" width="7" height="7" rx="1" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                        </svg>
-                    </button>
-                    
-                    <button class="nav-button flex items-center justify-center w-12 h-12 rounded-full">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Info icon -->
-                            <circle cx="12" cy="12" r="10" stroke="#b0b0b0" stroke-width="1.5" fill="none"/>
-                            <path d="M12 16V12" stroke="#b0b0b0" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M12 8H12.01" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
 
     <script>
-        // Camera functionality
-        let currentStream = null;
-        let currentCamera = 'environment'; // Start with back camera
-        let isTimerActive = false;
-        let timerSeconds = 0;
-        let currentZoom = 1;
-        let currentAspectRatio = '4:3';
-
-        // Slogans for animation
-        const slogans = [
-            "Photography comes alive through $LENS",
-            "Through $LENS, every photo tells a story!",
-            "$LENS celebrates the art of photography",
-            "Discover photography's beauty through $LENS",
-            "Through $LENS, we celebrate every frame!"
-        ];
-        
-        let currentSloganIndex = 0;
-        let isAnimating = false;
-        
-        function animateSlogan(text) {
-            if (isAnimating) return;
-            isAnimating = true;
-            
-            const sloganElement = document.getElementById('sloganText');
-            sloganElement.innerHTML = '';
-            
-            const letters = text.split('');
-            letters.forEach((letter, index) => {
-                const span = document.createElement('span');
-                span.textContent = letter === ' ' ? '\u00A0' : letter;
-                span.className = 'letter';
-                span.style.animationDelay = `${index * 0.05}s`;
-                sloganElement.appendChild(span);
-            });
-            
-            setTimeout(() => {
-                isAnimating = false;
-            }, letters.length * 50 + 500);
-        }
-        
-        function fadeOutSlogan() {
-            const sloganElement = document.getElementById('sloganText');
-            sloganElement.classList.add('fade-out');
-            
-            setTimeout(() => {
-                sloganElement.classList.remove('fade-out');
-                currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
-                animateSlogan(slogans[currentSloganIndex]);
-            }, 500);
-        }
-        
-        // Start slogan animation
-        animateSlogan(slogans[0]);
-        setInterval(fadeOutSlogan, 10000);
-        
         // Tab functionality
-        const tabs = ['leaderboard', 'pod', 'tutorial'];
+        const rewardTabs = ['daily', 'quests', 'achievements'];
         
-        tabs.forEach(tab => {
+        rewardTabs.forEach(tab => {
             document.getElementById(`tab-${tab}`).addEventListener('click', () => {
                 // Update tab styles
-                tabs.forEach(t => {
+                rewardTabs.forEach(t => {
                     const tabElement = document.getElementById(`tab-${t}`);
                     const contentElement = document.getElementById(`content-${t}`);
                     
@@ -1254,265 +624,44 @@
             });
         });
         
-        // Theme toggle functionality
-        let isDark = true;
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            const themeIcon = document.getElementById('themeIcon');
-            const body = document.body;
-            const themeToggle = document.getElementById('themeToggle');
-            const connectWalletBtn = document.querySelector('button[style*="border-color: #555555"]');
-            
-            isDark = !isDark;
-            
-            if (isDark) {
-                // Switch to dark mode
-                body.classList.remove('light-mode');
-                body.style.color = '#ffffff';
-                themeToggle.style.borderColor = '#555555';
-                themeToggle.style.backgroundColor = '#303030';
-                connectWalletBtn.style.borderColor = '#555555';
-                connectWalletBtn.style.backgroundColor = '#303030';
-                connectWalletBtn.style.color = '#ffffff';
-                
-                // Sun icon for dark mode
-                themeIcon.innerHTML = `
-                    <circle cx="12" cy="12" r="5" stroke="#ffffff" stroke-width="1.5" fill="none"/>
-                    <path d="M12 1V3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M12 21V23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M4.22 4.22L5.64 5.64" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M18.36 18.36L19.78 19.78" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M1 12H3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M21 12H23" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M4.22 19.78L5.64 18.36" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M18.36 5.64L19.78 4.22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                `;
-            } else {
-                // Switch to light mode
-                body.classList.add('light-mode');
-                body.style.color = '#212121';
-                themeToggle.style.borderColor = '#cccccc';
-                themeToggle.style.backgroundColor = '#f0f0f0';
-                connectWalletBtn.style.borderColor = '#cccccc';
-                connectWalletBtn.style.backgroundColor = '#f0f0f0';
-                connectWalletBtn.style.color = '#212121';
-                
-                // Moon icon for light mode
-                themeIcon.innerHTML = `
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="#212121" stroke-width="1.5" fill="none"/>
-                `;
-            }
+        // Close rewards interface
+        document.getElementById('closeRewardsBtn').addEventListener('click', () => {
+            document.getElementById('rewardsInterface').style.display = 'none';
         });
         
-        // Spotlight spot purchase functionality
-        document.querySelectorAll('.spotlight-spot').forEach(spot => {
-            spot.addEventListener('click', () => {
-                if (spot.textContent.includes('ETH')) {
-                    spot.innerHTML = '<span class="text-xs text-white">Purchased!</span>';
-                    spot.style.borderColor = '#ffffff';
-                }
-            });
-        });
-        
-        // Course dropdown functionality
-        function toggleCourse(courseId) {
-            const content = document.getElementById(`${courseId}-content`);
-            const arrow = document.getElementById(`${courseId}-arrow`);
-            
-            if (content.classList.contains('hidden')) {
-                // Show content
-                content.classList.remove('hidden');
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                // Hide content
-                content.classList.add('hidden');
-                arrow.style.transform = 'rotate(0deg)';
-            }
-        }
-        
-        // Camera functionality
-        async function startCamera() {
-            try {
-                if (currentStream) {
-                    currentStream.getTracks().forEach(track => track.stop());
-                }
-
-                const constraints = {
-                    video: {
-                        facingMode: currentCamera,
-                        width: { ideal: 1920 },
-                        height: { ideal: 1080 }
+        // Claim button functionality
+        document.querySelectorAll('.claim-btn').forEach(btn => {
+            if (!btn.disabled) {
+                btn.addEventListener('click', (e) => {
+                    e.target.textContent = 'Claimed';
+                    e.target.disabled = true;
+                    
+                    // Add completion styling to parent card
+                    const card = e.target.closest('.reward-card');
+                    card.classList.add('completed');
+                    
+                    // Update progress bar
+                    const progressFill = card.querySelector('.progress-fill');
+                    if (progressFill) {
+                        progressFill.style.width = '100%';
+                        progressFill.classList.add('completed');
                     }
-                };
-
-                currentStream = await navigator.mediaDevices.getUserMedia(constraints);
-                const video = document.getElementById('cameraVideo');
-                video.srcObject = currentStream;
-                
-                document.getElementById('cameraInterface').style.display = 'block';
-            } catch (error) {
-                console.error('Error accessing camera:', error);
-                alert('Camera access denied or not available');
+                    
+                    // Show reward notification (simplified)
+                    setTimeout(() => {
+                        alert('Reward claimed! +XP and Coins added to your account.');
+                    }, 300);
+                });
             }
-        }
-
-        function stopCamera() {
-            if (currentStream) {
-                currentStream.getTracks().forEach(track => track.stop());
-                currentStream = null;
-            }
-            document.getElementById('cameraInterface').style.display = 'none';
-        }
-
-        function swapCamera() {
-            currentCamera = currentCamera === 'environment' ? 'user' : 'environment';
-            startCamera();
-        }
-
-        function toggleGrid() {
-            const gridOverlay = document.getElementById('gridOverlay');
-            const gridBtn = document.getElementById('gridBtn');
-            
-            if (gridOverlay.classList.contains('active')) {
-                gridOverlay.classList.remove('active');
-                gridBtn.classList.remove('active');
-            } else {
-                gridOverlay.classList.add('active');
-                gridBtn.classList.add('active');
-            }
-        }
-
-        function toggleTimer() {
-            const timerBtn = document.getElementById('timerBtn');
-            
-            if (timerBtn.classList.contains('active')) {
-                timerBtn.classList.remove('active');
-                timerSeconds = 0;
-            } else {
-                timerBtn.classList.add('active');
-                timerSeconds = 3; // 3 second timer
-            }
-        }
-
-        function startTimer(callback) {
-            const timerDisplay = document.getElementById('timerDisplay');
-            let countdown = timerSeconds;
-            
-            timerDisplay.style.display = 'block';
-            timerDisplay.textContent = countdown;
-            
-            const interval = setInterval(() => {
-                countdown--;
-                if (countdown > 0) {
-                    timerDisplay.textContent = countdown;
-                } else {
-                    timerDisplay.style.display = 'none';
-                    clearInterval(interval);
-                    callback();
-                }
-            }, 1000);
-        }
-
-        function takePicture() {
-            const flashEffect = document.getElementById('flashEffect');
-            
-            // Flash effect
-            flashEffect.classList.add('active');
-            setTimeout(() => {
-                flashEffect.classList.remove('active');
-            }, 300);
-            
-            // Capture the photo (simplified - in real app would save to device)
-            const video = document.getElementById('cameraVideo');
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0);
-            
-            // Convert to blob and create download link
-            canvas.toBlob(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `lens-photo-${Date.now()}.jpg`;
-                a.click();
-                URL.revokeObjectURL(url);
-            }, 'image/jpeg', 0.9);
-        }
-
-        function handleShutter() {
-            if (timerSeconds > 0) {
-                startTimer(takePicture);
-            } else {
-                takePicture();
-            }
-        }
-
-        function setAspectRatio(ratio) {
-            currentAspectRatio = ratio;
-            
-            // Update active button
-            document.querySelectorAll('.aspect-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`[data-aspect="${ratio}"]`).classList.add('active');
-            
-            // Apply aspect ratio to video (simplified)
-            const video = document.getElementById('cameraVideo');
-            switch(ratio) {
-                case '1:1':
-                    video.style.objectFit = 'cover';
-                    break;
-                case '16:9':
-                    video.style.objectFit = 'cover';
-                    break;
-                case '9:16':
-                    video.style.objectFit = 'cover';
-                    break;
-                default:
-                    video.style.objectFit = 'cover';
-            }
-        }
-
-        function setLens(zoom) {
-            currentZoom = parseFloat(zoom.replace('x', ''));
-            
-            // Update active lens button
-            document.querySelectorAll('.lens-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`[data-zoom="${zoom}"]`).classList.add('active');
-            
-            // Apply zoom (simplified - real implementation would use camera API)
-            const video = document.getElementById('cameraVideo');
-            video.style.transform = `scale(${currentZoom})`;
-        }
-
-        // Event listeners
-        document.getElementById('cameraButton').addEventListener('click', startCamera);
-        document.getElementById('closeCameraBtn').addEventListener('click', stopCamera);
-        document.getElementById('swapCameraBtn').addEventListener('click', swapCamera);
-        document.getElementById('gridBtn').addEventListener('click', toggleGrid);
-        document.getElementById('timerBtn').addEventListener('click', toggleTimer);
-        document.getElementById('shutterBtn').addEventListener('click', handleShutter);
-
-        // Aspect ratio buttons
-        document.querySelectorAll('.aspect-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                setAspectRatio(btn.dataset.aspect);
-            });
-        });
-
-        // Lens buttons
-        document.querySelectorAll('.lens-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                setLens(btn.dataset.zoom);
-            });
         });
         
-        // Make toggleCourse function globally available
-        window.toggleCourse = toggleCourse;
+        // Function to show rewards interface
+        function showRewards() {
+            document.getElementById('rewardsInterface').style.display = 'block';
+        }
+        
+        // Make function globally available
+        window.showRewards = showRewards;
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df512a25ad9f90',t:'MTc1NzY3OTE4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df649e74a83ed0',t:'MTc1NzY3OTk4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
