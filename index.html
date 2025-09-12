@@ -1326,7 +1326,7 @@
             
             <!-- Bottom Controls -->
             <div class="absolute bottom-0 left-0 right-0 z-50 p-6">
-                <div class="flex items-center justify-between">
+                <div class="flex flex-col items-center space-y-4">
                     <!-- Zoom Controls -->
                     <div class="flex items-center space-x-2">
                         <button id="zoom05x" class="zoom-button px-3 py-2 rounded-full text-white text-sm font-medium transition-all bg-black bg-opacity-50 backdrop-blur-sm">
@@ -1340,16 +1340,20 @@
                         </button>
                     </div>
                     
-                    <!-- Shutter Button -->
-                    <button id="shutterButton" class="w-20 h-20 rounded-full flex items-center justify-center transition-all bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-2xl">
-                        <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                    <!-- Bottom Row with Shutter and Gallery -->
+                    <div class="flex items-center justify-between w-full">
+                        <!-- Empty space for balance -->
+                        <div class="w-12 h-12"></div>
+                        
+                        <!-- Shutter Button -->
+                        <button id="shutterButton" class="w-20 h-20 rounded-full flex items-center justify-center transition-all bg-white shadow-2xl">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                        </button>
+                        
+                        <!-- Gallery Thumbnail -->
+                        <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center cursor-pointer transition-all hover:scale-105">
+                            <span class="text-white text-xs">📷</span>
                         </div>
-                    </button>
-                    
-                    <!-- Gallery Thumbnail -->
-                    <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center cursor-pointer transition-all hover:scale-105">
-                        <span class="text-white text-xs">📷</span>
                     </div>
                 </div>
             </div>
@@ -2058,5 +2062,5 @@
         });
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df2be0239e1c95',t:'MTc1NzY3NzY2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df31e1e7a51c95',t:'MTc1NzY3NzkwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
