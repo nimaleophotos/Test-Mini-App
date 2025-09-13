@@ -3,665 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewards & Achievements - Lens App</title>
+    <title>LENS App - Photography Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #212121;
-            transition: all 0.3s ease;
         }
         
-        body.light-mode {
-            background: #f5f5f5;
+        .lens-icon {
+            position: relative;
+            width: 32px;
+            height: 32px;
         }
         
-        .rewards-interface {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #212121;
-            z-index: 100;
-            display: block;
+        .lens-outer {
+            width: 32px;
+            height: 32px;
+            border: 3px solid white;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .lens-inner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .theme-toggle {
+            width: 50px;
+            height: 26px;
+            background: #374151;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .theme-toggle.light {
+            background: #f3f4f6;
+        }
+        
+        .theme-toggle-circle {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .theme-toggle.light .theme-toggle-circle {
+            transform: translateX(24px);
+            background: #1f2937;
         }
         
         .tab-active {
-            background: #555555;
-            color: #ffffff;
-            border-bottom-color: #ffffff !important;
+            background: #4b5563 !important;
+            color: white !important;
+        }
+        
+        .nav-button {
             transition: all 0.3s ease;
         }
         
-        .tab-inactive {
-            background: transparent;
-            color: #888888;
-            border-bottom-color: transparent !important;
-            transition: all 0.3s ease;
+        .nav-button:hover {
+            transform: translateY(-2px);
         }
         
-        .tab-inactive:hover {
-            background: #303030;
-            color: #ffffff;
-        }
-        
-        body.light-mode .tab-active {
-            background: #c8c8c8;
-            color: #212121;
-            border-bottom-color: #212121 !important;
-        }
-        
-        body.light-mode .tab-inactive {
-            color: #666666;
-        }
-        
-        body.light-mode .tab-inactive:hover {
-            background: #f0f0f0;
-            color: #212121;
-        }
-        
-        .reward-card {
-            background: #303030;
-            border: 1px solid #555555;
-            transition: all 0.3s ease;
-        }
-        
-        .reward-card:hover {
-            border-color: #888888;
-            background: #404040;
-        }
-        
-        .reward-card.completed {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.3));
-            border-color: rgba(34, 197, 94, 0.5);
-        }
-        
-        .reward-card.locked {
-            background: #252525;
-            border-color: #444444;
-            opacity: 0.6;
-        }
-        
-        body.light-mode .reward-card {
-            background: #f0f0f0;
-            border-color: #555555;
-        }
-        
-        body.light-mode .reward-card:hover {
-            border-color: #808080;
-            background: #e8e8e8;
-        }
-        
-        body.light-mode .reward-card.completed {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.2));
-            border-color: rgba(34, 197, 94, 0.4);
-        }
-        
-        .progress-bar {
-            background: #404040;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 8px;
-        }
-        
-        .progress-fill {
-            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-            height: 100%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-fill.completed {
-            background: linear-gradient(90deg, #22c55e, #16a34a);
-        }
-        
-        body.light-mode .progress-bar {
-            background: #e0e0e0;
-        }
-        
-        .reward-icon {
-            width: 40px;
-            height: 40px;
+        .camera-button {
+            width: 60px;
+            height: 60px;
+            background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-        }
-        
-        .daily-task {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.2));
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-        
-        .quest-card {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(147, 51, 234, 0.2));
-            border-color: rgba(168, 85, 247, 0.3);
-        }
-        
-        .achievement-card {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.2));
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-        
-        .close-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-        
-        .claim-btn {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
         }
         
-        .claim-btn:hover {
-            background: linear-gradient(135deg, #16a34a, #15803d);
-            transform: translateY(-1px);
-        }
-        
-        .claim-btn:disabled {
-            background: #404040;
-            color: #888888;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .streak-counter {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .xp-badge {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-        
-        .coin-badge {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: 600;
+        .camera-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
     </style>
 </head>
-<body class="min-h-screen" style="color: #ffffff; transition: all 0.3s ease;">
-    <!-- Rewards Interface -->
-    <div id="rewardsInterface" class="rewards-interface">
-        <div class="h-full flex flex-col">
-            <!-- Header -->
-            <div class="px-4 py-6 border-b" style="border-color: #555555;">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="reward-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
-                            🏆
-                        </div>
-                        <div>
-                            <h1 class="text-xl font-bold">Rewards & Achievements</h1>
-                            <p class="text-sm text-gray-400">Earn XP, coins, and unlock exclusive rewards</p>
-                        </div>
-                    </div>
-                    <button id="closeRewardsBtn" class="close-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 6L6 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M6 6L18 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
+<body class="bg-black text-white min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="p-4">
+        <div class="flex items-center justify-between mb-4">
+            <!-- Left side - Logo and Title -->
+            <div class="flex items-center space-x-3">
+                <div class="lens-icon">
+                    <div class="lens-outer"></div>
+                    <div class="lens-inner"></div>
                 </div>
-                
-                <!-- Stats Bar -->
-                <div class="flex items-center justify-between mt-4 p-3 rounded-xl" style="background: #303030; border: 1px solid #555555;">
-                    <div class="flex items-center space-x-4">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-2xl">⚡</span>
-                            <div>
-                                <p class="text-sm font-medium">Level 12</p>
-                                <p class="text-xs text-gray-400">2,450 XP</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-2xl">🪙</span>
-                            <div>
-                                <p class="text-sm font-medium">1,250</p>
-                                <p class="text-xs text-gray-400">Coins</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-2xl">🔥</span>
-                            <div>
-                                <p class="text-sm font-medium">7 Days</p>
-                                <p class="text-xs text-gray-400">Streak</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="text-xl font-bold">LENS APP</h1>
             </div>
             
+            <!-- Right side - Theme toggle and Connect Wallet -->
+            <div class="flex items-center space-x-4">
+                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                    <div class="theme-toggle-circle"></div>
+                </div>
+                <button class="bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-full text-sm font-medium transition-colors">
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
+        
+        <!-- Slogan -->
+        <div class="text-left">
+            <p class="text-gray-300 text-lg">See the world through the lens of photographers</p>
+        </div>
+    </header>
+
+    <!-- Main Body -->
+    <main class="flex-1 px-4 pb-32">
+        <!-- Tabs and Content Container -->
+        <div class="bg-gray-800 rounded-2xl overflow-hidden h-full">
             <!-- Tabs -->
-            <div class="flex border-b" style="border-color: #555555;">
-                <button id="tab-daily" class="py-3 px-6 font-medium transition-all tab-active text-sm border-b-2 flex-1" style="border-color: #ffffff;">
-                    Daily Tasks
+            <div class="flex bg-gray-700">
+                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors tab-active" onclick="switchTab('leaderboard', this)">
+                    Leaderboard
                 </button>
-                <button id="tab-quests" class="py-3 px-6 font-medium transition-all tab-inactive text-sm border-b-2 flex-1" style="border-color: transparent;">
-                    Quests
+                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('pod', this)">
+                    POD
                 </button>
-                <button id="tab-achievements" class="py-3 px-6 font-medium transition-all tab-inactive text-sm border-b-2 flex-1" style="border-color: transparent;">
-                    Achievements
+                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('tutorial', this)">
+                    Tutorial
                 </button>
             </div>
             
             <!-- Content Area -->
-            <div class="flex-1 overflow-y-auto p-4">
-                <!-- Daily Tasks Tab -->
-                <div id="content-daily" class="tab-content space-y-3">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold">Today's Tasks</h3>
-                        <div class="streak-counter">
-                            🔥 7 Day Streak
-                        </div>
-                    </div>
-                    
-                    <!-- Daily Task Cards -->
-                    <div class="reward-card daily-task p-4 rounded-xl completed">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
-                                    ✓
-                                </div>
+            <div class="p-6 overflow-y-auto" style="height: calc(100vh - 280px);">
+                <!-- Leaderboard Content -->
+                <div id="leaderboard-content" class="tab-content">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Top Photographers
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between bg-gray-700 p-4 rounded-xl">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-black">1</div>
                                 <div>
-                                    <h4 class="font-medium">Take Your First Photo</h4>
-                                    <p class="text-xs text-gray-400">Capture and share a photo today</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+50 XP</span>
-                                        <span class="coin-badge">+25 Coins</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="claim-btn" disabled>Claimed</button>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill completed" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card daily-task p-4 rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
-                                    📸
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Upload 3 Photos</h4>
-                                    <p class="text-xs text-gray-400">Share 3 photos to the community</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+100 XP</span>
-                                        <span class="coin-badge">+50 Coins</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="claim-btn" disabled>1/3</button>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill" style="width: 33%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card daily-task p-4 rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                                    ❤️
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Like 5 Photos</h4>
-                                    <p class="text-xs text-gray-400">Show love to community photos</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+25 XP</span>
-                                        <span class="coin-badge">+15 Coins</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="claim-btn">Claim</button>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill completed" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card daily-task p-4 rounded-xl">
-                        <div class="flex items-center space-x-3">
-                            <div class="reward-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                                💬
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Comment on 2 Photos</h4>
-                                <p class="text-xs text-gray-400">Engage with the community</p>
-                                <div class="flex items-center space-x-2 mt-1">
-                                    <span class="xp-badge">+30 XP</span>
-                                    <span class="coin-badge">+20 Coins</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Quests Tab -->
-                <div id="content-quests" class="tab-content hidden space-y-3">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold">Weekly Quests</h3>
-                        <p class="text-sm text-gray-400">Resets in 3 days</p>
-                    </div>
-                    
-                    <div class="reward-card quest-card p-4 rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
-                                    🌟
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Photography Master</h4>
-                                    <p class="text-xs text-gray-400">Upload 20 high-quality photos this week</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+500 XP</span>
-                                        <span class="coin-badge">+200 Coins</span>
-                                    </div>
+                                    <p class="font-semibold">Alex Chen</p>
+                                    <p class="text-sm text-gray-400">Street Photography</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="text-sm font-medium">12/20</p>
-                                <p class="text-xs text-gray-400">Photos</p>
+                                <p class="font-bold text-yellow-400">2,450 $LENS</p>
+                                <p class="text-sm text-gray-400">156 photos</p>
                             </div>
                         </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card quest-card p-4 rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">
-                                    🎯
-                                </div>
+                        <div class="flex items-center justify-between bg-gray-700 p-4 rounded-xl">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center font-bold text-black">2</div>
                                 <div>
-                                    <h4 class="font-medium">Community Favorite</h4>
-                                    <p class="text-xs text-gray-400">Get 100 likes on your photos</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+300 XP</span>
-                                        <span class="coin-badge">+150 Coins</span>
-                                    </div>
+                                    <p class="font-semibold">Maria Santos</p>
+                                    <p class="text-sm text-gray-400">Nature Photography</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="text-sm font-medium">67/100</p>
-                                <p class="text-xs text-gray-400">Likes</p>
+                                <p class="font-bold text-gray-300">2,180 $LENS</p>
+                                <p class="text-sm text-gray-400">142 photos</p>
                             </div>
                         </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill" style="width: 67%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card quest-card p-4 rounded-xl completed">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
-                                    ✓
-                                </div>
+                        <div class="flex items-center justify-between bg-gray-700 p-4 rounded-xl">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center font-bold text-white">3</div>
                                 <div>
-                                    <h4 class="font-medium">Social Butterfly</h4>
-                                    <p class="text-xs text-gray-400">Comment on 50 different photos</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+200 XP</span>
-                                        <span class="coin-badge">+100 Coins</span>
-                                    </div>
+                                    <p class="font-semibold">David Kim</p>
+                                    <p class="text-sm text-gray-400">Portrait Photography</p>
                                 </div>
                             </div>
-                            <button class="claim-btn">Claim</button>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill completed" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card quest-card p-4 rounded-xl locked">
-                        <div class="flex items-center space-x-3">
-                            <div class="reward-icon" style="background: #404040;">
-                                🔒
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Lens Legend</h4>
-                                <p class="text-xs text-gray-400">Reach Level 15 to unlock</p>
-                                <div class="flex items-center space-x-2 mt-1">
-                                    <span class="xp-badge">+1000 XP</span>
-                                    <span class="coin-badge">+500 Coins</span>
-                                </div>
+                            <div class="text-right">
+                                <p class="font-bold text-orange-400">1,920 $LENS</p>
+                                <p class="text-sm text-gray-400">128 photos</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Achievements Tab -->
-                <div id="content-achievements" class="tab-content hidden space-y-3">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold">Achievements</h3>
-                        <p class="text-sm text-gray-400">8/24 Unlocked</p>
-                    </div>
-                    
-                    <div class="reward-card achievement-card p-4 rounded-xl completed">
+
+                <!-- POD Content -->
+                <div id="pod-content" class="tab-content hidden">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                        Picture of the Day
+                    </h2>
+                    <div class="bg-gray-700 rounded-xl p-6">
+                        <div class="aspect-video bg-gray-600 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">"Golden Hour Cityscape"</h3>
+                        <p class="text-gray-300 mb-4">Captured by Sarah Johnson during the magical golden hour, this stunning cityscape showcases the perfect blend of urban architecture and natural lighting.</p>
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
-                                    🥇
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">First Steps</h4>
-                                    <p class="text-xs text-gray-400">Upload your first photo</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+100 XP</span>
-                                        <span class="coin-badge">+50 Coins</span>
-                                    </div>
-                                </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-purple-400 font-bold">+500 $LENS</span>
+                                <span class="text-gray-400">1,247 likes</span>
                             </div>
-                            <div class="text-green-400 font-medium text-sm">Unlocked</div>
+                            <button class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                View Full Size
+                            </button>
                         </div>
                     </div>
-                    
-                    <div class="reward-card achievement-card p-4 rounded-xl completed">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
-                                    📱
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Mobile Master</h4>
-                                    <p class="text-xs text-gray-400">Take 100 photos with mobile camera</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+300 XP</span>
-                                        <span class="coin-badge">+150 Coins</span>
-                                    </div>
-                                </div>
+                </div>
+
+                <!-- Tutorial Content -->
+                <div id="tutorial-content" class="tab-content hidden">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Photography Tutorials
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-700 rounded-xl p-6">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
                             </div>
-                            <div class="text-green-400 font-medium text-sm">Unlocked</div>
+                            <h3 class="text-lg font-bold mb-2">Mastering Composition</h3>
+                            <p class="text-gray-300 mb-4">Learn the rule of thirds, leading lines, and framing techniques to create compelling photographs.</p>
+                            <button class="text-blue-400 hover:text-blue-300 font-medium">Start Tutorial →</button>
                         </div>
-                    </div>
-                    
-                    <div class="reward-card achievement-card p-4 rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="reward-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                                    🏆
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Community Champion</h4>
-                                    <p class="text-xs text-gray-400">Get featured in Picture of the Day</p>
-                                    <div class="flex items-center space-x-2 mt-1">
-                                        <span class="xp-badge">+500 XP</span>
-                                        <span class="coin-badge">+250 Coins</span>
-                                    </div>
-                                </div>
+                        <div class="bg-gray-700 rounded-xl p-6">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                                </svg>
                             </div>
-                            <div class="text-right">
-                                <p class="text-sm font-medium">0/1</p>
-                                <p class="text-xs text-gray-400">Features</p>
-                            </div>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card achievement-card p-4 rounded-xl">
-                        <div class="flex items-center space-x-3">
-                            <div class="reward-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                                🔥
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Streak Master</h4>
-                                <p class="text-xs text-gray-400">Maintain a 30-day login streak</p>
-                                <div class="flex items-center space-x-2 mt-1">
-                                    <span class="xp-badge">+750 XP</span>
-                                    <span class="coin-badge">+300 Coins</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-bar mt-3">
-                            <div class="progress-fill" style="width: 23%;"></div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-2">7/30 days</p>
-                    </div>
-                    
-                    <div class="reward-card achievement-card p-4 rounded-xl locked">
-                        <div class="flex items-center space-x-3">
-                            <div class="reward-icon" style="background: #404040;">
-                                🔒
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Lens Legendary</h4>
-                                <p class="text-xs text-gray-400">Reach Level 50</p>
-                                <div class="flex items-center space-x-2 mt-1">
-                                    <span class="xp-badge">+2000 XP</span>
-                                    <span class="coin-badge">+1000 Coins</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="reward-card achievement-card p-4 rounded-xl locked">
-                        <div class="flex items-center space-x-3">
-                            <div class="reward-icon" style="background: #404040;">
-                                🔒
-                            </div>
-                            <div>
-                                <h4 class="font-medium">NFT Pioneer</h4>
-                                <p class="text-xs text-gray-400">Mint your first photo NFT</p>
-                                <div class="flex items-center space-x-2 mt-1">
-                                    <span class="xp-badge">+1500 XP</span>
-                                    <span class="coin-badge">+750 Coins</span>
-                                </div>
-                            </div>
+                            <h3 class="text-lg font-bold mb-2">Understanding Light</h3>
+                            <p class="text-gray-300 mb-4">Discover how to work with natural and artificial light to enhance your photography skills.</p>
+                            <button class="text-green-400 hover:text-green-300 font-medium">Start Tutorial →</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer Navigation - Fixed -->
+    <footer class="fixed bottom-0 left-0 right-0 p-4 z-50">
+        <div class="bg-gray-800 rounded-2xl p-4">
+            <div class="flex items-center justify-around">
+                <!-- Rewards -->
+                <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToRewards()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                    </svg>
+                    <span class="text-xs">Rewards</span>
+                </button>
+
+                <!-- Contest -->
+                <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToContest()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                    <span class="text-xs">Contest</span>
+                </button>
+
+                <!-- Camera (Center, Large) -->
+                <button class="camera-button" onclick="navigateToCamera()">
+                    <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </button>
+
+                <!-- Lens Gallery -->
+                <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToGallery()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                    <span class="text-xs">Gallery</span>
+                </button>
+
+                <!-- Info -->
+                <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToInfo()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-xs">Info</span>
+                </button>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Tab functionality
-        const rewardTabs = ['daily', 'quests', 'achievements'];
-        
-        rewardTabs.forEach(tab => {
-            document.getElementById(`tab-${tab}`).addEventListener('click', () => {
-                // Update tab styles
-                rewardTabs.forEach(t => {
-                    const tabElement = document.getElementById(`tab-${t}`);
-                    const contentElement = document.getElementById(`content-${t}`);
-                    
-                    if (t === tab) {
-                        tabElement.className = tabElement.className.replace('tab-inactive', 'tab-active');
-                        contentElement.classList.remove('hidden');
-                    } else {
-                        tabElement.className = tabElement.className.replace('tab-active', 'tab-inactive');
-                        contentElement.classList.add('hidden');
-                    }
-                });
+        function toggleTheme() {
+            const toggle = document.getElementById('themeToggle');
+            toggle.classList.toggle('light');
+            // Theme switching logic can be expanded here
+        }
+
+        function switchTab(tabName, element) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('text-gray-300', 'hover:text-white');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            
+            // Add active class to selected tab
+            element.classList.add('tab-active');
+            element.classList.remove('text-gray-300', 'hover:text-white');
+        }
+
+        // Navigation functions
+        function navigateToRewards() {
+            alert('Navigation to Rewards page - Ready for implementation');
+        }
+
+        function navigateToContest() {
+            alert('Navigation to Contest page - Ready for implementation');
+        }
+
+        function navigateToCamera() {
+            alert('Navigation to Camera page - Ready for implementation');
+        }
+
+        function navigateToGallery() {
+            alert('Navigation to Gallery page - Ready for implementation');
+        }
+
+        function navigateToInfo() {
+            alert('Navigation to Info page - Ready for implementation');
+        }
+
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('header, main, footer');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
             });
         });
-        
-        // Close rewards interface
-        document.getElementById('closeRewardsBtn').addEventListener('click', () => {
-            document.getElementById('rewardsInterface').style.display = 'none';
-        });
-        
-        // Claim button functionality
-        document.querySelectorAll('.claim-btn').forEach(btn => {
-            if (!btn.disabled) {
-                btn.addEventListener('click', (e) => {
-                    e.target.textContent = 'Claimed';
-                    e.target.disabled = true;
-                    
-                    // Add completion styling to parent card
-                    const card = e.target.closest('.reward-card');
-                    card.classList.add('completed');
-                    
-                    // Update progress bar
-                    const progressFill = card.querySelector('.progress-fill');
-                    if (progressFill) {
-                        progressFill.style.width = '100%';
-                        progressFill.classList.add('completed');
-                    }
-                    
-                    // Show reward notification (simplified)
-                    setTimeout(() => {
-                        alert('Reward claimed! +XP and Coins added to your account.');
-                    }, 300);
-                });
-            }
-        });
-        
-        // Function to show rewards interface
-        function showRewards() {
-            document.getElementById('rewardsInterface').style.display = 'block';
-        }
-        
-        // Make function globally available
-        window.showRewards = showRewards;
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97df649e74a83ed0',t:'MTc1NzY3OTk4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e59d4e22490ba4',t:'MTc1Nzc0NTIyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
