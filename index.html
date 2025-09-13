@@ -265,24 +265,24 @@
     <!-- Footer Navigation - Fixed -->
     <footer class="fixed left-0 right-0 z-50" style="bottom: 7px; padding: 5px 16px 8px 16px;">
         <div class="bg-gray-800 rounded-2xl border border-gray-600" style="padding: 8px 16px;">
-            <div class="bg-gray-800 border border-gray-500" style="padding: 12px 28px; border-radius: 35px;">
+            <div class="bg-gray-800 border border-gray-500" style="padding: 12px 50px; border-radius: 35px;">
                 <div class="flex items-center justify-center w-full relative">
                 <!-- Left side buttons -->
-                <div class="flex items-center space-x-4 absolute" style="left: 20px;">
+                <div class="flex items-center space-x-6 absolute" style="left: 30px;">
                     <!-- Rewards -->
-                    <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToRewards()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                    <button class="nav-button text-gray-400 hover:text-white" onclick="navigateToRewards()">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
                         </svg>
-                        <span class="text-xs">Rewards</span>
                     </button>
 
                     <!-- Contest -->
-                    <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToContest()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    <button class="nav-button text-gray-400 hover:text-white" onclick="navigateToContest()">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20V6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4V4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7ZM8 8H16V10H14V12H16V14H14V16H16V18H8V16H10V14H8V12H10V10H8V8Z"/>
+                            <circle cx="12" cy="9" r="1.5"/>
+                            <path d="M10 13H14V15H10V13Z"/>
                         </svg>
-                        <span class="text-xs">Contest</span>
                     </button>
                 </div>
 
@@ -295,21 +295,24 @@
                 </button>
 
                 <!-- Right side buttons -->
-                <div class="flex items-center space-x-4 absolute" style="right: 20px;">
+                <div class="flex items-center space-x-6 absolute" style="right: 30px;">
                     <!-- Gallery -->
-                    <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToGallery()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    <button class="nav-button text-gray-400 hover:text-white" onclick="navigateToGallery()">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4ZM4 6V18H20V6H4Z"/>
+                            <rect x="6" y="8" width="4" height="3" rx="0.5"/>
+                            <rect x="11" y="8" width="7" height="2" rx="0.5"/>
+                            <rect x="11" y="11" width="5" height="2" rx="0.5"/>
+                            <rect x="6" y="14" width="12" height="2" rx="0.5"/>
                         </svg>
-                        <span class="text-xs">Gallery</span>
                     </button>
 
                     <!-- Info -->
-                    <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToInfo()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <button class="nav-button text-gray-400 hover:text-white" onclick="navigateToInfo()">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8C12.55 8 13 8.45 13 9S12.55 10 12 10 11 9.55 11 9 11.45 8 12 8ZM11 11H13V17H11V11Z" fill="white"/>
                         </svg>
-                        <span class="text-xs">Info</span>
                     </button>
                 </div>
                 </div>
@@ -379,5 +382,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e6195d2508b91e',t:'MTc1Nzc1MDMwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e61ec1f0b5b91e',t:'MTc1Nzc1MDUyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
