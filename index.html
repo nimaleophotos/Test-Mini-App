@@ -113,10 +113,10 @@
             
             <!-- Right side - Theme toggle and Connect Wallet -->
             <div class="flex items-center space-x-3">
-                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                <div class="theme-toggle border border-gray-600" id="themeToggle" onclick="toggleTheme()">
                     <div class="theme-toggle-circle"></div>
                 </div>
-                <button class="bg-gray-700 hover:bg-gray-600 px-5 py-2 rounded-full text-sm font-medium transition-colors">
+                <button class="bg-gray-700 hover:bg-gray-600 px-5 py-2 rounded-full border border-gray-600 text-sm font-medium transition-colors">
                     Connect Wallet
                 </button>
             </div>
@@ -131,13 +131,13 @@
     <!-- Main Body -->
     <main class="flex-1 px-4" style="padding-top: 99px; padding-bottom: 20px;">
         <!-- Tabs and Content Container -->
-        <div class="bg-gray-800 rounded-2xl overflow-hidden h-full">
+        <div class="bg-gray-800 rounded-2xl border border-gray-600 overflow-hidden h-full">
             <!-- Tabs -->
             <div class="flex bg-gray-700">
-                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors tab-active" onclick="switchTab('leaderboard', this)">
+                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors tab-active border-r border-gray-600" onclick="switchTab('leaderboard', this)">
                     Leaderboard
                 </button>
-                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('pod', this)">
+                <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white border-r border-gray-600" onclick="switchTab('pod', this)">
                     POD
                 </button>
                 <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('tutorial', this)">
@@ -265,7 +265,8 @@
     <!-- Footer Navigation - Fixed -->
     <footer class="fixed left-0 right-0 z-50" style="bottom: 7px; padding: 5px 16px 8px 16px;">
         <div class="bg-gray-800 rounded-2xl border border-gray-600" style="padding: 15.5px 16px;">
-            <div class="flex items-center justify-around">
+            <div class="bg-gray-800 rounded-full border border-gray-500" style="padding: 8px 12px;">
+                <div class="flex items-center justify-around">
                 <!-- Rewards -->
                 <button class="nav-button flex flex-col items-center space-y-1 text-gray-400 hover:text-white" onclick="navigateToRewards()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -305,6 +306,7 @@
                     </svg>
                     <span class="text-xs">Info</span>
                 </button>
+                </div>
             </div>
         </div>
     </footer>
@@ -371,5 +373,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e602fe43266620',t:'MTc1Nzc0OTM4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e6099421c76620',t:'MTc1Nzc0OTY1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
