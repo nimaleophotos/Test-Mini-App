@@ -431,135 +431,99 @@
                 <div id="pod-content" class="tab-content">
                     <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">PICTURE OF THE DAY</h2>
                     <div class="rounded-md p-3 mb-6" style="background-color: rgba(55, 55, 55, 0.3);">
-                        <div class="bg-gray-600 rounded-lg mb-3 flex items-center justify-center overflow-hidden" style="max-height: 300px;">
+                        <div class="bg-gray-600 rounded-lg mb-2 flex items-center justify-center overflow-hidden" style="max-height: 250px;">
                             <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/1f0b26fb-17b4-41a0-06c5-e48561bb2300/rectcontain3" 
                                  alt="Golden Hour Cityscape" 
                                  class="w-full h-full object-contain"
                                  onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                         </div>
-                        <h3 class="text-base font-bold mb-1">"Golden Hour Cityscape"</h3>
-                        <p class="text-gray-300 mb-3 text-sm">by Sarah Johnson</p>
+                        <h3 class="text-sm font-bold mb-1">"Golden Hour Cityscape"</h3>
+                        <p class="text-gray-300 mb-2 text-xs">by Sarah Johnson</p>
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-2">
                                 <span class="text-gray-400 text-xs">1,247 likes</span>
                                 <span class="text-gray-400 text-xs">89 recasts</span>
                                 <span class="text-gray-400 text-xs">156 comments</span>
                             </div>
-                            <button class="bg-gray-600 hover:bg-gray-500 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors text-gray-200">
-                                Support POD Artist
+                            <button class="bg-gray-600 hover:bg-gray-500 px-2 py-1 rounded text-xs font-medium transition-colors text-gray-200">
+                                Support
                             </button>
                         </div>
                     </div>
 
                     <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">SPOTLIGHT SPOTS</h2>
                     <div class="grid grid-cols-3 gap-2">
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(1)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Urban Nights</p>
-                                <p class="text-xs text-gray-400">by Alex M.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(2)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Ocean Waves</p>
-                                <p class="text-xs text-gray-400">by Maria S.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(3)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Forest Path</p>
-                                <p class="text-xs text-gray-400">by David K.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(4)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Mountain Peak</p>
-                                <p class="text-xs text-gray-400">by Emma W.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(5)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">City Lights</p>
-                                <p class="text-xs text-gray-400">by James R.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(6)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Desert Sunset</p>
-                                <p class="text-xs text-gray-400">by Sophie A.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
-                            <div class="bg-gray-600 aspect-square flex items-center justify-center">
-                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Rainy Street</p>
-                                <p class="text-xs text-gray-400">by Michael C.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(7)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Flower Field</p>
-                                <p class="text-xs text-gray-400">by Lisa T.</p>
-                            </div>
-                        </div>
+                        </button>
                         
-                        <div class="rounded-md overflow-hidden" style="background-color: rgba(55, 55, 55, 0.3);">
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(8)">
                             <div class="bg-gray-600 aspect-square flex items-center justify-center">
                                 <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="p-2">
-                                <p class="text-xs font-medium text-gray-300">Starry Night</p>
-                                <p class="text-xs text-gray-400">by Ryan P.</p>
+                        </button>
+                        
+                        <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(55, 55, 55, 0.3);" onclick="openSpotlightImage(9)">
+                            <div class="bg-gray-600 aspect-square flex items-center justify-center">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
 
@@ -755,5 +719,5 @@
             setTimeout(typeSlogan, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ee5b8ec1dfb986',t:'MTc1NzgzNjg5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ee6632108bb986',t:'MTc1NzgzNzMzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
