@@ -129,11 +129,11 @@
     </header>
 
     <!-- Main Body -->
-    <main class="flex-1 px-4" style="padding-top: 99px; padding-bottom: 25px;">
+    <main class="fixed left-0 right-0 px-4" style="top: 99px; bottom: 95px;">
         <!-- Tabs and Content Container -->
-        <div class="bg-gray-800 rounded-3xl border-2 border-gray-500 overflow-hidden h-full shadow-lg">
+        <div class="bg-gray-800 rounded-3xl border-2 border-gray-500 overflow-hidden h-full shadow-lg flex flex-col">
             <!-- Tabs -->
-            <div class="flex bg-gray-700">
+            <div class="flex bg-gray-700 flex-shrink-0">
                 <button class="tab-button flex-1 py-4 px-6 text-center font-medium transition-colors tab-active border-r border-gray-600" onclick="switchTab('leaderboard', this)">
                     Leaderboard
                 </button>
@@ -146,7 +146,7 @@
             </div>
             
             <!-- Content Area -->
-            <div class="p-6 overflow-y-auto" style="height: calc(100vh - 200px);">
+            <div class="p-6 overflow-y-auto flex-1">
                 <!-- Leaderboard Content -->
                 <div id="leaderboard-content" class="tab-content">
                     <h2 class="text-2xl font-bold mb-6 flex items-center">
@@ -377,5 +377,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e63df8466812fa',t:'MTc1Nzc1MTgwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eda99f063e0bb9',t:'MTc1NzgyOTYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
