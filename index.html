@@ -10,6 +10,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .lens-icon {
@@ -51,7 +52,7 @@
         }
         
         .theme-toggle.light {
-            background: #333333;
+            background: #e5e5e5;
         }
         
         .theme-toggle-circle {
@@ -64,7 +65,139 @@
         }
         
         .theme-toggle.light .theme-toggle-circle {
-            background: #aeaeae;
+            background: #4a4a4a;
+        }
+        
+        /* Add transitions to all elements that change in light mode */
+        .lens-outer, .lens-inner {
+            transition: border-color 0.3s ease;
+        }
+        
+        .theme-toggle {
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .theme-toggle svg {
+            transition: color 0.3s ease;
+        }
+        
+        button {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .rounded-3xl {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .rounded-md {
+            transition: background-color 0.3s ease;
+        }
+        
+        .text-gray-300, .text-gray-400 {
+            transition: color 0.3s ease;
+        }
+        
+        .bg-gray-600, .bg-gray-400 {
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        
+        #slogan {
+            transition: color 0.3s ease;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #f5f5f5 !important;
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .lens-outer,
+        .light-mode .lens-inner {
+            border-color: #1a1a1a !important;
+        }
+        
+        .light-mode .theme-toggle {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .theme-toggle svg {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]) {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode #slogan {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .tab-button {
+            border-color: #4a4a4a !important;
+            color: #666666 !important;
+        }
+        
+        .light-mode .tab-button:hover {
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .tab-active {
+            background: #666666 !important;
+            color: #ffffff !important;
+        }
+        
+        .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]) {
+            background-color: rgba(200, 200, 200, 0.5) !important;
+        }
+        
+        .light-mode .text-gray-300,
+        .light-mode .text-gray-400 {
+            color: #666666 !important;
+        }
+        
+        .light-mode .bg-gray-600 {
+            background-color: #d0d0d0 !important;
+        }
+        
+        .light-mode .bg-gray-400 {
+            background-color: #999999 !important;
+        }
+        
+        .light-mode .border-gray-600 {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button:hover {
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child > div {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
         }
         
         .tab-active {
@@ -96,11 +229,23 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
+        
+        .camera-button svg {
+            color: black;
+        }
+        
+        .light-mode .camera-button {
+            background: black !important;
+        }
+        
+        .light-mode .camera-button svg {
+            color: white !important;
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
     <!-- Header - Fixed -->
-    <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
+    <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727; transition: background-color 0.3s ease;">
         <div class="flex items-center justify-between mb-2">
             <!-- Left side - Logo and Title -->
             <div class="flex items-center space-x-1">
@@ -632,7 +777,7 @@
 
                         <!-- Camera (Center) -->
                         <button class="camera-button flex-shrink-0" onclick="navigateToCamera()">
-                            <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
@@ -662,11 +807,20 @@
             const toggle = document.getElementById('themeToggle');
             const moonIcon = document.getElementById('moonIcon');
             const sunIcon = document.getElementById('sunIcon');
+            const body = document.body;
             
             toggle.classList.toggle('light');
             moonIcon.classList.toggle('hidden');
             sunIcon.classList.toggle('hidden');
-            // Theme switching logic can be expanded here
+            body.classList.toggle('light-mode');
+            
+            // Update header background
+            const header = document.querySelector('header');
+            if (body.classList.contains('light-mode')) {
+                header.style.backgroundColor = '#f5f5f5';
+            } else {
+                header.style.backgroundColor = '#272727';
+            }
         }
 
         function switchTab(tabName, element) {
@@ -771,5 +925,5 @@
             setTimeout(typeSlogan, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eea43a23bb660a',t:'MTc1NzgzOTg3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eeba1774738eab',t:'MTc1Nzg0MDc3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
