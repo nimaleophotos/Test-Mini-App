@@ -21,7 +21,7 @@
         .lens-outer {
             width: 32px;
             height: 32px;
-            border: 3px solid white;
+            border: 1.5px solid white;
             border-radius: 50%;
             position: absolute;
         }
@@ -29,7 +29,7 @@
         .lens-inner {
             width: 16px;
             height: 16px;
-            border: 2px solid white;
+            border: 1px solid white;
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -114,9 +114,14 @@
             <!-- Right side - Theme toggle and Connect Wallet -->
             <div class="flex items-center space-x-3">
                 <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" style="border: 1px solid #656565;">
-                    <div class="theme-toggle-circle"></div>
+                    <svg class="w-4 h-4 text-gray-400" id="moonIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-gray-400 hidden" id="sunIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+                    </svg>
                 </div>
-                <button class="px-5 py-2 rounded-full text-sm font-medium transition-colors" style="background-color: #333333; border: 1px solid #656565; color: #aeaeae;">
+                <button class="px-3 py-2 rounded-full text-sm font-medium transition-colors" style="background-color: #333333; border: 1px solid #656565; color: #aeaeae;">
                     Connect Wallet
                 </button>
             </div>
@@ -124,7 +129,7 @@
         
         <!-- Slogan -->
         <div class="text-left" style="margin-top: 2px;">
-            <p class="text-gray-300 text-sm">See the world through the lens of photographers</p>
+            <p class="text-gray-300 text-sm" id="slogan"></p>
         </div>
     </header>
 
@@ -314,7 +319,12 @@
     <script>
         function toggleTheme() {
             const toggle = document.getElementById('themeToggle');
+            const moonIcon = document.getElementById('moonIcon');
+            const sunIcon = document.getElementById('sunIcon');
+            
             toggle.classList.toggle('light');
+            moonIcon.classList.toggle('hidden');
+            sunIcon.classList.toggle('hidden');
             // Theme switching logic can be expanded here
         }
 
@@ -359,6 +369,40 @@
             alert('Navigation to Info page - Ready for implementation');
         }
 
+        // Slogan animation system
+        const slogans = [
+            "Photography comes alive through $LENS.",
+            "Through $LENS, every photo tells a story.",
+            "$LENS celebrates the art of photography!",
+            "Discover photography's beauty through $LENS.",
+            "Through $LENS, we celebrate every frame!"
+        ];
+        
+        let currentSloganIndex = 0;
+        let currentCharIndex = 0;
+        let isTyping = true;
+        
+        function typeSlogan() {
+            const sloganElement = document.getElementById('slogan');
+            const currentSlogan = slogans[currentSloganIndex];
+            
+            if (isTyping) {
+                if (currentCharIndex < currentSlogan.length) {
+                    sloganElement.textContent = currentSlogan.substring(0, currentCharIndex + 1);
+                    currentCharIndex++;
+                    setTimeout(typeSlogan, 50); // 50ms per character
+                } else {
+                    // Finished typing, wait 10 seconds then start next slogan
+                    setTimeout(() => {
+                        currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+                        currentCharIndex = 0;
+                        sloganElement.textContent = '';
+                        typeSlogan();
+                    }, 10000); // 10 second pause
+                }
+            }
+        }
+
         // Add entrance animations
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('header, main, footer');
@@ -371,7 +415,10 @@
                     element.style.transform = 'translateY(0)';
                 }, index * 200);
             });
+            
+            // Start slogan animation after page loads
+            setTimeout(typeSlogan, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ede4fbf1ad3466',t:'MTc1NzgzMjA0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eded0b81443466',t:'MTc1NzgzMjM3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
