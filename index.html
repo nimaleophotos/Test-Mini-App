@@ -159,51 +159,269 @@
             <!-- Content Area -->
             <div class="p-6 overflow-y-auto flex-1">
                 <!-- Leaderboard Content -->
-                <div id="leaderboard-content" class="tab-content hidden">
-                    <h2 class="text-lg font-bold mb-4 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        Top Photographers
-                    </h2>
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-black text-sm">1</div>
-                                <div>
-                                    <p class="font-medium text-sm">Alex Chen</p>
-                                    <p class="text-xs text-gray-400">Street Photography</p>
+                <div id="leaderboard-content" class="tab-content hidden h-full flex flex-col">
+                    <!-- Fixed LENS App Leaderboard Title -->
+                    <div class="flex-shrink-0">
+                        <h2 class="text-base font-bold mb-4 text-center" style="letter-spacing: 2px;">LENS APP LEADERBOARD</h2>
+                    </div>
+                    
+                    <!-- Scrollable Top 20 Ranks -->
+                    <div class="flex-1 overflow-y-auto space-y-2 pr-2">
+                            <!-- Top 3 with special colors -->
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(255, 215, 0, 0.1);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-black text-sm">1</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Alex Chen</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-yellow-400 text-sm">2,450 pts</p>
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <p class="font-bold text-yellow-400 text-sm">2,450 $LENS</p>
-                                <p class="text-xs text-gray-400">156 photos</p>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(192, 192, 192, 0.1);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center font-bold text-black text-sm">2</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Maria Santos</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">2,180 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(205, 127, 50, 0.1);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center font-bold text-white text-sm">3</div>
+                                    <div>
+                                        <p class="font-medium text-sm">David Kim</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-orange-400 text-sm">1,920 pts</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Ranks 4-20 with subtle background -->
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">4</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Emma Wilson</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,750 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">5</div>
+                                    <div>
+                                        <p class="font-medium text-sm">James Rodriguez</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,680 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">6</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Sophie Anderson</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,590 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">7</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Michael Chang</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,520 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">8</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Lisa Thompson</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,450 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">9</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Ryan Parker</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,380 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">10</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Nina Patel</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,320 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">11</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Carlos Martinez</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,280 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">12</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Zoe Williams</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,240 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">13</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Ahmed Hassan</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,200 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">14</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Isabella Garcia</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,160 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">15</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Tom Johnson</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,120 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">16</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Maya Singh</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,080 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">17</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Lucas Brown</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,040 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">18</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Aria Nakamura</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">1,000 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">19</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Oliver Davis</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">960 pts</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(55, 55, 55, 0.3);">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-sm">20</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Grace Lee</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-gray-300 text-sm">920 pts</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
+                    
+                    <!-- Fixed Your Rank Section at bottom -->
+                    <div class="flex-shrink-0 mt-4 pt-4 border-t border-gray-600">
+                        <h3 class="text-base font-bold mb-3 text-center" style="letter-spacing: 2px;">YOUR RANK</h3>
+                        <div class="flex items-center justify-between p-3 rounded-lg" style="background-color: rgba(59, 130, 246, 0.1);">
                             <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center font-bold text-black text-sm">2</div>
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white text-sm">47</div>
                                 <div>
-                                    <p class="font-medium text-sm">Maria Santos</p>
-                                    <p class="text-xs text-gray-400">Nature Photography</p>
+                                    <p class="font-medium text-sm">You</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <p class="font-bold text-gray-300 text-sm">2,180 $LENS</p>
-                                <p class="text-xs text-gray-400">142 photos</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center font-bold text-white text-sm">3</div>
-                                <div>
-                                    <p class="font-medium text-sm">David Kim</p>
-                                    <p class="text-xs text-gray-400">Portrait Photography</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-bold text-orange-400 text-sm">1,920 $LENS</p>
-                                <p class="text-xs text-gray-400">128 photos</p>
+                                <p class="font-bold text-blue-400 text-sm">890 pts</p>
                             </div>
                         </div>
                     </div>
@@ -371,11 +589,16 @@
 
         // Slogan animation system
         const slogans = [
-            "Photography comes alive through $LENS.",
-            "Through $LENS, every photo tells a story.",
-            "$LENS celebrates the art of photography!",
-            "Discover photography's beauty through $LENS.",
-            "Through $LENS, we celebrate every frame!"
+            "See the world through the $LENS of creativity.",
+            "Every story begins with a $LENS.",
+            "Light and shadow find balance through a $LENS.",
+            "The beauty of photography lives in the $LENS.",
+            "Through a $LENS, moments become timeless.",
+            "Perspective changes with every $LENS.",
+            "A $LENS captures what the eye feels.",
+            "The art of photography starts with a $LENS.",
+            "Behind every photograph lies a $LENS.",
+            "Through a $LENS, the ordinary becomes extraordinary."
         ];
         
         let currentSloganIndex = 0;
@@ -420,5 +643,5 @@
             setTimeout(typeSlogan, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ee22ba727bb8c6',t:'MTc1NzgzNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ee44cb704d845a',t:'MTc1NzgzNTk2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
