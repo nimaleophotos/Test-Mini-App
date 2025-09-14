@@ -38,8 +38,8 @@
         }
         
         .theme-toggle {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             background: #333333;
             border-radius: 50%;
             position: relative;
@@ -112,24 +112,24 @@
             </div>
             
             <!-- Right side - Theme toggle and Connect Wallet -->
-            <div class="flex items-center space-x-3">
-                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" style="border: 1px solid #656565;">
-                    <svg class="w-4 h-4 text-gray-400" id="moonIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <div class="flex items-center space-x-2">
+                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" style="border: 1px solid #656565; width: 24px; height: 24px;">
+                    <svg class="w-3 h-3 text-gray-400" id="moonIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
                     </svg>
-                    <svg class="w-4 h-4 text-gray-400 hidden" id="sunIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <svg class="w-3 h-3 text-gray-400 hidden" id="sunIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
                     </svg>
                 </div>
-                <button class="px-3 py-2 rounded-full text-sm font-medium transition-colors" style="background-color: #333333; border: 1px solid #656565; color: #aeaeae;">
-                    Connect Wallet
+                <button class="px-2 py-1 rounded-full text-xs font-medium transition-colors" style="background-color: #333333; border: 1px solid #656565; color: #aeaeae;">
+                    Connect
                 </button>
             </div>
         </div>
         
         <!-- Slogan -->
         <div class="text-left" style="margin-top: 2px;">
-            <p class="text-gray-300 text-sm" id="slogan"></p>
+            <p class="text-gray-400 text-xs" id="slogan"></p>
         </div>
     </header>
 
@@ -420,5 +420,5 @@
             setTimeout(typeSlogan, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eded0b81443466',t:'MTc1NzgzMjM3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ee10e6d527fb8b',t:'MTc1NzgzMzg0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
