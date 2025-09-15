@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LENS App - Photography Platform</title>
+    <title>LENS App - Rewards</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -89,14 +89,6 @@
             transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         
-        .tab-button {
-            transition: all 0.5s ease;
-        }
-        
-        .rounded-md {
-            transition: background-color 0.5s ease;
-        }
-        
         .text-gray-300, .text-gray-400 {
             transition: color 0.5s ease;
         }
@@ -148,7 +140,7 @@
             color: #4a4a4a !important;
         }
         
-        .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]) {
+        .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(220, 38, 127"]):not([style*="background-color: rgba(245, 101, 101"]) {
             background-color: #e5e5e5 !important;
             border-color: #4a4a4a !important;
             color: #4a4a4a !important;
@@ -163,52 +155,11 @@
             border-color: #4a4a4a !important;
         }
         
-        .light-mode .tab-button {
-            color: #999999 !important;
-            background: #f0f0f0 !important;
-        }
-        
-        .light-mode .tab-button:hover {
-            color: #1a1a1a !important;
-            background: #e0e0e0 !important;
-        }
-        
-        .light-mode .tab-active {
-            background: #1a1a1a !important;
-            color: #ffffff !important;
-        }
-        
-        /* Light mode tab-specific borders */
-        .light-mode .tab-leaderboard.tab-active {
-            border-right: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
-        }
-        
-        .light-mode .tab-pod.tab-active {
-            border-left: 2px solid #4a4a4a !important;
-            border-right: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
-        }
-        
-        .light-mode .tab-tutorial.tab-active {
-            border-left: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
-        }
-        
-        /* Tab borders for inactive tabs in light mode */
-        .light-mode .tab-leaderboard {
-            border-right: 2px solid #4a4a4a !important;
-        }
-        
-        .light-mode .tab-tutorial {
-            border-left: 2px solid #4a4a4a !important;
-        }
-        
         .light-mode .border-gray-600 {
             border-color: #4a4a4a !important;
         }
         
-        .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]) {
+        .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(220, 38, 127"]):not([style*="background-color: rgba(245, 101, 101"]) {
             background-color: rgba(200, 200, 200, 0.5) !important;
         }
         
@@ -247,42 +198,6 @@
             border-color: #4a4a4a !important;
         }
         
-        .light-mode .your-rank-box {
-            background-color: rgba(59, 130, 246, 0.2) !important;
-            border: 2px solid rgba(59, 130, 246, 0.4) !important;
-        }
-        
-        .tab-active {
-            background: #565656 !important;
-            color: white !important;
-        }
-        
-        /* Tab-specific borders for dark mode */
-        body:not(.light-mode) .tab-leaderboard.tab-active {
-            border-right: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
-        }
-        
-        body:not(.light-mode) .tab-pod.tab-active {
-            border-left: 2px solid #656565 !important;
-            border-right: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
-        }
-        
-        body:not(.light-mode) .tab-tutorial.tab-active {
-            border-left: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
-        }
-        
-        /* Tab borders for inactive tabs in dark mode */
-        body:not(.light-mode) .tab-leaderboard {
-            border-right: 2px solid #656565 !important;
-        }
-        
-        body:not(.light-mode) .tab-tutorial {
-            border-left: 2px solid #656565 !important;
-        }
-        
         .nav-button {
             transition: all 0.3s ease;
         }
@@ -319,19 +234,117 @@
         .light-mode .camera-button svg {
             color: white !important;
         }
+
+        .tab-active {
+            background: #565656 !important;
+            color: white !important;
+        }
+        
+        /* Tab-specific borders for dark mode */
+        body:not(.light-mode) .tab-daily.tab-active {
+            border-right: 2px solid #656565 !important;
+            border-bottom: 2px solid #656565 !important;
+        }
+        
+        body:not(.light-mode) .tab-milestones.tab-active {
+            border-left: 2px solid #656565 !important;
+            border-right: 2px solid #656565 !important;
+            border-bottom: 2px solid #656565 !important;
+        }
+        
+        body:not(.light-mode) .tab-badges.tab-active {
+            border-left: 2px solid #656565 !important;
+            border-bottom: 2px solid #656565 !important;
+        }
+        
+        /* Light mode tab styles */
+        .light-mode .tab-button {
+            color: #999999 !important;
+            background: #f0f0f0 !important;
+        }
+        
+        .light-mode .tab-button:hover {
+            color: #1a1a1a !important;
+            background: #e0e0e0 !important;
+        }
+        
+        .light-mode .tab-active {
+            background: #1a1a1a !important;
+            color: #ffffff !important;
+        }
+        
+        /* Light mode tab-specific borders */
+        .light-mode .tab-daily.tab-active {
+            border-right: 2px solid #4a4a4a !important;
+            border-bottom: 2px solid #4a4a4a !important;
+        }
+        
+        .light-mode .tab-milestones.tab-active {
+            border-left: 2px solid #4a4a4a !important;
+            border-right: 2px solid #4a4a4a !important;
+            border-bottom: 2px solid #4a4a4a !important;
+        }
+        
+        .light-mode .tab-badges.tab-active {
+            border-left: 2px solid #4a4a4a !important;
+            border-bottom: 2px solid #4a4a4a !important;
+        }
+        
+        /* Tab borders for inactive tabs in light mode */
+        .light-mode .tab-milestones {
+            border-left: 2px solid #4a4a4a !important;
+            border-right: 2px solid #4a4a4a !important;
+        }
+
+        .reward-card {
+            transition: all 0.3s ease;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .progress-bar {
+            transition: width 0.8s ease;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .back-button {
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-2px);
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
     <!-- Header - Fixed -->
     <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
         <div class="flex items-center justify-between mb-2">
-            <!-- Left side - Logo and Title -->
-            <div class="flex items-center space-x-1">
-                <div class="lens-icon">
-                    <div class="lens-outer"></div>
-                    <div class="lens-inner"></div>
+            <!-- Left side - Back button and Title -->
+            <div class="flex items-center space-x-3">
+                <button class="back-button p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae;">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <div class="flex items-center space-x-1">
+                    <div class="lens-icon">
+                        <div class="lens-outer"></div>
+                        <div class="lens-inner"></div>
+                    </div>
+                    <h1 class="text-xl font-bold" style="margin-left: 5px;">REWARDS AND ACHIEVEMENTS</h1>
                 </div>
-                <h1 class="text-xl font-bold" style="margin-left: 5px;">LENS APP</h1>
             </div>
             
             <!-- Right side - Theme toggle and Connect Wallet -->
@@ -352,819 +365,315 @@
         
         <!-- Slogan -->
         <div class="text-left" style="margin-top: 2px;">
-            <p class="text-xs" id="slogan" style="color: #aeaeae;"></p>
+            <p class="text-xs" id="slogan" style="color: #aeaeae;">Complete tasks, reach milestones, and earn badges.</p>
         </div>
     </header>
 
-    <!-- Main Body with Integrated Navigation -->
+    <!-- Main Content -->
     <main class="fixed left-0 right-0 px-4" style="top: 85px; bottom: 7px;">
-        <!-- Unified Container -->
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
             <!-- Tabs -->
             <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565;">
-                <button class="tab-button tab-leaderboard py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('leaderboard', this)" style="flex: 0.7;">
-                    <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
-                        <rect x="3" y="12" width="4" height="9" rx="1"/>
-                        <rect x="10" y="8" width="4" height="13" rx="1"/>
-                        <rect x="17" y="4" width="4" height="17" rx="1"/>
-                    </svg>
+                <button class="tab-button tab-daily py-2 md:py-3 px-6 text-center font-medium transition-colors tab-active" onclick="switchTab('daily', this)" style="flex: 1;">
+                    Daily Tasks
                 </button>
-                <button class="tab-button tab-pod py-2 md:py-3 px-6 text-center font-bold transition-colors tab-active" onclick="switchTab('pod', this)" style="flex: 2.6; letter-spacing: 6px;">
-                    POD
+                <button class="tab-button tab-milestones py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('milestones', this)" style="flex: 1; border-left: 2px solid #656565; border-right: 2px solid #656565;">
+                    Milestones
                 </button>
-                <button class="tab-button tab-tutorial py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('tutorial', this)" style="flex: 0.7;">
-                    <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
-                        <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9l-11-6zM18.82 9L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
-                    </svg>
+                <button class="tab-button tab-badges py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('badges', this)" style="flex: 1;">
+                    Badges
                 </button>
             </div>
             
             <!-- Content Area -->
             <div class="p-6 overflow-y-auto flex-1">
-                <!-- Leaderboard Content -->
-                <div id="leaderboard-content" class="tab-content hidden h-full flex flex-col">
-                    <!-- Fixed LENS App Leaderboard Title -->
-                    <div class="flex-shrink-0">
-                        <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">LENS APP LEADERBOARD</h2>
-                    </div>
-                    
-                    <!-- Scrollable Top 50 Ranks -->
-                    <div class="flex-1 overflow-y-auto space-y-2 pr-2">
-                            <!-- Top 3 with special colors -->
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(255, 215, 0, 0.1);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-black text-xs">1</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Alex Chen</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-yellow-400 text-xs">2,450 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(192, 192, 192, 0.1);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center font-bold text-black text-xs">2</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Maria Santos</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">2,180 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(205, 127, 50, 0.1);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center font-bold text-white text-xs">3</div>
-                                    <div>
-                                        <p class="font-medium text-xs">David Kim</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-orange-400 text-xs">1,920 pts</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Ranks 4-50 with brighter background -->
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">4</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Emma Wilson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,750 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">5</div>
-                                    <div>
-                                        <p class="font-medium text-xs">James Rodriguez</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,680 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">6</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Sophie Anderson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,590 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">7</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Michael Chang</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,520 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">8</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Lisa Thompson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,450 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">9</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ryan Parker</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,380 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">10</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Nina Patel</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,320 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">11</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Carlos Martinez</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,280 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">12</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Zoe Williams</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,240 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">13</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ahmed Hassan</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,200 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">14</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Isabella Garcia</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,160 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">15</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Tom Johnson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,120 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">16</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Maya Singh</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,080 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">17</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Lucas Brown</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,040 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">18</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Aria Nakamura</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,000 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">19</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Oliver Davis</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">960 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">20</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Grace Lee</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">920 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">21</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Kevin Zhang</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">880 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">22</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Rachel Green</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">840 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">23</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Daniel Foster</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">800 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">24</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Samantha Cruz</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">760 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">25</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Marcus Johnson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">720 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">26</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Lily Wang</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">680 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">27</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Tyler Brooks</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">640 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">28</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Chloe Miller</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">600 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">29</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Jason Taylor</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">560 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">30</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Megan Roberts</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">520 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">31</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Brandon Lee</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">480 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">32</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Victoria Stone</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">440 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">33</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Nathan Cooper</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">400 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">34</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Hannah Price</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">360 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">35</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Eric Mitchell</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">320 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">36</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Stephanie Ward</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">280 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">37</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Jordan Bell</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">240 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">38</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ashley Turner</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">200 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">39</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Connor Hayes</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">160 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">40</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Paige Collins</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">120 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">41</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Jake Morrison</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">100 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">42</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Sophia Reed</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">80 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">43</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ethan Clark</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">60 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">44</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ava Martinez</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">50 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">45</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Noah Phillips</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">40 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">46</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Mia Thompson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">30 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">47</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Liam Anderson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">25 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">48</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Emma Wilson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">20 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">49</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Logan Davis</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">15 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">50</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Isabella Garcia</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">10 pts</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    <!-- Fixed Your Rank Section at bottom -->
-                    <div class="flex-shrink-0 mt-3 pt-3 border-t border-gray-600">
-                        <h3 class="text-sm font-bold mb-2 text-center" style="letter-spacing: 1px;">YOUR RANK</h3>
-                        <div class="flex items-center justify-between p-2 rounded-md your-rank-box" style="background-color: rgba(59, 130, 246, 0.1);">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white text-xs">51</div>
-                                <div>
-                                    <p class="font-medium text-xs">You</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-bold text-blue-400 text-xs">890 pts</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- POD Content -->
-                <div id="pod-content" class="tab-content">
-                    <div class="rounded-md p-3 mb-6" style="background-color: rgba(75, 75, 75, 0.5);">
-                        <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">PICTURE OF THE DAY</h2>
-                        <div class="bg-gray-600 rounded-lg mb-2 flex items-center justify-center overflow-hidden" style="max-height: 250px;">
-                            <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/1f0b26fb-17b4-41a0-06c5-e48561bb2300/rectcontain3" 
-                                 alt="Golden Hour Cityscape" 
-                                 class="w-full h-full object-contain"
-                                 onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
-                        </div>
-                        <h3 class="text-sm font-bold mb-1">"Golden Hour Cityscape"</h3>
-                        <p class="text-gray-300 mb-2 text-xs">by nimaleophotos.eth</p>
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-gray-400 text-xs">❤️ 1,247</span>
-                                <span class="text-gray-400 text-xs">🔄 89</span>
-                                <span class="text-gray-400 text-xs">💬 156</span>
-                            </div>
-                            <button class="bg-gray-600 hover:bg-gray-500 px-2 py-1 rounded text-xs font-medium transition-colors text-gray-200" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0x38cf1df4', '_blank')">
-                                Support
-                            </button>
-                        </div>
-                        <div class="mt-2 pt-2 border-t border-gray-600 text-xs">
-                            <span class="text-xs" style="margin-right: 1px;">💡</span><span class="text-gray-300 font-medium text-xs">How it works:</span>
-                            <span class="text-gray-300 text-xs"> Support POD artist with follow and comments and earn extra points!</span>
-                        </div>
-                    </div>
-
-                    <div class="rounded-md p-4 mb-6" style="background-color: rgba(75, 75, 75, 0.5);">
-                        <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">SPOTLIGHT SPOTS</h2>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(1)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(2)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(3)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(4)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(5)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(6)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(7)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(8)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(9)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                        </div>
-                        
-                        <div class="mt-3 pt-2 border-t border-gray-600 text-xs">
-                            <span class="text-xs" style="margin-right: 1px;">💡</span><span class="text-gray-300 font-medium text-xs">How it works:</span>
-                            <span class="text-gray-300 text-xs"> Buy a spot for $0.5 and get featured for 4 hours! Earn points and have chance to be POD and win $20!</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tutorial Content -->
-                <div id="tutorial-content" class="tab-content hidden">
-                    <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">PHOTOGRAPHY TUTORIALS</h2>
+                <!-- Daily Tasks Content -->
+                <div id="daily-content" class="tab-content">
                     <div class="space-y-3">
-                        <div class="rounded-md p-3 flex items-center justify-between" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex items-center flex-1">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background-color: rgba(59, 130, 246, 0.2);">
-                                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        <!-- Task 1 - Completed -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.5);">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-bold">Mobile Photography Course</h3>
+                                <div>
+                                    <p class="font-medium text-sm">Support POD Artist</p>
+                                    <p class="text-gray-300 text-xs">Follow artist and comment under their cast</p>
                                 </div>
                             </div>
-                            <button class="px-3 py-1 rounded text-xs font-medium transition-colors text-blue-400 hover:text-blue-300 ml-3 flex-shrink-0" style="background-color: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.3);">
-                                Start Course
-                            </button>
+                            <div class="text-green-400 font-bold text-sm">+15 pts</div>
                         </div>
-                        
-                        <div class="rounded-md p-3 flex items-center justify-between" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex items-center flex-1">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background-color: rgba(34, 197, 94, 0.2);">
-                                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                    </svg>
+
+                        <!-- Task 2 - In Progress -->
+                        <div class="flex flex-col p-3 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.5);">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">12</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-sm">Support Spotlight Artist</p>
+                                        <p class="text-gray-300 text-xs">Like and Recast all active spots in a day</p>
+                                    </div>
                                 </div>
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-bold">Intermediate Course</h3>
-                                </div>
+                                <div class="text-blue-400 font-bold text-sm">+36 pts</div>
                             </div>
-                            <button class="px-3 py-1 rounded text-xs font-medium transition-colors text-green-400 hover:text-green-300 ml-3 flex-shrink-0" style="background-color: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.3);">
-                                Start Course
-                            </button>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 33%;"></div>
+                                </div>
+                                <span class="text-xs text-gray-300">12/36</span>
+                            </div>
                         </div>
-                        
-                        <div class="rounded-md p-3 flex items-center justify-between" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex items-center flex-1">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background-color: rgba(168, 85, 247, 0.2);">
-                                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                                    </svg>
+
+                        <!-- Task 3 - In Progress -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.5);">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">1/3</span>
                                 </div>
-                                <div class="flex-1">
-                                    <h3 class="text-sm font-bold">Extra Courses</h3>
+                                <div>
+                                    <p class="font-medium text-sm">Capture the Moment</p>
+                                    <p class="text-gray-300 text-xs">Use in-app camera to capture a photo</p>
                                 </div>
                             </div>
-                            <button class="px-3 py-1 rounded text-xs font-medium transition-colors text-purple-400 hover:text-purple-300 ml-3 flex-shrink-0" style="background-color: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.3);">
-                                Explore Extra Courses
-                            </button>
+                            <div class="text-orange-400 font-bold text-sm">+15 pts</div>
+                        </div>
+
+                        <!-- Task 4 - Not Started -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.5);">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">0/3</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">Share Your Shot</p>
+                                    <p class="text-gray-300 text-xs">Share your photos with $LENS tag</p>
+                                </div>
+                            </div>
+                            <div class="text-gray-400 font-bold text-sm">+15 pts</div>
+                        </div>
+
+                        <!-- Task 5 - Not Started -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.5);">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">Join Daily ITAP Channel</p>
+                                    <p class="text-gray-300 text-xs">Share your ITAP photos</p>
+                                </div>
+                            </div>
+                            <div class="text-gray-400 font-bold text-sm">+15 pts</div>
+                        </div>
+
+                        <!-- Task 6 - Not Started -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.5);">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sm">Join Daily Nature Channel</p>
+                                    <p class="text-gray-300 text-xs">Share daily theme shots</p>
+                                </div>
+                            </div>
+                            <div class="text-gray-400 font-bold text-sm">+15 pts</div>
+                        </div>
+                    </div>
+
+                    <!-- Claim Points Button -->
+                    <div class="mt-6 text-center">
+                        <button class="px-6 py-3 rounded-lg font-bold text-white transition-all hover:scale-105" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="claimDailyPoints()">
+                            Claim 27 Points
+                        </button>
+                        <p class="text-gray-400 text-xs mt-2">Complete more tasks to earn additional points</p>
+                    </div>
+                </div>
+
+                <!-- Milestones Content -->
+                <div id="milestones-content" class="tab-content hidden">
+                    <div class="space-y-4">
+                        <!-- Milestone 1 - Completed -->
+                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm">First Steps</p>
+                                        <p class="text-gray-300 text-xs">Upload your first photo</p>
+                                    </div>
+                                </div>
+                                <div class="text-green-400 font-bold text-sm">+100 pts</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 100%;"></div>
+                                </div>
+                                <span class="text-xs text-green-400">Complete</span>
+                            </div>
+                        </div>
+
+                        <!-- Milestone 2 - In Progress -->
+                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">7/10</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm">Getting Started</p>
+                                        <p class="text-gray-300 text-xs">Upload 10 photos</p>
+                                    </div>
+                                </div>
+                                <div class="text-blue-400 font-bold text-sm">+250 pts</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 70%;"></div>
+                                </div>
+                                <span class="text-xs text-gray-300">7/10</span>
+                            </div>
+                        </div>
+
+                        <!-- Milestone 3 - Locked -->
+                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm text-gray-400">Community Builder</p>
+                                        <p class="text-gray-500 text-xs">Get 100 total likes</p>
+                                    </div>
+                                </div>
+                                <div class="text-gray-500 font-bold text-sm">+500 pts</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-gray-600 h-2 rounded-full" style="width: 23%;"></div>
+                                </div>
+                                <span class="text-xs text-gray-500">23/100</span>
+                            </div>
+                        </div>
+
+                        <!-- Milestone 4 - Locked -->
+                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm text-gray-400">Rising Photographer</p>
+                                        <p class="text-gray-500 text-xs">Reach top 25 on leaderboard</p>
+                                    </div>
+                                </div>
+                                <div class="text-gray-500 font-bold text-sm">+750 pts</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-gray-600 h-2 rounded-full" style="width: 0%;"></div>
+                                </div>
+                                <span class="text-xs text-gray-500">Locked</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badges Content -->
+                <div id="badges-content" class="tab-content hidden">
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Badge 1 - Unlocked -->
+                        <div class="p-4 rounded-md text-center reward-card" style="background-color: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);">
+                            <div class="text-3xl mb-2">🏆</div>
+                            <p class="font-bold text-sm">First Upload</p>
+                            <p class="text-yellow-400 text-xs mb-2">Unlocked</p>
+                            <p class="text-gray-300 text-xs">Uploaded your first photo to LENS</p>
+                        </div>
+
+                        <!-- Badge 2 - Unlocked -->
+                        <div class="p-4 rounded-md text-center reward-card" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
+                            <div class="text-3xl mb-2">📸</div>
+                            <p class="font-bold text-sm">Shutterfly</p>
+                            <p class="text-green-400 text-xs mb-2">Unlocked</p>
+                            <p class="text-gray-300 text-xs">Completed your first daily task</p>
+                        </div>
+
+                        <!-- Badge 3 - Unlocked -->
+                        <div class="p-4 rounded-md text-center reward-card" style="background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3);">
+                            <div class="text-3xl mb-2">💜</div>
+                            <p class="font-bold text-sm">Social Butterfly</p>
+                            <p class="text-purple-400 text-xs mb-2">Unlocked</p>
+                            <p class="text-gray-300 text-xs">Liked 10 photos from other users</p>
+                        </div>
+
+                        <!-- Badge 4 - Locked -->
+                        <div class="p-4 rounded-md text-center reward-card opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="text-3xl mb-2 opacity-50">🌟</div>
+                            <p class="font-bold text-sm text-gray-400">Rising Star</p>
+                            <p class="text-gray-500 text-xs mb-2">Locked</p>
+                            <p class="text-gray-500 text-xs">Get 100 total likes on your photos</p>
+                        </div>
+
+                        <!-- Badge 5 - Locked -->
+                        <div class="p-4 rounded-md text-center reward-card opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="text-3xl mb-2 opacity-50">👑</div>
+                            <p class="font-bold text-sm text-gray-400">Top Photographer</p>
+                            <p class="text-gray-500 text-xs mb-2">Locked</p>
+                            <p class="text-gray-500 text-xs">Reach top 10 on the leaderboard</p>
+                        </div>
+
+                        <!-- Badge 6 - Locked -->
+                        <div class="p-4 rounded-md text-center reward-card opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="text-3xl mb-2 opacity-50">🔥</div>
+                            <p class="font-bold text-sm text-gray-400">Streak Master</p>
+                            <p class="text-gray-500 text-xs mb-2">Locked</p>
+                            <p class="text-gray-500 text-xs">Complete daily tasks for 7 days straight</p>
+                        </div>
+
+                        <!-- Badge 7 - Locked -->
+                        <div class="p-4 rounded-md text-center reward-card opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="text-3xl mb-2 opacity-50">💎</div>
+                            <p class="font-bold text-sm text-gray-400">Diamond Lens</p>
+                            <p class="text-gray-500 text-xs mb-2">Locked</p>
+                            <p class="text-gray-500 text-xs">Earn 5000 total points</p>
+                        </div>
+
+                        <!-- Badge 8 - Locked -->
+                        <div class="p-4 rounded-md text-center reward-card opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                            <div class="text-3xl mb-2 opacity-50">🎯</div>
+                            <p class="font-bold text-sm text-gray-400">Perfectionist</p>
+                            <p class="text-gray-500 text-xs mb-2">Locked</p>
+                            <p class="text-gray-500 text-xs">Have a photo featured as POD</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Integrated Navigation Bar -->
+            <!-- Navigation Bar -->
             <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 2px solid #656565;">
                 <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 2px solid #656565;">
                     <div class="flex items-center justify-around w-full">
-                        <!-- Rewards -->
-                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToRewards()" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
+                        <!-- Rewards - Active -->
+                        <button class="nav-button flex-shrink-0" style="color: white;">
+                            <svg class="w-6 h-6" fill="currentColor" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
                             </svg>
                         </button>
@@ -1180,7 +689,7 @@
                         <button class="camera-button flex-shrink-0" onclick="navigateToCamera()">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                         </button>
 
@@ -1244,11 +753,19 @@
             element.classList.remove('text-gray-300', 'hover:text-white');
         }
 
-        // Navigation functions
-        function navigateToRewards() {
-            alert('Navigation to Rewards page - Ready for implementation');
+        function goBack() {
+            // This will navigate back to your main page (version 148)
+            // You can replace this with actual navigation logic
+            alert('Navigate back to main page - Ready for implementation');
         }
 
+        function claimDailyPoints() {
+            // Calculate claimable points based on completed tasks
+            const completedPoints = 15 + 12; // POD Artist (15) + Spotlight progress (12 spots = 12 points)
+            alert(`Claimed ${completedPoints} points! Complete more tasks to earn additional rewards.`);
+        }
+
+        // Navigation functions
         function navigateToContest() {
             alert('Navigation to Contest page - Ready for implementation');
         }
@@ -1265,273 +782,9 @@
             alert('Navigation to Info page - Ready for implementation');
         }
 
-        // Slogan animation system
-        const slogans = [
-            "See the world through the $LENS of creativity.",
-            "Every story begins with a $LENS.",
-            "Light and shadow find balance through a $LENS.",
-            "The beauty of photography lives in the $LENS.",
-            "Through a $LENS, moments become timeless.",
-            "Perspective changes with every $LENS.",
-            "A $LENS captures what the eye feels.",
-            "The art of photography starts with a $LENS.",
-            "Behind every photograph lies a $LENS.",
-            "Through a $LENS, the ordinary becomes extraordinary."
-        ];
-        
-        let currentSloganIndex = 0;
-        let currentCharIndex = 0;
-        let isTyping = true;
-        
-        function typeSlogan() {
-            const sloganElement = document.getElementById('slogan');
-            const currentSlogan = slogans[currentSloganIndex];
-            
-            if (isTyping) {
-                if (currentCharIndex < currentSlogan.length) {
-                    sloganElement.textContent = currentSlogan.substring(0, currentCharIndex + 1);
-                    currentCharIndex++;
-                    setTimeout(typeSlogan, 50); // 50ms per character
-                } else {
-                    // Finished typing, wait 10 seconds then start next slogan
-                    setTimeout(() => {
-                        currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
-                        currentCharIndex = 0;
-                        sloganElement.textContent = '';
-                        typeSlogan();
-                    }, 10000); // 10 second pause
-                }
-            }
-        }
-
-        // Spotlight spots system
-        let spotlightSpots = {
-            1: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            2: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            3: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            4: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            5: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            6: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            7: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            8: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            9: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null }
-        };
-
-        function openSpotlightImage(spotNumber) {
-            const spot = spotlightSpots[spotNumber];
-            
-            if (spot.occupied) {
-                // If spot is occupied, show cast details
-                showCastDetails(spotNumber);
-            } else {
-                // If spot is available, show purchase popup
-                showPurchasePopup(spotNumber);
-            }
-        }
-
-        function showPurchasePopup(spotNumber) {
-            // Create popup overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            overlay.id = 'purchase-popup';
-            
-            // Create popup content
-            overlay.innerHTML = `
-                <div class="bg-gray-800 rounded-lg p-8 max-w-md mx-4 border-2 border-gray-600">
-                    <h3 class="text-xl font-bold mb-6 text-center">Spotlight Spot ${spotNumber}</h3>
-                    <p class="text-gray-300 mb-6 text-center">Add your cast to get featured for 4 hours</p>
-                    
-                    <div class="mb-6">
-                        <label class="block font-medium mb-3">Cast URL:</label>
-                        <input type="text" id="cast-url-input" placeholder="https://warpcast.com/username/0x..." 
-                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-blue-500">
-                    </div>
-                    
-                    <div class="flex space-x-3">
-                        <button onclick="purchaseSpot(${spotNumber})" 
-                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            Purchase ($0.5)
-                        </button>
-                        <button onclick="closePurchasePopup()" 
-                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(overlay);
-        }
-
-        function closePurchasePopup() {
-            const popup = document.getElementById('purchase-popup');
-            if (popup) {
-                popup.remove();
-            }
-        }
-
-        function purchaseSpot(spotNumber) {
-            const castUrl = document.getElementById('cast-url-input').value.trim();
-            
-            if (!castUrl) {
-                alert('Please enter a cast URL');
-                return;
-            }
-            
-            if (!castUrl.includes('warpcast.com') && !castUrl.includes('farcaster.xyz')) {
-                alert('Please enter a valid Warpcast or Farcaster cast URL');
-                return;
-            }
-            
-            // Check if this cast is already featured in any spot
-            for (let i = 1; i <= 9; i++) {
-                if (spotlightSpots[i].occupied && spotlightSpots[i].castUrl === castUrl) {
-                    alert('This cast is already being featured in another spotlight spot!');
-                    return;
-                }
-            }
-            
-            // Simulate purchase process
-            const spot = spotlightSpots[spotNumber];
-            spot.occupied = true;
-            spot.castUrl = castUrl;
-            spot.imageUrl = generatePlaceholderImage(castUrl);
-            spot.timeRemaining = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
-            spot.purchaseTime = Date.now();
-            
-            // Update the spot display
-            updateSpotDisplay(spotNumber);
-            
-            // Close popup
-            closePurchasePopup();
-            
-            // Show success message
-            alert('Spot purchased successfully! Your cast will be featured for 4 hours.');
-            
-            // Start countdown timer
-            startSpotTimer(spotNumber);
-        }
-
-        function generatePlaceholderImage(castUrl) {
-            // Try to extract cast hash and generate a more realistic image
-            const parts = castUrl.split('/');
-            const username = parts[3] || 'user';
-            const castHash = parts[4] || '';
-            
-            // Generate different placeholder images based on cast hash
-            const colors = ['4F46E5', '059669', 'DC2626', 'D97706', '7C3AED', 'DB2777'];
-            const colorIndex = castHash.length % colors.length;
-            const color = colors[colorIndex];
-            
-            // Create a more realistic placeholder that looks like a photo
-            return `https://picsum.photos/150/150?random=${castHash.slice(-4) || Math.floor(Math.random() * 1000)}`;
-        }
-
-        function updateSpotDisplay(spotNumber) {
-            const spotButton = document.querySelector(`button[onclick="openSpotlightImage(${spotNumber})"]`);
-            const spot = spotlightSpots[spotNumber];
-            
-            if (spot.occupied) {
-                spotButton.innerHTML = `
-                    <div class="relative">
-                        <img src="${spot.imageUrl}" alt="Featured Cast" class="w-full h-full object-cover rounded-md"
-                             onerror="this.src='https://via.placeholder.com/150x150/4F46E5/FFFFFF?text=IMG'; this.alt='Image failed to load';">
-                        <div class="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded shadow-lg" id="timer-${spotNumber}">
-                            ${formatTimeRemaining(spot.timeRemaining)}
-                        </div>
-                    </div>
-                `;
-            } else {
-                spotButton.innerHTML = `
-                    <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                        <span class="text-gray-300 text-sm font-medium">Available</span>
-                    </div>
-                `;
-            }
-        }
-
-        function startSpotTimer(spotNumber) {
-            const timer = setInterval(() => {
-                const spot = spotlightSpots[spotNumber];
-                const elapsed = Date.now() - spot.purchaseTime;
-                spot.timeRemaining = Math.max(0, (4 * 60 * 60 * 1000) - elapsed);
-                
-                const timerElement = document.getElementById(`timer-${spotNumber}`);
-                if (timerElement) {
-                    const newTime = formatTimeRemaining(spot.timeRemaining);
-                    if (timerElement.textContent !== newTime) {
-                        timerElement.style.transition = 'opacity 0.2s ease';
-                        timerElement.style.opacity = '0.7';
-                        setTimeout(() => {
-                            timerElement.textContent = newTime;
-                            timerElement.style.opacity = '1';
-                        }, 100);
-                    }
-                }
-                
-                if (spot.timeRemaining <= 0) {
-                    // Time expired, free the spot
-                    spot.occupied = false;
-                    spot.castUrl = '';
-                    spot.imageUrl = '';
-                    spot.purchaseTime = null;
-                    updateSpotDisplay(spotNumber);
-                    clearInterval(timer);
-                }
-            }, 1000);
-        }
-
-        function formatTimeRemaining(milliseconds) {
-            const hours = Math.floor(milliseconds / (1000 * 60 * 60));
-            const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
-            return `${hours}h ${minutes}m`;
-        }
-
-        function showCastDetails(spotNumber) {
-            const spot = spotlightSpots[spotNumber];
-            
-            // Create popup overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            overlay.id = 'cast-details-popup';
-            
-            // Create popup content
-            overlay.innerHTML = `
-                <div class="bg-gray-800 rounded-lg p-8 max-w-md mx-4 border-2 border-gray-600">
-                    <h3 class="text-xl font-bold mb-6 text-center">Featured Cast</h3>
-                    
-                    <div class="mb-6">
-                        <img src="${spot.imageUrl}" alt="Featured Cast" class="w-full h-32 object-cover rounded-md mb-3"
-                             onerror="this.src='https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=IMG'; this.alt='Image failed to load';">
-                        <p class="text-gray-300 text-center">Time remaining: ${formatTimeRemaining(spot.timeRemaining)}</p>
-                    </div>
-                    
-                    <div class="flex space-x-3">
-                        <button onclick="window.open('${spot.castUrl}', '_blank')" 
-                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            View Cast
-                        </button>
-                        <button onclick="closeCastDetails()" 
-                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(overlay);
-        }
-
-        function closeCastDetails() {
-            const popup = document.getElementById('cast-details-popup');
-            if (popup) {
-                popup.remove();
-            }
-        }
-
         // Add entrance animations
         document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('header, main, footer');
+            const elements = document.querySelectorAll('header, main');
             elements.forEach((element, index) => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(20px)';
@@ -1541,33 +794,19 @@
                     element.style.transform = 'translateY(0)';
                 }, index * 200);
             });
-            
-            // Start slogan animation after page loads
-            setTimeout(typeSlogan, 1000);
-            
-            // Add demo spots for testing (spots 2 and 5)
+
+            // Animate progress bars
             setTimeout(() => {
-                // Demo spot 2
-                const spot2 = spotlightSpots[2];
-                spot2.occupied = true;
-                spot2.castUrl = 'https://warpcast.com/photographer/0x12345';
-                spot2.imageUrl = 'https://picsum.photos/150/150?random=2';
-                spot2.timeRemaining = 2.5 * 60 * 60 * 1000; // 2.5 hours
-                spot2.purchaseTime = Date.now() - (1.5 * 60 * 60 * 1000); // Started 1.5 hours ago
-                updateSpotDisplay(2);
-                startSpotTimer(2);
-                
-                // Demo spot 5
-                const spot5 = spotlightSpots[5];
-                spot5.occupied = true;
-                spot5.castUrl = 'https://warpcast.com/artist/0x67890';
-                spot5.imageUrl = 'https://picsum.photos/150/150?random=5';
-                spot5.timeRemaining = 3.8 * 60 * 60 * 1000; // 3.8 hours
-                spot5.purchaseTime = Date.now() - (0.2 * 60 * 60 * 1000); // Started 12 minutes ago
-                updateSpotDisplay(5);
-                startSpotTimer(5);
-            }, 2000);
+                const progressBars = document.querySelectorAll('.progress-bar');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 500);
+                });
+            }, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f72598c792a4bf',t:'MTc1NzkyOTA2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7c01551899085',t:'MTc1NzkzNTM4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
