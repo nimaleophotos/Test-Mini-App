@@ -1337,17 +1337,17 @@
             
             // Create popup content
             overlay.innerHTML = `
-                <div class="bg-gray-800 rounded-lg p-6 max-w-sm mx-4 border-2 border-gray-600">
-                    <h3 class="text-lg font-bold mb-4 text-center">Spotlight Spot ${spotNumber}</h3>
-                    <p class="text-gray-300 mb-4 text-center text-sm">Add your cast to get featured for 4 hours</p>
+                <div class="bg-gray-800 rounded-lg p-8 max-w-md mx-4 border-2 border-gray-600">
+                    <h3 class="text-xl font-bold mb-6 text-center">Spotlight Spot ${spotNumber}</h3>
+                    <p class="text-gray-300 mb-6 text-center">Add your cast to get featured for 4 hours</p>
                     
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium mb-2">Cast URL:</label>
+                    <div class="mb-6">
+                        <label class="block font-medium mb-3">Cast URL:</label>
                         <input type="text" id="cast-url-input" placeholder="https://warpcast.com/username/0x..." 
-                               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-sm focus:outline-none focus:border-blue-500">
+                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-blue-500">
                     </div>
                     
-                    <div class="flex space-x-2">
+                    <div class="flex space-x-3">
                         <button onclick="purchaseSpot(${spotNumber})" 
                                 class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
                             Purchase ($0.5)
@@ -1497,22 +1497,22 @@
             
             // Create popup content
             overlay.innerHTML = `
-                <div class="bg-gray-800 rounded-lg p-6 max-w-sm mx-4 border-2 border-gray-600">
-                    <h3 class="text-lg font-bold mb-4 text-center">Featured Cast</h3>
+                <div class="bg-gray-800 rounded-lg p-8 max-w-md mx-4 border-2 border-gray-600">
+                    <h3 class="text-xl font-bold mb-6 text-center">Featured Cast</h3>
                     
-                    <div class="mb-4">
-                        <img src="${spot.imageUrl}" alt="Featured Cast" class="w-full h-32 object-cover rounded-md mb-3"
+                    <div class="mb-6">
+                        <img src="${spot.imageUrl}" alt="Featured Cast" class="w-full h-40 object-cover rounded-md mb-4"
                              onerror="this.src='https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=IMG'; this.alt='Image failed to load';">
-                        <p class="text-sm text-gray-300 mb-2">Time remaining: ${formatTimeRemaining(spot.timeRemaining)}</p>
+                        <p class="text-gray-300 mb-2">Time remaining: ${formatTimeRemaining(spot.timeRemaining)}</p>
                     </div>
                     
                     <div class="flex space-x-3">
                         <button onclick="window.open('${spot.castUrl}', '_blank')" 
-                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded font-medium transition-colors">
+                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
                             View Cast
                         </button>
                         <button onclick="closeCastDetails()" 
-                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded font-medium transition-colors">
+                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
                             Close
                         </button>
                     </div>
@@ -1569,5 +1569,5 @@
             }, 2000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7178fe575a4bf',t:'MTc1NzkyODQ4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7202a4401a4bf',t:'MTc1NzkyODgzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
