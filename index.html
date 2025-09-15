@@ -10,7 +10,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         
         .lens-icon {
@@ -68,49 +68,65 @@
             background: #4a4a4a;
         }
         
-        /* Add transitions to all elements that change in light mode */
+        /* Add smooth transitions to all elements that change in light mode */
         .lens-outer, .lens-inner {
-            transition: border-color 0.3s ease;
+            transition: border-color 0.5s ease;
         }
         
         .theme-toggle {
-            transition: border-color 0.3s ease, background-color 0.3s ease;
+            transition: border-color 0.5s ease, background-color 0.5s ease;
         }
         
         .theme-toggle svg {
-            transition: color 0.3s ease;
+            transition: color 0.5s ease;
         }
         
         button {
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
         }
         
         .rounded-3xl {
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         
         .tab-button {
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
         
         .rounded-md {
-            transition: background-color 0.3s ease;
+            transition: background-color 0.5s ease;
         }
         
         .text-gray-300, .text-gray-400 {
-            transition: color 0.3s ease;
+            transition: color 0.5s ease;
         }
         
         .bg-gray-600, .bg-gray-400 {
-            transition: background-color 0.3s ease;
+            transition: background-color 0.5s ease;
         }
         
         .nav-button {
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
+        }
+        
+        .nav-button svg {
+            transition: color 0.5s ease, opacity 0.5s ease;
         }
         
         #slogan {
-            transition: color 0.3s ease;
+            transition: color 0.5s ease;
+        }
+        
+        header {
+            transition: background-color 0.5s ease !important;
+        }
+        
+        .camera-button {
+            transition: all 0.5s ease, transform 0.3s ease;
+        }
+        
+        .camera-button svg {
+            transition: color 0.5s ease;
         }
 
         /* Light mode styles */
@@ -149,15 +165,17 @@
         
         .light-mode .tab-button {
             border-color: #4a4a4a !important;
-            color: #666666 !important;
+            color: #999999 !important;
+            background: #f0f0f0 !important;
         }
         
         .light-mode .tab-button:hover {
             color: #1a1a1a !important;
+            background: #e0e0e0 !important;
         }
         
         .light-mode .tab-active {
-            background: #666666 !important;
+            background: #2a2a2a !important;
             color: #ffffff !important;
         }
         
@@ -198,6 +216,10 @@
         .light-mode .rounded-3xl .flex-shrink-0:last-child > div {
             background-color: #e5e5e5 !important;
             border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .your-rank-box {
+            background-color: rgba(59, 130, 246, 0.2) !important;
         }
         
         .tab-active {
@@ -245,7 +267,7 @@
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
     <!-- Header - Fixed -->
-    <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727; transition: background-color 0.3s ease;">
+    <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
         <div class="flex items-center justify-between mb-2">
             <!-- Left side - Logo and Title -->
             <div class="flex items-center space-x-1">
@@ -558,7 +580,7 @@
                     <!-- Fixed Your Rank Section at bottom -->
                     <div class="flex-shrink-0 mt-3 pt-3 border-t border-gray-600">
                         <h3 class="text-sm font-bold mb-2 text-center" style="letter-spacing: 1px;">YOUR RANK</h3>
-                        <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(59, 130, 246, 0.1);">
+                        <div class="flex items-center justify-between p-2 rounded-md your-rank-box" style="background-color: rgba(59, 130, 246, 0.1);">
                             <div class="flex items-center space-x-2">
                                 <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white text-xs">47</div>
                                 <div>
@@ -925,5 +947,5 @@
             setTimeout(typeSlogan, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eeba1774738eab',t:'MTc1Nzg0MDc3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f67a5f8735d7a1',t:'MTc1NzkyMjA0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
