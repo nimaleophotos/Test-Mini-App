@@ -246,12 +246,12 @@
         }
         
         /* Tab-specific borders for dark mode */
-        body:not(.light-mode) .tab-daily.tab-active {
+        body:not(.light-mode) .tab-milestones.tab-active {
             border-right: 2px solid #656565 !important;
             border-bottom: 2px solid #656565 !important;
         }
         
-        body:not(.light-mode) .tab-milestones.tab-active {
+        body:not(.light-mode) .tab-daily.tab-active {
             border-left: 2px solid #656565 !important;
             border-right: 2px solid #656565 !important;
             border-bottom: 2px solid #656565 !important;
@@ -279,12 +279,12 @@
         }
         
         /* Light mode tab-specific borders */
-        .light-mode .tab-daily.tab-active {
+        .light-mode .tab-milestones.tab-active {
             border-right: 2px solid #4a4a4a !important;
             border-bottom: 2px solid #4a4a4a !important;
         }
         
-        .light-mode .tab-milestones.tab-active {
+        .light-mode .tab-daily.tab-active {
             border-left: 2px solid #4a4a4a !important;
             border-right: 2px solid #4a4a4a !important;
             border-bottom: 2px solid #4a4a4a !important;
@@ -296,7 +296,7 @@
         }
         
         /* Tab borders for inactive tabs in light mode */
-        .light-mode .tab-milestones {
+        .light-mode .tab-daily {
             border-left: 2px solid #4a4a4a !important;
             border-right: 2px solid #4a4a4a !important;
         }
@@ -366,11 +366,11 @@
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
             <!-- Tabs -->
             <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565;">
-                <button class="tab-button tab-daily py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors tab-active whitespace-nowrap" onclick="switchTab('daily', this)" style="flex: 1;">
-                    Daily Tasks
-                </button>
-                <button class="tab-button tab-milestones py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('milestones', this)" style="flex: 1; border-left: 2px solid #656565; border-right: 2px solid #656565;">
+                <button class="tab-button tab-milestones py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('milestones', this)" style="flex: 1;">
                     Milestones
+                </button>
+                <button class="tab-button tab-daily py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors tab-active whitespace-nowrap" onclick="switchTab('daily', this)" style="flex: 1; border-left: 2px solid #656565; border-right: 2px solid #656565;">
+                    Daily Tasks
                 </button>
                 <button class="tab-button tab-badges py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('badges', this)" style="flex: 1;">
                     Badges
@@ -797,5 +797,5 @@
             }, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7f555a67d774e',t:'MTc1NzkzNzU3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7f8eff0c6774e',t:'MTc1NzkzNzcxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
