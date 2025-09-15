@@ -495,98 +495,245 @@
 
                 <!-- Milestones Content -->
                 <div id="milestones-content" class="tab-content hidden">
-                    <div class="space-y-4">
-                        <!-- Milestone 1 - Completed -->
-                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    <div class="space-y-3">
+                        <!-- Social Campaign Category -->
+                        <div class="milestone-category" data-category="social">
+                            <div class="p-4 rounded-md reward-card cursor-pointer" onclick="toggleCategory('social')" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-sm text-blue-400">Social Campaign</p>
+                                            <p class="text-gray-300 text-xs">Build your network and community</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-blue-400 text-xs font-bold">2/4 Complete</span>
+                                        <svg class="w-4 h-4 text-blue-400 transform transition-transform category-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-sm">First Steps</p>
-                                        <p class="text-gray-300 text-xs">Upload your first photo</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Social Campaign Tasks -->
+                            <div class="category-tasks hidden mt-2 ml-4 space-y-2">
+                                <div class="p-3 rounded-md" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-blue-400">Follow Founders ✓</p>
+                                        <span class="text-blue-400 text-xs">+100 pts</span>
                                     </div>
                                 </div>
-                                <div class="text-green-400 font-bold text-sm">+100 pts</div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="flex-1 bg-gray-700 rounded-full h-2">
-                                    <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 100%;"></div>
+                                
+                                <div class="p-3 rounded-md" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-blue-400">Invite 3 Friends ✓</p>
+                                        <span class="text-blue-400 text-xs">+250 pts</span>
+                                    </div>
                                 </div>
-                                <span class="text-xs text-green-400">Complete</span>
+                                
+                                <div class="p-3 rounded-md" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <p class="font-medium text-xs text-blue-400">Invite 10 Friends</p>
+                                        <span class="text-blue-400 text-xs">+500 pts</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 bg-gray-700 rounded-full h-1">
+                                            <div class="bg-blue-500 h-1 rounded-full" style="width: 60%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-300">6/10</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Invite 50 Friends 🔒</p>
+                                        <span class="text-gray-400 text-xs">+1000 pts</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Milestone 2 - In Progress -->
-                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                                        <span class="text-white text-xs font-bold">7/10</span>
+                        <!-- Economy Campaign Category -->
+                        <div class="milestone-category" data-category="economy">
+                            <div class="p-4 rounded-md reward-card cursor-pointer" onclick="toggleCategory('economy')" style="background-color: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3);">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-sm text-yellow-400">Economy Campaign</p>
+                                            <p class="text-gray-300 text-xs">Invest and hold $LENS tokens</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-sm">Getting Started</p>
-                                        <p class="text-gray-300 text-xs">Upload 10 photos</p>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-yellow-400 text-xs font-bold">0/3 Complete</span>
+                                        <svg class="w-4 h-4 text-yellow-400 transform transition-transform category-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
                                     </div>
                                 </div>
-                                <div class="text-blue-400 font-bold text-sm">+250 pts</div>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="flex-1 bg-gray-700 rounded-full h-2">
-                                    <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 70%;"></div>
+                            
+                            <!-- Economy Campaign Tasks -->
+                            <div class="category-tasks hidden mt-2 ml-4 space-y-2">
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Buy & Hold 1M $LENS 🔒</p>
+                                        <span class="text-gray-400 text-xs">+500 pts</span>
+                                    </div>
                                 </div>
-                                <span class="text-xs text-gray-300">7/10</span>
+                                
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Buy & Hold 10M $LENS 🔒</p>
+                                        <span class="text-gray-400 text-xs">+1500 pts</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Buy & Hold 100M $LENS 🔒</p>
+                                        <span class="text-gray-400 text-xs">+5000 pts</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Milestone 3 - Locked -->
-                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.3);">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        <!-- Art Campaign Category -->
+                        <div class="milestone-category" data-category="art">
+                            <div class="p-4 rounded-md reward-card cursor-pointer" onclick="toggleCategory('art')" style="background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3);">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-sm text-purple-400">Art Campaign</p>
+                                            <p class="text-gray-300 text-xs">Create and share your photography</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-purple-400 text-xs font-bold">1/4 Complete</span>
+                                        <svg class="w-4 h-4 text-purple-400 transform transition-transform category-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-sm text-gray-400">Community Builder</p>
-                                        <p class="text-gray-500 text-xs">Get 100 total likes</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Art Campaign Tasks -->
+                            <div class="category-tasks hidden mt-2 ml-4 space-y-2">
+                                <div class="p-3 rounded-md" style="background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-purple-400">Take 100 Shots ✓</p>
+                                        <span class="text-purple-400 text-xs">+200 pts</span>
                                     </div>
                                 </div>
-                                <div class="text-gray-500 font-bold text-sm">+500 pts</div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="flex-1 bg-gray-700 rounded-full h-2">
-                                    <div class="progress-bar bg-gray-600 h-2 rounded-full" style="width: 23%;"></div>
+                                
+                                <div class="p-3 rounded-md" style="background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <p class="font-medium text-xs text-purple-400">Take 1000 Shots</p>
+                                        <span class="text-purple-400 text-xs">+750 pts</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 bg-gray-700 rounded-full h-1">
+                                            <div class="bg-purple-500 h-1 rounded-full" style="width: 35%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-300">350/1000</span>
+                                    </div>
                                 </div>
-                                <span class="text-xs text-gray-500">23/100</span>
+                                
+                                <div class="p-3 rounded-md" style="background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <p class="font-medium text-xs text-purple-400">Take 10K Shots</p>
+                                        <span class="text-purple-400 text-xs">+2000 pts</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 bg-gray-700 rounded-full h-1">
+                                            <div class="bg-purple-500 h-1 rounded-full" style="width: 3.5%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-300">350/10000</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Featured as POD 🔒</p>
+                                        <span class="text-gray-400 text-xs">+5000 pts</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Milestone 4 - Locked -->
-                        <div class="p-4 rounded-md reward-card" style="background-color: rgba(75, 75, 75, 0.3);">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        <!-- Academy Campaign Category -->
+                        <div class="milestone-category" data-category="academy">
+                            <div class="p-4 rounded-md reward-card cursor-pointer" onclick="toggleCategory('academy')" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-sm text-green-400">Academy Campaign</p>
+                                            <p class="text-gray-300 text-xs">Learn photography skills and techniques</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-green-400 text-xs font-bold">1/4 Complete</span>
+                                        <svg class="w-4 h-4 text-green-400 transform transition-transform category-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-sm text-gray-400">Rising Photographer</p>
-                                        <p class="text-gray-500 text-xs">Reach top 25 on leaderboard</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Academy Campaign Tasks -->
+                            <div class="category-tasks hidden mt-2 ml-4 space-y-2">
+                                <div class="p-3 rounded-md" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-green-400">Learn 10 Lessons ✓</p>
+                                        <span class="text-green-400 text-xs">+300 pts</span>
                                     </div>
                                 </div>
-                                <div class="text-gray-500 font-bold text-sm">+750 pts</div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <div class="flex-1 bg-gray-700 rounded-full h-2">
-                                    <div class="progress-bar bg-gray-600 h-2 rounded-full" style="width: 0%;"></div>
+                                
+                                <div class="p-3 rounded-md" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <p class="font-medium text-xs text-green-400">Learn 100 Lessons</p>
+                                        <span class="text-green-400 text-xs">+1000 pts</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 bg-gray-700 rounded-full h-1">
+                                            <div class="bg-green-500 h-1 rounded-full" style="width: 85%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-300">85/100</span>
+                                    </div>
                                 </div>
-                                <span class="text-xs text-gray-500">Locked</span>
+                                
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Finish a Course 🔒</p>
+                                        <span class="text-gray-400 text-xs">+2500 pts</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 rounded-md opacity-50" style="background-color: rgba(75, 75, 75, 0.3);">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-xs text-gray-400">Become Certified 🔒</p>
+                                        <span class="text-gray-400 text-xs">+5000 pts</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -752,6 +899,30 @@
             alert(`Claimed ${totalPoints} points! Complete more tasks to earn additional rewards.`);
         }
 
+        function toggleCategory(categoryName) {
+            const category = document.querySelector(`[data-category="${categoryName}"]`);
+            const tasks = category.querySelector('.category-tasks');
+            const arrow = category.querySelector('.category-arrow');
+            
+            if (tasks.classList.contains('hidden')) {
+                // Close all other categories first
+                document.querySelectorAll('.category-tasks').forEach(task => {
+                    task.classList.add('hidden');
+                });
+                document.querySelectorAll('.category-arrow').forEach(arr => {
+                    arr.classList.remove('rotate-180');
+                });
+                
+                // Open this category
+                tasks.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                // Close this category
+                tasks.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
         // Navigation functions
         function navigateToContest() {
             alert('Navigation to Contest page - Ready for implementation');
@@ -797,5 +968,5 @@
             }, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7f8eff0c6774e',t:'MTc1NzkzNzcxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f83ad076c2f5d7',t:'MTc1Nzk0MDQxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
