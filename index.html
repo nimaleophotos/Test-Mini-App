@@ -366,7 +366,7 @@
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
             <!-- Tabs -->
             <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565;">
-                <button class="tab-button tab-daily py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors tab-active" onclick="switchTab('daily', this)" style="flex: 1;">
+                <button class="tab-button tab-daily py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors tab-active whitespace-nowrap" onclick="switchTab('daily', this)" style="flex: 1;">
                     Daily Tasks
                 </button>
                 <button class="tab-button tab-milestones py-2 md:py-3 px-6 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('milestones', this)" style="flex: 1; border-left: 2px solid #656565; border-right: 2px solid #656565;">
@@ -384,9 +384,12 @@
                     <div class="space-y-3">
                         <!-- Task 1 - Completed -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Support POD Artist</p>
-                                <p class="text-gray-300 text-xs">Follow artist and comment under their cast</p>
+                            <div class="flex items-center space-x-2 flex-1">
+                                <div class="w-2 h-2 rounded-full" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-xs">Support POD Artist</p>
+                                    <p class="text-gray-300 text-xs">Follow artist and comment under their cast</p>
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 relative">
                                 <div class="text-white font-bold text-xs">+15 pts</div>
@@ -400,9 +403,12 @@
 
                         <!-- Task 2 - In Progress -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Support Spotlight Artist</p>
-                                <p class="text-gray-300 text-xs">Like and Recast all active spots in a day</p>
+                            <div class="flex items-center space-x-2 flex-1">
+                                <div class="w-2 h-2 rounded-full" style="background: linear-gradient(135deg, #10b981, #059669); opacity: 0.33;"></div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-xs">Support Spotlight Artists</p>
+                                    <p class="text-gray-300 text-xs">Like and Recast all active spots in a day</p>
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 relative">
                                 <div class="absolute -left-16 flex items-center space-x-1">
@@ -417,9 +423,12 @@
 
                         <!-- Task 3 - In Progress -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Capture the Moment</p>
-                                <p class="text-gray-300 text-xs">Use in-app camera to capture a photo</p>
+                            <div class="flex items-center space-x-2 flex-1">
+                                <div class="w-2 h-2 rounded-full" style="background: linear-gradient(135deg, #10b981, #059669); opacity: 0.33;"></div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-xs">Capture the Moment</p>
+                                    <p class="text-gray-300 text-xs">Use in-app camera to capture a photo</p>
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 relative">
                                 <div class="absolute -left-16 flex items-center space-x-1">
@@ -434,9 +443,12 @@
 
                         <!-- Task 4 - Not Started -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Share Your Shot</p>
-                                <p class="text-gray-300 text-xs">Share your photos with $LENS tag</p>
+                            <div class="flex items-center space-x-2 flex-1">
+                                <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-xs">Share Your Shot</p>
+                                    <p class="text-gray-300 text-xs">Share your photos with $LENS tag</p>
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 relative">
                                 <div class="absolute -left-16 flex items-center space-x-1">
@@ -451,9 +463,12 @@
 
                         <!-- Task 5 - Not Started -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Join Daily ITAP Channel</p>
-                                <p class="text-gray-300 text-xs">Share your ITAP photos</p>
+                            <div class="flex items-center space-x-2 flex-1">
+                                <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-xs">Join Daily ITAP Channel</p>
+                                    <p class="text-gray-300 text-xs">Share your ITAP photos</p>
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 relative">
                                 <div class="text-white font-bold text-xs">+15 pts</div>
@@ -462,9 +477,12 @@
 
                         <!-- Task 6 - Not Started -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Join Daily Nature Channel</p>
-                                <p class="text-gray-300 text-xs">Share daily theme shots</p>
+                            <div class="flex items-center space-x-2 flex-1">
+                                <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-xs">Join Daily Nature Channel</p>
+                                    <p class="text-gray-300 text-xs">Share daily theme shots</p>
+                                </div>
                             </div>
                             <div class="flex items-center space-x-2 relative">
                                 <div class="text-white font-bold text-xs">+15 pts</div>
@@ -475,7 +493,7 @@
                     <!-- Claim Points Button -->
                     <div class="mt-6 text-center">
                         <button class="px-6 py-3 rounded-lg font-bold text-white transition-all hover:scale-105" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="claimDailyPoints()">
-                            Claim 132 Points
+                            Claim Daily 132 Points
                         </button>
                         <p class="text-gray-400 text-xs mt-2">Complete more tasks to earn additional points</p>
                     </div>
@@ -785,5 +803,5 @@
             }, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7e7ed20c1774e',t:'MTc1NzkzNzAyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7f03ee0c0774e',t:'MTc1NzkzNzM2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
