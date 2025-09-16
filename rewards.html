@@ -395,52 +395,15 @@
                 <!-- Daily Tasks Content -->
                 <div id="daily-content" class="tab-content">
                     <div class="space-y-3">
-                        <!-- Task 1 - Completed -->
-                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Support POD Artist</p>
-                                <p class="text-gray-300" style="font-size: 10px;">Follow artist and comment under their cast</p>
-                            </div>
-                            <div class="flex flex-col items-end space-y-1">
-                                <div class="flex items-center space-x-2">
-                                    <div class="text-white font-bold text-xs">+15 pts</div>
-                                    <div class="w-4 h-4 rounded flex items-center justify-center" style="background: linear-gradient(135deg, #10b981, #059669);">
-                                        <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Task 2 - In Progress -->
-                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
-                            <div class="flex-1">
-                                <p class="font-medium text-xs">Support Spotlight Artists</p>
-                                <p class="text-gray-300" style="font-size: 10px;">Like and Recast all active spots in a day</p>
-                            </div>
-                            <div class="flex flex-col items-end space-y-1">
-                                <div class="flex items-center space-x-2">
-                                    <div class="text-white font-bold text-xs">+36 pts</div>
-                                </div>
-                                <div class="flex items-center space-x-1">
-                                    <div class="w-10 bg-gray-700 rounded-full h-1">
-                                        <div class="progress-bar h-1 rounded-full" style="width: 33%; background: linear-gradient(135deg, #10b981, #059669);"></div>
-                                    </div>
-                                    <span class="text-gray-300" style="font-size: 9px;">12/36</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Task 3 - In Progress -->
-                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <!-- Task 1 - Capture the Moment (Clickable) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16 cursor-pointer hover:bg-opacity-80 transition-all" onclick="navigateToCamera()" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
                             <div class="flex-1">
                                 <p class="font-medium text-xs">Capture the Moment</p>
-                                <p class="text-gray-300" style="font-size: 10px;">Use in-app camera to capture a photo</p>
+                                <p class="text-gray-300" style="font-size: 10px;">Share your photos with $LENS tag</p>
                             </div>
                             <div class="flex flex-col items-end space-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="text-white font-bold text-xs">+15 pts</div>
+                                    <div class="text-white font-bold text-xs">+150 pts</div>
                                 </div>
                                 <div class="flex items-center space-x-1">
                                     <div class="w-10 bg-gray-700 rounded-full h-1">
@@ -451,47 +414,104 @@
                             </div>
                         </div>
 
-                        <!-- Task 4 - Not Started -->
+                        <!-- Task 2 - Promote Your Photo -->
                         <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
                             <div class="flex-1">
-                                <p class="font-medium text-xs">Share Your Shot</p>
-                                <p class="text-gray-300" style="font-size: 10px;">Share your photos with $LENS tag</p>
+                                <p class="font-medium text-xs">Promote Your Photo</p>
+                                <p class="text-gray-300" style="font-size: 10px;">Purchase one spot to get onboarded</p>
                             </div>
                             <div class="flex flex-col items-end space-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="text-white font-bold text-xs">+15 pts</div>
+                                    <div class="text-white font-bold text-xs">+500 pts</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task 3 - Support POD Artist (Completed) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div class="flex-1">
+                                <p class="font-medium text-xs">Support POD Artist</p>
+                                <p class="text-gray-300" style="font-size: 10px;">Follow and comment under their cast</p>
+                            </div>
+                            <div class="flex flex-col items-end space-y-1">
+                                <div class="flex items-center space-x-2">
+                                    <div class="text-white font-bold text-xs">+200 pts</div>
+                                    <div class="w-4 h-4 rounded flex items-center justify-center" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                        <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task 4 - Support Spotlight Artists (In Progress) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div class="flex-1">
+                                <p class="font-medium text-xs">Support Spotlight Artists</p>
+                                <p class="text-gray-300" style="font-size: 10px;">Like and recast each spot's cast</p>
+                            </div>
+                            <div class="flex flex-col items-end space-y-1">
+                                <div class="flex items-center space-x-2">
+                                    <div class="text-white font-bold text-xs">+270 pts</div>
                                 </div>
                                 <div class="flex items-center space-x-1">
                                     <div class="w-10 bg-gray-700 rounded-full h-1">
-                                        <div class="progress-bar h-1 rounded-full" style="width: 0%; background: linear-gradient(135deg, #10b981, #059669);"></div>
+                                        <div class="progress-bar h-1 rounded-full" style="width: 37%; background: linear-gradient(135deg, #10b981, #059669);"></div>
                                     </div>
-                                    <span class="text-gray-300" style="font-size: 9px;">0/3</span>
+                                    <span class="text-gray-300" style="font-size: 9px;">20/54</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Task 5 - Not Started -->
-                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <!-- Task 5 - Join ITAP Channel (Clickable, Coming Soon) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16 cursor-pointer hover:bg-opacity-80 transition-all opacity-60" onclick="window.open('https://farcaster.xyz/~/channel/itookaphoto', '_blank')" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(255, 193, 7, 0.3);">
                             <div class="flex-1">
-                                <p class="font-medium text-xs">Join Daily ITAP Channel</p>
-                                <p class="text-gray-300" style="font-size: 10px;">Share your ITAP photos</p>
+                                <p class="font-medium text-xs">Join ITAP Channel Daily</p>
+                                <p class="text-gray-300" style="font-size: 10px;">Share your ITAP shot - Coming Soon</p>
                             </div>
                             <div class="flex flex-col items-end space-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="text-white font-bold text-xs">+15 pts</div>
+                                    <div class="text-yellow-400 font-bold text-xs">+50 pts</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Task 6 - Not Started -->
-                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <!-- Task 6 - Join Nature Channel (Clickable, Coming Soon) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16 cursor-pointer hover:bg-opacity-80 transition-all opacity-60" onclick="window.open('https://farcaster.xyz/~/channel/nature', '_blank')" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(255, 193, 7, 0.3);">
                             <div class="flex-1">
-                                <p class="font-medium text-xs">Join Daily Nature Channel</p>
-                                <p class="text-gray-300" style="font-size: 10px;">Share daily theme shots</p>
+                                <p class="font-medium text-xs">Join Nature Channel Daily</p>
+                                <p class="text-gray-300" style="font-size: 10px;">Share your nature daily theme shot - Coming Soon</p>
                             </div>
                             <div class="flex flex-col items-end space-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="text-white font-bold text-xs">+15 pts</div>
+                                    <div class="text-yellow-400 font-bold text-xs">+50 pts</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task 7 - Do Daily Practice (Coming Soon) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16 opacity-60" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(255, 193, 7, 0.3);">
+                            <div class="flex-1">
+                                <p class="font-medium text-xs">Do Daily Practice</p>
+                                <p class="text-gray-300" style="font-size: 10px;">QC your practice shot - Coming Soon</p>
+                            </div>
+                            <div class="flex flex-col items-end space-y-1">
+                                <div class="flex items-center space-x-2">
+                                    <div class="text-yellow-400 font-bold text-xs">+50 pts</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task 8 - Join Daily Competition (Coming Soon) -->
+                        <div class="flex items-center justify-between p-3 rounded-md reward-card h-16 opacity-60" style="background-color: rgba(75, 75, 75, 0.5); border: 1px solid rgba(255, 193, 7, 0.3);">
+                            <div class="flex-1">
+                                <p class="font-medium text-xs">Join Daily Competition</p>
+                                <p class="text-gray-300" style="font-size: 10px;">QC your submission - Coming Soon</p>
+                            </div>
+                            <div class="flex flex-col items-end space-y-1">
+                                <div class="flex items-center space-x-2">
+                                    <div class="text-yellow-400 font-bold text-xs">+50 pts</div>
                                 </div>
                             </div>
                         </div>
@@ -500,7 +520,7 @@
                     <!-- Claim Points Button -->
                     <div class="mt-6 text-center">
                         <button class="px-6 py-3 rounded-lg font-bold text-white transition-all hover:scale-105" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="claimDailyPoints()">
-                            Claim Daily 132 Points
+                            Claim Daily 1170 Points
                         </button>
                         <p class="text-gray-400 text-xs mt-2">Complete more tasks to earn additional points</p>
                     </div>
@@ -1113,5 +1133,5 @@
             }, 1000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9800cbc453ce9d56',t:'MTc1ODAzMDIzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9800e9ac04950a71',t:'MTc1ODAzMTQ2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
