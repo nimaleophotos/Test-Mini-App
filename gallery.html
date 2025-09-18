@@ -94,6 +94,57 @@
         .sample-image:hover {
             transform: scale(1.02);
         }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .popup-content {
+            background: #272727;
+            border: 1px solid rgba(101, 101, 101, 0.3);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .blank-image {
+            aspect-ratio: 1;
+            background: #6b7280;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .blank-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
@@ -147,7 +198,7 @@
                 <div id="collections-content" class="tab-content hidden">
                     <div class="space-y-4">
                         <!-- PODs Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="toggleCollection('pods')">
+                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('pods')">
                             <div class="flex items-center space-x-3 md:space-x-4 h-full">
                                 <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,89 +215,6 @@
                                         <span>365 photos</span>
                                         <span>•</span>
                                         <span>Updated daily</span>
-                                    </div>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <svg id="pods-arrow" class="w-5 h-5 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            
-                            <!-- Dropdown Content -->
-                            <div id="pods-dropdown" class="collection-dropdown mt-4">
-                                <div class="grid grid-cols-3 md:grid-cols-4 gap-2">
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-15')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 15</div>
-                                            <div class="text-xs opacity-80">Today</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-14')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 14</div>
-                                            <div class="text-xs opacity-80">Yesterday</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-13')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 13</div>
-                                            <div class="text-xs opacity-80">2 days ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-12')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 12</div>
-                                            <div class="text-xs opacity-80">3 days ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-11')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 11</div>
-                                            <div class="text-xs opacity-80">4 days ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-10')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 10</div>
-                                            <div class="text-xs opacity-80">5 days ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-09')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 09</div>
-                                            <div class="text-xs opacity-80">6 days ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-08')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 08</div>
-                                            <div class="text-xs opacity-80">1 week ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-07')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 07</div>
-                                            <div class="text-xs opacity-80">1 week ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-06')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 06</div>
-                                            <div class="text-xs opacity-80">1 week ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-05')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 05</div>
-                                            <div class="text-xs opacity-80">10 days ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="sample-image" onclick="selectImage('pods', 'dec-04')">
-                                        <div>
-                                            <div class="font-semibold text-xs">Dec 04</div>
-                                            <div class="text-xs opacity-80">11 days ago</div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -606,6 +574,34 @@
         </div>
     </main>
 
+    <!-- PODs Collection Popup -->
+    <div id="pods-popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content" style="background-color: #272727; border: 1px solid rgba(101, 101, 101, 0.3);">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold text-lg">PODs Collection</h3>
+                        <p class="text-gray-300 text-sm">365 daily photos from Farcaster</p>
+                    </div>
+                </div>
+                <button onclick="closePodsPopup()" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="image-grid" id="pods-image-grid">
+                <!-- Images will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script>
         function switchTab(tabName, element) {
             // Hide all tab contents
@@ -725,12 +721,76 @@
         }
 
         function openCollection(collectionType) {
-            alert(`Opening ${collectionType} collection - Ready for implementation!`);
+            if (collectionType === 'pods') {
+                openPodsPopup();
+            } else {
+                alert(`Opening ${collectionType} collection - Ready for implementation!`);
+            }
+        }
+
+        function openPodsPopup() {
+            const popup = document.getElementById('pods-popup');
+            const grid = document.getElementById('pods-image-grid');
+            
+            // Clear existing content
+            grid.innerHTML = '';
+            
+            // Generate 24 blank image boxes with dates
+            const today = new Date();
+            for (let i = 0; i < 24; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() - i);
+                
+                const imageBox = document.createElement('div');
+                imageBox.className = 'blank-image';
+                imageBox.onclick = () => selectPodsImage(i);
+                
+                const dateStr = date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                let timeLabel = '';
+                if (i === 0) timeLabel = 'Today';
+                else if (i === 1) timeLabel = 'Yesterday';
+                else if (i < 7) timeLabel = `${i} days ago`;
+                else timeLabel = `${Math.floor(i/7)} week${Math.floor(i/7) > 1 ? 's' : ''} ago`;
+                
+                imageBox.innerHTML = `
+                    <div>
+                        <div class="font-semibold">${dateStr}</div>
+                        <div class="text-xs opacity-80">${timeLabel}</div>
+                    </div>
+                `;
+                
+                grid.appendChild(imageBox);
+            }
+            
+            popup.style.display = 'flex';
+        }
+
+        function closePodsPopup() {
+            document.getElementById('pods-popup').style.display = 'none';
+        }
+
+        function selectPodsImage(index) {
+            const today = new Date();
+            const selectedDate = new Date(today);
+            selectedDate.setDate(today.getDate() - index);
+            
+            const dateStr = selectedDate.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric',
+                year: 'numeric'
+            });
+            
+            alert(`Selected PODs image from ${dateStr} - Ready for implementation!`);
+            closePodsPopup();
         }
 
         function goBack() {
             alert('Navigate back to main page - Ready for implementation');
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9812a774714ed9f2',t:'MTc1ODIxNzQ5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9812bb50c1160e4c',t:'MTc1ODIxODMwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
