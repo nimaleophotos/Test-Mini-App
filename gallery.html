@@ -492,6 +492,69 @@
                 <!-- Featured Content -->
                 <div id="featured-content" class="tab-content">
                     <div class="space-y-6">
+                        <!-- Order POD Section -->
+                        <div class="rounded-lg p-4 mb-6" style="background: rgba(75, 75, 75, 0.5); border: 1px solid rgba(101, 101, 101, 0.3);">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <h3 class="text-white font-bold text-lg">Order POD</h3>
+                                    <p class="text-gray-300 text-sm">Purchase high-quality digital files</p>
+                                </div>
+                                <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Date Selection -->
+                                <div class="bg-gray-600 bg-opacity-50 rounded-lg p-3">
+                                    <label class="block text-white text-sm font-medium mb-2">Select POD Date</label>
+                                    <select class="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600" onchange="updatePODPreview(this.value)">
+                                        <option value="2024-12-15">Dec 15, 2024 (Today)</option>
+                                        <option value="2024-12-14">Dec 14, 2024 (Yesterday)</option>
+                                        <option value="2024-12-13">Dec 13, 2024 (2 days ago)</option>
+                                        <option value="2024-12-12">Dec 12, 2024 (3 days ago)</option>
+                                        <option value="2024-12-11">Dec 11, 2024 (4 days ago)</option>
+                                        <option value="2024-12-10">Dec 10, 2024 (5 days ago)</option>
+                                        <option value="2024-12-09">Dec 9, 2024 (6 days ago)</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- File Quality -->
+                                <div class="bg-gray-600 bg-opacity-50 rounded-lg p-3">
+                                    <label class="block text-white text-sm font-medium mb-2">File Quality</label>
+                                    <select class="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600" onchange="updatePricing(this.value)">
+                                        <option value="standard">Standard (2K) - $2.99</option>
+                                        <option value="high">High (4K) - $4.99</option>
+                                        <option value="ultra">Ultra (8K) - $7.99</option>
+                                        <option value="raw">RAW + JPEG - $12.99</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Purchase Button -->
+                                <div class="bg-gray-600 bg-opacity-50 rounded-lg p-3 flex items-end">
+                                    <button class="w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-400 transition-colors" onclick="orderPOD()">
+                                        Purchase File
+                                        <span class="block text-xs font-normal" id="price-display">$2.99</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- POD Preview -->
+                            <div class="mt-4 bg-gray-600 bg-opacity-30 rounded-lg p-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-gray-600 bg-opacity-50 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="text-white font-medium" id="pod-title">Photo of the Day - Dec 15, 2024</div>
+                                        <div class="text-gray-300 text-sm" id="pod-description">High-resolution digital download</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Featured Gallery Grid -->
                         <div class="gallery-grid">
                             <!-- Today's Photo -->
@@ -502,8 +565,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 15, 2024</div>
-                                    <div class="text-xs opacity-75">Today</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 15, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">Today</div>
                                 </div>
                             </div>
 
@@ -515,8 +578,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 14, 2024</div>
-                                    <div class="text-xs opacity-75">Yesterday</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 14, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">Yesterday</div>
                                 </div>
                             </div>
 
@@ -528,8 +591,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 13, 2024</div>
-                                    <div class="text-xs opacity-75">2 days ago</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 13, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">2 days ago</div>
                                 </div>
                             </div>
 
@@ -541,8 +604,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 12, 2024</div>
-                                    <div class="text-xs opacity-75">3 days ago</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 12, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">3 days ago</div>
                                 </div>
                             </div>
 
@@ -554,8 +617,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 11, 2024</div>
-                                    <div class="text-xs opacity-75">4 days ago</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 11, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">4 days ago</div>
                                 </div>
                             </div>
 
@@ -567,8 +630,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 10, 2024</div>
-                                    <div class="text-xs opacity-75">5 days ago</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 10, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">5 days ago</div>
                                 </div>
                             </div>
 
@@ -580,8 +643,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 9, 2024</div>
-                                    <div class="text-xs opacity-75">6 days ago</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 9, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">6 days ago</div>
                                 </div>
                             </div>
 
@@ -593,8 +656,8 @@
                                     </svg>
                                 </div>
                                 <div class="photo-overlay">
-                                    <div class="text-xs font-medium">Dec 8, 2024</div>
-                                    <div class="text-xs opacity-75">7 days ago</div>
+                                    <div class="text-xs font-medium" style="font-size: 10px;">Dec 8, 2024</div>
+                                    <div class="text-xs opacity-75" style="font-size: 9px;">7 days ago</div>
                                 </div>
                             </div>
                         </div>
@@ -1053,6 +1116,102 @@
             alert('Navigation to Info page - Ready for implementation');
         }
 
+        // POD ordering functions
+        function updatePODPreview(selectedDate) {
+            const podTitle = document.getElementById('pod-title');
+            const dateOptions = {
+                '2024-12-15': 'Dec 15, 2024 (Today)',
+                '2024-12-14': 'Dec 14, 2024 (Yesterday)', 
+                '2024-12-13': 'Dec 13, 2024 (2 days ago)',
+                '2024-12-12': 'Dec 12, 2024 (3 days ago)',
+                '2024-12-11': 'Dec 11, 2024 (4 days ago)',
+                '2024-12-10': 'Dec 10, 2024 (5 days ago)',
+                '2024-12-09': 'Dec 9, 2024 (6 days ago)'
+            };
+            
+            podTitle.textContent = `Photo of the Day - ${dateOptions[selectedDate]}`;
+        }
+
+        function updatePricing(selectedQuality) {
+            const priceDisplay = document.getElementById('price-display');
+            const prices = {
+                'standard': '$2.99',
+                'high': '$4.99',
+                'ultra': '$7.99',
+                'raw': '$12.99'
+            };
+            
+            priceDisplay.textContent = prices[selectedQuality];
+        }
+
+        function orderPOD() {
+            const dateSelect = document.querySelector('select[onchange="updatePODPreview(this.value)"]');
+            const qualitySelect = document.querySelector('select[onchange="updatePricing(this.value)"]');
+            
+            const selectedDate = dateSelect.options[dateSelect.selectedIndex].text;
+            const selectedQuality = qualitySelect.options[qualitySelect.selectedIndex].text;
+            
+            // Create order confirmation modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
+            
+            modal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Purchase Complete!</h3>
+                        <p class="text-gray-300 text-sm">Your digital file is ready for download</p>
+                    </div>
+                    
+                    <div class="bg-gray-700 rounded-lg p-4 mb-6">
+                        <h4 class="text-white font-medium mb-3">Purchase Details</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Date:</span>
+                                <span class="text-white">${selectedDate}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Quality:</span>
+                                <span class="text-white">${selectedQuality}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Format:</span>
+                                <span class="text-white">JPEG/RAW</span>
+                            </div>
+                            <div class="flex justify-between border-t border-gray-600 pt-2 mt-2">
+                                <span class="text-gray-300">File Size:</span>
+                                <span class="text-white">~25-150 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="flex-1 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-500 transition-colors">
+                            Close
+                        </button>
+                        <button onclick="downloadFile()" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-500 transition-colors">
+                            Download File
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function downloadFile() {
+            alert('File download started - Ready for implementation');
+        }
+
         // Slogan animation function
         function animateSlogan() {
             const sloganText = "Discover amazing photography from our community.";
@@ -1091,5 +1250,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980ee95383b1b192',t:'MTc1ODE3ODI1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980ef62595dcb192',t:'MTc1ODE3ODc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
