@@ -108,7 +108,7 @@
                     Market Overview
                 </button>
                 <button class="tab-button py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('order', this)" style="flex: 1; border-left: 1px solid rgba(101, 101, 101, 0.3);">
-                    Order Image
+                    Download
                 </button>
             </div>
             
@@ -118,20 +118,20 @@
                 <div id="collections-content" class="tab-content hidden">
                     <div class="space-y-4">
                         <!-- PODs Collection -->
-                        <div class="collection-card" onclick="openCollection('pods')">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('pods')">
+                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-sm md:text-base">PODs</h4>
-                                        <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
+                                        <h4 class="font-bold text-white text-xs md:text-base">PODs</h4>
+                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
                                     </div>
                                     <p class="text-gray-300 text-xs md:text-sm">The best daily image on Farcaster</p>
-                                    <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
                                         <span>365 photos</span>
                                         <span>•</span>
                                         <span>Updated daily</span>
@@ -141,20 +141,20 @@
                         </div>
 
                         <!-- Weekly Winners Collection -->
-                        <div class="collection-card" onclick="openCollection('weekly')">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('weekly')">
+                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-sm md:text-base">Weekly Winners</h4>
-                                        <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
+                                        <h4 class="font-bold text-white text-xs md:text-base">Weekly Winners</h4>
+                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
                                     </div>
                                     <p class="text-gray-300 text-xs md:text-sm">Top contest winners from each week</p>
-                                    <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
                                         <span>52 photos</span>
                                         <span>•</span>
                                         <span>Updated weekly</span>
@@ -164,20 +164,20 @@
                         </div>
 
                         <!-- Nature Collection -->
-                        <div class="collection-card" onclick="openCollection('nature')">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('nature')">
+                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-sm md:text-base">Nature & Wildlife</h4>
-                                        <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
+                                        <h4 class="font-bold text-white text-xs md:text-base">Nature & Wildlife</h4>
+                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
                                     </div>
                                     <p class="text-gray-300 text-xs md:text-sm">Beautiful landscapes and wildlife photography</p>
-                                    <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
                                         <span>127 photos</span>
                                         <span>•</span>
                                         <span>Updated 2 days ago</span>
@@ -187,20 +187,20 @@
                         </div>
 
                         <!-- More collections... -->
-                        <div class="collection-card" onclick="openCollection('street')">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('street')">
+                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
+                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                     </svg>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-sm md:text-base">Street Photography</h4>
-                                        <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
+                                        <h4 class="font-bold text-white text-xs md:text-base">Street Photography</h4>
+                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
                                     </div>
                                     <p class="text-gray-300 text-xs md:text-sm">Urban life and candid moments</p>
-                                    <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
                                         <span>89 photos</span>
                                         <span>•</span>
                                         <span>Updated 1 week ago</span>
@@ -222,76 +222,76 @@
                             </div>
                             
                             <!-- Main Stats Grid -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 mb-6">
                                 <!-- Total Photos -->
                                 <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mx-auto mb-3">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
+                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-xl md:text-2xl font-bold text-white mb-1">1,247</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-1">Total Photos</div>
+                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">1,247</div>
+                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Total Photos</div>
                                     <div class="text-xs text-green-400 font-medium">+23 this week</div>
                                 </div>
 
                                 <!-- Total Mints -->
                                 <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mx-auto mb-3">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
+                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-xl md:text-2xl font-bold text-white mb-1">892</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-1">Total Mints</div>
+                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">892</div>
+                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Total Mints</div>
                                     <div class="text-xs text-green-400 font-medium">+15 this week</div>
                                 </div>
 
                                 <!-- Transactions -->
                                 <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mx-auto mb-3">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
+                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                                         </svg>
                                     </div>
-                                    <div class="text-xl md:text-2xl font-bold text-white mb-1">2,156</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-1">Transactions</div>
+                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">2,156</div>
+                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Transactions</div>
                                     <div class="text-xs text-green-400 font-medium">+47 this week</div>
                                 </div>
 
                                 <!-- Floor Price -->
                                 <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-3">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-1 md:mb-3">
+                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                                         </svg>
                                     </div>
-                                    <div class="text-xl md:text-2xl font-bold text-white mb-1">0.25</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-1">Floor Price (ETH)</div>
+                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">0.25</div>
+                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Floor Price (ETH)</div>
                                     <div class="text-xs text-green-400 font-medium">+12.5%</div>
                                 </div>
 
                                 <!-- Market Cap -->
                                 <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center mx-auto mb-3">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center mx-auto mb-1 md:mb-3">
+                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-xl md:text-2xl font-bold text-white mb-1">223.5</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-1">Market Cap (ETH)</div>
+                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">223.5</div>
+                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Market Cap (ETH)</div>
                                     <div class="text-xs text-green-400 font-medium">+8.7%</div>
                                 </div>
 
                                 <!-- Unique Owners -->
                                 <div class="text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mx-auto mb-3">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
+                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-xl md:text-2xl font-bold text-white mb-1">347</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-1">Unique Owners</div>
+                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">347</div>
+                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Unique Owners</div>
                                     <div class="text-xs text-blue-400 font-medium">Active</div>
                                 </div>
                             </div>
@@ -503,5 +503,5 @@
             alert('Navigate back to main page - Ready for implementation');
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981253094675f531',t:'MTc1ODIxNDAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98125bd69165b8ed',t:'MTc1ODIxNDM5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
