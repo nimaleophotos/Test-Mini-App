@@ -65,6 +65,35 @@
             padding: 12px;
             text-align: center;
         }
+
+        .collection-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collection-dropdown.expanded {
+            max-height: 500px;
+        }
+
+        .sample-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #6b7280;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .sample-image:hover {
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
@@ -118,7 +147,7 @@
                 <div id="collections-content" class="tab-content hidden">
                     <div class="space-y-4">
                         <!-- PODs Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('pods')">
+                        <div class="collection-card h-20 md:h-auto" onclick="toggleCollection('pods')">
                             <div class="flex items-center space-x-3 md:space-x-4 h-full">
                                 <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,6 +164,89 @@
                                         <span>365 photos</span>
                                         <span>•</span>
                                         <span>Updated daily</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <svg id="pods-arrow" class="w-5 h-5 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <!-- Dropdown Content -->
+                            <div id="pods-dropdown" class="collection-dropdown mt-4">
+                                <div class="grid grid-cols-3 md:grid-cols-4 gap-2">
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-15')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 15</div>
+                                            <div class="text-xs opacity-80">Today</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-14')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 14</div>
+                                            <div class="text-xs opacity-80">Yesterday</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-13')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 13</div>
+                                            <div class="text-xs opacity-80">2 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-12')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 12</div>
+                                            <div class="text-xs opacity-80">3 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-11')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 11</div>
+                                            <div class="text-xs opacity-80">4 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-10')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 10</div>
+                                            <div class="text-xs opacity-80">5 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-09')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 09</div>
+                                            <div class="text-xs opacity-80">6 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-08')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 08</div>
+                                            <div class="text-xs opacity-80">1 week ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-07')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 07</div>
+                                            <div class="text-xs opacity-80">1 week ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-06')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 06</div>
+                                            <div class="text-xs opacity-80">1 week ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-05')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 05</div>
+                                            <div class="text-xs opacity-80">10 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="sample-image" onclick="selectImage('pods', 'dec-04')">
+                                        <div>
+                                            <div class="font-semibold text-xs">Dec 04</div>
+                                            <div class="text-xs opacity-80">11 days ago</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -587,6 +699,31 @@
             alert('Order functionality ready for implementation!');
         }
 
+        function toggleCollection(collectionType) {
+            const dropdown = document.getElementById(collectionType + '-dropdown');
+            const arrow = document.getElementById(collectionType + '-arrow');
+            
+            if (dropdown.classList.contains('expanded')) {
+                dropdown.classList.remove('expanded');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                // Close all other dropdowns first
+                const allDropdowns = document.querySelectorAll('.collection-dropdown');
+                const allArrows = document.querySelectorAll('[id$="-arrow"]');
+                
+                allDropdowns.forEach(dd => dd.classList.remove('expanded'));
+                allArrows.forEach(arr => arr.style.transform = 'rotate(0deg)');
+                
+                // Open the clicked one
+                dropdown.classList.add('expanded');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function selectImage(collection, imageId) {
+            alert(`Selected ${collection} image: ${imageId} - Ready for implementation!`);
+        }
+
         function openCollection(collectionType) {
             alert(`Opening ${collectionType} collection - Ready for implementation!`);
         }
@@ -595,5 +732,5 @@
             alert('Navigate back to main page - Ready for implementation');
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9812946393213581',t:'MTc1ODIxNjcxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9812a774714ed9f2',t:'MTc1ODIxNzQ5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
