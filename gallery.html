@@ -499,6 +499,7 @@
                                     <h3 class="text-white font-bold text-base">Order POD</h3>
                                     <p class="text-gray-300 text-xs">Purchase high-quality digital files</p>
                                 </div>
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
                                 <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
@@ -506,9 +507,9 @@
                             
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <!-- Date Selection -->
-                                <div class="bg-gray-600 bg-opacity-50 rounded-lg p-3">
+                                <div class="bg-gray-400 bg-opacity-70 rounded-lg p-3">
                                     <label class="block text-white text-xs font-medium mb-2">Select POD Date</label>
-                                    <select class="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600" onchange="updatePODPreview(this.value)">
+                                    <select class="w-full bg-gray-500 text-white rounded-md px-3 py-2 text-sm border border-gray-400" onchange="updatePODPreview(this.value)">
                                         <option value="2024-12-15">Dec 15, 2024 (Today)</option>
                                         <option value="2024-12-14">Dec 14, 2024 (Yesterday)</option>
                                         <option value="2024-12-13">Dec 13, 2024 (2 days ago)</option>
@@ -520,13 +521,13 @@
                                 </div>
                                 
                                 <!-- File Quality -->
-                                <div class="bg-gray-600 bg-opacity-50 rounded-lg p-3">
+                                <div class="bg-gray-400 bg-opacity-70 rounded-lg p-3">
                                     <label class="block text-white text-xs font-medium mb-2">File Quality</label>
-                                    <select class="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm border border-gray-600" onchange="updatePricing(this.value)">
-                                        <option value="standard">Standard (2K) - 0.15 $LENS</option>
-                                        <option value="high">High (4K) - 0.25 $LENS</option>
-                                        <option value="ultra">Ultra (8K) - 0.40 $LENS</option>
-                                        <option value="raw">RAW + JPEG - 0.65 $LENS</option>
+                                    <select class="w-full bg-gray-500 text-white rounded-md px-3 py-2 text-sm border border-gray-400" onchange="updatePricing(this.value)">
+                                        <option value="standard">Standard (2K) - 10m $LENS</option>
+                                        <option value="high">High (4K) - 25m $LENS</option>
+                                        <option value="ultra">Ultra (8K) - 50m $LENS</option>
+                                        <option value="raw">RAW + 8K - 100m $LENS</option>
                                     </select>
                                 </div>
                                 
@@ -534,7 +535,7 @@
                                 <div class="bg-gray-600 bg-opacity-50 rounded-lg p-3 flex items-end">
                                     <button class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-500 transition-colors" onclick="orderPOD()">
                                         Purchase & Download
-                                        <span class="block text-xs font-normal" id="price-display">0.15 $LENS</span>
+                                        <span class="block text-xs font-normal" id="price-display">10m $LENS</span>
                                     </button>
                                 </div>
                             </div>
@@ -1120,10 +1121,10 @@
         function updatePricing(selectedQuality) {
             const priceDisplay = document.getElementById('price-display');
             const prices = {
-                'standard': '0.15 $LENS',
-                'high': '0.25 $LENS',
-                'ultra': '0.40 $LENS',
-                'raw': '0.65 $LENS'
+                'standard': '10m $LENS',
+                'high': '25m $LENS',
+                'ultra': '50m $LENS',
+                'raw': '100m $LENS'
             };
             
             priceDisplay.textContent = prices[selectedQuality];
@@ -1235,5 +1236,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981125b9c63bb896',t:'MTc1ODIwMTY5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9811356355a3b896',t:'MTc1ODIwMjMzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
