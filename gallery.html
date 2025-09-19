@@ -38,11 +38,337 @@
             transform: translate(-50%, -50%);
         }
         
+        .theme-toggle {
+            width: 28px;
+            height: 28px;
+            background: #333333;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle.light {
+            background: #e5e5e5;
+        }
+        
+        .theme-toggle-circle {
+            width: 16px;
+            height: 16px;
+            background: #aeaeae;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .theme-toggle.light .theme-toggle-circle {
+            background: #4a4a4a;
+        }
+        
+        /* Add smooth transitions to all elements that change in light mode */
+        .lens-outer, .lens-inner {
+            transition: border-color 0.5s ease;
+        }
+        
+        .theme-toggle {
+            transition: border-color 0.5s ease, background-color 0.5s ease;
+        }
+        
+        .theme-toggle svg {
+            transition: color 0.5s ease;
+        }
+        
+        button {
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .rounded-3xl {
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+        
+        .text-gray-300, .text-gray-400 {
+            transition: color 0.5s ease;
+        }
+        
+        .bg-gray-600, .bg-gray-400 {
+            transition: background-color 0.5s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.5s ease;
+        }
+        
+        .nav-button svg {
+            transition: color 0.5s ease, opacity 0.5s ease;
+        }
+        
+        #slogan {
+            transition: color 0.5s ease;
+        }
+        
+        header {
+            transition: background-color 0.5s ease !important;
+        }
+        
+        .camera-button {
+            transition: all 0.5s ease, transform 0.3s ease;
+        }
+        
+        .camera-button svg {
+            transition: color 0.5s ease;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #f5f5f5 !important;
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .lens-outer,
+        .light-mode .lens-inner {
+            border-color: white !important;
+        }
+        
+        .light-mode .theme-toggle {
+            border-color: white !important;
+        }
+        
+        .light-mode .theme-toggle svg {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(220, 38, 127"]):not([style*="background-color: rgba(245, 101, 101"]) {
+            background-color: #e5e5e5 !important;
+            border-color: white !important;
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode #slogan {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl {
+            background-color: #e5e5e5 !important;
+            border-color: white !important;
+        }
+        
+        .light-mode .border-gray-600 {
+            border-color: white !important;
+        }
+        
+        .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(220, 38, 127"]):not([style*="background-color: rgba(245, 101, 101"]) {
+            background-color: rgba(200, 200, 200, 0.5) !important;
+        }
+        
+        .light-mode .text-gray-300,
+        .light-mode .text-gray-400 {
+            color: #666666 !important;
+        }
+        
+        .light-mode .bg-gray-600 {
+            background-color: #d0d0d0 !important;
+        }
+        
+        .light-mode .bg-gray-400 {
+            background-color: #999999 !important;
+        }
+        
+        .light-mode .border-gray-600 {
+            border-color: white !important;
+        }
+        
+        .light-mode .nav-button {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button:hover {
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .back-button {
+            background-color: rgba(200, 200, 200, 0.5) !important;
+            border-color: white !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child {
+            background-color: #e5e5e5 !important;
+            border-color: white !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child > div {
+            background-color: #e5e5e5 !important;
+            border-color: white !important;
+        }
+        
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .camera-button {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .camera-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        
+        .camera-button svg {
+            color: black;
+        }
+        
+        .light-mode .camera-button {
+            background: black !important;
+        }
+        
+        .light-mode .camera-button svg {
+            color: white !important;
+        }
+
         .tab-active {
             background: #565656 !important;
             color: white !important;
         }
         
+        /* Tab-specific borders for dark mode */
+        body:not(.light-mode) .tab-featured.tab-active {
+            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;
+            border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        }
+        
+        body:not(.light-mode) .tab-collections.tab-active {
+            border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
+            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;
+            border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        }
+        
+        body:not(.light-mode) .tab-order.tab-active {
+            border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
+            border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        }
+        
+        /* Light mode tab styles */
+        .light-mode .tab-button {
+            color: #999999 !important;
+            background: #f0f0f0 !important;
+        }
+        
+        .light-mode .tab-button:hover {
+            color: #1a1a1a !important;
+            background: #e0e0e0 !important;
+        }
+        
+        .light-mode .tab-active {
+            background: #1a1a1a !important;
+            color: #ffffff !important;
+        }
+        
+        /* Light mode tab-specific borders */
+        .light-mode .tab-featured.tab-active {
+            border-right: 1px solid white !important;
+            border-bottom: 1px solid white !important;
+        }
+        
+        .light-mode .tab-collections.tab-active {
+            border-left: 1px solid white !important;
+            border-right: 1px solid white !important;
+            border-bottom: 1px solid white !important;
+        }
+        
+        .light-mode .tab-order.tab-active {
+            border-left: 1px solid white !important;
+            border-bottom: 1px solid white !important;
+        }
+
+        .back-button {
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-2px);
+        }
+
+        /* Gallery specific styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        @media (min-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+        }
+
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 16px;
+            }
+        }
+
+        .photo-card {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(75, 75, 75, 0.5);
+            border: 1px solid rgba(101, 101, 101, 0.3);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+            color: #999;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 12px 8px 8px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+
+
         .collection-card {
             background: rgba(75, 75, 75, 0.5);
             border: 1px solid rgba(101, 101, 101, 0.3);
@@ -58,6 +384,52 @@
             border-color: rgba(101, 101, 101, 0.5);
         }
 
+        .light-mode .photo-card {
+            background: rgba(200, 200, 200, 0.5) !important;
+            border-color: white !important;
+        }
+
+        .light-mode .collection-card {
+            background: rgba(200, 200, 200, 0.5) !important;
+            border-color: white !important;
+        }
+
+        .light-mode .photo-placeholder {
+            background: linear-gradient(135deg, #d0d0d0, #b0b0b0) !important;
+            color: #666 !important;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(101, 101, 101, 0.3);
+            background: rgba(75, 75, 75, 0.5);
+            color: #999;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .light-mode .filter-button {
+            background: rgba(200, 200, 200, 0.5) !important;
+            border-color: white !important;
+            color: #666 !important;
+        }
+
+        .light-mode .filter-button:hover,
+        .light-mode .filter-button.active {
+            background: #10b981 !important;
+            color: white !important;
+            border-color: #10b981 !important;
+        }
+
         .stats-card {
             background: rgba(75, 75, 75, 0.5);
             border: 1px solid rgba(101, 101, 101, 0.3);
@@ -66,94 +438,19 @@
             text-align: center;
         }
 
-        .collection-dropdown {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .collection-dropdown.expanded {
-            max-height: 500px;
-        }
-
-        .sample-image {
-            width: 100%;
-            aspect-ratio: 1;
-            background: #6b7280;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .sample-image:hover {
-            transform: scale(1.02);
-        }
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .popup-content {
-            background: #272727;
-            border: 1px solid rgba(101, 101, 101, 0.3);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 24px;
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 12px;
-        }
-
-        .blank-image {
-            aspect-ratio: 1;
-            background: #6b7280;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            border: 2px solid transparent;
-        }
-
-        .blank-image:hover {
-            transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.3);
+        .light-mode .stats-card {
+            background: rgba(200, 200, 200, 0.5) !important;
+            border-color: white !important;
         }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
-    <!-- Header -->
+    <!-- Header - Fixed -->
     <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
         <div class="flex items-center justify-between mb-2">
             <!-- Left side - Back button -->
             <div class="flex items-center">
-                <button class="p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae; background-color: rgba(75, 75, 75, 0.3); border: 1px solid rgba(101, 101, 101, 0.5);">
+                <button class="back-button p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae; background-color: rgba(75, 75, 75, 0.3); border: 1px solid rgba(101, 101, 101, 0.5);">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
@@ -172,299 +469,361 @@
         
         <!-- Slogan -->
         <div class="text-left" style="margin-top: 2px;">
-            <p class="text-xs" id="slogan" style="color: #aeaeae;">Discover amazing photography from our community.</p>
+            <p class="text-xs" id="slogan" style="color: #aeaeae;"></p>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="fixed left-0 right-0 px-4" style="top: 89px; bottom: 7px;">
+        <!-- Mobile spacing adjustment -->
+        <style>
+            @media (max-width: 768px) {
+                main {
+                    top: 91px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                main {
+                    top: 93px !important;
+                }
+            }
+        </style>
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 1px solid rgba(101, 101, 101, 0.3);">
             <!-- Tabs -->
             <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 1px solid rgba(101, 101, 101, 0.3); height: 44px;">
-                <button class="tab-button py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('collections', this)" style="flex: 1;">
+                <button class="tab-button tab-featured py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('featured', this)" style="flex: 1;">
                     Collections
                 </button>
-                <button class="tab-button py-2 md:py-3 text-center text-sm font-medium transition-colors tab-active" onclick="switchTab('market', this)" style="flex: 1; border-left: 1px solid rgba(101, 101, 101, 0.3);">
+                <button class="tab-button tab-collections py-2 md:py-3 text-center text-sm font-medium transition-colors tab-active" onclick="switchTab('collections', this)" style="flex: 1; border-left: 1px solid rgba(101, 101, 101, 0.3);">
                     Market
                 </button>
-                <button class="tab-button py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('order', this)" style="flex: 1; border-left: 1px solid rgba(101, 101, 101, 0.3);">
+                <button class="tab-button tab-order py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('order', this)" style="flex: 1; border-left: 1px solid rgba(101, 101, 101, 0.3);">
                     Download
                 </button>
             </div>
             
             <!-- Content Area -->
             <div class="p-6 overflow-y-auto flex-1">
-                <!-- Collections Content -->
-                <div id="collections-content" class="tab-content hidden">
-                    <div class="space-y-4">
-                        <!-- PODs Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('pods')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
-                                    </svg>
+                <!-- Collections Content (Now with collection cards) -->
+                <div id="featured-content" class="tab-content hidden">
+                    <div class="space-y-6">
+                        <!-- Collections Grid -->
+                        <div class="space-y-4">
+                            <!-- PODs Collection -->
+                            <div class="collection-card" onclick="openCollection('pods')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">PODs</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">The best daily image on Farcaster</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>365 photos</span>
+                                            <span>•</span>
+                                            <span>Updated daily</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">PODs</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                            </div>
+
+                            <!-- Weekly Winners Collection -->
+                            <div class="collection-card" onclick="openCollection('weekly')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">The best daily image on Farcaster</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>365 photos</span>
-                                        <span>•</span>
-                                        <span>Updated daily</span>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Weekly Winners</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Top contest winners from each week</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>52 photos</span>
+                                            <span>•</span>
+                                            <span>Updated weekly</span>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Nature Collection -->
+                            <div class="collection-card" onclick="openCollection('nature')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Nature & Wildlife</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Beautiful landscapes and wildlife photography</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>127 photos</span>
+                                            <span>•</span>
+                                            <span>Updated 2 days ago</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Street Photography Collection -->
+                            <div class="collection-card" onclick="openCollection('street')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Street Photography</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Urban life and candid moments</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>89 photos</span>
+                                            <span>•</span>
+                                            <span>Updated 1 week ago</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Portrait Collection -->
+                            <div class="collection-card" onclick="openCollection('portrait')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Portrait Sessions</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Professional and artistic portraits</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>45 photos</span>
+                                            <span>•</span>
+                                            <span>Updated 3 days ago</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Macro Collection -->
+                            <div class="collection-card" onclick="openCollection('macro')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Macro Photography</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Close-up details and textures</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>67 photos</span>
+                                            <span>•</span>
+                                            <span>Updated 5 days ago</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Black & White Collection -->
+                            <div class="collection-card" onclick="openCollection('bw')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1a1 1 0 011-1h2a1 1 0 011 1v22a1 1 0 01-1 1H4a1 1 0 01-1-1V1a1 1 0 011-1h2a1 1 0 011 1v3m0 0h8M7 4H5a1 1 0 00-1 1v16a1 1 0 001 1h14a1 1 0 001-1V5a1 1 0 00-1-1h-2"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Black & White</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Timeless monochrome photography</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>34 photos</span>
+                                            <span>•</span>
+                                            <span>Updated 1 week ago</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Travel Collection -->
+                            <div class="collection-card" onclick="openCollection('travel')">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-bold text-white">Travel Adventures</h4>
+                                            <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Destinations and cultural moments</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                            <span>156 photos</span>
+                                            <span>•</span>
+                                            <span>Updated yesterday</span>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Weekly Winners Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('weekly')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Weekly Winners</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Top contest winners from each week</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>52 photos</span>
-                                        <span>•</span>
-                                        <span>Updated weekly</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Nature Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('nature')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Nature & Wildlife</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Beautiful nature shots</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>127 photos</span>
-                                        <span>•</span>
-                                        <span>Updated 2 days ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- More collections... -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('street')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Street Photography</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Urban life and candid moments</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>89 photos</span>
-                                        <span>•</span>
-                                        <span>Updated 1 week ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Portrait Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('portrait')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Portrait</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Professional portrait sessions</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>45 photos</span>
-                                        <span>•</span>
-                                        <span>Updated 3 days ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Macro Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('macro')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Macro</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Close-up details and textures</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>67 photos</span>
-                                        <span>•</span>
-                                        <span>Updated 5 days ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Black & White Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('bw')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Black & White</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Timeless monochrome photography</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>34 photos</span>
-                                        <span>•</span>
-                                        <span>Updated 1 week ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Travel Adventure Collection -->
-                        <div class="collection-card h-20 md:h-auto" onclick="openCollection('travel')">
-                            <div class="flex items-center space-x-3 md:space-x-4 h-full">
-                                <div class="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center gap-1 md:gap-2 mb-1">
-                                        <h4 class="font-bold text-white text-xs md:text-base">Travel Adventure</h4>
-                                        <span class="px-1 md:px-2 py-0.5 md:py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                                    </div>
-                                    <p class="text-gray-300 text-xs md:text-sm">Adventures from around the world</p>
-                                    <div class="flex items-center space-x-2 md:space-x-4 mt-1 md:mt-2 text-xs text-gray-400">
-                                        <span>156 photos</span>
-                                        <span>•</span>
-                                        <span>Updated 4 days ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Market Overview Content -->
-                <div id="market-content" class="tab-content">
+                <!-- Market Overview Content (Stats Dashboard) -->
+                <div id="collections-content" class="tab-content">
                     <div class="space-y-6">
                         <!-- Combined Stats Box -->
                         <div class="stats-card p-6">
                             <div class="flex items-center gap-2 mb-6">
-                                <h3 class="text-white font-bold text-base md:text-lg">Market Statistics</h3>
+                                <h3 class="text-white font-bold text-lg">Market Statistics</h3>
                                 <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
                             </div>
                             
                             <!-- Main Stats Grid -->
-                            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 mb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                                 <!-- Total Photos -->
                                 <div class="text-center">
-                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
-                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">1,247</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Total Photos</div>
+                                    <div class="text-2xl font-bold text-white mb-1">1,247</div>
+                                    <div class="text-sm text-gray-400 mb-1">Total Photos</div>
                                     <div class="text-xs text-green-400 font-medium">+23 this week</div>
                                 </div>
 
                                 <!-- Total Mints -->
                                 <div class="text-center">
-                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
-                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">892</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Total Mints</div>
+                                    <div class="text-2xl font-bold text-white mb-1">892</div>
+                                    <div class="text-sm text-gray-400 mb-1">Total Mints</div>
                                     <div class="text-xs text-green-400 font-medium">+15 this week</div>
                                 </div>
 
                                 <!-- Transactions -->
                                 <div class="text-center">
-                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
-                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                                         </svg>
                                     </div>
-                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">2,156</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Transactions</div>
+                                    <div class="text-2xl font-bold text-white mb-1">2,156</div>
+                                    <div class="text-sm text-gray-400 mb-1">Transactions</div>
                                     <div class="text-xs text-green-400 font-medium">+47 this week</div>
                                 </div>
 
                                 <!-- Floor Price -->
                                 <div class="text-center">
-                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-1 md:mb-3">
-                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                                         </svg>
                                     </div>
-                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">0.25</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Floor Price (ETH)</div>
+                                    <div class="text-2xl font-bold text-white mb-1">0.25</div>
+                                    <div class="text-sm text-gray-400 mb-1">Floor Price (ETH)</div>
                                     <div class="text-xs text-green-400 font-medium">+12.5%</div>
                                 </div>
 
                                 <!-- Market Cap -->
                                 <div class="text-center">
-                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center mx-auto mb-1 md:mb-3">
-                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">223.5</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Market Cap (ETH)</div>
+                                    <div class="text-2xl font-bold text-white mb-1">223.5</div>
+                                    <div class="text-sm text-gray-400 mb-1">Market Cap (ETH)</div>
                                     <div class="text-xs text-green-400 font-medium">+8.7%</div>
                                 </div>
 
                                 <!-- Unique Owners -->
                                 <div class="text-center">
-                                    <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mx-auto mb-1 md:mb-3">
-                                        <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mx-auto mb-3">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                         </svg>
                                     </div>
-                                    <div class="text-sm md:text-xl lg:text-2xl font-bold text-white mb-0.5 md:mb-1">347</div>
-                                    <div class="text-xs md:text-sm text-gray-400 mb-0.5 md:mb-1">Unique Owners</div>
+                                    <div class="text-2xl font-bold text-white mb-1">347</div>
+                                    <div class="text-sm text-gray-400 mb-1">Unique Owners</div>
                                     <div class="text-xs text-blue-400 font-medium">Active</div>
+                                </div>
+                            </div>
+
+                            <!-- Secondary Stats -->
+                            <div class="border-t border-gray-600 pt-6">
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                    <div class="text-center">
+                                        <div class="text-xl font-bold text-white mb-1">71.5%</div>
+                                        <div class="text-xs text-gray-400">Mint Percentage</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-xl font-bold text-white mb-1">45.2k</div>
+                                        <div class="text-xs text-gray-400">Total Views</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-xl font-bold text-white mb-1">1.8k</div>
+                                        <div class="text-xs text-gray-400">Total Likes</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-xl font-bold text-white mb-1">24h</div>
+                                        <div class="text-xs text-gray-400">Avg Hold Time</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Chart Placeholder -->
+                        <div class="stats-card p-6">
+                            <div class="flex items-center gap-2 mb-4">
+                                <h3 class="text-white font-bold text-lg">Performance Overview</h3>
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                            </div>
+                            <div class="h-32 bg-gray-700 rounded-lg flex items-center justify-center">
+                                <div class="text-center">
+                                    <svg class="w-12 h-12 mx-auto mb-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                    </svg>
+                                    <p class="text-gray-400 text-sm">Chart visualization coming soon</p>
                                 </div>
                             </div>
                         </div>
@@ -532,27 +891,28 @@
             </div>
             
             <!-- Navigation Bar -->
-            <div class="flex-shrink-0" style="padding: 6px 4px; background-color: #333333; border-top: 1px solid rgba(101, 101, 101, 0.3);">
+            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 1px solid rgba(101, 101, 101, 0.3);">
                 <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 1px solid rgba(101, 101, 101, 0.3);">
                     <div class="flex items-center justify-around w-full">
-                        <!-- Navigation buttons -->
-                        <button class="nav-button hover:text-white flex-shrink-0" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <!-- Rewards -->
+                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToRewards()" style="color: #aeaeae;">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
                             </svg>
                         </button>
 
-                        <button class="nav-button hover:text-white flex-shrink-0" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <!-- Contest -->
+                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToContest()" style="color: #aeaeae;">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"/>
                             </svg>
                         </button>
 
                         <!-- Camera (Center) -->
-                        <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                            <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button class="camera-button flex-shrink-0" onclick="navigateToCamera()">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                         </button>
 
@@ -563,8 +923,9 @@
                             </svg>
                         </button>
 
-                        <button class="nav-button hover:text-white flex-shrink-0" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <!-- Info -->
+                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToInfo()" style="color: #aeaeae;">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
                             </svg>
                         </button>
@@ -574,35 +935,38 @@
         </div>
     </main>
 
-    <!-- PODs Collection Popup -->
-    <div id="pods-popup" class="popup-overlay" style="display: none;">
-        <div class="popup-content" style="background-color: #272727; border: 1px solid rgba(101, 101, 101, 0.3);">
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-white font-bold text-lg">PODs Collection</h3>
-                        <p class="text-gray-300 text-sm">365 daily photos from Farcaster</p>
-                    </div>
-                </div>
-                <button onclick="closePodsPopup()" class="text-gray-400 hover:text-white transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div class="image-grid" id="pods-image-grid">
-                <!-- Images will be generated by JavaScript -->
-            </div>
-        </div>
-    </div>
-
     <script>
+        // Theme detection and synchronization with main page
+        function detectTheme() {
+            // Check localStorage for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            
+            // Listen for theme changes from other pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue || 'dark');
+                }
+            });
+        }
+
+        function applyTheme(theme) {
+            const body = document.body;
+            const header = document.querySelector('header');
+            
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#f5f5f5';
+                }
+            } else {
+                body.classList.remove('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#272727';
+                }
+            }
+        }
+
         function switchTab(tabName, element) {
             // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');
@@ -623,61 +987,271 @@
             element.classList.remove('text-gray-300', 'hover:text-white');
         }
 
-        function updateImageOptions(selectedCollection) {
-            const imageSelect = document.getElementById('image-select');
-            imageSelect.innerHTML = '';
+        function filterPhotos(category, element) {
+            // Remove active class from all filter buttons
+            const filterButtons = document.querySelectorAll('.filter-button');
+            filterButtons.forEach(btn => btn.classList.remove('active'));
             
-            const collectionOptions = {
-                'pods': [
-                    { value: '2024-12-15', text: 'Dec 15, 2024 (Today)' },
-                    { value: '2024-12-14', text: 'Dec 14, 2024 (Yesterday)' },
-                    { value: '2024-12-13', text: 'Dec 13, 2024 (2 days ago)' },
-                    { value: '2024-12-12', text: 'Dec 12, 2024 (3 days ago)' }
-                ],
-                'weekly': [
-                    { value: 'week-50', text: 'Week 50, 2024 (Current)' },
-                    { value: 'week-49', text: 'Week 49, 2024' },
-                    { value: 'week-48', text: 'Week 48, 2024' }
-                ],
-                'nature': [
-                    { value: 'nature-1', text: 'Mountain Sunrise #127' },
-                    { value: 'nature-2', text: 'Forest Stream #126' },
-                    { value: 'nature-3', text: 'Eagle Flight #125' }
-                ],
-                'street': [
-                    { value: 'street-1', text: 'City Rush Hour #89' },
-                    { value: 'street-2', text: 'Market Vendor #88' },
-                    { value: 'street-3', text: 'Neon Reflections #87' }
-                ],
-                'portrait': [
-                    { value: 'portrait-1', text: 'Studio Portrait #45' },
-                    { value: 'portrait-2', text: 'Natural Light #44' },
-                    { value: 'portrait-3', text: 'Creative Concept #43' }
-                ],
-                'macro': [
-                    { value: 'macro-1', text: 'Dewdrop Detail #67' },
-                    { value: 'macro-2', text: 'Flower Texture #66' },
-                    { value: 'macro-3', text: 'Insect Close-up #65' }
-                ],
-                'bw': [
-                    { value: 'bw-1', text: 'Urban Architecture #34' },
-                    { value: 'bw-2', text: 'Portrait Study #33' },
-                    { value: 'bw-3', text: 'Landscape Drama #32' }
-                ],
-                'travel': [
-                    { value: 'travel-1', text: 'Tokyo Streets #156' },
-                    { value: 'travel-2', text: 'Paris Sunset #155' },
-                    { value: 'travel-3', text: 'Bali Temple #154' }
-                ]
+            // Add active class to clicked button
+            element.classList.add('active');
+            
+            // Here you would filter the photos based on category
+            console.log('Filtering photos by:', category);
+        }
+
+        function openPhotoModal(title, artist, description) {
+            // Create a modal to display the photo details
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
             };
             
-            const options = collectionOptions[selectedCollection] || collectionOptions['pods'];
-            options.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option.value;
-                optionElement.textContent = option.text;
-                imageSelect.appendChild(optionElement);
-            });
+            modal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-white">${title}</h3>
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="bg-gray-700 rounded-lg h-64 flex items-center justify-center mb-4">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 mx-auto mb-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <p class="text-gray-400 text-sm">${description}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-white font-medium">${title}</p>
+                                <p class="text-gray-400 text-sm">${artist}</p>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                                    <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                                    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                            <div>
+                                <div class="text-white font-medium">1.2k</div>
+                                <div class="text-gray-400">Likes</div>
+                            </div>
+                            <div>
+                                <div class="text-white font-medium">89</div>
+                                <div class="text-gray-400">Comments</div>
+                            </div>
+                            <div>
+                                <div class="text-white font-medium">234</div>
+                                <div class="text-gray-400">Views</div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-gray-600">
+                            <h4 class="text-white font-medium mb-2">Camera Settings</h4>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-300">
+                                <div>Camera: Canon EOS R5</div>
+                                <div>Lens: 24-70mm f/2.8</div>
+                                <div>ISO: 400</div>
+                                <div>Aperture: f/5.6</div>
+                                <div>Shutter: 1/125s</div>
+                                <div>Focal: 50mm</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function openCollection(collectionType) {
+            // Create a modal to display the collection details
+            const collections = {
+                pods: {
+                    title: "PODs",
+                    description: "The best daily image on Farcaster",
+                    photos: 365,
+                    color: "yellow"
+                },
+                weekly: {
+                    title: "Weekly Winners",
+                    description: "Top contest winners from each week",
+                    photos: 52,
+                    color: "pink"
+                },
+                nature: {
+                    title: "Nature & Wildlife",
+                    description: "Beautiful landscapes and wildlife photography",
+                    photos: 127,
+                    color: "green"
+                },
+                street: {
+                    title: "Street Photography", 
+                    description: "Urban life and candid moments",
+                    photos: 89,
+                    color: "blue"
+                },
+                portrait: {
+                    title: "Portrait Sessions",
+                    description: "Professional and artistic portraits", 
+                    photos: 45,
+                    color: "purple"
+                },
+                macro: {
+                    title: "Macro Photography",
+                    description: "Close-up details and textures",
+                    photos: 67,
+                    color: "yellow"
+                },
+                bw: {
+                    title: "Black & White",
+                    description: "Timeless monochrome photography",
+                    photos: 34,
+                    color: "gray"
+                },
+                travel: {
+                    title: "Travel Adventures",
+                    description: "Destinations and cultural moments",
+                    photos: 156,
+                    color: "red"
+                }
+            };
+
+            const collection = collections[collectionType];
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
+            
+            // Generate chronological dates for PODs (most recent first)
+            const podDates = [
+                'Dec 15, 2024',
+                'Dec 14, 2024', 
+                'Dec 13, 2024',
+                'Dec 12, 2024',
+                'Dec 11, 2024',
+                'Dec 10, 2024',
+                'Dec 9, 2024',
+                'Dec 8, 2024',
+                'Dec 7, 2024',
+                'Dec 6, 2024',
+                'Dec 5, 2024',
+                'Dec 4, 2024'
+            ];
+
+            // Special content for PODs collection
+            const isPODs = collectionType === 'pods';
+            
+            const gridContent = isPODs ? 
+                podDates.map((date, i) => `
+                    <div class="aspect-square bg-gray-700 rounded-lg flex flex-col items-center justify-center relative overflow-hidden group">
+                        <svg class="w-8 h-8 text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <div class="absolute bottom-2 left-2 right-2 text-center">
+                            <div class="text-xs text-gray-300 bg-black bg-opacity-50 rounded px-2 py-1">
+                                ${date}
+                            </div>
+                        </div>
+                        ${i === 0 ? '<div class="absolute top-2 right-2"><div class="w-2 h-2 bg-green-400 rounded-full"></div></div>' : ''}
+                    </div>
+                `).join('') :
+                Array.from({length: 12}, (_, i) => `
+                    <div class="aspect-square bg-gray-700 rounded-lg flex flex-col items-center justify-center relative overflow-hidden group">
+                        <svg class="w-8 h-8 text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <div class="absolute bottom-2 left-2 right-2 text-center">
+                            <div class="text-xs text-gray-300 bg-black bg-opacity-50 rounded px-2 py-1">
+                                Sample ${i + 1}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            modal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">${collection.title}</h3>
+                        </div>
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Sample photos grid -->
+                    <div class="grid grid-cols-3 gap-3 max-h-96 overflow-y-auto pr-2 mb-6">
+                        ${gridContent}
+                    </div>
+
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function goBack() {
+            // This will navigate back to your main page
+            alert('Navigate back to main page - Ready for implementation');
+        }
+
+        // Navigation functions
+        function navigateToRewards() {
+            alert('Navigation to Rewards page - Ready for implementation');
+        }
+
+        function navigateToContest() {
+            alert('Navigation to Contest page - Ready for implementation');
+        }
+
+        function navigateToCamera() {
+            alert('Navigation to Camera page - Ready for implementation');
+        }
+
+        function navigateToInfo() {
+            alert('Navigation to Info page - Ready for implementation');
+        }
+
+        // POD ordering functions
+        function updatePODPreview(selectedDate) {
+            const podTitle = document.getElementById('pod-title');
+            const dateOptions = {
+                '2024-12-15': 'Dec 15, 2024 (Today)',
+                '2024-12-14': 'Dec 14, 2024 (Yesterday)', 
+                '2024-12-13': 'Dec 13, 2024 (2 days ago)',
+                '2024-12-12': 'Dec 12, 2024 (3 days ago)',
+                '2024-12-11': 'Dec 11, 2024 (4 days ago)',
+                '2024-12-10': 'Dec 10, 2024 (5 days ago)',
+                '2024-12-09': 'Dec 9, 2024 (6 days ago)'
+            };
+            
+            podTitle.textContent = `Photo of the Day - ${dateOptions[selectedDate]}`;
         }
 
         function updatePricing(selectedQuality) {
@@ -688,127 +1262,403 @@
                 'ultra': '50m $LENS',
                 'raw': '100m $LENS'
             };
+            
             priceDisplay.textContent = prices[selectedQuality];
         }
 
-        function orderImage() {
-            alert('Order functionality ready for implementation!');
-        }
-
-        function toggleCollection(collectionType) {
-            const dropdown = document.getElementById(collectionType + '-dropdown');
-            const arrow = document.getElementById(collectionType + '-arrow');
+        function orderPOD() {
+            const dateSelect = document.querySelector('select[onchange="updatePODPreview(this.value)"]');
+            const qualitySelect = document.querySelector('select[onchange="updatePricing(this.value)"]');
             
-            if (dropdown.classList.contains('expanded')) {
-                dropdown.classList.remove('expanded');
-                arrow.style.transform = 'rotate(0deg)';
-            } else {
-                // Close all other dropdowns first
-                const allDropdowns = document.querySelectorAll('.collection-dropdown');
-                const allArrows = document.querySelectorAll('[id$="-arrow"]');
-                
-                allDropdowns.forEach(dd => dd.classList.remove('expanded'));
-                allArrows.forEach(arr => arr.style.transform = 'rotate(0deg)');
-                
-                // Open the clicked one
-                dropdown.classList.add('expanded');
-                arrow.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        function selectImage(collection, imageId) {
-            alert(`Selected ${collection} image: ${imageId} - Ready for implementation!`);
-        }
-
-        function openCollection(collectionType) {
-            if (collectionType === 'pods') {
-                openPodsPopup();
-            } else {
-                alert(`Opening ${collectionType} collection - Ready for implementation!`);
-            }
-        }
-
-        function openPodsPopup() {
-            const popup = document.getElementById('pods-popup');
-            const grid = document.getElementById('pods-image-grid');
+            const selectedDate = dateSelect.options[dateSelect.selectedIndex].text;
+            const selectedQuality = qualitySelect.options[qualitySelect.selectedIndex].text;
             
-            // Clear existing content
-            grid.innerHTML = '';
+            // Create order confirmation modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
             
-            // Generate 24 blank image boxes with dates
-            const today = new Date();
-            for (let i = 0; i < 24; i++) {
-                const date = new Date(today);
-                date.setDate(today.getDate() - i);
-                
-                const imageBox = document.createElement('div');
-                imageBox.className = 'blank-image';
-                imageBox.onclick = () => selectPodsImage(i);
-                
-                const dateStr = date.toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric' 
-                });
-                
-                let timeLabel = '';
-                if (i === 0) timeLabel = 'Today';
-                else if (i === 1) timeLabel = 'Yesterday';
-                else if (i < 7) timeLabel = `${i} days ago`;
-                else timeLabel = `${Math.floor(i/7)} week${Math.floor(i/7) > 1 ? 's' : ''} ago`;
-                
-                imageBox.innerHTML = `
-                    <div>
-                        <div class="font-semibold">${dateStr}</div>
-                        <div class="text-xs opacity-80">${timeLabel}</div>
+            modal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Purchase Complete!</h3>
+                        <p class="text-gray-300 text-sm">Your digital file is ready for download</p>
                     </div>
-                `;
-                
-                grid.appendChild(imageBox);
+                    
+                    <div class="bg-gray-700 rounded-lg p-4 mb-6">
+                        <h4 class="text-white font-medium mb-3">Purchase Details</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Date:</span>
+                                <span class="text-white">${selectedDate}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Quality:</span>
+                                <span class="text-white">${selectedQuality}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Format:</span>
+                                <span class="text-white">JPEG/RAW</span>
+                            </div>
+                            <div class="flex justify-between border-t border-gray-600 pt-2 mt-2">
+                                <span class="text-gray-300">File Size:</span>
+                                <span class="text-white">~25-150 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="flex-1 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-500 transition-colors">
+                            Close
+                        </button>
+                        <button onclick="downloadFile()" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-500 transition-colors">
+                            Download File
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function downloadFile() {
+            alert('File download started - Ready for implementation');
+        }
+
+        function orderPODCollection() {
+            // Close the current modal
+            const modal = document.querySelector('.fixed');
+            if (modal) {
+                document.body.removeChild(modal);
             }
             
-            popup.style.display = 'flex';
-        }
-
-        function closePodsPopup() {
-            document.getElementById('pods-popup').style.display = 'none';
-        }
-
-        function selectPodsImage(index) {
-            const today = new Date();
-            const selectedDate = new Date(today);
-            selectedDate.setDate(today.getDate() - index);
+            // Create POD collection order modal
+            const orderModal = document.createElement('div');
+            orderModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            orderModal.onclick = (e) => {
+                if (e.target === orderModal) {
+                    document.body.removeChild(orderModal);
+                }
+            };
             
-            const dateStr = selectedDate.toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric',
-                year: 'numeric'
+            orderModal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-white">Order POD Collection</h3>
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-300 text-sm">Get access to high-resolution versions of all Photo of the Day images</p>
+                    </div>
+                    
+                    <form class="space-y-4">
+                        <div class="mb-4">
+                            <label class="block text-white text-sm font-medium mb-2">Collection Package</label>
+                            <select class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500" onchange="updateCollectionPricing(this.value)">
+                                <option value="last30">Last 30 Days - 500m $LENS</option>
+                                <option value="last90">Last 90 Days - 1.2k $LENS</option>
+                                <option value="last365">Full Year (365 PODs) - 3.5k $LENS</option>
+                                <option value="custom">Custom Date Range - Quote</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-white text-sm font-medium mb-2">File Quality</label>
+                            <select class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500" onchange="updateCollectionQuality(this.value)">
+                                <option value="standard">Standard (2K) - Base Price</option>
+                                <option value="high">High (4K) - +50% Price</option>
+                                <option value="ultra">Ultra (8K) - +100% Price</option>
+                                <option value="raw">RAW + 8K - +200% Price</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4 bg-gray-700 rounded-lg p-4">
+                            <h4 class="text-white font-medium mb-2">Package Details</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Photos included:</span>
+                                    <span class="text-white" id="photo-count">30 PODs</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Resolution:</span>
+                                    <span class="text-white" id="resolution-display">Standard (2K)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Format:</span>
+                                    <span class="text-white">JPEG + Metadata</span>
+                                </div>
+                                <div class="flex justify-between border-t border-gray-600 pt-2 mt-2">
+                                    <span class="text-gray-300 font-medium">Total Price:</span>
+                                    <span class="text-white font-bold" id="total-price">500m $LENS</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-white text-sm font-medium mb-2">Email for Download Link</label>
+                            <input type="email" placeholder="your.email@example.com" class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <button type="button" onclick="document.body.removeChild(this.closest('.fixed'))" class="flex-1 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-500 transition-colors">
+                                Cancel
+                            </button>
+                            <button type="button" onclick="submitPODCollectionOrder()" class="flex-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-2 px-4 rounded-md hover:from-yellow-600 hover:to-orange-600 transition-colors">
+                                Order Collection
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(orderModal);
+        }
+
+        function updateCollectionPricing(packageType) {
+            const photoCount = document.getElementById('photo-count');
+            const totalPrice = document.getElementById('total-price');
+            
+            const packages = {
+                'last30': { count: '30 PODs', price: '500m $LENS' },
+                'last90': { count: '90 PODs', price: '1.2k $LENS' },
+                'last365': { count: '365 PODs', price: '3.5k $LENS' },
+                'custom': { count: 'Custom Range', price: 'Quote' }
+            };
+            
+            const selectedPackage = packages[packageType];
+            photoCount.textContent = selectedPackage.count;
+            totalPrice.textContent = selectedPackage.price;
+        }
+
+        function updateCollectionQuality(quality) {
+            const resolutionDisplay = document.getElementById('resolution-display');
+            
+            const qualities = {
+                'standard': 'Standard (2K)',
+                'high': 'High (4K)',
+                'ultra': 'Ultra (8K)',
+                'raw': 'RAW + 8K'
+            };
+            
+            resolutionDisplay.textContent = qualities[quality];
+        }
+
+
+
+        function openOrderType(orderType) {
+            const orderTypes = {
+                existing: {
+                    title: "Order Existing Photo",
+                    description: "Select a photo from our gallery to order in high resolution",
+                    icon: "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                },
+                custom: {
+                    title: "Commission Custom Work",
+                    description: "Request original photography tailored to your specific needs",
+                    icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                }
+            };
+
+            const order = orderTypes[orderType];
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            };
+            
+            const formContent = orderType === 'existing' ? `
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-medium mb-2">Select Photo Category</label>
+                    <select class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                        <option>Nature & Wildlife</option>
+                        <option>Street Photography</option>
+                        <option>Portrait Sessions</option>
+                        <option>Macro Photography</option>
+                        <option>Black & White</option>
+                        <option>Travel Adventures</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-medium mb-2">Photo ID or Description</label>
+                    <input type="text" placeholder="e.g., Sunset landscape from Dec 12" class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-medium mb-2">Resolution</label>
+                    <select class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                        <option>Standard (2K) - 15m $LENS</option>
+                        <option>High (4K) - 35m $LENS</option>
+                        <option>Ultra (8K) - 75m $LENS</option>
+                        <option>RAW + 8K - 150m $LENS</option>
+                    </select>
+                </div>
+            ` : `
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-medium mb-2">Project Type</label>
+                    <select class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                        <option>Portrait Session</option>
+                        <option>Event Photography</option>
+                        <option>Product Photography</option>
+                        <option>Landscape/Nature</option>
+                        <option>Architecture</option>
+                        <option>Other (specify below)</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-medium mb-2">Project Description</label>
+                    <textarea placeholder="Describe your vision, requirements, timeline, and any specific details..." rows="4" class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-medium mb-2">Budget Range</label>
+                    <select class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                        <option>100-250m $LENS</option>
+                        <option>250-500m $LENS</option>
+                        <option>500m-1k $LENS</option>
+                        <option>1k+ $LENS (Custom Quote)</option>
+                    </select>
+                </div>
+            `;
+            
+            modal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-white">${order.title}</h3>
+                        <button onclick="document.body.removeChild(this.closest('.fixed'))" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-${orderType === 'existing' ? 'blue' : 'purple'}-400 to-${orderType === 'existing' ? 'blue' : 'purple'}-600 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${order.icon}"/>
+                            </svg>
+                        </div>
+                        <p class="text-gray-300 text-sm">${order.description}</p>
+                    </div>
+                    
+                    <form class="space-y-4">
+                        ${formContent}
+                        
+                        <div class="mb-6">
+                            <label class="block text-white text-sm font-medium mb-2">Contact Information</label>
+                            <input type="email" placeholder="your.email@example.com" class="w-full bg-gray-600 text-white rounded-md px-3 py-2 border border-gray-500">
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <button type="button" onclick="document.body.removeChild(this.closest('.fixed'))" class="flex-1 bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-500 transition-colors">
+                                Cancel
+                            </button>
+                            <button type="button" onclick="submitOrder('${orderType}')" class="flex-1 bg-${orderType === 'existing' ? 'blue' : 'purple'}-600 text-white py-2 px-4 rounded-md hover:bg-${orderType === 'existing' ? 'blue' : 'purple'}-500 transition-colors">
+                                Submit Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function submitOrder(orderType) {
+            // Close the current modal
+            const modal = document.querySelector('.fixed');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+            
+            // Show success message
+            const successModal = document.createElement('div');
+            successModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
+            successModal.onclick = (e) => {
+                if (e.target === successModal) {
+                    document.body.removeChild(successModal);
+                }
+            };
+            
+            successModal.innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Order Submitted!</h3>
+                    <p class="text-gray-300 text-sm mb-6">
+                        ${orderType === 'existing' ? 
+                            'Your photo order has been received. You\'ll receive a download link within 24 hours.' : 
+                            'Your commission request has been submitted. We\'ll contact you within 48 hours to discuss details.'
+                        }
+                    </p>
+                    <button onclick="document.body.removeChild(this.closest('.fixed'))" class="bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-500 transition-colors">
+                        Close
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(successModal);
+        }
+
+        // Slogan animation function
+        function animateSlogan() {
+            const sloganText = "Discover amazing photography from our community.";
+            const sloganElement = document.getElementById('slogan');
+            let index = 0;
+            
+            function typeNextLetter() {
+                if (index < sloganText.length) {
+                    sloganElement.textContent += sloganText[index];
+                    index++;
+                    setTimeout(typeNextLetter, 50); // 50ms delay between letters
+                }
+            }
+            
+            // Start typing after a short delay
+            setTimeout(typeNextLetter, 800);
+        }
+
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect theme from main page
+            detectTheme();
+            
+            // Start slogan animation
+            animateSlogan();
+            
+            const elements = document.querySelectorAll('header, main');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
             });
-            
-            alert(`Selected PODs image from ${dateStr} - Ready for implementation!`);
-            closePodsPopup();
-        }
-
-        function goBack() {
-            window.location.href = 'index.html'; // or whatever you name your main page
-        }
-
-        // Navigation functions
-        function navigateToRewards() {
-            window.location.href = 'rewards.html';
-        }
-
-        function navigateToCamera() {
-            window.location.href = 'camera.html';
-        }
-
-        function navigateToGallery() {
-            window.location.href = 'gallery.html';
-        }
-
-        function navigateToInfo() {
-            window.location.href = 'info.html';
-        }
-
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9812bb50c1160e4c',t:'MTc1ODIxODMwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98123b16715df531',t:'MTc1ODIxMzA1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
