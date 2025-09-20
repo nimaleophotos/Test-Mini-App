@@ -412,11 +412,23 @@
     </header>
 
     <!-- Main Body with Integrated Navigation -->
-    <main class="fixed left-0 right-0 px-4" style="top: 85px; bottom: 7px;">
+    <main class="fixed left-0 right-0 px-4" style="top: 89px; bottom: 7px;">
         <!-- Unified Container -->
+         <style>
+            @media (max-width: 768px) {
+                main {
+                    top: 91px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                main {
+                    top: 93px !important;
+                }
+            }
+        </style>
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
             <!-- Tabs -->
-            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565;">
+            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565; height: 44px;">
                 <button class="tab-button tab-about py-2 md:py-3 px-6 text-center font-medium transition-colors tab-active text-sm" onclick="switchTab('about', this)" style="flex: 1;">
                     Tokenomics
                 </button>
@@ -607,16 +619,16 @@
                     </div>
                 </div>
                 
-                        <!-- Roadmap Content -->
-                        <div id="settings-content" class="tab-content">
-                            <!-- Title -->
+                <!-- Roadmap Content -->
+                <div id="settings-content" class="tab-content">
+                    <!-- Title -->
                             <div class="text-center mb-8">
                                 <h2 class="text-lg font-bold text-white">$LENS Road Map</h2>
                                 <p class="text-gray-400 text-xs">Our journey and what’s coming next</p>
                             </div>
-                            <!-- Roadmap Timeline -->
-                            <div class="relative">
-                                <!-- Central Timeline Line -->
+                    <!-- Roadmap Timeline -->
+                    <div class="relative">
+                        <!-- Central Timeline Line -->
                                 <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-500 via-green-500 via-yellow-500 via-purple-500 to-pink-500 rounded-full" style="height: calc(100% - 40px); top: 20px;"></div>
 
                                 <!-- Phase 1: Initial App -->
@@ -717,11 +729,9 @@
                                         <div class="flex-1"></div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                     </div>
 
-                            <!-- Phase Descriptions -->
+                    <!-- Phase Descriptions -->
                             <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <!-- Phase 1: Initial Phase -->
                                 <div class="bg-blue-500/10 border border-blue-500/40 rounded-lg p-4 shadow-sm">
@@ -825,7 +835,6 @@
                                         <li class="flex items-center space-x-1"><span class="text-purple-300">🚀</span><span>Etc</span></li>
                                     </ul>
                                 </div>
-                            </div>
                 </div>
             </div>
             
@@ -851,7 +860,7 @@
                         <button class="camera-button flex-shrink-0" onclick="navigateToCamera()">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                         </button>
 
@@ -875,23 +884,34 @@
     </main>
 
     <script>
-        function toggleTheme() {
-            const toggle = document.getElementById('themeToggle');
-            const moonIcon = document.getElementById('moonIcon');
-            const sunIcon = document.getElementById('sunIcon');
+        // Theme detection and synchronization with main page
+        function detectTheme() {
+            // Check localStorage for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            
+            // Listen for theme changes from other pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue || 'dark');
+                }
+            });
+        }
+
+        function applyTheme(theme) {
             const body = document.body;
-            
-            toggle.classList.toggle('light');
-            moonIcon.classList.toggle('hidden');
-            sunIcon.classList.toggle('hidden');
-            body.classList.toggle('light-mode');
-            
-            // Update header background
             const header = document.querySelector('header');
-            if (body.classList.contains('light-mode')) {
-                header.style.backgroundColor = '#f5f5f5';
+            
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#f5f5f5';
+                }
             } else {
-                header.style.backgroundColor = '#272727';
+                body.classList.remove('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#272727';
+                }
             }
         }
 
@@ -921,71 +941,63 @@
 
         // Navigation functions
         function goBack() {
-            console.log('Going back to previous page');
-            // Add navigation logic here
+            // This will navigate back to your main page
+            window.location.href = 'index.html'; // or whatever you name your main page
         }
 
         function navigateToRewards() {
-            console.log('Navigate to Rewards');
+            window.location.href = 'rewards.html';
         }
 
         function navigateToContest() {
-            console.log('Navigate to Contest');
+            window.location.href = 'contest.html';
         }
 
         function navigateToCamera() {
-            console.log('Navigate to Camera');
+            window.location.href = 'camera.html';
         }
 
         function navigateToGallery() {
-            console.log('Navigate to Gallery');
+            window.location.href = 'gallery.html';
         }
 
-        // Slogan system
-        const slogan = "Discover the tokenomics and roadmap behind $LENS.";
-        
-        let currentCharIndex = 0;
-        
-        function typeSlogan() {
+        // Slogan animation function
+        function animateSlogan() {
+            const sloganText = "Compete daily, showcase your talent, win amazing prizes.";
             const sloganElement = document.getElementById('slogan');
+            let index = 0;
             
-            if (currentCharIndex < slogan.length) {
-                sloganElement.textContent = slogan.substring(0, currentCharIndex + 1);
-                currentCharIndex++;
-                setTimeout(typeSlogan, 50); // 50ms per character
+            function typeNextLetter() {
+                if (index < sloganText.length) {
+                    sloganElement.textContent += sloganText[index];
+                    index++;
+                    setTimeout(typeNextLetter, 50); // 50ms delay between letters
+                }
             }
-        }
-
-        // Circular chart interaction functions
-        function highlightSegment(element, name, percentage, tokens) {
-            element.style.strokeWidth = '12';
-            element.style.filter = 'brightness(1.2) drop-shadow(0 0 8px rgba(255,255,255,0.3))';
             
-            // Update center info
-            const centerInfo = document.getElementById('centerInfo');
-            centerInfo.innerHTML = `
-                <div class="text-sm font-bold text-white">${name}</div>
-                <div class="text-lg font-bold text-white">${percentage}</div>
-                <div class="text-xs text-gray-400">${tokens}</div>
-            `;
+            // Start typing after a short delay
+            setTimeout(typeNextLetter, 800);
         }
 
-        function unhighlightSegment(element) {
-            element.style.strokeWidth = '8';
-            element.style.filter = '';
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect theme from main page
+            detectTheme();
             
-            // Reset center info
-            const centerInfo = document.getElementById('centerInfo');
-            centerInfo.innerHTML = `
-                <div class="text-2xl font-bold text-white mb-1">100B $LENS</div>
-                <div class="text-sm text-gray-400">Total Supply</div>
-            `;
-        }
+            // Start slogan animation
+            animateSlogan();
 
-        // Start the slogan animation when page loads
-        window.addEventListener('load', () => {
-            setTimeout(typeSlogan, 1000); // Start after 1 second
+            const elements = document.querySelectorAll('header, main');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821892f203d0ea4',t:'MTc1ODM3MzU0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981f2c8d226faa31',t:'MTc1ODM0ODc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
