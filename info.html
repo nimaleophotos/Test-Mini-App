@@ -863,40 +863,51 @@
 
         // Navigation functions
         function goBack() {
-            console.log('Going back to previous page');
-            // Add navigation logic here
+            // This will navigate back to your main page
+            window.location.href = 'index.html'; // or whatever you name your main page
         }
 
         function navigateToRewards() {
-            console.log('Navigate to Rewards');
+            window.location.href = 'rewards.html';
         }
 
         function navigateToContest() {
-            console.log('Navigate to Contest');
+            window.location.href = 'contest.html';
         }
 
         function navigateToCamera() {
-            console.log('Navigate to Camera');
+            window.location.href = 'camera.html';
         }
 
         function navigateToGallery() {
-            console.log('Navigate to Gallery');
+            window.location.href = 'gallery.html';
         }
 
-        // Slogan system
-        const slogan = "Discover the tokenomics and roadmap behind $LENS.";
-        
-        let currentCharIndex = 0;
-        
-        function typeSlogan() {
+        // Slogan animation function
+        function animateSlogan() {
+            const sloganText = "Compete daily, showcase your talent, win amazing prizes.";
             const sloganElement = document.getElementById('slogan');
+            let index = 0;
             
-            if (currentCharIndex < slogan.length) {
-                sloganElement.textContent = slogan.substring(0, currentCharIndex + 1);
-                currentCharIndex++;
-                setTimeout(typeSlogan, 50); // 50ms per character
+            function typeNextLetter() {
+                if (index < sloganText.length) {
+                    sloganElement.textContent += sloganText[index];
+                    index++;
+                    setTimeout(typeNextLetter, 50); // 50ms delay between letters
+                }
             }
+            
+            // Start typing after a short delay
+            setTimeout(typeNextLetter, 800);
         }
+
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect theme from main page
+            detectTheme();
+            
+            // Start slogan animation
+            animateSlogan();
 
         // Circular chart interaction functions
         function highlightSegment(element, name, percentage, tokens) {
