@@ -412,8 +412,20 @@
     </header>
 
     <!-- Main Body with Integrated Navigation -->
-    <main class="fixed left-0 right-0 px-4" style="top: 85px; bottom: 7px;">
+    <main class="fixed left-0 right-0 px-4" style="top: 89px; bottom: 7px;">
         <!-- Unified Container -->
+         <style>
+            @media (max-width: 768px) {
+                main {
+                    top: 91px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                main {
+                    top: 93px !important;
+                }
+            }
+        </style>
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
             <!-- Tabs -->
             <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565; height: 44px;">
