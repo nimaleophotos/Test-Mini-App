@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LENS Gallery</title>
+    <title>LENS App - Rewards</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -22,7 +22,7 @@
         .lens-outer {
             width: 32px;
             height: 32px;
-            border: 1.5px solid #aeaeae;
+            border: 1.5px solid white;
             border-radius: 50%;
             position: absolute;
         }
@@ -30,7 +30,7 @@
         .lens-inner {
             width: 16px;
             height: 16px;
-            border: 1px solid #aeaeae;
+            border: 1px solid white;
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -129,11 +129,11 @@
         
         .light-mode .lens-outer,
         .light-mode .lens-inner {
-            border-color: white !important;
+            border-color: #1a1a1a !important;
         }
         
         .light-mode .theme-toggle {
-            border-color: white !important;
+            border-color: #4a4a4a !important;
         }
         
         .light-mode .theme-toggle svg {
@@ -142,7 +142,7 @@
         
         .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(220, 38, 127"]):not([style*="background-color: rgba(245, 101, 101"]) {
             background-color: #e5e5e5 !important;
-            border-color: white !important;
+            border-color: #4a4a4a !important;
             color: #4a4a4a !important;
         }
         
@@ -152,11 +152,11 @@
         
         .light-mode .rounded-3xl {
             background-color: #e5e5e5 !important;
-            border-color: white !important;
+            border-color: #4a4a4a !important;
         }
         
         .light-mode .border-gray-600 {
-            border-color: white !important;
+            border-color: #4a4a4a !important;
         }
         
         .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(220, 38, 127"]):not([style*="background-color: rgba(245, 101, 101"]) {
@@ -177,7 +177,7 @@
         }
         
         .light-mode .border-gray-600 {
-            border-color: white !important;
+            border-color: #4a4a4a !important;
         }
         
         .light-mode .nav-button {
@@ -190,17 +190,17 @@
         
         .light-mode .back-button {
             background-color: rgba(200, 200, 200, 0.5) !important;
-            border-color: white !important;
+            border-color: rgba(74, 74, 74, 0.5) !important;
         }
         
         .light-mode .rounded-3xl .flex-shrink-0:last-child {
             background-color: #e5e5e5 !important;
-            border-color: white !important;
+            border-color: #4a4a4a !important;
         }
         
         .light-mode .rounded-3xl .flex-shrink-0:last-child > div {
             background-color: #e5e5e5 !important;
-            border-color: white !important;
+            border-color: #4a4a4a !important;
         }
         
         .nav-button {
@@ -246,20 +246,20 @@
         }
         
         /* Tab-specific borders for dark mode */
-        body:not(.light-mode) .tab-featured.tab-active {
-            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;
-            border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        body:not(.light-mode) .tab-milestones.tab-active {
+            border-right: 2px solid #656565 !important;
+            border-bottom: 2px solid #656565 !important;
         }
         
-        body:not(.light-mode) .tab-collections.tab-active {
-            border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
-            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;
-            border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        body:not(.light-mode) .tab-daily.tab-active {
+            border-left: 2px solid #656565 !important;
+            border-right: 2px solid #656565 !important;
+            border-bottom: 2px solid #656565 !important;
         }
         
-        body:not(.light-mode) .tab-order.tab-active {
-            border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
-            border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        body:not(.light-mode) .tab-badges.tab-active {
+            border-left: 2px solid #656565 !important;
+            border-bottom: 2px solid #656565 !important;
         }
         
         /* Light mode tab styles */
@@ -279,20 +279,48 @@
         }
         
         /* Light mode tab-specific borders */
-        .light-mode .tab-featured.tab-active {
-            border-right: 1px solid white !important;
-            border-bottom: 1px solid white !important;
+        .light-mode .tab-milestones.tab-active {
+            border-right: 2px solid #4a4a4a !important;
+            border-bottom: 2px solid #4a4a4a !important;
         }
         
-        .light-mode .tab-collections.tab-active {
-            border-left: 1px solid white !important;
-            border-right: 1px solid white !important;
-            border-bottom: 1px solid white !important;
+        .light-mode .tab-daily.tab-active {
+            border-left: 2px solid #4a4a4a !important;
+            border-right: 2px solid #4a4a4a !important;
+            border-bottom: 2px solid #4a4a4a !important;
         }
         
-        .light-mode .tab-order.tab-active {
-            border-left: 1px solid white !important;
-            border-bottom: 1px solid white !important;
+        .light-mode .tab-badges.tab-active {
+            border-left: 2px solid #4a4a4a !important;
+            border-bottom: 2px solid #4a4a4a !important;
+        }
+        
+        /* Tab borders for inactive tabs in light mode */
+        .light-mode .tab-daily {
+            border-left: 2px solid #4a4a4a !important;
+            border-right: 2px solid #4a4a4a !important;
+        }
+
+        .reward-card {
+            transition: all 0.3s ease;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .progress-bar {
+            transition: width 0.8s ease;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .back-button {
@@ -301,146 +329,6 @@
 
         .back-button:hover {
             transform: translateX(-2px);
-        }
-
-        /* Gallery specific styles */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        @media (min-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
-            }
-        }
-
-        @media (min-width: 640px) {
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-                gap: 16px;
-            }
-        }
-
-        .photo-card {
-            aspect-ratio: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(75, 75, 75, 0.5);
-            border: 1px solid rgba(101, 101, 101, 0.3);
-        }
-
-        .photo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .photo-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
-            color: #999;
-        }
-
-        .photo-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            padding: 12px 8px 8px;
-            color: white;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .photo-card:hover .photo-overlay {
-            opacity: 1;
-        }
-
-
-
-        .collection-card {
-            background: rgba(75, 75, 75, 0.5);
-            border: 1px solid rgba(101, 101, 101, 0.3);
-            border-radius: 12px;
-            padding: 16px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .collection-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            border-color: rgba(101, 101, 101, 0.5);
-        }
-
-        .light-mode .photo-card {
-            background: rgba(200, 200, 200, 0.5) !important;
-            border-color: white !important;
-        }
-
-        .light-mode .collection-card {
-            background: rgba(200, 200, 200, 0.5) !important;
-            border-color: white !important;
-        }
-
-        .light-mode .photo-placeholder {
-            background: linear-gradient(135deg, #d0d0d0, #b0b0b0) !important;
-            color: #666 !important;
-        }
-
-        .filter-button {
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(101, 101, 101, 0.3);
-            background: rgba(75, 75, 75, 0.5);
-            color: #999;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .filter-button:hover,
-        .filter-button.active {
-            background: #10b981;
-            color: white;
-            border-color: #10b981;
-        }
-
-        .light-mode .filter-button {
-            background: rgba(200, 200, 200, 0.5) !important;
-            border-color: white !important;
-            color: #666 !important;
-        }
-
-        .light-mode .filter-button:hover,
-        .light-mode .filter-button.active {
-            background: #10b981 !important;
-            color: white !important;
-            border-color: #10b981 !important;
-        }
-
-        .stats-card {
-            background: rgba(75, 75, 75, 0.5);
-            border: 1px solid rgba(101, 101, 101, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .light-mode .stats-card {
-            background: rgba(200, 200, 200, 0.5) !important;
-            border-color: white !important;
         }
     </style>
 </head>
