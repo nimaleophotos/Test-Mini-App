@@ -390,74 +390,73 @@
                 </button>
             </div>
             
-            <!-- Content Area -->
-            <div class="p-6 overflow-y-auto flex-1">
                 <!-- Submit Content -->
                 <div id="submit-content" class="tab-content hidden">
-                    <div class="space-y-6">
-                        <!-- Preview Form (Disabled) -->
-                        <div class="space-y-4 opacity-50">
-                            <div class="flex items-center justify-center gap-3 mb-4">
-                                <h3 class="text-base font-bold">Submit Your Photo</h3>
-                                <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
-                            </div>
-                            
-                            <!-- Image Upload Area -->
-                            <div class="upload-area" onclick="document.getElementById('photo-upload').click()">
-                                <input type="file" id="photo-upload" accept="image/*" style="display: none;" disabled>
-                                <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                                </svg>
-                                <p class="text-gray-400 mb-2">Click to upload or drag and drop</p>
-                                <p class="text-gray-500 text-xs">JPG, PNG up to 10MB</p>
-                            </div>
-
-                            <!-- Cast URL -->
-                            <div>
-                                <label class="block text-xs font-medium mb-2">Cast URL (Optional)</label>
-                                <input type="url" class="form-input" placeholder="https://warpcast.com/username/0x..." disabled>
-                            </div>
-
-                            <!-- Artist Name -->
-                            <div>
-                                <label class="block text-xs font-medium mb-2">Artist Name</label>
-                                <input type="text" class="form-input" placeholder="Your name or handle" disabled>
-                            </div>
-
-                            <!-- EXIF Data -->
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-medium mb-2">Camera</label>
-                                    <input type="text" class="form-input" placeholder="e.g., Canon EOS R5" disabled>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium mb-2">Lens</label>
-                                    <input type="text" class="form-input" placeholder="e.g., 24-70mm f/2.8" disabled>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium mb-2">ISO</label>
-                                    <input type="text" class="form-input" placeholder="e.g., 400" disabled>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium mb-2">Aperture</label>
-                                    <input type="text" class="form-input" placeholder="e.g., f/2.8" disabled>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium mb-2">Shutter Speed</label>
-                                    <input type="text" class="form-input" placeholder="e.g., 1/125s" disabled>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium mb-2">Focal Length</label>
-                                    <input type="text" class="form-input" placeholder="e.g., 50mm" disabled>
-                                </div>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <button class="w-full py-3 rounded-lg font-bold text-white transition-all opacity-50 cursor-not-allowed" style="background: linear-gradient(135deg, #10b981, #059669);" disabled>
-                                Submit Entry (Coming Soon)
-                            </button>
+                  <div class="space-y-6">
+                    <!-- Preview Form (Disabled) -->
+                    <div class="space-y-4 opacity-50">
+                      <div class="flex items-center justify-center gap-3 mb-4">
+                        <h3 class="text-base font-bold">Submit Your Photo</h3>
+                        <span class="px-2 py-1 text-xs font-medium bg-gray-500 text-white rounded-full">Coming Soon</span>
+                      </div>
+                      
+                      <!-- Image Upload Area -->
+                      <div class="upload-area border border-gray-600 rounded-md p-4" onclick="document.getElementById('photo-upload').click()">
+                        <input type="file" id="photo-upload" accept="image/*" style="display: none;" disabled>
+                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p class="text-gray-400 mb-2">Click to upload or drag and drop</p>
+                        <p class="text-gray-500 text-xs">JPG, PNG up to 10MB</p>
+                      </div>
+                
+                      <!-- Cast URL -->
+                      <div class="border border-gray-600 rounded-md p-3">
+                        <label class="block text-xs font-medium mb-2">Cast URL (Optional)</label>
+                        <input type="url" class="form-input w-full" placeholder="https://warpcast.com/username/0x..." disabled>
+                      </div>
+                
+                      <!-- Artist Name -->
+                      <div class="border border-gray-600 rounded-md p-3">
+                        <label class="block text-xs font-medium mb-2">Artist Name</label>
+                        <input type="text" class="form-input w-full" placeholder="Your name or handle" disabled>
+                      </div>
+                
+                      <!-- EXIF Data -->
+                      <div class="grid grid-cols-2 gap-4">
+                        <div class="border border-gray-600 rounded-md p-3">
+                          <label class="block text-xs font-medium mb-2">Camera</label>
+                          <input type="text" class="form-input w-full" placeholder="e.g., Canon EOS R5" disabled>
                         </div>
+                        <div class="border border-gray-600 rounded-md p-3">
+                          <label class="block text-xs font-medium mb-2">Lens</label>
+                          <input type="text" class="form-input w-full" placeholder="e.g., 24-70mm f/2.8" disabled>
+                        </div>
+                        <div class="border border-gray-600 rounded-md p-3">
+                          <label class="block text-xs font-medium mb-2">ISO</label>
+                          <input type="text" class="form-input w-full" placeholder="e.g., 400" disabled>
+                        </div>
+                        <div class="border border-gray-600 rounded-md p-3">
+                          <label class="block text-xs font-medium mb-2">Aperture</label>
+                          <input type="text" class="form-input w-full" placeholder="e.g., f/2.8" disabled>
+                        </div>
+                        <div class="border border-gray-600 rounded-md p-3">
+                          <label class="block text-xs font-medium mb-2">Shutter Speed</label>
+                          <input type="text" class="form-input w-full" placeholder="e.g., 1/125s" disabled>
+                        </div>
+                        <div class="border border-gray-600 rounded-md p-3">
+                          <label class="block text-xs font-medium mb-2">Focal Length</label>
+                          <input type="text" class="form-input w-full" placeholder="e.g., 50mm" disabled>
+                        </div>
+                      </div>
+                
+                      <!-- Submit Button -->
+                      <button class="w-full py-3 rounded-lg font-bold text-white transition-all opacity-50 cursor-not-allowed border border-gray-600" 
+                        style="background: linear-gradient(135deg, #10b981, #059669);" disabled>
+                        Submit Entry (Coming Soon)
+                      </button>
                     </div>
+                  </div>
                 </div>
 
                 <!-- Winners Content -->
