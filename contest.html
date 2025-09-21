@@ -22,7 +22,7 @@
         .lens-outer {
             width: 32px;
             height: 32px;
-            border: 1.5px solid #aeaeae;
+            border: 1.5px solid white;
             border-radius: 50%;
             position: absolute;
         }
@@ -30,7 +30,7 @@
         .lens-inner {
             width: 16px;
             height: 16px;
-            border: 1px solid #aeaeae;
+            border: 1px solid white;
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -247,19 +247,28 @@
         
         /* Tab-specific borders for dark mode */
         body:not(.light-mode) .tab-submit.tab-active {
-            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;
+            /*border-right: 1px solid rgba(101, 101, 101, 0.5) !important;*/
             border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
         }
         
         body:not(.light-mode) .tab-winners.tab-active {
-            border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
-            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;
+            /*border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
+            border-right: 1px solid rgba(101, 101, 101, 0.5) !important;*/
             border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
         }
         
         body:not(.light-mode) .tab-juries.tab-active {
-            border-left: 1px solid rgba(101, 101, 101, 0.5) !important;
+            /*border-left: 1px solid rgba(101, 101, 101, 0.5) !important;*/
             border-bottom: 1px solid rgba(101, 101, 101, 0.5) !important;
+        }
+
+        /* Tab borders for inactive tabs in dark mode */
+        body:not(.light-mode) .tab-submit {
+            border-right: 1px solid #656565 !important;
+        }
+        
+        body:not(.light-mode) .tab-juries {
+            border-left: 1px solid #656565 !important;
         }
         
         /* Light mode tab styles */
@@ -280,27 +289,31 @@
         
         /* Light mode tab-specific borders */
         .light-mode .tab-submit.tab-active {
-            border-right: 1px solid white !important;
+            /*border-right: 1px solid white !important;*/
             border-bottom: 1px solid white !important;
         }
         
         .light-mode .tab-winners.tab-active {
-            border-left: 1px solid white !important;
-            border-right: 1px solid white !important;
+            /*border-left: 1px solid white !important;
+            border-right: 1px solid white !important;*/
             border-bottom: 1px solid white !important;
         }
         
         .light-mode .tab-juries.tab-active {
-            border-left: 1px solid white !important;
+            /*border-left: 1px solid white !important;*/
             border-bottom: 1px solid white !important;
         }
-        
+
         /* Tab borders for inactive tabs in light mode */
-        .light-mode .tab-winners {
-            border-left: 1px solid white !important;
-            border-right: 1px solid white !important;
+        .light-mode .tab-submit {
+            border-left: 1px solid #4a4a4a !important;
         }
 
+        .light-mode .tab-juries {
+            border-left: 1px solid #4a4a4a !important;
+        }
+
+        /*-----*/
         .contest-card {
             transition: all 0.3s ease;
         }
@@ -464,9 +477,9 @@
                 }
             }
         </style>
-        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
+        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 1px solid #656565;">
             <!-- Tabs -->
-            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565; height: 44px;">
+            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 1px solid #656565; height: 44px;">
                 <button class="tab-button tab-submit py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('submit', this)" style="flex: 1;">
                     Submit
                 </button>
@@ -931,8 +944,8 @@
             </div>
             
             <!-- Navigation Bar -->
-            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 2px solid #656565;">
-                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 2px solid #656565;">
+            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 1px solid #656565;">
+                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 1px solid #656565;">
                     <div class="flex items-center justify-around w-full">
                         <!-- Rewards -->
                         <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToRewards()" style="color: #aeaeae;">
