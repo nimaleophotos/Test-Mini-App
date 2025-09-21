@@ -177,33 +177,46 @@
             background: #1a1a1a !important;
             color: #ffffff !important;
         }
+
+        .nav-button svg {
+        transition: color 0.2s ease, opacity 0.2s ease;
+        color: #aeaeae;   /* default grey */
+        opacity: 0.7;     /* default dim */
+        }
+
+        .nav-button:hover svg {
+        color: #ffffff;   /* shine white on hover */
+        opacity: 1;       /* full brightness */
+        }
+
         
         /* Light mode tab-specific borders */
         .light-mode .tab-leaderboard.tab-active {
-            border-right: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
+            /*border-right: 1px solid #4a4a4a !important;*/
+            border-bottom: 1px solid #4a4a4a !important;
         }
         
         .light-mode .tab-pod.tab-active {
-            border-left: 2px solid #4a4a4a !important;
-            border-right: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
+            /*border-left: 1px solid #4a4a4a !important;
+            border-right: 1px solid #4a4a4a !important;*/
+            border-bottom: 1px solid #4a4a4a !important;
         }
         
         .light-mode .tab-tutorial.tab-active {
-            border-left: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
+            /*border-left: 1px solid #4a4a4a !important;*/
+            border-bottom: 1px solid #4a4a4a !important;
         }
         
         /* Tab borders for inactive tabs in light mode */
         .light-mode .tab-leaderboard {
-            border-right: 2px solid #4a4a4a !important;
+            border-left: 1px solid #4a4a4a !important;
         }
-        
+
         .light-mode .tab-tutorial {
-            border-left: 2px solid #4a4a4a !important;
+            border-left: 1px solid #4a4a4a !important;
         }
         
+        /*------*/
         .light-mode .border-gray-600 {
             border-color: #4a4a4a !important;
         }
@@ -259,30 +272,31 @@
         
         /* Tab-specific borders for dark mode */
         body:not(.light-mode) .tab-leaderboard.tab-active {
-            border-right: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
+            /*border-right: 1px solid #656565 !important;*/
+            border-bottom: 1px solid #656565 !important;
         }
         
         body:not(.light-mode) .tab-pod.tab-active {
-            border-left: 2px solid #656565 !important;
-            border-right: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
+            /*border-left: 1px solid #656565 !important;
+            border-right: 1px solid #656565 !important;*/
+            border-bottom: 1px solid #656565 !important;
         }
         
         body:not(.light-mode) .tab-tutorial.tab-active {
-            border-left: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
+            /*border-left: 1px solid #656565 !important;*/
+            border-bottom: 1px solid #656565 !important;
         }
         
         /* Tab borders for inactive tabs in dark mode */
         body:not(.light-mode) .tab-leaderboard {
-            border-right: 2px solid #656565 !important;
+            border-right: 1px solid #656565 !important;
         }
         
-        body:not(.light-mode) .tab-tutorial {
-            border-left: 2px solid #656565 !important;
+        body:not(.light-mode) .tab-tutorials {
+            border-left: 1px solid #656565 !important;
         }
         
+        /*------*/
         .nav-button {
             transition: all 0.3s ease;
         }
@@ -336,17 +350,20 @@
             
             <!-- Right side - Theme toggle and Connect Wallet -->
             <div class="flex items-center space-x-2">
-                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" style="border: 1px solid #656565;">
-                    <svg class="w-5 h-5 hidden" id="moonIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color: #aeaeae;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
-                    </svg>
-                    <svg class="w-5 h-5" id="sunIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color: #aeaeae;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
-                    </svg>
-                </div>
-                <button class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors" style="background-color: #333333; border: 1px solid #656565; color: #aeaeae;">
-                    Connect
+                <!-- Theme Toggle -->
+                <button class="w-9 h-9 rounded-full transition-colors bg-[#333333] border border-[#656565] text-[#aeaeae] hover:bg-[#444444] hover:text-white active:scale-95 flex items-center justify-center"id="themeToggle" onclick="toggleTheme()">
+                <!-- Moon Icon -->
+                <svg class="w-5 h-5 hidden" id="moonIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+                </svg>
+                <!-- Sun Icon -->
+                <svg class="w-5 h-5" id="sunIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+                </svg>
                 </button>
+
+                <!-- Connect Wallet -->
+                <button class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-[#333333] border border-[#656565] text-[#aeaeae] hover:bg-[#444444] hover:text-white active:scale-95" onclick="navigateToWallet()">Connect</button>
             </div>
         </div>
         
@@ -359,9 +376,9 @@
     <!-- Main Body with Integrated Navigation -->
     <main class="fixed left-0 right-0 px-4" style="top: 85px; bottom: 7px;">
         <!-- Unified Container -->
-        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
+        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 1px solid #656565;">
             <!-- Tabs -->
-            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565;">
+            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 1px solid #656565;">
                 <button class="tab-button tab-leaderboard py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('leaderboard', this)" style="flex: 0.7;">
                     <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
                         <rect x="3" y="12" width="4" height="9" rx="1"/>
@@ -369,7 +386,7 @@
                         <rect x="17" y="4" width="4" height="17" rx="1"/>
                     </svg>
                 </button>
-                <button class="tab-button tab-pod py-2 md:py-3 px-6 text-center font-bold transition-colors tab-active" onclick="switchTab('pod', this)" style="flex: 2.6; letter-spacing: 6px;">
+                <button class="tab-button tab-pod py-2 md:py-3 px-6 text-center font-bold transition-colors tab-active" onclick="switchTab('pod', this)" style="flex: 2.6; letter-spacing: 6px; border-left: 1px solid rgba(101, 101, 101, 0.3); border-right: 1px solid rgba(101, 101, 101, 0.3);">
                     POD
                 </button>
                 <button class="tab-button tab-tutorial py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('tutorial', this)" style="flex: 0.7;">
@@ -1159,8 +1176,8 @@
             </div>
             
             <!-- Integrated Navigation Bar -->
-            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 2px solid #656565;">
-                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 2px solid #656565;">
+            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 1px solid #656565;">
+                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 1px solid #656565;">
                     <div class="flex items-center justify-around w-full">
                         <!-- Rewards -->
                         <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToRewards()" style="color: #aeaeae;">
@@ -1263,6 +1280,9 @@
 
         function navigateToInfo() {
             window.location.href = 'info.html';
+        }
+        function navigateToWallet() {
+            window.location.href = 'wallet.html';
         }
 
         // Slogan animation system
