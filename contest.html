@@ -244,6 +244,11 @@
             background: #565656 !important;
             color: white !important;
         }
+
+        .nav-button:hover svg {
+        color: #ffffff;   /* shine white on hover */
+        opacity: 1;       /* full brightness */
+        }
         
         /* Tab-specific borders for dark mode */
         body:not(.light-mode) .tab-submit.tab-active {
@@ -439,7 +444,7 @@
         <div class="flex items-center justify-between mb-2">
             <!-- Left side - Back button -->
             <div class="flex items-center">
-                <button class="back-button p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae; background-color: rgba(75, 75, 75, 0.3); border: 1px solid rgba(101, 101, 101, 0.5);">
+                <button class="back-button p-2 rounded-full text-sm font-medium transition bg-[#333333] border border-[#656565] text-[#aeaeae] hover:bg-[#444444] hover:text-white active:scale-95" onclick="goBack()">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
