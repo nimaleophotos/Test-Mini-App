@@ -247,19 +247,28 @@
         
         /* Tab-specific borders for dark mode */
         body:not(.light-mode) .tab-milestones.tab-active {
-            border-right: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
+            /*border-right: 1px solid #656565 !important;*/
+            border-bottom: 1px solid #656565 !important;
         }
         
         body:not(.light-mode) .tab-daily.tab-active {
-            border-left: 2px solid #656565 !important;
-            border-right: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
+            /*border-left: 1px solid #656565 !important;
+            border-right: 1px solid #656565 !important;*/
+            border-bottom: 1px solid #656565 !important;
         }
         
         body:not(.light-mode) .tab-badges.tab-active {
-            border-left: 2px solid #656565 !important;
-            border-bottom: 2px solid #656565 !important;
+            /*border-left: 1px solid #656565 !important;*/
+            border-bottom: 1px solid #656565 !important;
+        }
+
+        /* Tab borders for inactive tabs in dark mode */
+        body:not(.light-mode) .tab-milestones {
+            border-right: 1px solid #656565 !important;
+        }
+        
+        body:not(.light-mode) .tab-badges {
+            border-left: 1px solid #656565 !important;
         }
         
         /* Light mode tab styles */
@@ -280,27 +289,31 @@
         
         /* Light mode tab-specific borders */
         .light-mode .tab-milestones.tab-active {
-            border-right: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
+            /*border-right: 1px solid #4a4a4a !important*/
+            border-bottom: 1px solid #4a4a4a !important;
         }
         
         .light-mode .tab-daily.tab-active {
-            border-left: 2px solid #4a4a4a !important;
-            border-right: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
+            /*border-left: 1px solid #4a4a4a !important;
+            border-right: 1px solid #4a4a4a !important;*/
+            border-bottom: 1px solid #4a4a4a !important;
         }
         
         .light-mode .tab-badges.tab-active {
-            border-left: 2px solid #4a4a4a !important;
-            border-bottom: 2px solid #4a4a4a !important;
-        }
-        
-        /* Tab borders for inactive tabs in light mode */
-        .light-mode .tab-daily {
-            border-left: 2px solid #4a4a4a !important;
-            border-right: 2px solid #4a4a4a !important;
+            /*border-left: 1px solid #4a4a4a !important;*/
+            border-bottom: 1px solid #4a4a4a !important;
         }
 
+        /* Tab borders for inactive tabs in light mode */
+        .light-mode .tab-milestones {
+            border-left: 1px solid #4a4a4a !important;
+        }
+
+        .light-mode .tab-badges {
+            border-left: 1px solid #4a4a4a !important;
+        }
+
+        /*-----*/
         .reward-card {
             transition: all 0.3s ease;
         }
@@ -376,9 +389,9 @@
                 }
             }
         </style>
-        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
+        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 1px solid #656565;">
             <!-- Tabs -->
-            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565; height: 44px;">
+            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 1px solid #656565; height: 44px;">
                 <button class="tab-button tab-milestones py-2 md:py-3 text-center text-sm font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('milestones', this)" style="flex: 1;">
                     Milestones
                 </button>
@@ -1168,8 +1181,8 @@
             </div>
             
             <!-- Navigation Bar -->
-            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 2px solid #656565;">
-                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 2px solid #656565;">
+            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 1px solid #656565;">
+                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 1px solid #656565;">
                     <div class="flex items-center justify-around w-full">
                         <!-- Rewards - Active -->
                         <button class="nav-button flex-shrink-0" style="color: white;">
@@ -1343,6 +1356,7 @@
             // Start slogan animation
             animateSlogan();
             
+            //something that i don't know
             const elements = document.querySelectorAll('header, main');
             elements.forEach((element, index) => {
                 element.style.opacity = '0';
