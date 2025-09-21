@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENS App - Connect Wallet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .lens-icon {
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .lens-outer {
+            width: 32px;
+            height: 32px;
+            border: 1.5px solid white;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .lens-inner {
+            width: 16px;
+            height: 16px;
+            border: 1px solid white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .theme-toggle {
+            width: 28px;
+            height: 28px;
+            background: #333333;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .camera-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        
+        .camera-button svg {
+            color: black;
+        }
+        
+        .light-mode .camera-button {
+            background: black !important;
+        }
+        
+        .light-mode .camera-button svg {
+            color: white !important;
+        }
+
+        .theme-toggle.light {
+            background: #e5e5e5;
+        }
+        
+        .theme-toggle-circle {
+            width: 16px;
+            height: 16px;
+            background: #aeaeae;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .theme-toggle.light .theme-toggle-circle {
+            background: #4a4a4a;
+        }
+        
+        /* Add smooth transitions to all elements that change in light mode */
+        .lens-outer, .lens-inner {
+            transition: border-color 0.5s ease;
+        }
+        
+        .theme-toggle {
+            transition: border-color 0.5s ease, background-color 0.5s ease;
+        }
+        
+        .theme-toggle svg {
+            transition: color 0.5s ease;
+        }
+        
+        button {
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .rounded-3xl {
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+        
+        .tab-button {
+            transition: all 0.5s ease;
+        }
+        
+        .rounded-md {
+            transition: background-color 0.5s ease;
+        }
+        
+        .text-gray-300, .text-gray-400 {
+            transition: color 0.5s ease;
+        }
+        
+        .bg-gray-600, .bg-gray-400 {
+            transition: background-color 0.5s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.5s ease;
+        }
+        
+        .nav-button svg {
+            transition: color 0.5s ease, opacity 0.5s ease;
+        }
+        
+        #slogan {
+            transition: color 0.5s ease;
+        }
+        
+        header {
+            transition: background-color 0.5s ease !important;
+        }
+        
+        .camera-button {
+            transition: all 0.5s ease, transform 0.3s ease;
+        }
+        
+        .camera-button svg {
+            transition: color 0.5s ease;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #f5f5f5 !important;
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .lens-outer,
+        .light-mode .lens-inner {
+            border-color: #1a1a1a !important;
+        }
+        
+        .light-mode .theme-toggle {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .theme-toggle svg {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]) {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode #slogan {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .tab-button {
+            color: #999999 !important;
+            background: #f0f0f0 !important;
+        }
+        
+        .light-mode .tab-button:hover {
+            color: #1a1a1a !important;
+            background: #e0e0e0 !important;
+        }
+        
+        .light-mode .tab-active {
+            background: #565656 !important;
+            color: white !important;
+        }
+
+        .light-mode .border-gray-600 {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]) {
+            background-color: rgba(200, 200, 200, 0.5) !important;
+        }
+        
+        .light-mode .text-gray-300,
+        .light-mode .text-gray-400 {
+            color: #666666 !important;
+        }
+        
+        .light-mode .bg-gray-600 {
+            background-color: #d0d0d0 !important;
+        }
+        
+        .light-mode .bg-gray-400 {
+            background-color: #999999 !important;
+        }
+        
+        .light-mode .border-gray-600 {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button:hover {
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child > div {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .tab-active {
+            background: #565656 !important;
+            color: white !important;
+        }
+
+        body:not(.light-mode) .tab-about {
+            border-left: 1px solid #656565 !important;
+        }
+        
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .light-mode .info-card {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-mode .info-card:hover {
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .light-mode .setting-item {
+            border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: #333;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #4CAF50;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+
+        .light-mode .toggle-switch {
+            background: #ccc !important;
+        }
+
+        .light-mode .toggle-switch.active {
+            background: #4CAF50 !important;
+        }
+
+        .wallet-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .wallet-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .light-mode .wallet-card {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-mode .wallet-card:hover {
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 16px;
+        }
+
+        .badge-counter {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
+    <!-- Header - Fixed -->
+    <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
+        <div class="flex items-center justify-between mb-2">
+            <!-- Left side - Back button -->
+            <div class="flex items-center">
+                <button class="back-button p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae; background-color: rgba(75, 75, 75, 0.3); border: 1px solid rgba(101, 101, 101, 0.5);">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Right side - Title and LENS icon -->
+            <div class="flex items-center space-x-1">
+                <h1 class="text-xl font-bold">Connect Wallet</h1>
+                <div class="lens-icon" style="margin-left: 8px;">
+                    <div class="lens-outer"></div>
+                    <div class="lens-inner"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slogan -->
+        <div class="text-left" style="margin-top: 2px;">
+            <p class="text-xs" id="slogan" style="color: #aeaeae;"></p>
+        </div>
+    </header>
+
+    <!-- Main Body with Integrated Navigation -->
+    <main class="fixed left-0 right-0 px-4" style="top: 89px; bottom: 7px;">
+        <!-- Unified Container -->
+         <style>
+            @media (max-width: 768px) {
+                main {
+                    top: 91px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                main {
+                    top: 93px !important;
+                }
+            }
+        </style>
+        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 1px solid #656565;">
+            <div class="flex-1 overflow-y-auto p-6">
+                
+                <!-- User Profile Section -->
+                <div class="wallet-card text-center">
+                    <div class="profile-avatar">JD</div>
+                    <h2 class="text-xl font-bold mb-2">johndoe.eth</h2>
+                    <p class="text-gray-400 text-sm font-mono">0x742d...8c4A</p>
+                    <div class="mt-4">
+                        <span class="badge-counter">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            12 Badges Earned
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Wallet Balances Section -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Wallet Balances</h3>
+                    
+                    <!-- ETH Balance -->
+                    <div class="wallet-card">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">ETH</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Ethereum</p>
+                                    <p class="text-gray-400 text-sm">ETH</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">2.45 ETH</p>
+                                <p class="text-gray-400 text-sm">$4,890.00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- USDC Balance -->
+                    <div class="wallet-card">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
+                                    <span class="text-white font-bold text-xs">USDC</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">USD Coin</p>
+                                    <p class="text-gray-400 text-sm">USDC</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">1,250.00 USDC</p>
+                                <p class="text-gray-400 text-sm">$1,250.00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LENS Balance -->
+                    <div class="wallet-card">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
+                                    <div class="lens-icon" style="width: 20px; height: 20px;">
+                                        <div style="width: 20px; height: 20px; border: 1px solid white; border-radius: 50%; position: absolute;"></div>
+                                        <div style="width: 10px; height: 10px; border: 1px solid white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">LENS Protocol</p>
+                                    <p class="text-gray-400 text-sm">LENS</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold">847.32 LENS</p>
+                                <p class="text-gray-400 text-sm">$169.46</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="wallet-card text-center py-4 hover:scale-105 transition-transform">
+                            <svg class="w-8 h-8 mx-auto mb-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            <p class="font-semibold">Receive</p>
+                        </button>
+                        <button class="wallet-card text-center py-4 hover:scale-105 transition-transform">
+                            <svg class="w-8 h-8 mx-auto mb-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                            <p class="font-semibold">Send</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Security Notice -->
+                <div class="info-card">
+                    <div class="flex items-start space-x-3">
+                        <svg class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                        </svg>
+                        <div>
+                            <h4 class="font-semibold mb-1">Security Reminder</h4>
+                            <p class="text-gray-400 text-sm">Always verify transaction details before confirming. Your wallet is secured with industry-standard encryption.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Theme detection and synchronization with main page
+        function detectTheme() {
+            // Check localStorage for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+            
+            // Listen for theme changes from other pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue || 'dark');
+                }
+            });
+        }
+
+        function applyTheme(theme) {
+            const body = document.body;
+            const header = document.querySelector('header');
+            
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#f5f5f5';
+                }
+            } else {
+                body.classList.remove('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#272727';
+                }
+            }
+        }
+
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+        }
+
+        // Navigation functions
+        function goBack() {
+            // This will navigate back to your main page
+            window.location.href = 'index.html'; // or whatever you name your main page
+        }
+
+        // Slogan animation function
+        function animateSlogan() {
+            const sloganText = "Your wallet is secure. Learn more about your stats and achievements!";
+            const sloganElement = document.getElementById('slogan');
+            let index = 0;
+            
+            function typeNextLetter() {
+                if (index < sloganText.length) {
+                    sloganElement.textContent += sloganText[index];
+                    index++;
+                    setTimeout(typeNextLetter, 50); // 50ms delay between letters
+                }
+            }
+            
+            // Start typing after a short delay
+            setTimeout(typeNextLetter, 800);
+        }
+
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect theme from main page
+            detectTheme();
+            
+            // Start slogan animation
+            animateSlogan();
+
+            const elements = document.querySelectorAll('header, main');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // Animate wallet cards
+            const walletCards = document.querySelectorAll('.wallet-card');
+            walletCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 1000 + (index * 150));
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'982b2271d08ad5a5',t:'MTc1ODQ3NDE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
