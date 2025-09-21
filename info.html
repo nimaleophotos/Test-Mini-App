@@ -429,18 +429,21 @@
         <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 2px solid #656565;">
             <!-- Tabs -->
             <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 2px solid #656565; height: 44px;">
-                <button class="tab-button tab-about py-2 md:py-3 px-6 text-center font-medium transition-colors tab-active text-sm" onclick="switchTab('about', this)" style="flex: 1;">
+                <button class="tab-button tab-tokenomics py-2 md:py-3 px-6 text-center font-medium transition-colors tab-active text-sm" onclick="switchTab('tokenomics', this)" style="flex: 1;">
                     Tokenomics
                 </button>
-                <button class="tab-button tab-settings py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white text-sm" onclick="switchTab('settings', this)" style="flex: 1;">
+                <button class="tab-button tab-roadmap py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white text-sm" onclick="switchTab('roadmap', this)" style="flex: 1;">
                     Roadmap
+                </button>
+                <button class="tab-button tab-about py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white text-sm" onclick="switchTab('about', this)" style="flex: 1;">
+                    About
                 </button>
             </div>
             
             <!-- Content Area -->
             <div class="p-6 overflow-y-auto flex-1">
                 <!-- Tokenomics Content -->
-                <div id="about-content" class="tab-content">
+                <div id="tokenomics-content" class="tab-content hidden">
 
                     <div class="info-card">
                         <h3 class="text-lg font-bold mb-3">$LENS Token Overview</h3>
@@ -630,7 +633,7 @@
                 </div>
                 
                 <!-- Roadmap Content -->
-                <div id="settings-content" class="tab-content hidden">
+                <div id="roadmap-content" class="tab-content">
                     <!-- Roadmap Section Box -->
                     <div class="info-card">
                         <h3 class="text-[14px] font-bold mb-4 text-center">$LENS Road Map</h3>
@@ -922,6 +925,28 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- Footer -->
+                    <div class="text-center py-6 border-t border-gray-600 mt-6">
+                        <p class="text-gray-400 text-sm mb-2">© 2025 LensApp. All rights reserved.</p>
+                        <p class="text-gray-500 text-xs">
+                            Powered by 
+                            <a href="https://farcaster.xyz/genyleap" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition-colors">
+                                @genyleap
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div id="roadmap-content" class="tab-content hidden">
+                    <!-- Roadmap Section Box -->
+                    <div class="info-card">
+                        <h3 class="text-lg font-bold mb-3">$LENS Token Overview</h3>
+                        <p class="text-sm text-gray-300 mb-4">The $LENS token fuels the photography community on Farcaster, empowering creators to learn, practice, capture, showcase, compete in weekly themes, and monetize their photos.</p>
+                        <div class="flex items-center space-x-2 text-xs text-gray-400">
+                        </div>
+                    </div>
+                        
                     <!-- Footer -->
                     <div class="text-center py-6 border-t border-gray-600 mt-6">
                         <p class="text-gray-400 text-sm mb-2">© 2025 LensApp. All rights reserved.</p>
