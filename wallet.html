@@ -439,14 +439,21 @@
                 
                 <!-- User Profile Section -->
                 <div class="wallet-card text-center">
-                    <div class="profile-avatar">JD</div>
+                    <img src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698c9e-c89d-4f0d-2fc4-c03c8ff7df00/original" alt="Profile" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-purple-400">
                     <h2 class="text-xl font-bold mb-2">johndoe.eth</h2>
-                    <p class="text-gray-400 text-sm font-mono mb-4">0x742d...8c4A</p>
+                    <div class="flex items-center justify-center mb-4">
+                        <p class="text-gray-400 text-sm font-mono mr-2" id="walletAddress">0x742d...8c4A</p>
+                        <button onclick="copyWalletAddress()" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                        </button>
+                    </div>
                     
                     <!-- Points Display -->
                     <div class="mb-6">
                         <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full inline-block font-bold text-lg">
-                            🏆 2,847 Points
+                            2,847 Points
                         </div>
                     </div>
 
@@ -471,7 +478,7 @@
                     </div>
 
                     <!-- Additional Stats -->
-                    <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="grid grid-cols-3 gap-3 text-center mb-4">
                         <div>
                             <div class="text-lg font-semibold text-orange-400">45</div>
                             <div class="text-xs text-gray-400">Days Active</div>
@@ -483,6 +490,18 @@
                         <div>
                             <div class="text-lg font-semibold text-red-400">3</div>
                             <div class="text-xs text-gray-400">Streak Days</div>
+                        </div>
+                    </div>
+
+                    <!-- Rankings -->
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <div class="text-lg font-semibold text-indigo-400">#247</div>
+                            <div class="text-xs text-gray-400">LENS App Rank</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold text-pink-400">#89</div>
+                            <div class="text-xs text-gray-400">LENS Empire Rank</div>
                         </div>
                     </div>
                 </div>
