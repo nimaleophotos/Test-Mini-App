@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENS App - Mobile Photography Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .lens-icon {
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .lens-outer {
+            width: 32px;
+            height: 32px;
+            border: 1.5px solid white;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .lens-inner {
+            width: 16px;
+            height: 16px;
+            border: 1px solid white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .theme-toggle {
+            width: 28px;
+            height: 28px;
+            background: #333333;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .camera-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        
+        .camera-button svg {
+            color: black;
+        }
+        
+        .light-mode .camera-button {
+            background: black !important;
+        }
+        
+        .light-mode .camera-button svg {
+            color: white !important;
+        }
+
+        .theme-toggle.light {
+            background: #e5e5e5;
+        }
+        
+        .theme-toggle-circle {
+            width: 16px;
+            height: 16px;
+            background: #aeaeae;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .theme-toggle.light .theme-toggle-circle {
+            background: #4a4a4a;
+        }
+        
+        /* Add smooth transitions to all elements that change in light mode */
+        .lens-outer, .lens-inner {
+            transition: border-color 0.5s ease;
+        }
+        
+        .theme-toggle {
+            transition: border-color 0.5s ease, background-color 0.5s ease;
+        }
+        
+        .theme-toggle svg {
+            transition: color 0.5s ease;
+        }
+        
+        button {
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .rounded-3xl {
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+        
+        .tab-button {
+            transition: all 0.5s ease;
+        }
+        
+        .rounded-md {
+            transition: background-color 0.5s ease;
+        }
+        
+        .text-gray-300, .text-gray-400 {
+            transition: color 0.5s ease;
+        }
+        
+        .bg-gray-600, .bg-gray-400 {
+            transition: background-color 0.5s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.5s ease;
+        }
+        
+        .nav-button svg {
+            transition: color 0.5s ease, opacity 0.5s ease;
+        }
+        
+        #slogan {
+            transition: color 0.5s ease;
+        }
+        
+        header {
+            transition: background-color 0.5s ease !important;
+        }
+        
+        .camera-button {
+            transition: all 0.5s ease, transform 0.3s ease;
+        }
+        
+        .camera-button svg {
+            transition: color 0.5s ease;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #f5f5f5 !important;
+            color: #1a1a1a !important;
+        }
+        
+        /* Ensure dark mode is default */
+        body {
+            background-color: #272727 !important;
+            color: white !important;
+        }
+        
+        .light-mode .lens-outer,
+        .light-mode .lens-inner {
+            border-color: #1a1a1a !important;
+        }
+        
+        .light-mode .theme-toggle {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .theme-toggle svg {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode button:not(.camera-button):not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(59, 130, 246"]):not([style*="background-color: rgba(34, 197, 94"]):not([style*="background-color: rgba(168, 85, 247"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]) {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode #slogan {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .tab-button {
+            color: #999999 !important;
+            background: #f0f0f0 !important;
+        }
+        
+        .light-mode .tab-button:hover {
+            color: #1a1a1a !important;
+            background: #e0e0e0 !important;
+        }
+        
+        .light-mode .tab-active {
+            background: #565656 !important;
+            color: white !important;
+        }
+
+        .light-mode .border-gray-600 {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-md:not([style*="background-color: rgba(255, 215, 0"]):not([style*="background-color: rgba(192, 192, 192"]):not([style*="background-color: rgba(205, 127, 50"]):not([style*="background-color: rgba(59, 130, 246"]) {
+            background-color: rgba(200, 200, 200, 0.5) !important;
+        }
+        
+        .light-mode .text-gray-300,
+        .light-mode .text-gray-400 {
+            color: #666666 !important;
+        }
+        
+        .light-mode .bg-gray-600 {
+            background-color: #d0d0d0 !important;
+        }
+        
+        .light-mode .bg-gray-400 {
+            background-color: #999999 !important;
+        }
+        
+        .light-mode .border-gray-600 {
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button {
+            color: #4a4a4a !important;
+        }
+        
+        .light-mode .nav-button:hover {
+            color: #1a1a1a !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .light-mode .rounded-3xl .flex-shrink-0:last-child > div {
+            background-color: #e5e5e5 !important;
+            border-color: #4a4a4a !important;
+        }
+        
+        .tab-active {
+            background: #565656 !important;
+            color: white !important;
+        }
+
+        body:not(.light-mode) .tab-about {
+            border-left: 1px solid #656565 !important;
+        }
+        
+        .nav-button {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .light-mode .course-card {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-mode .course-card:hover {
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .day-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .day-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .light-mode .day-card {
+            background: rgba(0, 0, 0, 0.03) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .light-mode .day-card:hover {
+            background: rgba(0, 0, 0, 0.06) !important;
+            border-color: rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .quiz-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .quiz-content {
+            background: #2a2a2a;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 90%;
+            width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-modal.active .quiz-content {
+            transform: scale(1);
+        }
+
+        .light-mode .quiz-content {
+            background: #f0f0f0 !important;
+            color: #1a1a1a !important;
+        }
+
+        .question-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .question-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .question-option.selected {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .question-option.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+
+        .question-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        .light-mode .question-option {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-mode .question-option:hover {
+            background: rgba(0, 0, 0, 0.1) !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .light-mode .progress-bar {
+            background: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .completed-day {
+            background: rgba(34, 197, 94, 0.1) !important;
+            border-color: rgba(34, 197, 94, 0.3) !important;
+        }
+
+        .completed-day .day-status {
+            color: #10b981 !important;
+        }
+
+        .fixed-progress {
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .light-mode .fixed-progress {
+            background-color: #f5f5f5 !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
+    <!-- Header - Fixed -->
+    <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
+        <div class="flex items-center justify-between mb-2">
+            <!-- Left side - Back button -->
+            <div class="flex items-center">
+                <button class="back-button p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae; background-color: rgba(75, 75, 75, 0.3); border: 1px solid rgba(101, 101, 101, 0.5);">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Right side - Title and LENS icon -->
+            <div class="flex items-center space-x-1">
+                <h1 class="text-xl font-bold">Photography Course</h1>
+                <div class="lens-icon" style="margin-left: 8px;">
+                    <div class="lens-outer"></div>
+                    <div class="lens-inner"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slogan -->
+        <div class="text-left" style="margin-top: 2px;">
+            <p class="text-xs" id="slogan" style="color: #aeaeae;"></p>
+        </div>
+    </header>
+
+    <!-- Main Body -->
+    <main class="fixed left-0 right-0 px-4 overflow-y-auto" style="top: 89px; bottom: 180px;">
+        <style>
+            @media (max-width: 768px) {
+                main {
+                    top: 91px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                main {
+                    top: 93px !important;
+                }
+            }
+        </style>
+
+
+
+        <!-- Week 1 -->
+        <div class="course-card">
+            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleWeek(1)">
+                <h3 class="text-lg font-semibold flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    Week 1: Fundamentals
+                </h3>
+                <div class="flex items-center space-x-3">
+                    <div class="text-sm text-gray-400">
+                        <span id="week1Progress">0</span>/7 Days
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" id="week1Arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-300 mb-4">Master the basics of mobile photography including light, composition, and camera settings.</p>
+            
+            <!-- Week 1 Educational Material -->
+            <div class="space-y-3 week-content" id="week1Content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                <div class="bg-gradient-to-r from-green-600/20 to-cyan-600/20 border border-green-500/30 rounded-xl p-4 mb-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-green-300 flex items-center">
+                            📚 Study Material
+                        </h4>
+                        <div class="flex space-x-2">
+                            <button onclick="openEducationalLink('https://example.com/week1-fundamentals')" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-1 px-3 rounded-lg transition-all duration-300 text-sm">
+                                📖 Read
+                            </button>
+                            <button onclick="openMintLink('https://example.com/mint-week1')" class="bg-cyan-500/20 border border-cyan-400/30 hover:bg-cyan-500/30 text-cyan-400 font-semibold py-1 px-3 rounded-lg transition-all duration-300 text-sm">
+                                🎯 Mint
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-300">
+                        Read the complete guide on photography fundamentals before starting your daily challenges. Learn about light, shadows, composition rules, and essential techniques.
+                    </p>
+                </div>
+                
+                <div class="border-t border-gray-600/30 pt-4">
+                    <h5 class="font-semibold text-gray-300 mb-3 flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Daily Challenges
+                    </h5>
+                </div>
+
+            <!-- Week 1 Days -->
+                <div class="day-card" onclick="attemptQuiz(1, 'Shadows', 'Understanding how shadows work in photography')" id="dayCard1">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 1: Shadows</h4>
+                            <p class="text-xs text-gray-400">Learn about shadow direction and timing</p>
+                            <p class="text-xs text-yellow-400 mt-1" id="day1Timer" style="display: none;">Available in: <span id="day1Countdown"></span></p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day1Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="attemptQuiz(2, 'Golden Hour', 'Capturing the perfect light')" id="dayCard2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 2: Golden Hour</h4>
+                            <p class="text-xs text-gray-400">Master the magic hour lighting</p>
+                            <p class="text-xs text-yellow-400 mt-1" id="day2Timer" style="display: none;">Available in: <span id="day2Countdown"></span></p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day2Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(3, 'Rule of Thirds', 'Composition fundamentals')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 3: Rule of Thirds</h4>
+                            <p class="text-xs text-gray-400">Essential composition technique</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day3Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(4, 'Leading Lines', 'Guide the viewers eye')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 4: Leading Lines</h4>
+                            <p class="text-xs text-gray-400">Create visual flow in your photos</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day4Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(5, 'Depth of Field', 'Focus and blur techniques')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 5: Depth of Field</h4>
+                            <p class="text-xs text-gray-400">Control focus for better portraits</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day5Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(6, 'Symmetry', 'Balance in composition')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 6: Symmetry</h4>
+                            <p class="text-xs text-gray-400">Create balanced compositions</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day6Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(7, 'Framing', 'Natural frames in photography')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 7: Framing</h4>
+                            <p class="text-xs text-gray-400">Use natural elements as frames</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day7Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="course-card">
+            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleWeek(2)">
+                <h3 class="text-lg font-semibold flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    Week 2: Advanced Techniques
+                </h3>
+                <div class="flex items-center space-x-3">
+                    <div class="text-sm text-gray-400">
+                        <span id="week2Progress">0</span>/7 Days
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300" id="week2Arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-300 mb-4">Explore advanced mobile photography techniques including night photography, macro, and creative effects.</p>
+            
+            <!-- Week 2 Educational Material -->
+            <div class="space-y-3 week-content" id="week2Content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                <div class="bg-gradient-to-r from-green-600/20 to-cyan-600/20 border border-green-500/30 rounded-xl p-4 mb-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-green-300 flex items-center">
+                            📚 Study Material
+                        </h4>
+                        <div class="flex space-x-2">
+                            <button onclick="openEducationalLink('https://example.com/week2-advanced')" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-1 px-3 rounded-lg transition-all duration-300 text-sm">
+                                📖 Read
+                            </button>
+                            <button onclick="openMintLink('https://example.com/mint-week2')" class="bg-cyan-500/20 border border-cyan-400/30 hover:bg-cyan-500/30 text-cyan-400 font-semibold py-1 px-3 rounded-lg transition-all duration-300 text-sm">
+                                🎯 Mint
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-300">
+                        Dive deep into advanced mobile photography techniques. Master night photography, macro shots, creative effects, and professional composition methods.
+                    </p>
+                </div>
+                
+                <div class="border-t border-gray-600/30 pt-4">
+                    <h5 class="font-semibold text-gray-300 mb-3 flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Daily Challenges
+                    </h5>
+                </div>
+
+            <!-- Week 2 Days -->
+                <div class="day-card" onclick="openQuiz(8, 'Night Photography', 'Capturing in low light')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 8: Night Photography</h4>
+                            <p class="text-xs text-gray-400">Master low-light techniques</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day8Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(9, 'Macro Photography', 'Close-up details')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 9: Macro Photography</h4>
+                            <p class="text-xs text-gray-400">Capture tiny details up close</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day9Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(10, 'Motion Blur', 'Creative movement effects')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 10: Motion Blur</h4>
+                            <p class="text-xs text-gray-400">Show movement in your photos</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day10Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(11, 'Reflections', 'Mirror effects in photography')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 11: Reflections</h4>
+                            <p class="text-xs text-gray-400">Use water and glass creatively</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day11Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(12, 'Silhouettes', 'Dramatic backlighting')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 12: Silhouettes</h4>
+                            <p class="text-xs text-gray-400">Create dramatic backlit photos</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day12Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(13, 'Street Photography', 'Candid moments')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 13: Street Photography</h4>
+                            <p class="text-xs text-gray-400">Capture life as it happens</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day13Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card" onclick="openQuiz(14, 'Color Theory', 'Understanding color harmony')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-semibold">Day 14: Color Theory</h4>
+                            <p class="text-xs text-gray-400">Master color combinations</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="day-status text-gray-400" id="day14Status">●</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fixed Course Progress Box -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 fixed-progress" style="background-color: #272727; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="course-card" style="margin-bottom: 0;">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Course Progress
+                </h3>
+                <div class="text-sm text-gray-400">
+                    <span id="completedDays">0</span>/14 Days
+                </div>
+            </div>
+            
+            <div class="progress-bar mb-4">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-gradient-to-br from-blue-600/20 to-blue-700/20 border border-blue-500/30 rounded-xl p-4 text-center">
+                    <div class="text-xl font-bold text-blue-300" id="totalScore">0</div>
+                    <div class="text-xs text-blue-400">Challenges</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-600/20 to-green-700/20 border border-green-500/30 rounded-xl p-4 text-center">
+                    <div class="text-xl font-bold text-green-300" id="streak">0</div>
+                    <div class="text-xs text-green-400">Day Streak</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-600/20 to-purple-700/20 border border-purple-500/30 rounded-xl p-4 text-center">
+                    <div class="text-xl font-bold text-purple-300" id="avgScore">0</div>
+                    <div class="text-xs text-purple-400">Total Points</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="quiz-modal" id="quizModal">
+        <div class="quiz-content">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold" id="quizTitle">Day 1: Shadows</h3>
+                <button onclick="closeQuiz()" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <p class="text-sm text-gray-300 mb-6" id="quizDescription">Understanding how shadows work in photography</p>
+            
+            <div id="quizContent">
+                <!-- Quiz questions will be loaded here -->
+            </div>
+            
+            <div class="flex justify-between items-center mt-6">
+                <div class="text-sm text-gray-400">
+                    Question <span id="currentQuestion">1</span> of <span id="totalQuestions">3</span>
+                </div>
+                <div class="space-x-3">
+                    <button id="prevBtn" onclick="previousQuestion()" class="bg-gray-600/30 border border-gray-500/40 hover:bg-gray-600/40 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm" style="display: none;">
+                        Previous
+                    </button>
+                    <button id="nextBtn" onclick="nextQuestion()" class="bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/30 text-blue-400 font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm">
+                        Next
+                    </button>
+                    <button id="submitBtn" onclick="submitQuiz()" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm" style="display: none;">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Course data
+        const courseData = {
+            1: {
+                title: "Shadows",
+                description: "Understanding how shadows work in photography",
+                questions: [
+                    {
+                        question: "At which time of day are shadows the tallest?",
+                        options: ["Noon", "Early morning/Late evening", "Midnight", "Mid-afternoon"],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the golden hour?",
+                        options: ["12 PM to 1 PM", "The hour after sunrise and before sunset", "Any hour with good weather", "The busiest hour of the day"],
+                        correct: 1
+                    },
+                    {
+                        question: "What creates shadows in photography?",
+                        options: ["Camera settings", "Light being blocked by objects", "Lens filters", "Image editing"],
+                        correct: 1
+                    }
+                ]
+            },
+            2: {
+                title: "Golden Hour",
+                description: "Capturing the perfect light",
+                questions: [
+                    {
+                        question: "What makes golden hour light special?",
+                        options: ["It's the brightest light", "It's warm and soft", "It's the coolest light", "It creates harsh shadows"],
+                        correct: 1
+                    },
+                    {
+                        question: "When does golden hour typically occur?",
+                        options: ["Only at sunset", "Hour after sunrise and before sunset", "All day long", "Only in winter"],
+                        correct: 1
+                    },
+                    {
+                        question: "What color temperature is golden hour light?",
+                        options: ["Cool blue", "Warm orange/yellow", "Pure white", "Green tinted"],
+                        correct: 1
+                    }
+                ]
+            },
+            3: {
+                title: "Rule of Thirds",
+                description: "Composition fundamentals",
+                questions: [
+                    {
+                        question: "How do you apply the rule of thirds?",
+                        options: ["Divide image into 9 equal sections", "Use three different colors", "Take three photos", "Use three light sources"],
+                        correct: 0
+                    },
+                    {
+                        question: "Where should you place important subjects?",
+                        options: ["Dead center", "At intersection points of grid lines", "In corners only", "Randomly"],
+                        correct: 1
+                    },
+                    {
+                        question: "What does the rule of thirds help create?",
+                        options: ["Better exposure", "More balanced composition", "Sharper focus", "Brighter colors"],
+                        correct: 1
+                    }
+                ]
+            },
+            4: {
+                title: "Leading Lines",
+                description: "Guide the viewer's eye",
+                questions: [
+                    {
+                        question: "What are leading lines?",
+                        options: ["Lines that lead to the camera", "Visual elements that guide the eye through the photo", "Lines drawn on the camera screen", "Straight lines only"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which can be used as leading lines?",
+                        options: ["Roads and paths", "Rivers and shorelines", "Architectural elements", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "Where should leading lines ideally lead?",
+                        options: ["Out of the frame", "To the main subject", "To the sky", "To the bottom corner"],
+                        correct: 1
+                    }
+                ]
+            },
+            5: {
+                title: "Depth of Field",
+                description: "Focus and blur techniques",
+                questions: [
+                    {
+                        question: "What is depth of field?",
+                        options: ["How deep you can dig", "The area in focus in your photo", "Camera battery life", "Photo file size"],
+                        correct: 1
+                    },
+                    {
+                        question: "How do you create shallow depth of field on mobile?",
+                        options: ["Use portrait mode", "Get closer to subject", "Use maximum zoom", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "What effect does shallow depth of field create?",
+                        options: ["Everything in focus", "Blurred background", "Darker photos", "Wider angle view"],
+                        correct: 1
+                    }
+                ]
+            },
+            6: {
+                title: "Symmetry",
+                description: "Balance in composition",
+                questions: [
+                    {
+                        question: "What is symmetry in photography?",
+                        options: ["Using symmetric lenses", "Balance and mirror-like qualities", "Taking square photos", "Using two cameras"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which type of symmetry is most common?",
+                        options: ["Vertical symmetry", "Horizontal symmetry", "Diagonal symmetry", "Circular symmetry"],
+                        correct: 0
+                    },
+                    {
+                        question: "Where can you find natural symmetry?",
+                        options: ["Reflections in water", "Architecture", "Human faces", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            },
+            7: {
+                title: "Framing",
+                description: "Natural frames in photography",
+                questions: [
+                    {
+                        question: "What is natural framing?",
+                        options: ["Using expensive frames", "Using elements in scene to frame subject", "Only using windows", "Digital photo frames"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which can be used as natural frames?",
+                        options: ["Tree branches", "Doorways and windows", "Rock formations", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "What does framing help achieve?",
+                        options: ["Focus attention on subject", "Add depth to image", "Create more interesting composition", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            },
+            8: {
+                title: "Night Photography",
+                description: "Capturing in low light",
+                questions: [
+                    {
+                        question: "What's most important for night photography?",
+                        options: ["Bright flash", "Steady hands or tripod", "Expensive camera", "Daylight settings"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which phone feature helps in low light?",
+                        options: ["Night mode", "Portrait mode", "Panorama mode", "Video mode"],
+                        correct: 0
+                    },
+                    {
+                        question: "What should you avoid in night photography?",
+                        options: ["Using flash for distant subjects", "Using timer", "Finding stable surface", "Manual focus"],
+                        correct: 0
+                    }
+                ]
+            },
+            9: {
+                title: "Macro Photography",
+                description: "Close-up details",
+                questions: [
+                    {
+                        question: "What is macro photography?",
+                        options: ["Taking large photos", "Extreme close-up photography", "Wide landscape shots", "Group photos"],
+                        correct: 1
+                    },
+                    {
+                        question: "How do you achieve macro shots on mobile?",
+                        options: ["Get very close to subject", "Use macro lens attachment", "Use digital zoom carefully", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "What's challenging about macro photography?",
+                        options: ["Maintaining focus", "Camera shake", "Shallow depth of field", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            },
+            10: {
+                title: "Motion Blur",
+                description: "Creative movement effects",
+                questions: [
+                    {
+                        question: "How do you create motion blur?",
+                        options: ["Move camera during exposure", "Use faster shutter speed", "Keep everything perfectly still", "Use flash"],
+                        correct: 0
+                    },
+                    {
+                        question: "What is panning in photography?",
+                        options: ["Moving camera up and down", "Following moving subject with camera", "Zooming in and out", "Rotating the camera"],
+                        correct: 1
+                    },
+                    {
+                        question: "When is motion blur most effective?",
+                        options: ["In bright sunlight", "With stationary subjects", "With moving subjects", "In macro photography"],
+                        correct: 2
+                    }
+                ]
+            },
+            11: {
+                title: "Reflections",
+                description: "Mirror effects in photography",
+                questions: [
+                    {
+                        question: "Where can you find good reflections?",
+                        options: ["Water surfaces", "Glass buildings", "Mirrors and shiny surfaces", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "What makes a good reflection photo?",
+                        options: ["Perfect mirror image", "Interesting subject to reflect", "Good lighting", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "How can you enhance reflections?",
+                        options: ["Shoot at low angles", "Wait for calm water", "Clean the reflecting surface", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            },
+            12: {
+                title: "Silhouettes",
+                description: "Dramatic backlighting",
+                questions: [
+                    {
+                        question: "How do you create a silhouette?",
+                        options: ["Expose for the background light", "Use flash on subject", "Shoot in complete darkness", "Use maximum brightness"],
+                        correct: 0
+                    },
+                    {
+                        question: "When are silhouettes most effective?",
+                        options: ["Noon sunlight", "Sunrise or sunset", "Cloudy days", "Indoor lighting"],
+                        correct: 1
+                    },
+                    {
+                        question: "What makes a strong silhouette?",
+                        options: ["Recognizable shape", "Strong contrast", "Interesting background", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            },
+            13: {
+                title: "Street Photography",
+                description: "Candid moments",
+                questions: [
+                    {
+                        question: "What is street photography about?",
+                        options: ["Only photographing streets", "Capturing candid life moments", "Architecture only", "Traffic photography"],
+                        correct: 1
+                    },
+                    {
+                        question: "What's important in street photography?",
+                        options: ["Being discreet", "Capturing authentic moments", "Understanding light", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "Which technique helps in street photography?",
+                        options: ["Shooting from the hip", "Using continuous focus", "Being patient", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            },
+            14: {
+                title: "Color Theory",
+                description: "Understanding color harmony",
+                questions: [
+                    {
+                        question: "What are complementary colors?",
+                        options: ["Colors that look nice", "Colors opposite on color wheel", "Similar colors", "Black and white"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which creates visual harmony?",
+                        options: ["Analogous colors", "Monochromatic scheme", "Complementary colors", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "How does color affect mood?",
+                        options: ["Warm colors feel energetic", "Cool colors feel calm", "Colors have psychological impact", "All of the above"],
+                        correct: 3
+                    }
+                ]
+            }
+        };
+
+        // Quiz state
+        let currentDay = 1;
+        let currentQuestionIndex = 0;
+        let selectedAnswers = [];
+        let quizScore = 0;
+        let completedDays = JSON.parse(localStorage.getItem('completedDays') || '[]');
+        let totalScore = parseInt(localStorage.getItem('totalScore') || '0');
+
+        // Theme detection and synchronization
+        function detectTheme() {
+            const savedTheme = 'dark';
+            applyTheme(savedTheme);
+            
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue || 'dark');
+                }
+            });
+        }
+
+        function applyTheme(theme) {
+            const body = document.body;
+            const header = document.querySelector('header');
+            
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#f5f5f5';
+                }
+            } else {
+                body.classList.remove('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#272727';
+                }
+            }
+        }
+
+        // Day availability system
+        let courseStartDate = localStorage.getItem('courseStartDate');
+        if (!courseStartDate) {
+            courseStartDate = new Date().toISOString();
+            localStorage.setItem('courseStartDate', courseStartDate);
+        }
+
+        function isDayAvailable(day) {
+            const startDate = new Date(courseStartDate);
+            const currentDate = new Date();
+            const daysSinceStart = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+            return daysSinceStart >= (day - 1);
+        }
+
+        function getTimeUntilDay(day) {
+            const startDate = new Date(courseStartDate);
+            const targetDate = new Date(startDate);
+            targetDate.setDate(startDate.getDate() + (day - 1));
+            const currentDate = new Date();
+            const timeDiff = targetDate - currentDate;
+            
+            if (timeDiff <= 0) return null;
+            
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes}m`;
+            } else {
+                return `${minutes}m`;
+            }
+        }
+
+        function attemptQuiz(day, title, description) {
+            if (!isDayAvailable(day)) {
+                const timeLeft = getTimeUntilDay(day);
+                alert(`This challenge will be available in ${timeLeft}. Come back tomorrow!`);
+                return;
+            }
+            
+            if (completedDays.includes(day)) {
+                alert('You have already completed this challenge today!');
+                return;
+            }
+            
+            openQuiz(day, title, description);
+        }
+
+        function openEducationalLink(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        function openMintLink(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        function updateDayAvailability() {
+            for (let day = 1; day <= 14; day++) {
+                const dayCard = document.getElementById(`dayCard${day}`);
+                const dayTimer = document.getElementById(`day${day}Timer`);
+                const dayCountdown = document.getElementById(`day${day}Countdown`);
+                
+                if (!dayCard) continue;
+                
+                if (!isDayAvailable(day)) {
+                    dayCard.style.opacity = '0.5';
+                    dayCard.style.cursor = 'not-allowed';
+                    if (dayTimer && dayCountdown) {
+                        dayTimer.style.display = 'block';
+                        dayCountdown.textContent = getTimeUntilDay(day);
+                    }
+                } else {
+                    dayCard.style.opacity = '1';
+                    dayCard.style.cursor = 'pointer';
+                    if (dayTimer) {
+                        dayTimer.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        // Quiz functions
+        function openQuiz(day, title, description) {
+            currentDay = day;
+            currentQuestionIndex = 0;
+            selectedAnswers = [];
+            quizScore = 0;
+            
+            document.getElementById('quizTitle').textContent = `Day ${day}: ${title}`;
+            document.getElementById('quizDescription').textContent = description;
+            document.getElementById('quizModal').classList.add('active');
+            
+            loadQuestion();
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.remove('active');
+        }
+
+        function loadQuestion() {
+            const questionData = courseData[currentDay].questions[currentQuestionIndex];
+            const quizContent = document.getElementById('quizContent');
+            
+            quizContent.innerHTML = `
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold mb-4">${questionData.question}</h4>
+                    <div class="space-y-2">
+                        ${questionData.options.map((option, index) => `
+                            <div class="question-option" onclick="selectAnswer(${index})" data-index="${index}">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = courseData[currentDay].questions.length;
+            
+            // Update button visibility
+            document.getElementById('prevBtn').style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
+            document.getElementById('nextBtn').style.display = currentQuestionIndex < courseData[currentDay].questions.length - 1 ? 'inline-block' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestionIndex === courseData[currentDay].questions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        function selectAnswer(answerIndex) {
+            // Remove previous selections
+            document.querySelectorAll('.question-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            document.querySelector(`[data-index="${answerIndex}"]`).classList.add('selected');
+            selectedAnswers[currentQuestionIndex] = answerIndex;
+        }
+
+        function nextQuestion() {
+            if (selectedAnswers[currentQuestionIndex] === undefined) {
+                alert('Please select an answer before continuing.');
+                return;
+            }
+            
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function previousQuestion() {
+            currentQuestionIndex--;
+            loadQuestion();
+            
+            // Restore previous selection if exists
+            if (selectedAnswers[currentQuestionIndex] !== undefined) {
+                document.querySelector(`[data-index="${selectedAnswers[currentQuestionIndex]}"]`).classList.add('selected');
+            }
+        }
+
+        function submitQuiz() {
+            if (selectedAnswers[currentQuestionIndex] === undefined) {
+                alert('Please select an answer before submitting.');
+                return;
+            }
+            
+            // Calculate score
+            let correctAnswers = 0;
+            courseData[currentDay].questions.forEach((question, index) => {
+                if (selectedAnswers[index] === question.correct) {
+                    correctAnswers++;
+                }
+            });
+            
+            quizScore = Math.round((correctAnswers / courseData[currentDay].questions.length) * 100);
+            
+            // Show results
+            showQuizResults(correctAnswers);
+        }
+
+        function showQuizResults(correctAnswers) {
+            const totalQuestions = courseData[currentDay].questions.length;
+            const quizContent = document.getElementById('quizContent');
+            
+            quizContent.innerHTML = `
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div class="text-4xl font-bold ${quizScore >= 70 ? 'text-green-400' : 'text-red-400'} mb-2">
+                            ${quizScore}%
+                        </div>
+                        <p class="text-gray-300">
+                            You got ${correctAnswers} out of ${totalQuestions} questions correct!
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        ${quizScore >= 70 ? 
+                            '<p class="text-green-400">🎉 Congratulations! You passed this challenge!</p>' :
+                            '<p class="text-red-400">Keep practicing! You need 70% to pass.</p>'
+                        }
+                    </div>
+                    
+                    <button onclick="finishQuiz()" class="bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/30 text-blue-400 font-semibold py-2 px-6 rounded-lg transition-all duration-300">
+                        Continue
+                    </button>
+                </div>
+            `;
+            
+            // Hide navigation buttons
+            document.getElementById('prevBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('submitBtn').style.display = 'none';
+        }
+
+        function finishQuiz() {
+            if (quizScore >= 70 && !completedDays.includes(currentDay)) {
+                completedDays.push(currentDay);
+                totalScore += quizScore;
+                
+                // Save progress
+                localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                localStorage.setItem('totalScore', totalScore.toString());
+                
+                // Update UI
+                updateProgress();
+                markDayCompleted(currentDay);
+            }
+            
+            closeQuiz();
+        }
+
+        function markDayCompleted(day) {
+            const dayStatus = document.getElementById(`day${day}Status`);
+            const dayCard = dayStatus.closest('.day-card');
+            
+            dayStatus.textContent = '✓';
+            dayStatus.style.color = '#10b981';
+            dayCard.classList.add('completed-day');
+        }
+
+        function updateProgress() {
+            const totalDays = 14;
+            const completed = completedDays.length;
+            const progressPercentage = (completed / totalDays) * 100;
+            const totalChallenges = completed * 3; // Each day has 3 questions/challenges
+            
+            document.getElementById('completedDays').textContent = completed;
+            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
+            document.getElementById('totalScore').textContent = totalChallenges; // Number of challenges completed
+            document.getElementById('streak').textContent = calculateStreak(); // Day streak
+            document.getElementById('avgScore').textContent = totalScore; // Total points earned
+            
+            // Update week progress
+            const week1Completed = completedDays.filter(day => day <= 7).length;
+            const week2Completed = completedDays.filter(day => day > 7).length;
+            
+            document.getElementById('week1Progress').textContent = week1Completed;
+            document.getElementById('week2Progress').textContent = week2Completed;
+        }
+
+        function calculateStreak() {
+            if (completedDays.length === 0) return 0;
+            
+            const sortedDays = [...completedDays].sort((a, b) => a - b);
+            let streak = 1;
+            let maxStreak = 1;
+            
+            for (let i = 1; i < sortedDays.length; i++) {
+                if (sortedDays[i] === sortedDays[i-1] + 1) {
+                    streak++;
+                    maxStreak = Math.max(maxStreak, streak);
+                } else {
+                    streak = 1;
+                }
+            }
+            
+            return maxStreak;
+        }
+
+        // Week toggle functions
+        function toggleWeek(weekNumber) {
+            const content = document.getElementById(`week${weekNumber}Content`);
+            const arrow = document.getElementById(`week${weekNumber}Arrow`);
+            
+            if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                // Open the week
+                content.style.maxHeight = content.scrollHeight + 'px';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                // Close the week
+                content.style.maxHeight = '0px';
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Navigation functions
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Slogan animation
+        function animateSlogan() {
+            const sloganText = "Master mobile photography with daily challenges!";
+            const sloganElement = document.getElementById('slogan');
+            let index = 0;
+            
+            function typeNextLetter() {
+                if (index < sloganText.length) {
+                    sloganElement.textContent += sloganText[index];
+                    index++;
+                    setTimeout(typeNextLetter, 50);
+                }
+            }
+            
+            setTimeout(typeNextLetter, 800);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            detectTheme();
+            animateSlogan();
+            
+            // Load saved progress
+            completedDays.forEach(day => markDayCompleted(day));
+            updateProgress();
+            updateDayAvailability();
+            
+            // Update timers every minute
+            setInterval(updateDayAvailability, 60000);
+            
+            // Add entrance animations
+            const elements = document.querySelectorAll('header, main');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // Animate course cards
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 1000 + (index * 150));
+            });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('quizModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQuiz();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'983a5c38d40aef92',t:'MTc1ODYzMzg0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
