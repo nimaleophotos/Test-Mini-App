@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LENS App - Photography Platform</title>
+    <title>LENS App - Connect Wallet</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -49,8 +49,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         
+        .camera-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        
+        .camera-button svg {
+            color: black;
+        }
+        
+        .light-mode .camera-button {
+            background: black !important;
+        }
+        
+        .light-mode .camera-button svg {
+            color: white !important;
+        }
+
         .theme-toggle.light {
             background: #e5e5e5;
         }
@@ -135,6 +153,12 @@
             color: #1a1a1a !important;
         }
         
+        /* Ensure dark mode is default */
+        body {
+            background-color: #272727 !important;
+            color: white !important;
+        }
+        
         .light-mode .lens-outer,
         .light-mode .lens-inner {
             border-color: #1a1a1a !important;
@@ -175,44 +199,9 @@
         
         .light-mode .tab-active {
             background: #565656 !important;
-            color: #ffffff !important;
+            color: white !important;
         }
 
-        .nav-button svg {
-        transition: color 0.2s ease, opacity 0.2s ease;
-        color: #aeaeae;   /* default grey */
-        opacity: 0.7;     /* default dim */
-        }
-
-        .nav-button:hover svg {
-        color: #ffffff;   /* shine white on hover */
-        opacity: 1;       /* full brightness */
-        }
-
-        
-        /* Light mode tab-specific borders */
-        body.light-mode .tab-leaderboard.tab-active {
-            border-bottom: 1px solid #4a4a4a !important;
-        }
-
-        body.light-mode .tab-pod.tab-active {
-            border-bottom: 1px solid #4a4a4a !important;
-        }
-
-        body.light-mode .tab-tutorial.tab-active {
-            border-bottom: 1px solid #4a4a4a !important;
-        }
-
-        /* Tab borders for inactive tabs in light mode */
-        body.light-mode .tab-leaderboard {
-            border-left: 1px solid #999999 !important;
-        }
-
-        body.light-mode .tab-tutorial {
-            border-left: 1px solid #999999 !important;
-        }
-
-        /*------*/
         .light-mode .border-gray-600 {
             border-color: #4a4a4a !important;
         }
@@ -256,43 +245,15 @@
             border-color: #4a4a4a !important;
         }
         
-        .light-mode .your-rank-box {
-            background-color: rgba(59, 130, 246, 0.2) !important;
-            border: 2px solid rgba(59, 130, 246, 0.4) !important;
-        }
-        
         .tab-active {
             background: #565656 !important;
             color: white !important;
         }
-        
-        /* Tab-specific borders for dark mode */
-        body:not(.light-mode) .tab-leaderboard.tab-active {
-            /*border-right: 1px solid #656565 !important;*/
-            border-bottom: 1px solid #656565 !important;
-        }
-        
-        body:not(.light-mode) .tab-pod.tab-active {
-            /*border-left: 1px solid #656565 !important;
-            border-right: 1px solid #656565 !important;*/
-            border-bottom: 1px solid #656565 !important;
-        }
-        
-        body:not(.light-mode) .tab-tutorial.tab-active {
-            /*border-left: 1px solid #656565 !important;*/
-            border-bottom: 1px solid #656565 !important;
-        }
-        
-        /* Tab borders for inactive tabs in dark mode */
-        body:not(.light-mode) .tab-leaderboard {
-            border-right: 1px solid #656565 !important;
-        }
-        
-        body:not(.light-mode) .tab-tutorial {
+
+        body:not(.light-mode) .tab-about {
             border-left: 1px solid #656565 !important;
         }
         
-        /*------*/
         .nav-button {
             transition: all 0.3s ease;
         }
@@ -300,67 +261,171 @@
         .nav-button:hover {
             transform: translateY(-2px);
         }
-        
-        .camera-button {
-            width: 60px;
-            height: 60px;
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .light-mode .info-card {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-mode .info-card:hover {
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .light-mode .setting-item {
+            border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: #333;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #4CAF50;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            width: 20px;
+            height: 20px;
             background: white;
             border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+
+        .light-mode .toggle-switch {
+            background: #ccc !important;
+        }
+
+        .light-mode .toggle-switch.active {
+            background: #4CAF50 !important;
+        }
+
+        .wallet-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .wallet-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .light-mode .wallet-card {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-mode .wallet-card:hover {
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .camera-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-        }
-        
-        .camera-button svg {
-            color: black;
-        }
-        
-        .light-mode .camera-button {
-            background: black !important;
-        }
-        
-        .light-mode .camera-button svg {
-            color: white !important;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 16px;
         }
 
+        .badge-counter {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Custom scrollbar for badge section */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Smooth scrolling */
+        .overflow-x-auto {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col" style="background-color: #272727;">
     <!-- Header - Fixed -->
     <header class="fixed top-0 left-0 right-0 z-40" style="padding: 16px 16px 8px 16px; background-color: #272727;">
         <div class="flex items-center justify-between mb-2">
-            <!-- Left side - Logo and Title -->
+            <!-- Left side - Back button -->
+            <div class="flex items-center">
+                <button class="back-button p-2 rounded-full hover:bg-gray-700 transition-colors" onclick="goBack()" style="color: #aeaeae; background-color: rgba(75, 75, 75, 0.3); border: 1px solid rgba(101, 101, 101, 0.5);">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Right side - Title and LENS icon -->
             <div class="flex items-center space-x-1">
-                <div class="lens-icon">
+                <h1 class="text-xl font-bold">Your Profile</h1>
+                <div class="lens-icon" style="margin-left: 8px;">
                     <div class="lens-outer"></div>
                     <div class="lens-inner"></div>
                 </div>
-                <h1 class="text-xl font-bold" style="margin-left: 5px;">LENS APP</h1>
-            </div>
-            
-            <!-- Right side - Theme toggle and Connect Wallet -->
-            <div class="flex items-center space-x-2">
-                <!-- Theme Toggle -->
-                <button class="w-8 h-8 rounded-full transition-colors bg-[#333333] border border-[#656565] text-[#aeaeae] hover:bg-[#444444] hover:text-white active:scale-95 flex items-center justify-center"id="themeToggle" onclick="toggleTheme()">
-                <!-- Moon Icon -->
-                <svg class="w-5 h-5 hidden" id="moonIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
-                </svg>
-                <!-- Sun Icon -->
-                <svg class="w-5 h-5" id="sunIcon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
-                </svg>
-                </button>
-
-                <!-- Connect Wallet -->
-                <button class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-[#333333] border border-[#656565] text-[#aeaeae] hover:bg-[#444444] hover:text-white active:scale-95" onclick="navigateToWallet()">Connect</button>
             </div>
         </div>
         
@@ -370,1189 +435,582 @@
         </div>
     </header>
 
-    <!-- Main Body with Integrated Navigation -->
-    <main class="fixed left-0 right-0 px-4" style="top: 85px; bottom: 7px;">
-        <!-- Unified Container -->
-        <div class="rounded-3xl overflow-hidden h-full shadow-lg flex flex-col" style="background-color: #333333; border: 1px solid #656565;">
-            <!-- Tabs -->
-            <div class="flex flex-shrink-0" style="background-color: #333333; border-bottom: 1px solid #656565;">
-                <button class="tab-button tab-leaderboard py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('leaderboard', this)" style="flex: 0.7;">
-                    <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
-                        <rect x="3" y="12" width="4" height="9" rx="1"/>
-                        <rect x="10" y="8" width="4" height="13" rx="1"/>
-                        <rect x="17" y="4" width="4" height="17" rx="1"/>
-                    </svg>
-                </button>
-                <button class="tab-button tab-pod py-2 md:py-3 px-6 text-center font-bold transition-colors tab-active" onclick="switchTab('pod', this)" style="flex: 2.6; letter-spacing: 6px; border-left: 1px solid rgba(101, 101, 101, 0.3); border-right: 1px solid rgba(101, 101, 101, 0.3);">
-                    POD
-                </button>
-                <button class="tab-button tab-tutorial py-2 md:py-3 px-6 text-center font-medium transition-colors text-gray-300 hover:text-white" onclick="switchTab('tutorial', this)" style="flex: 0.7;">
-                    <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
-                        <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9l-11-6zM18.82 9L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <!-- Content Area -->
-            <div class="p-6 overflow-y-auto flex-1">
-                <!-- Leaderboard Content -->
-                <div id="leaderboard-content" class="tab-content hidden h-full flex flex-col">
-                    <!-- Fixed LENS App Leaderboard Title -->
-                    <div class="flex-shrink-0">
-                        <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">LENS APP LEADERBOARD</h2>
+    <!-- Main Body -->
+    <main class="fixed left-0 right-0 px-4 overflow-y-auto" style="top: 89px; bottom: 7px;">
+         <style>
+            @media (max-width: 768px) {
+                main {
+                    top: 91px !important;
+                }
+            }
+            @media (max-width: 480px) {
+                main {
+                    top: 93px !important;
+                }
+            }
+        </style>
+                
+                <!-- User Profile Section -->
+                <div class="wallet-card">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698c9e-c89d-4f0d-2fc4-c03c8ff7df00/original" alt="Profile" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h2 class="text-lg font-bold">photographer.eth</h2>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Your Stats Section -->
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Your Stats</h4>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-gray-300">156</div>
+                            <div class="text-xs text-gray-400">Shared Photos</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-gray-300">12</div>
+                            <div class="text-xs text-gray-400">Badges Earned</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-red-600/20 to-red-700/20 border border-red-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-red-300">2,847</div>
+                            <div class="text-xs text-red-400">Points</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-gray-300">2.4K</div>
+                            <div class="text-xs text-gray-400">Total Interactions</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-gray-300">8.7</div>
+                            <div class="text-xs text-gray-400">Shutter Score (SS)</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-gray-300">#247</div>
+                            <div class="text-xs text-gray-400">LENS App Rank</div>
+                        </div>
+                    </div>
+
+                    <!-- Divider Line -->
+                    <div class="w-full h-px bg-gradient-to-r from-transparent via-gray-600/30 to-transparent mt-6 mb-4"></div>
+
+                    <!-- Your Badges Section -->
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Your Badges</h4>
+                    <div class="overflow-x-auto scrollbar-hide">
+                        <div class="flex space-x-3 pb-2" style="width: max-content;">
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="w-12 h-12 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Section -->
+                <div class="wallet-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                            </svg>
+                            Wallet Balances
+                        </h3>
+                        
+                        <!-- Wallet Address -->
+                        <div class="flex items-center">
+                            <p class="text-gray-400 text-sm font-mono mr-2" id="walletAddress">0x742d...8c4A</p>
+                            <button onclick="copyWalletAddress()" class="text-gray-400 hover:text-white transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     
-                    <!-- Scrollable Top 50 Ranks -->
-                    <div class="flex-1 overflow-y-auto space-y-2 pr-2">
-                            <!-- Top 3 with special colors -->
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(255, 215, 0, 0.1);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center font-bold text-black text-xs">1</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Alex Chen</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-yellow-400 text-xs">2,450 pts</p>
+                    <!-- Asset Boxes -->
+                    <div class="grid grid-cols-3 gap-3 mb-6">
+                        <!-- ETH Balance Box -->
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center items-center">
+                            <div class="w-6 h-6 mb-1">
+                                <svg class="w-full h-full" viewBox="0 0 32 32" fill="none">
+                                    <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+                                    <path d="M16.498 4v8.87l7.497 3.35L16.498 4z" fill="#fff" fill-opacity="0.602"/>
+                                    <path d="M16.498 4L9 16.22l7.498-3.35V4z" fill="#fff"/>
+                                    <path d="M16.498 21.968v6.027L24 17.616l-7.502 4.352z" fill="#fff" fill-opacity="0.602"/>
+                                    <path d="M16.498 27.995v-6.028L9 17.616l7.498 10.38z" fill="#fff"/>
+                                    <path d="M16.498 20.573l7.497-4.353-7.497-3.348v7.701z" fill="#fff" fill-opacity="0.2"/>
+                                    <path d="M9 16.22l7.498 4.353v-7.701L9 16.22z" fill="#fff" fill-opacity="0.602"/>
+                                </svg>
+                            </div>
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                        </div>
+
+                        <!-- USDC Balance Box -->
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center items-center">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center mb-1" style="background-color: #4974c5; position: relative;">
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
+                                    <path d="M 12 6 A 7 10 0 0 0 12 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                    <path d="M 20 6 A 7 10 0 0 1 20 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                </svg>
+                                <span class="text-white font-normal text-sm relative z-10" style="font-weight: 400;">$</span>
+                            </div>
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                        </div>
+
+                        <!-- LENS Balance Box -->
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center items-center">
+                            <div class="w-6 h-6 rounded-full bg-black flex items-center justify-center mb-1">
+                                <div class="lens-icon" style="width: 12px; height: 12px; position: relative;">
+                                    <div style="width: 12px; height: 12px; border: 1px solid white; border-radius: 50%; position: absolute;"></div>
+                                    <div style="width: 6px; height: 6px; border: 1px solid white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
                                 </div>
                             </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(192, 192, 192, 0.1);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center font-bold text-black text-xs">2</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Maria Santos</p>
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Token Swap Interface -->
+                    <div class="bg-gradient-to-r from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-lg p-4 mt-4">
+                        <h4 class="text-sm font-semibold mb-3 flex items-center text-gray-300">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                            </svg>
+                            Token Swap
+                        </h4>
+                        
+                        <div class="grid grid-cols-2 gap-3 mb-3">
+                            <div class="relative">
+                                <label class="text-xs text-gray-400 mb-1 block">From</label>
+                                <div class="custom-dropdown" onclick="toggleDropdown('fromDropdown')">
+                                    <div class="dropdown-selected bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white cursor-pointer flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="token-icon mr-2" id="fromIcon">
+                                                <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
+                                                    <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+                                                    <path d="M16.498 4v8.87l7.497 3.35L16.498 4z" fill="#fff" fill-opacity="0.602"/>
+                                                    <path d="M16.498 4L9 16.22l7.498-3.35V4z" fill="#fff"/>
+                                                    <path d="M16.498 21.968v6.027L24 17.616l-7.502 4.352z" fill="#fff" fill-opacity="0.602"/>
+                                                    <path d="M16.498 27.995v-6.028L9 17.616l7.498 10.38z" fill="#fff"/>
+                                                    <path d="M16.498 20.573l7.497-4.353-7.497-3.348v7.701z" fill="#fff" fill-opacity="0.2"/>
+                                                    <path d="M9 16.22l7.498 4.353v-7.701L9 16.22z" fill="#fff" fill-opacity="0.602"/>
+                                                </svg>
+                                            </div>
+                                            <span id="fromText">ETH</span>
+                                        </div>
+                                        <svg class="w-3 h-3 text-gray-400 dropdown-arrow transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
                                     </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">2,180 pts</p>
+                                    <div class="dropdown-options absolute top-full left-0 right-0 bg-gray-800/95 border border-gray-600/50 rounded-lg mt-1 z-10 hidden backdrop-blur-sm">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('from', 'ETH')">
+                                            <div class="token-icon mr-2">
+                                                <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
+                                                    <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+                                                    <path d="M16.498 4v8.87l7.497 3.35L16.498 4z" fill="#fff" fill-opacity="0.602"/>
+                                                    <path d="M16.498 4L9 16.22l7.498-3.35V4z" fill="#fff"/>
+                                                    <path d="M16.498 21.968v6.027L24 17.616l-7.502 4.352z" fill="#fff" fill-opacity="0.602"/>
+                                                    <path d="M16.498 27.995v-6.028L9 17.616l7.498 10.38z" fill="#fff"/>
+                                                    <path d="M16.498 20.573l7.497-4.353-7.497-3.348v7.701z" fill="#fff" fill-opacity="0.2"/>
+                                                    <path d="M9 16.22l7.498 4.353v-7.701L9 16.22z" fill="#fff" fill-opacity="0.602"/>
+                                                </svg>
+                                            </div>
+                                            ETH
+                                        </div>
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('from', 'USDC')">
+                                            <div class="token-icon mr-2">
+                                                <div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
+                                                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
+                                                        <path d="M 12 6 A 7 10 0 0 0 12 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                                        <path d="M 20 6 A 7 10 0 0 1 20 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                                    </svg>
+                                                    <span class="text-white font-normal text-xs relative z-10" style="font-weight: 400;">$</span>
+                                                </div>
+                                            </div>
+                                            USDC
+                                        </div>
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('from', 'LENS')">
+                                            <div class="token-icon mr-2">
+                                                <div class="w-4 h-4 rounded-full bg-black flex items-center justify-center">
+                                                    <div class="lens-icon" style="width: 8px; height: 8px;">
+                                                        <div style="width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; position: absolute;"></div>
+                                                        <div style="width: 4px; height: 4px; border: 1px solid white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            LENS
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(205, 127, 50, 0.1);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center font-bold text-white text-xs">3</div>
-                                    <div>
-                                        <p class="font-medium text-xs">David Kim</p>
+                            <div class="relative">
+                                <label class="text-xs text-gray-400 mb-1 block">To</label>
+                                <div class="custom-dropdown" onclick="toggleDropdown('toDropdown')">
+                                    <div class="dropdown-selected bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white cursor-pointer flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="token-icon mr-2" id="toIcon">
+                                                <div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
+                                                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
+                                                        <path d="M 12 6 A 7 10 0 0 0 12 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                                        <path d="M 20 6 A 7 10 0 0 1 20 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                                    </svg>
+                                                    <span class="text-white font-normal text-xs relative z-10" style="font-weight: 400;">$</span>
+                                                </div>
+                                            </div>
+                                            <span id="toText">USDC</span>
+                                        </div>
+                                        <svg class="w-3 h-3 text-gray-400 dropdown-arrow transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
                                     </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-orange-400 text-xs">1,920 pts</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Ranks 4-50 with brighter background -->
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">4</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Emma Wilson</p>
+                                    <div class="dropdown-options absolute top-full left-0 right-0 bg-gray-800/95 border border-gray-600/50 rounded-lg mt-1 z-10 hidden backdrop-blur-sm">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('to', 'ETH')">
+                                            <div class="token-icon mr-2">
+                                                <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
+                                                    <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+                                                    <path d="M16.498 4v8.87l7.497 3.35L16.498 4z" fill="#fff" fill-opacity="0.602"/>
+                                                    <path d="M16.498 4L9 16.22l7.498-3.35V4z" fill="#fff"/>
+                                                    <path d="M16.498 21.968v6.027L24 17.616l-7.502 4.352z" fill="#fff" fill-opacity="0.602"/>
+                                                    <path d="M16.498 27.995v-6.028L9 17.616l7.498 10.38z" fill="#fff"/>
+                                                    <path d="M16.498 20.573l7.497-4.353-7.497-3.348v7.701z" fill="#fff" fill-opacity="0.2"/>
+                                                    <path d="M9 16.22l7.498 4.353v-7.701L9 16.22z" fill="#fff" fill-opacity="0.602"/>
+                                                </svg>
+                                            </div>
+                                            ETH
+                                        </div>
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('to', 'USDC')">
+                                            <div class="token-icon mr-2">
+                                                <div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
+                                                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
+                                                        <path d="M 12 6 A 7 10 0 0 0 12 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                                        <path d="M 20 6 A 7 10 0 0 1 20 26" stroke="white" stroke-width="1.5" fill="none"/>
+                                                    </svg>
+                                                    <span class="text-white font-normal text-xs relative z-10" style="font-weight: 400;">$</span>
+                                                </div>
+                                            </div>
+                                            USDC
+                                        </div>
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('to', 'LENS')">
+                                            <div class="token-icon mr-2">
+                                                <div class="w-4 h-4 rounded-full bg-black flex items-center justify-center">
+                                                    <div class="lens-icon" style="width: 8px; height: 8px;">
+                                                        <div style="width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; position: absolute;"></div>
+                                                        <div style="width: 4px; height: 4px; border: 1px solid white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            LENS
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,750 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">5</div>
-                                    <div>
-                                        <p class="font-medium text-xs">James Rodriguez</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,680 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">6</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Sophie Anderson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,590 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">7</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Michael Chang</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,520 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">8</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Lisa Thompson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,450 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">9</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ryan Parker</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,380 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">10</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Nina Patel</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,320 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">11</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Carlos Martinez</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,280 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">12</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Zoe Williams</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,240 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">13</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ahmed Hassan</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,200 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">14</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Isabella Garcia</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,160 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">15</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Tom Johnson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,120 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">16</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Maya Singh</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,080 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">17</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Lucas Brown</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,040 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">18</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Aria Nakamura</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">1,000 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">19</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Oliver Davis</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">960 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">20</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Grace Lee</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">920 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">21</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Kevin Zhang</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">880 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">22</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Rachel Green</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">840 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">23</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Daniel Foster</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">800 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">24</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Samantha Cruz</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">760 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">25</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Marcus Johnson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">720 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">26</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Lily Wang</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">680 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">27</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Tyler Brooks</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">640 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">28</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Chloe Miller</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">600 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">29</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Jason Taylor</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">560 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">30</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Megan Roberts</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">520 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">31</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Brandon Lee</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">480 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">32</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Victoria Stone</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">440 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">33</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Nathan Cooper</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">400 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">34</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Hannah Price</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">360 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">35</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Eric Mitchell</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">320 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">36</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Stephanie Ward</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">280 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">37</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Jordan Bell</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">240 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">38</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ashley Turner</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">200 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">39</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Connor Hayes</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">160 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">40</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Paige Collins</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">120 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">41</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Jake Morrison</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">100 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">42</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Sophia Reed</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">80 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">43</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ethan Clark</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">60 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">44</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Ava Martinez</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">50 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">45</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Noah Phillips</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">40 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">46</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Mia Thompson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">30 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">47</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Liam Anderson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">25 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">48</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Emma Wilson</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">20 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">49</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Logan Davis</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">15 pts</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-2 rounded-md" style="background-color: rgba(75, 75, 75, 0.5);">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center font-bold text-white text-xs">50</div>
-                                    <div>
-                                        <p class="font-medium text-xs">Isabella Garcia</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-gray-300 text-xs">10 pts</p>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="text-xs text-gray-400 mb-1 block">Amount</label>
+                            <input type="number" id="amount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-sm text-white">
+                        </div>
+
+                        <button onclick="swapTokens()" class="w-full bg-gray-600/30 border border-gray-500/40 hover:bg-gray-600/40 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm">
+                            Swap Tokens
+                        </button>
+
+                        <p id="result" class="mt-2 text-xs text-center font-medium text-gray-300"></p>
+                    </div>
+                </div>
+
+                <!-- Reward Pool Section -->
+                <div class="wallet-card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        </svg>
+                        Reward Pool
+                    </h3>
                     
-                    <!-- Fixed Your Rank Section at bottom -->
-                    <div class="flex-shrink-0 mt-3 pt-3 border-t border-gray-600">
-                        <h3 class="text-sm font-bold mb-2 text-center" style="letter-spacing: 1px;">YOUR RANK</h3>
-                        <div class="flex items-center justify-between p-2 rounded-md your-rank-box" style="background-color: rgba(59, 130, 246, 0.1);">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white text-xs">51</div>
-                                <div>
-                                    <p class="font-medium text-xs">You</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-bold text-blue-400 text-xs">890 pts</p>
-                            </div>
+                    <!-- Pool Stats -->
+                    <div class="grid grid-cols-3 gap-3 mb-4">
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">LENS Staked</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">LENS to Unstake</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">Claimable Rewards</div>
+                        </div>
+                    </div>
+
+                    <!-- APY and Total Rewards Display -->
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="bg-gradient-to-r from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-lg p-3 text-center">
+                            <div class="text-sm text-gray-400">Current APY</div>
+                            <div class="text-xl font-bold text-green-400">12.5%</div>
+                        </div>
+                        <div class="bg-gradient-to-r from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-lg p-3 text-center">
+                            <div class="text-sm text-gray-400">Total Rewards Claimed</div>
+                            <div class="text-xl font-bold text-blue-400">0 LENS</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="flex flex-col space-y-2">
+                            <input type="number" id="stakeAmount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white">
+                            <button onclick="stakeTokens()" class="bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/30 text-blue-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm">
+                                Stake
+                            </button>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <input type="number" id="unstakeAmount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white">
+                            <button onclick="unstakeTokens()" class="bg-red-500/20 border border-red-400/30 hover:bg-red-500/30 text-red-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm">
+                                Unstake
+                            </button>
+                        </div>
+                        <div class="flex flex-col justify-end">
+                            <button onclick="claimRewards()" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm">
+                                Claim All
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pool Info -->
+                    <div class="mt-4 p-3 bg-gray-800/30 rounded-lg border border-gray-600/30">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Lock Period:</span>
+                            <span class="text-white">30 days</span>
+                        </div>
+                        <div class="flex justify-between text-sm mt-1">
+                            <span class="text-gray-400">Next Reward:</span>
+                            <span class="text-white">23h 45m</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- POD Content -->
-                <div id="pod-content" class="tab-content">
-                    <div class="rounded-md p-3 mb-6" style="background-color: rgba(75, 75, 75, 0.5);">
-                        <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">PICTURE OF THE DAY</h2>
-                        <div class="bg-gray-600 rounded-lg mb-2 flex items-center justify-center overflow-hidden" style="max-height: 250px;">
-                            <img src="https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/1f0b26fb-17b4-41a0-06c5-e48561bb2300/rectcontain3" 
-                                 alt="Golden Hour Cityscape" 
-                                 class="w-full h-full object-contain"
-                                 onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
-                        </div>
-                        <h3 class="text-sm font-bold mb-1">"Golden Hour Cityscape"</h3>
-                        <p class="text-gray-300 mb-2 text-xs">by nimaleophotos.eth</p>
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-gray-400 text-xs">❤️ 1,247</span>
-                                <span class="text-gray-400 text-xs">🔄 89</span>
-                                <span class="text-gray-400 text-xs">💬 156</span>
-                            </div>
-                            <button class="bg-gray-600 hover:bg-gray-500 px-2 py-1 rounded text-xs font-medium transition-colors text-gray-200" onclick="window.open('https://farcaster.xyz/nimaleophotos.eth/0x38cf1df4', '_blank')">
-                                Support
-                            </button>
-                        </div>
-                        <div class="mt-2 pt-2 border-t border-gray-600 text-xs">
-                            <span class="text-xs" style="margin-right: 1px;">💡</span><span class="text-gray-300 font-medium text-xs">How it works:</span>
-                            <span class="text-gray-300 text-xs"> Support POD artist with follow and comments and earn extra points!</span>
-                        </div>
-                    </div>
-
-                    <div class="rounded-md p-4 mb-6" style="background-color: rgba(75, 75, 75, 0.5);">
-                        <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">SPOTLIGHT SPOTS</h2>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(1)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(2)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(3)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(4)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(5)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(6)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(7)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(8)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                            
-                            <button class="rounded-md overflow-hidden hover:opacity-80 transition-opacity" style="background-color: rgba(75, 75, 75, 0.5);" onclick="openSpotlightImage(9)">
-                                <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                                    <span class="text-gray-300 text-sm font-medium">Available</span>
-                                </div>
-                            </button>
-                        </div>
-                        
-                        <div class="mt-3 pt-2 border-t border-gray-600 text-xs">
-                            <span class="text-xs" style="margin-right: 1px;">💡</span><span class="text-gray-300 font-medium text-xs">How it works:</span>
-                            <span class="text-gray-300 text-xs"> Buy a spot for $0.5 and get featured for 4 hours! Earn points and have chance to be POD and win $20!</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tutorial Content -->
-                <div id="tutorial-content" class="tab-content hidden">
-                    <h2 class="text-sm font-bold mb-3 text-center" style="letter-spacing: 1px;">PHOTOGRAPHY TUTORIALS</h2>
-                    <div class="space-y-3">
-                        <div class="rounded-md p-3 flex items-center justify-between" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex items-center flex-1">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background-color: rgba(59, 130, 246, 0.2);">
-                                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-[10px] font-bold">Mobile Photography Course</h3>
-                                </div>
-                            </div>
-                            <button class="px-3 py-1 rounded text-xs font-medium transition-colors text-blue-400 hover:text-blue-300 ml-3 flex-shrink-0" onclick="navigateToMobileCourse()" style="background-color: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.3);">
-                                Start Course
-                            </button>
-                        </div>
-                        
-                        <div class="rounded-md p-3 flex items-center justify-between" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex items-center flex-1">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background-color: rgba(34, 197, 94, 0.2);">
-                                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-[10px] font-bold">Intermediate Course</h3>
-                                </div>
-                            </div>
-                            <button class="px-3 py-1 rounded text-xs font-medium transition-colors text-green-400 hover:text-green-300 ml-3 flex-shrink-0" style="background-color: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.3);">
-                                Start Course
-                            </button>
-                        </div>
-                        
-                        <div class="rounded-md p-3 flex items-center justify-between" style="background-color: rgba(75, 75, 75, 0.5);">
-                            <div class="flex items-center flex-1">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background-color: rgba(168, 85, 247, 0.2);">
-                                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-[10px] font-bold">Extra Courses</h3>
-                                </div>
-                            </div>
-                            <button class="px-3 py-1 rounded text-xs font-medium transition-colors text-purple-400 hover:text-purple-300 ml-3 flex-shrink-0" style="background-color: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.3);">
-                                Explore Extra Courses
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Integrated Navigation Bar -->
-            <div class="flex-shrink-0" style="padding: 3px 4px; md:padding: 6px 4px; background-color: #333333; border-top: 1px solid #656565;">
-                <div class="px-4 py-2 md:px-32 md:py-2" style="border-radius: 30px; background-color: #333333; border: 1px solid #656565;">
-                    <div class="flex items-center justify-around w-full">
-                        <!-- Rewards -->
-                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToRewards()" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
-                            </svg>
-                        </button>
-
-                        <!-- Contest -->
-                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToContest()" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"/>
-                            </svg>
-                        </button>
-
-                        <!-- Camera (Center) -->
-                        <button class="camera-button flex-shrink-0" onclick="navigateToCamera()">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </button>
-
-                        <!-- Gallery -->
-                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToGallery()" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                            </svg>
-                        </button>
-
-                        <!-- Info -->
-                        <button class="nav-button hover:text-white flex-shrink-0" onclick="navigateToInfo()" style="color: #aeaeae;">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" opacity="0.7">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <script>
-        function toggleTheme() {
-            const toggle = document.getElementById('themeToggle');
-            const moonIcon = document.getElementById('moonIcon');
-            const sunIcon = document.getElementById('sunIcon');
+        // Theme detection and synchronization with main page
+        function detectTheme() {
+            // Default to dark theme
+            const savedTheme = 'dark';
+            applyTheme(savedTheme);
+            
+            // Listen for theme changes from other pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue || 'dark');
+                }
+            });
+        }
+
+        function applyTheme(theme) {
             const body = document.body;
-            
-            toggle.classList.toggle('light');
-            moonIcon.classList.toggle('hidden');
-            sunIcon.classList.toggle('hidden');
-            body.classList.toggle('light-mode');
-            
-            // Update header background
             const header = document.querySelector('header');
-            if (body.classList.contains('light-mode')) {
-                header.style.backgroundColor = '#f5f5f5';
+            
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#f5f5f5';
+                }
             } else {
-                header.style.backgroundColor = '#272727';
+                body.classList.remove('light-mode');
+                if (header) {
+                    header.style.backgroundColor = '#272727';
+                }
             }
         }
 
-        function switchTab(tabName, element) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.add('hidden'));
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+        }
+
+        function copyWalletAddress() {
+            const fullAddress = "0x742d35Cc6C4C0532C58d4DCE990E2dCdD442c52C8c4A";
+            navigator.clipboard.writeText(fullAddress).then(() => {
+                // Show feedback
+                const button = event.target.closest('button');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 1000);
+            });
+        }
+
+
+
+        // Dropdown functionality
+        let currentFromToken = 'ETH';
+        let currentToToken = 'USDC';
+
+        function toggleDropdown(dropdownId) {
+            const dropdown = event.currentTarget.querySelector('.dropdown-options');
+            const arrow = event.currentTarget.querySelector('.dropdown-arrow');
             
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab-button');
-            tabs.forEach(tab => {
-                tab.classList.remove('tab-active');
-                tab.classList.add('text-gray-300', 'hover:text-white');
+            // Close other dropdowns
+            document.querySelectorAll('.dropdown-options').forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.add('hidden');
+                    d.parentElement.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+                }
             });
             
-            // Show selected tab content
-            document.getElementById(tabName + '-content').classList.remove('hidden');
-            
-            // Add active class to selected tab
-            element.classList.add('tab-active');
-            element.classList.remove('text-gray-300', 'hover:text-white');
+            // Toggle current dropdown
+            dropdown.classList.toggle('hidden');
+            arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
         }
+
+        function selectToken(type, token) {
+            const tokenIcons = {
+                'ETH': `<svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+                    <path d="M16.498 4v8.87l7.497 3.35L16.498 4z" fill="#fff" fill-opacity="0.602"/>
+                    <path d="M16.498 4L9 16.22l7.498-3.35V4z" fill="#fff"/>
+                    <path d="M16.498 21.968v6.027L24 17.616l-7.502 4.352z" fill="#fff" fill-opacity="0.602"/>
+                    <path d="M16.498 27.995v-6.028L9 17.616l7.498 10.38z" fill="#fff"/>
+                    <path d="M16.498 20.573l7.497-4.353-7.497-3.348v7.701z" fill="#fff" fill-opacity="0.2"/>
+                    <path d="M9 16.22l7.498 4.353v-7.701L9 16.22z" fill="#fff" fill-opacity="0.602"/>
+                </svg>`,
+                'USDC': `<div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
+                        <path d="M 12 6 A 7 10 0 0 0 12 26" stroke="white" stroke-width="1.5" fill="none"/>
+                        <path d="M 20 6 A 7 10 0 0 1 20 26" stroke="white" stroke-width="1.5" fill="none"/>
+                    </svg>
+                    <span class="text-white font-normal text-xs relative z-10" style="font-weight: 400;">$</span>
+                </div>`,
+                'LENS': `<div class="w-4 h-4 rounded-full bg-black flex items-center justify-center">
+                    <div class="lens-icon" style="width: 8px; height: 8px;">
+                        <div style="width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; position: absolute;"></div>
+                        <div style="width: 4px; height: 4px; border: 1px solid white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                    </div>
+                </div>`
+            };
+
+            if (type === 'from') {
+                currentFromToken = token;
+                document.getElementById('fromText').textContent = token;
+                document.getElementById('fromIcon').innerHTML = tokenIcons[token];
+            } else {
+                currentToToken = token;
+                document.getElementById('toText').textContent = token;
+                document.getElementById('toIcon').innerHTML = tokenIcons[token];
+            }
+
+            // Close dropdown
+            event.target.closest('.custom-dropdown').querySelector('.dropdown-options').classList.add('hidden');
+            event.target.closest('.custom-dropdown').querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+        }
+
+        function swapTokens() {
+            const from = currentFromToken;
+            const to = currentToToken;
+            const amount = document.getElementById('amount').value;
+
+            if(from === to) {
+                document.getElementById('result').innerText = "Select two different tokens!";
+                return;
+            }
+            
+            if(amount <= 0) {
+                document.getElementById('result').innerText = "Enter a valid amount!";
+                return;
+            }
+
+            // Simulate a swap (In reality, you would call a blockchain API here)
+            document.getElementById('result').innerText = 
+                `Swapped ${amount} ${from} to ${amount} ${to} (simulation)`;
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.custom-dropdown')) {
+                document.querySelectorAll('.dropdown-options').forEach(dropdown => {
+                    dropdown.classList.add('hidden');
+                    dropdown.parentElement.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+                });
+            }
+        });
 
         // Navigation functions
-        function navigateToRewards() {
-            window.location.href = 'rewards.html';
+        function goBack() {
+            // This will navigate back to your main page
+            window.location.href = 'index.html'; // or whatever you name your main page
         }
 
-        function navigateToContest() {
-            window.location.href = 'contest.html';
-        }
-
-        function navigateToCamera() {
-            window.location.href = 'camera.html';
-        }
-
-        function navigateToGallery() {
-            window.location.href = 'gallery.html';
-        }
-
-        function navigateToInfo() {
-            window.location.href = 'info.html';
-        }
-        function navigateToWallet() {
-            window.location.href = 'wallet.html';
-        }
-
-                function navigateToMobileCourse() {
-            window.location.href = 'MobileCourse.html';
-        }
-
-        // Slogan animation system
-        const slogans = [
-            "See the world through the $LENS of creativity.",
-            "Every story begins with a $LENS.",
-            "Light and shadow find balance through a $LENS.",
-            "The beauty of photography lives in the $LENS.",
-            "Through a $LENS, moments become timeless.",
-            "Perspective changes with every $LENS.",
-            "A $LENS captures what the eye feels.",
-            "The art of photography starts with a $LENS.",
-            "Behind every photograph lies a $LENS.",
-            "Through a $LENS, the ordinary becomes extraordinary."
-        ];
-        
-        let currentSloganIndex = 0;
-        let currentCharIndex = 0;
-        let isTyping = true;
-        
-        function typeSlogan() {
+        // Slogan animation function
+        function animateSlogan() {
+            const sloganText = "Check your assets, points, and achievements!";
             const sloganElement = document.getElementById('slogan');
-            const currentSlogan = slogans[currentSloganIndex];
+            let index = 0;
             
-            if (isTyping) {
-                if (currentCharIndex < currentSlogan.length) {
-                    sloganElement.textContent = currentSlogan.substring(0, currentCharIndex + 1);
-                    currentCharIndex++;
-                    setTimeout(typeSlogan, 50); // 50ms per character
-                } else {
-                    // Finished typing, wait 10 seconds then start next slogan
-                    setTimeout(() => {
-                        currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
-                        currentCharIndex = 0;
-                        sloganElement.textContent = '';
-                        typeSlogan();
-                    }, 10000); // 10 second pause
-                }
-            }
-        }
-
-        // Spotlight spots system
-        let spotlightSpots = {
-            1: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            2: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            3: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            4: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            5: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            6: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            7: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            8: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null },
-            9: { occupied: false, castUrl: '', imageUrl: '', timeRemaining: 0, purchaseTime: null }
-        };
-
-        function openSpotlightImage(spotNumber) {
-            const spot = spotlightSpots[spotNumber];
-            
-            if (spot.occupied) {
-                // If spot is occupied, show cast details
-                showCastDetails(spotNumber);
-            } else {
-                // If spot is available, show purchase popup
-                showPurchasePopup(spotNumber);
-            }
-        }
-
-        function showPurchasePopup(spotNumber) {
-            // Create popup overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            overlay.id = 'purchase-popup';
-            
-            // Create popup content
-            overlay.innerHTML = `
-                <div class="bg-gray-800 rounded-lg p-8 max-w-lg mx-4 border-2 border-gray-600">
-                    <h3 class="text-xl font-bold mb-6 text-center">Spotlight Spot ${spotNumber}</h3>
-                    <p class="text-gray-300 mb-6 text-center">Add your cast to get featured for 4 hours</p>
-                    
-                    <div class="mb-6">
-                        <label class="block font-medium mb-3">Cast URL:</label>
-                        <input type="text" id="cast-url-input" placeholder="https://warpcast.com/username/0x..." 
-                               class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-blue-500">
-                    </div>
-                    
-                    <div class="flex space-x-3">
-                        <button onclick="purchaseSpot(${spotNumber})" 
-                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            Purchase ($0.5)
-                        </button>
-                        <button onclick="closePurchasePopup()" 
-                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(overlay);
-        }
-
-        function closePurchasePopup() {
-            const popup = document.getElementById('purchase-popup');
-            if (popup) {
-                popup.remove();
-            }
-        }
-
-        function purchaseSpot(spotNumber) {
-            const castUrl = document.getElementById('cast-url-input').value.trim();
-            
-            if (!castUrl) {
-                alert('Please enter a cast URL');
-                return;
-            }
-            
-            if (!castUrl.includes('warpcast.com') && !castUrl.includes('farcaster.xyz')) {
-                alert('Please enter a valid Warpcast or Farcaster cast URL');
-                return;
-            }
-            
-            // Check if this cast is already featured in any spot
-            for (let i = 1; i <= 9; i++) {
-                if (spotlightSpots[i].occupied && spotlightSpots[i].castUrl === castUrl) {
-                    alert('This cast is already being featured in another spotlight spot!');
-                    return;
+            function typeNextLetter() {
+                if (index < sloganText.length) {
+                    sloganElement.textContent += sloganText[index];
+                    index++;
+                    setTimeout(typeNextLetter, 50); // 50ms delay between letters
                 }
             }
             
-            // Simulate purchase process
-            const spot = spotlightSpots[spotNumber];
-            spot.occupied = true;
-            spot.castUrl = castUrl;
-            spot.imageUrl = generatePlaceholderImage(castUrl);
-            spot.timeRemaining = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
-            spot.purchaseTime = Date.now();
-            
-            // Update the spot display
-            updateSpotDisplay(spotNumber);
-            
-            // Close popup
-            closePurchasePopup();
-            
-            // Show success message
-            alert('Spot purchased successfully! Your cast will be featured for 4 hours.');
-            
-            // Start countdown timer
-            startSpotTimer(spotNumber);
-        }
-
-        function generatePlaceholderImage(castUrl) {
-            // Try to extract cast hash and generate a more realistic image
-            const parts = castUrl.split('/');
-            const username = parts[3] || 'user';
-            const castHash = parts[4] || '';
-            
-            // Generate different placeholder images based on cast hash
-            const colors = ['4F46E5', '059669', 'DC2626', 'D97706', '7C3AED', 'DB2777'];
-            const colorIndex = castHash.length % colors.length;
-            const color = colors[colorIndex];
-            
-            // Create a more realistic placeholder that looks like a photo
-            return `https://picsum.photos/150/150?random=${castHash.slice(-4) || Math.floor(Math.random() * 1000)}`;
-        }
-
-        function updateSpotDisplay(spotNumber) {
-            const spotButton = document.querySelector(`button[onclick="openSpotlightImage(${spotNumber})"]`);
-            const spot = spotlightSpots[spotNumber];
-            
-            if (spot.occupied) {
-                spotButton.innerHTML = `
-                    <div class="relative">
-                        <img src="${spot.imageUrl}" alt="Featured Cast" class="w-full h-full object-cover rounded-md"
-                             onerror="this.src='https://via.placeholder.com/150x150/4F46E5/FFFFFF?text=IMG'; this.alt='Image failed to load';">
-                        <div class="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1.5 py-0.5 rounded shadow-lg" id="timer-${spotNumber}">
-                            ${formatTimeRemaining(spot.timeRemaining)}
-                        </div>
-                    </div>
-                `;
-            } else {
-                spotButton.innerHTML = `
-                    <div class="aspect-square flex items-center justify-center" style="background-color: #a0a0a0;">
-                        <span class="text-gray-300 text-sm font-medium">Available</span>
-                    </div>
-                `;
-            }
-        }
-
-        function startSpotTimer(spotNumber) {
-            const timer = setInterval(() => {
-                const spot = spotlightSpots[spotNumber];
-                const elapsed = Date.now() - spot.purchaseTime;
-                spot.timeRemaining = Math.max(0, (4 * 60 * 60 * 1000) - elapsed);
-                
-                const timerElement = document.getElementById(`timer-${spotNumber}`);
-                if (timerElement) {
-                    const newTime = formatTimeRemaining(spot.timeRemaining);
-                    if (timerElement.textContent !== newTime) {
-                        timerElement.style.transition = 'opacity 0.2s ease';
-                        timerElement.style.opacity = '0.7';
-                        setTimeout(() => {
-                            timerElement.textContent = newTime;
-                            timerElement.style.opacity = '1';
-                        }, 100);
-                    }
-                }
-                
-                if (spot.timeRemaining <= 0) {
-                    // Time expired, free the spot
-                    spot.occupied = false;
-                    spot.castUrl = '';
-                    spot.imageUrl = '';
-                    spot.purchaseTime = null;
-                    updateSpotDisplay(spotNumber);
-                    clearInterval(timer);
-                }
-            }, 1000);
-        }
-
-        function formatTimeRemaining(milliseconds) {
-            const hours = Math.floor(milliseconds / (1000 * 60 * 60));
-            const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
-            return `${hours}h ${minutes}m`;
-        }
-
-        function showCastDetails(spotNumber) {
-            const spot = spotlightSpots[spotNumber];
-            
-            // Create popup overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            overlay.id = 'cast-details-popup';
-            
-            // Create popup content
-            overlay.innerHTML = `
-                <div class="bg-gray-800 rounded-lg p-8 max-w-lg mx-4 border-2 border-gray-600">
-                    <h3 class="text-xl font-bold mb-6 text-center">Featured Cast</h3>
-                    
-                    <div class="mb-6 text-center">
-                        <img src="${spot.imageUrl}" alt="Featured Cast" class="w-full h-32 object-cover rounded-md mb-3"
-                             onerror="this.src='https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=IMG'; this.alt='Image failed to load';">
-                        <p class="text-gray-300">Time remaining: ${formatTimeRemaining(spot.timeRemaining)}</p>
-                    </div>
-                    
-                    <div class="flex space-x-3">
-                        <button onclick="window.open('${spot.castUrl}', '_blank')" 
-                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            View Cast
-                        </button>
-                        <button onclick="closeCastDetails()" 
-                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-1.5 px-3 rounded text-sm font-medium transition-colors">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(overlay);
-        }
-
-        function closeCastDetails() {
-            const popup = document.getElementById('cast-details-popup');
-            if (popup) {
-                popup.remove();
-            }
+            // Start typing after a short delay
+            setTimeout(typeNextLetter, 800);
         }
 
         // Add entrance animations
         document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('header, main, footer');
+            // Detect theme from main page
+            detectTheme();
+            
+            // Start slogan animation
+            animateSlogan();
+
+            const elements = document.querySelectorAll('header, main');
             elements.forEach((element, index) => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(20px)';
@@ -1562,33 +1020,19 @@
                     element.style.transform = 'translateY(0)';
                 }, index * 200);
             });
-            
-            // Start slogan animation after page loads
-            setTimeout(typeSlogan, 1000);
-            
-            // Add demo spots for testing (spots 2 and 5)
-            setTimeout(() => {
-                // Demo spot 2
-                const spot2 = spotlightSpots[2];
-                spot2.occupied = true;
-                spot2.castUrl = 'https://warpcast.com/photographer/0x12345';
-                spot2.imageUrl = 'https://picsum.photos/150/150?random=2';
-                spot2.timeRemaining = 2.5 * 60 * 60 * 1000; // 2.5 hours
-                spot2.purchaseTime = Date.now() - (1.5 * 60 * 60 * 1000); // Started 1.5 hours ago
-                updateSpotDisplay(2);
-                startSpotTimer(2);
-                
-                // Demo spot 5
-                const spot5 = spotlightSpots[5];
-                spot5.occupied = true;
-                spot5.castUrl = 'https://warpcast.com/artist/0x67890';
-                spot5.imageUrl = 'https://picsum.photos/150/150?random=5';
-                spot5.timeRemaining = 3.8 * 60 * 60 * 1000; // 3.8 hours
-                spot5.purchaseTime = Date.now() - (0.2 * 60 * 60 * 1000); // Started 12 minutes ago
-                updateSpotDisplay(5);
-                startSpotTimer(5);
-            }, 2000);
+
+            // Animate wallet cards
+            const walletCards = document.querySelectorAll('.wallet-card');
+            walletCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 1000 + (index * 150));
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f72d61b55d8ade',t:'MTc1NzkyOTM4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9839d16ec5501cb6',t:'MTc1ODYyODE1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
