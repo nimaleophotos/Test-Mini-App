@@ -85,11 +85,6 @@
         .theme-toggle.light .theme-toggle-circle {
             background: #4a4a4a;
         }
-
-        .nav-button:hover svg {
-        color: #ffffff;   /* shine white on hover */
-        opacity: 1;       /* full brightness */
-        }
         
         /* Add smooth transitions to all elements that change in light mode */
         .lens-outer, .lens-inner {
@@ -156,6 +151,12 @@
         body.light-mode {
             background-color: #f5f5f5 !important;
             color: #1a1a1a !important;
+        }
+        
+        /* Ensure dark mode is default */
+        body {
+            background-color: #272727 !important;
+            color: white !important;
         }
         
         .light-mode .lens-outer,
@@ -437,11 +438,13 @@
                 <!-- User Profile Section -->
                 <div class="wallet-card">
                     <div class="flex items-center space-x-4 mb-6">
-                        <img src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698c9e-c89d-4f0d-2fc4-c03c8ff7df00/original" alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-purple-400">
+                        <img src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698c9e-c89d-4f0d-2fc4-c03c8ff7df00/original" alt="Profile" class="w-12 h-12 rounded-full object-cover">
                         <div>
                             <h2 class="text-lg font-bold">photographer.eth</h2>
                         </div>
                     </div>
+
+
 
                     <!-- User Stats Grid -->
                     <div class="grid grid-cols-3 gap-3">
@@ -453,9 +456,9 @@
                             <div class="text-xl font-bold text-gray-300">12</div>
                             <div class="text-xs text-gray-400">Badges Earned</div>
                         </div>
-                        <div class="bg-gradient-to-br from-purple-600/20 to-purple-700/20 border border-purple-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
-                            <div class="text-xl font-bold text-purple-300">2,847</div>
-                            <div class="text-xs text-purple-400">Points</div>
+                        <div class="bg-gradient-to-br from-red-600/20 to-red-700/20 border border-red-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
+                            <div class="text-xl font-bold text-red-300">2,847</div>
+                            <div class="text-xs text-red-400">Points</div>
                         </div>
                         <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
                             <div class="text-xl font-bold text-gray-300">2.4K</div>
@@ -468,6 +471,35 @@
                         <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center h-20 flex flex-col justify-center">
                             <div class="text-xl font-bold text-gray-300">#247</div>
                             <div class="text-xs text-gray-400">LENS App Rank</div>
+                        </div>
+                    </div>
+
+                    <!-- Locked Badges Row -->
+                    <div class="flex justify-center space-x-2 mt-4">
+                        <div class="w-8 h-8 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-700/30 border border-gray-600/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -749,8 +781,8 @@
     <script>
         // Theme detection and synchronization with main page
         function detectTheme() {
-            // Check localStorage for saved theme preference
-            const savedTheme = localStorage.getItem('theme') || 'dark';
+            // Default to dark theme
+            const savedTheme = 'dark';
             applyTheme(savedTheme);
             
             // Listen for theme changes from other pages
@@ -795,39 +827,7 @@
             });
         }
 
-        function stakeTokens() {
-            const amount = prompt("Enter amount of LENS tokens to stake:");
-            if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
-                // Simulate staking process
-                alert(`Successfully staked ${amount} LENS tokens! Your rewards will start accumulating in 24 hours.`);
-                // In a real app, this would interact with smart contracts
-            } else if (amount !== null) {
-                alert("Please enter a valid amount.");
-            }
-        }
 
-        function unstakeTokens() {
-            const amount = prompt("Enter amount of LENS tokens to unstake:");
-            if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
-                // Simulate unstaking process
-                const confirm = window.confirm(`Are you sure you want to unstake ${amount} LENS tokens? This will forfeit any pending rewards.`);
-                if (confirm) {
-                    alert(`Successfully initiated unstaking of ${amount} LENS tokens! Tokens will be available in 7 days.`);
-                }
-            } else if (amount !== null) {
-                alert("Please enter a valid amount.");
-            }
-        }
-
-        function claimRewards() {
-            // Simulate claiming rewards
-            const rewardAmount = "89.3";
-            const confirm = window.confirm(`Claim ${rewardAmount} LENS tokens as rewards?`);
-            if (confirm) {
-                alert(`Successfully claimed ${rewardAmount} LENS tokens! Rewards have been added to your wallet.`);
-                // In a real app, this would trigger a blockchain transaction
-            }
-        }
 
         // Dropdown functionality
         let currentFromToken = 'ETH';
@@ -977,5 +977,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'982b2271d08ad5a5',t:'MTc1ODQ3NDE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9837fa7594071ca4',t:'MTc1ODYwODg2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
