@@ -3,31 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LENS Camera</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mobile Camera App</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #000;
             overflow: hidden;
+            height: 100vh;
+            position: relative;
         }
-        
+
         .camera-container {
             position: relative;
             width: 100vw;
             height: 100vh;
             background: #000;
         }
-        
-        .camera-preview {
+
+        #video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            transform: scaleX(-1); /* Mirror effect for front camera */
         }
-        
+
         .camera-overlay {
             position: absolute;
             top: 0;
@@ -35,13 +40,92 @@
             right: 0;
             bottom: 0;
             pointer-events: none;
+            z-index: 10;
         }
-        
-        .camera-overlay > * {
+
+        .top-controls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             pointer-events: auto;
+            z-index: 20;
         }
-        
-        .shutter-button {
+
+        .bottom-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 20px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+            pointer-events: auto;
+            z-index: 20;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .control-btn.active {
+            background: rgba(255,255,255,0.4);
+        }
+
+
+
+
+
+        .capture-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .gallery-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .capture-btn {
             width: 80px;
             height: 80px;
             border: 4px solid white;
@@ -50,14 +134,18 @@
             position: relative;
             transition: all 0.2s ease;
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .shutter-button:active {
+        .capture-btn:active {
             transform: scale(0.95);
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
         }
         
-        .shutter-button::after {
+        .capture-btn::after {
             content: '';
             position: absolute;
             top: 50%;
@@ -70,751 +158,507 @@
             transition: all 0.2s ease;
         }
         
-        .shutter-button:active::after {
+        .capture-btn:active::after {
             width: 50px;
             height: 50px;
         }
-        
-        .control-button {
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+
+        .flip-btn {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .flip-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .lens-controls {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .lens-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
             color: white;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.2s ease;
             backdrop-filter: blur(10px);
-        }
-        
-        .control-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-        }
-        
-        .control-button.active {
-            background: rgba(59, 130, 246, 0.8);
-            border-color: #3b82f6;
-        }
-        
-        .zoom-button {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 8px 16px;
-            color: white;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lens-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .lens-btn.active {
+            background: rgba(255,255,255,0.4);
+        }
+
+
+
+        .focus-ring {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .focus-ring.show {
+            opacity: 1;
+        }
+
+        .timer-display {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ff4444;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(0,0,0,0.7);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: none;
             backdrop-filter: blur(10px);
         }
-        
-        .zoom-button.active {
-            background: rgba(255, 255, 255, 0.9);
-            color: #000;
-            transform: scale(1.1);
+
+        .timer-display.show {
+            display: block;
         }
-        
-        .grid-overlay {
+
+        .captured-photo {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .grid-overlay.active {
-            opacity: 0.5;
-        }
-        
-        .grid-line {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-        }
-        
-        .grid-3x3 .grid-line:nth-child(1) { top: 33.33%; left: 0; right: 0; height: 1px; }
-        .grid-3x3 .grid-line:nth-child(2) { top: 66.66%; left: 0; right: 0; height: 1px; }
-        .grid-3x3 .grid-line:nth-child(3) { left: 33.33%; top: 0; bottom: 0; width: 1px; }
-        .grid-3x3 .grid-line:nth-child(4) { left: 66.66%; top: 0; bottom: 0; width: 1px; }
-        
-        .settings-panel {
-            position: absolute;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            transition: right 0.3s ease;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        
-        .settings-panel.active {
-            right: 0;
-        }
-        
-        .aspect-ratio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            box-sizing: border-box;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .aspect-ratio-overlay.active {
-            opacity: 1;
-        }
-        
-        .timer-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 120px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .timer-indicator.active {
-            opacity: 1;
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
-        }
-        
-        .flash-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: white;
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .flash-effect.active {
-            animation: flash 0.3s ease;
-        }
-        
-        @keyframes flash {
-            0% { opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { opacity: 0; }
-        }
-        
-        .gallery-thumbnail {
-            width: 50px;
-            height: 50px;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
             border-radius: 8px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: #333;
-            overflow: hidden;
-        }
-        
-        .gallery-thumbnail img {
-            width: 100%;
-            height: 100%;
+            border: 2px solid white;
             object-fit: cover;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 30;
         }
-        
-        .mode-selector {
-            display: flex;
-            gap: 20px;
-            padding: 0 20px;
+
+        .captured-photo:hover {
+            transform: scale(1.05);
         }
-        
-        .mode-button {
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 0;
-            position: relative;
-        }
-        
-        .mode-button.active {
-            color: white;
-        }
-        
-        .mode-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #3b82f6;
-            border-radius: 1px;
+
+        @media (max-width: 480px) {
+            .top-controls {
+                padding: 15px;
+            }
+            
+            .bottom-controls {
+                padding: 20px 15px;
+            }
+            
+            .capture-btn {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .zoom-slider {
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="camera-container">
-        <!-- Camera Preview -->
-        <video class="camera-preview" id="cameraPreview" autoplay muted playsinline></video>
+        <video id="video" autoplay muted playsinline></video>
         
-        <!-- Grid Overlay -->
-        <div class="grid-overlay grid-3x3" id="gridOverlay">
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-            <div class="grid-line"></div>
-        </div>
-        
-        <!-- Aspect Ratio Overlay -->
-        <div class="aspect-ratio-overlay" id="aspectRatioOverlay"></div>
-        
-        <!-- Timer Indicator -->
-        <div class="timer-indicator" id="timerIndicator">3</div>
-        
-        <!-- Flash Effect -->
-        <div class="flash-effect" id="flashEffect"></div>
-        
-        <!-- Camera Overlay -->
         <div class="camera-overlay">
-            <!-- Top Controls -->
-            <div class="absolute top-0 left-0 right-0 p-4 flex justify-between items-start">
-                <!-- Left Top Controls -->
-                <div class="flex flex-col gap-3">
-                    <button class="control-button" onclick="goBack()" title="Back">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
-                    <button class="control-button" id="flashBtn" onclick="toggleFlash()" title="Flash">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </button>
-                    <button class="control-button" id="timerBtn" onclick="toggleTimer()" title="Timer">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Right Top Controls -->
-                <div class="flex flex-col gap-3">
-                    <button class="control-button" onclick="toggleSettings()" title="Settings">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                    </button>
-                    <button class="control-button" id="gridBtn" onclick="toggleGrid()" title="Grid">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Zoom Controls -->
-            <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
-                <div class="flex flex-col gap-2">
-                    <button class="zoom-button active" onclick="setZoom(0.5)">0.5x</button>
-                    <button class="zoom-button" onclick="setZoom(1)">1x</button>
-                    <button class="zoom-button" onclick="setZoom(2)">2x</button>
-                </div>
-            </div>
-            
-            <!-- Camera Modes -->
-            <div class="absolute bottom-32 left-0 right-0">
-                <div class="mode-selector justify-center">
-                    <button class="mode-button" onclick="setMode('video')">VIDEO</button>
-                    <button class="mode-button active" onclick="setMode('photo')">PHOTO</button>
-                    <button class="mode-button" onclick="setMode('portrait')">PORTRAIT</button>
-                </div>
-            </div>
-            
-            <!-- Bottom Controls -->
-            <div class="absolute bottom-0 left-0 right-0 p-6">
-                <div class="flex items-center justify-between">
-                    <!-- Gallery Button -->
-                    <button class="gallery-thumbnail" onclick="openGallery()" title="Gallery">
-                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                    </button>
-                    
-                    <!-- Shutter Button -->
-                    <button class="shutter-button" onclick="takePhoto()" title="Take Photo"></button>
-                    
-                    <!-- Switch Camera Button -->
-                    <button class="control-button" onclick="switchCamera()" title="Switch Camera">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+            <div class="focus-ring" id="focusRing"></div>
         </div>
-        
-        <!-- Settings Panel -->
-        <div class="settings-panel" id="settingsPanel">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-white text-lg font-semibold">Camera Settings</h3>
-                <button onclick="toggleSettings()" class="text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+
+        <div class="top-controls">
+            <div style="display: flex; gap: 12px;">
+                <button class="control-btn" id="backBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
                     </svg>
                 </button>
             </div>
             
-            <!-- Aspect Ratio -->
-            <div class="mb-6">
-                <h4 class="text-white text-sm font-medium mb-3">Aspect Ratio</h4>
-                <div class="grid grid-cols-2 gap-2">
-                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('full')">Full</button>
-                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('4:3')">4:3</button>
-                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('16:9')">16:9</button>
-                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('1:1')">1:1</button>
-                </div>
+            <div style="display: flex; gap: 12px;">
+                <button class="control-btn" id="aspectBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <path d="M9 9h6v6"/>
+                    </svg>
+                </button>
+                <button class="control-btn" id="flashBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                    </svg>
+                </button>
+                <button class="control-btn" id="timerBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                </button>
+                <button class="control-btn" id="gridBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+
+
+        <div class="timer-display" id="timerDisplay">3</div>
+
+        <div class="bottom-controls">
+            <div class="lens-controls">
+                <button class="lens-btn" id="lens05x">0.5x</button>
+                <button class="lens-btn active" id="lens1x">1x</button>
+                <button class="lens-btn" id="lens2x">2x</button>
             </div>
             
-            <!-- Grid Options -->
-            <div class="mb-6">
-                <h4 class="text-white text-sm font-medium mb-3">Grid Lines</h4>
-                <div class="space-y-2">
-                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('none')">None</button>
-                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('3x3')">Rule of Thirds</button>
-                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('golden')">Golden Ratio</button>
-                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('center')">Center Lines</button>
-                </div>
-            </div>
-            
-            <!-- Timer Options -->
-            <div class="mb-6">
-                <h4 class="text-white text-sm font-medium mb-3">Timer</h4>
-                <div class="grid grid-cols-3 gap-2">
-                    <button class="timer-option bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setTimerDuration(3)">3s</button>
-                    <button class="timer-option bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setTimerDuration(5)">5s</button>
-                    <button class="timer-option bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setTimerDuration(10)">10s</button>
-                </div>
-            </div>
-            
-            <!-- Flash Options -->
-            <div class="mb-6">
-                <h4 class="text-white text-sm font-medium mb-3">Flash</h4>
-                <div class="space-y-2">
-                    <button class="flash-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setFlashMode('off')">Off</button>
-                    <button class="flash-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setFlashMode('on')">On</button>
-                    <button class="flash-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setFlashMode('auto')">Auto</button>
-                </div>
+            <div class="capture-controls">
+                <button class="gallery-btn" id="galleryBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21,15 16,10 5,21"/>
+                    </svg>
+                </button>
+                
+                <button class="capture-btn" id="captureBtn"></button>
+                
+                <button class="flip-btn" id="flipBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 4v6h6"/>
+                        <path d="M23 20v-6h-6"/>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Camera state
-        let currentStream = null;
-        let currentCamera = 'user'; // 'user' for front, 'environment' for back
-        let currentZoom = 1;
-        let flashMode = 'off';
-        let timerDuration = 0;
-        let timerActive = false;
-        let gridType = 'none';
-        let aspectRatio = 'full';
-        let currentMode = 'photo';
-        let isRecording = false;
-        
-        // Initialize camera
-        async function initCamera() {
-            try {
-                const constraints = {
-                    video: {
-                        facingMode: currentCamera,
-                        width: { ideal: 1920 },
-                        height: { ideal: 1080 }
+        class MobileCamera {
+            constructor() {
+                this.video = document.getElementById('video');
+                this.captureBtn = document.getElementById('captureBtn');
+                this.flipBtn = document.getElementById('flipBtn');
+                this.backBtn = document.getElementById('backBtn');
+                this.timerBtn = document.getElementById('timerBtn');
+                this.timerDisplay = document.getElementById('timerDisplay');
+                this.focusRing = document.getElementById('focusRing');
+                this.lens05xBtn = document.getElementById('lens05x');
+                this.lens1xBtn = document.getElementById('lens1x');
+                this.lens2xBtn = document.getElementById('lens2x');
+                this.aspectBtn = document.getElementById('aspectBtn');
+                this.flashBtn = document.getElementById('flashBtn');
+                
+                this.currentStream = null;
+                this.facingMode = 'user'; // Start with front camera
+                this.timerSeconds = 0;
+                this.currentZoom = 1;
+                this.aspectRatio = '16:9'; // Default aspect ratio
+                this.flashMode = 'off'; // off, on, auto
+                
+                this.init();
+            }
+
+            async init() {
+                await this.startCamera();
+                this.setupEventListeners();
+            }
+
+            async startCamera() {
+                try {
+                    if (this.currentStream) {
+                        this.currentStream.getTracks().forEach(track => track.stop());
                     }
-                };
-                
-                if (currentStream) {
-                    currentStream.getTracks().forEach(track => track.stop());
+
+                    const constraints = {
+                        video: {
+                            facingMode: this.facingMode,
+                            width: { ideal: 1920 },
+                            height: { ideal: 1080 }
+                        }
+                    };
+
+                    this.currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+                    this.video.srcObject = this.currentStream;
+                } catch (error) {
+                    console.error('Error accessing camera:', error);
+                    alert('Unable to access camera. Please check permissions.');
                 }
+            }
+
+            setupEventListeners() {
+                // Capture button
+                this.captureBtn.addEventListener('click', () => {
+                    this.takePhoto();
+                });
+
+                // Flip camera
+                this.flipBtn.addEventListener('click', () => {
+                    this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';
+                    this.video.style.transform = `scaleX(${this.facingMode === 'user' ? -this.currentZoom : this.currentZoom}) scaleY(${this.currentZoom})`;
+                    this.startCamera();
+                });
+
+                // Back button
+                this.backBtn.addEventListener('click', () => {
+                    // Go back functionality - could close camera or navigate back
+                    if (confirm('Close camera?')) {
+                        if (this.currentStream) {
+                            this.currentStream.getTracks().forEach(track => track.stop());
+                        }
+                        window.history.back();
+                    }
+                });
+
+                // Timer
+                this.timerBtn.addEventListener('click', () => {
+                    this.timerSeconds = this.timerSeconds === 0 ? 3 : this.timerSeconds === 3 ? 10 : 0;
+                    this.timerBtn.classList.toggle('active', this.timerSeconds > 0);
+                });
+
+                // Focus tap
+                this.video.addEventListener('click', (e) => {
+                    const rect = this.video.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    this.showFocusRing(x, y);
+                });
+
+                // Grid toggle
+                document.getElementById('gridBtn').addEventListener('click', () => {
+                    this.toggleGrid();
+                });
+
+                // Lens switching
+                this.lens05xBtn.addEventListener('click', () => {
+                    this.switchLens(0.5);
+                });
+
+                this.lens1xBtn.addEventListener('click', () => {
+                    this.switchLens(1);
+                });
+
+                this.lens2xBtn.addEventListener('click', () => {
+                    this.switchLens(2);
+                });
+
+                // Aspect ratio toggle
+                this.aspectBtn.addEventListener('click', () => {
+                    this.toggleAspectRatio();
+                });
+
+                // Flash toggle
+                this.flashBtn.addEventListener('click', () => {
+                    this.toggleFlash();
+                });
+            }
+
+
+
+            async takePhoto() {
+                if (this.timerSeconds > 0) {
+                    await this.startTimer();
+                }
+
+                // Capture photo
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
                 
-                currentStream = await navigator.mediaDevices.getUserMedia(constraints);
-                document.getElementById('cameraPreview').srcObject = currentStream;
-            } catch (error) {
-                console.error('Error accessing camera:', error);
-                alert('Unable to access camera. Please check permissions.');
-            }
-        }
-        
-        // Navigation
-        function goBack() {
-            if (currentStream) {
-                currentStream.getTracks().forEach(track => track.stop());
-            }
-            window.location.href = 'index.html';
-        }
-        
-        // Camera controls
-        async function switchCamera() {
-            currentCamera = currentCamera === 'user' ? 'environment' : 'user';
-            await initCamera();
-        }
-        
-        function setZoom(zoom) {
-            currentZoom = zoom;
-            document.querySelectorAll('.zoom-button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Apply zoom effect (visual feedback)
-            const preview = document.getElementById('cameraPreview');
-            preview.style.transform = `scale(${zoom})`;
-        }
-        
-        // Flash controls
-        function toggleFlash() {
-            const modes = ['off', 'on', 'auto'];
-            const currentIndex = modes.indexOf(flashMode);
-            flashMode = modes[(currentIndex + 1) % modes.length];
-            
-            const flashBtn = document.getElementById('flashBtn');
-            flashBtn.classList.toggle('active', flashMode !== 'off');
-            
-            updateFlashIcon();
-        }
-        
-        function setFlashMode(mode) {
-            flashMode = mode;
-            const flashBtn = document.getElementById('flashBtn');
-            flashBtn.classList.toggle('active', mode !== 'off');
-            updateFlashIcon();
-            updateSettingsButtons();
-        }
-        
-        function updateFlashIcon() {
-            const flashBtn = document.getElementById('flashBtn');
-            const icon = flashBtn.querySelector('svg');
-            
-            if (flashMode === 'off') {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12"/>';
-            } else if (flashMode === 'auto') {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/><text x="12" y="20" text-anchor="middle" font-size="8" fill="currentColor">A</text>';
-            } else {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>';
-            }
-        }
-        
-        // Timer controls
-        function toggleTimer() {
-            const durations = [0, 3, 5, 10];
-            const currentIndex = durations.indexOf(timerDuration);
-            timerDuration = durations[(currentIndex + 1) % durations.length];
-            
-            const timerBtn = document.getElementById('timerBtn');
-            timerBtn.classList.toggle('active', timerDuration > 0);
-            
-            updateTimerIcon();
-        }
-        
-        function setTimerDuration(duration) {
-            timerDuration = duration;
-            const timerBtn = document.getElementById('timerBtn');
-            timerBtn.classList.toggle('active', duration > 0);
-            updateTimerIcon();
-            updateSettingsButtons();
-        }
-        
-        function updateTimerIcon() {
-            const timerBtn = document.getElementById('timerBtn');
-            const icon = timerBtn.querySelector('svg');
-            
-            if (timerDuration > 0) {
-                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/><text x="12" y="16" text-anchor="middle" font-size="6" fill="currentColor">${timerDuration}</text>`;
-            } else {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>';
-            }
-        }
-        
-        // Grid controls
-        function toggleGrid() {
-            const types = ['none', '3x3', 'golden', 'center'];
-            const currentIndex = types.indexOf(gridType);
-            gridType = types[(currentIndex + 1) % types.length];
-            
-            const gridBtn = document.getElementById('gridBtn');
-            gridBtn.classList.toggle('active', gridType !== 'none');
-            
-            updateGrid();
-        }
-        
-        function setGridType(type) {
-            gridType = type;
-            const gridBtn = document.getElementById('gridBtn');
-            gridBtn.classList.toggle('active', type !== 'none');
-            updateGrid();
-            updateSettingsButtons();
-        }
-        
-        function updateGrid() {
-            const gridOverlay = document.getElementById('gridOverlay');
-            gridOverlay.className = `grid-overlay ${gridType !== 'none' ? 'active' : ''} grid-${gridType}`;
-            
-            // Update grid lines based on type
-            if (gridType === 'golden') {
-                gridOverlay.innerHTML = `
-                    <div class="grid-line" style="top: 38.2%; left: 0; right: 0; height: 1px;"></div>
-                    <div class="grid-line" style="top: 61.8%; left: 0; right: 0; height: 1px;"></div>
-                    <div class="grid-line" style="left: 38.2%; top: 0; bottom: 0; width: 1px;"></div>
-                    <div class="grid-line" style="left: 61.8%; top: 0; bottom: 0; width: 1px;"></div>
-                `;
-            } else if (gridType === 'center') {
-                gridOverlay.innerHTML = `
-                    <div class="grid-line" style="top: 50%; left: 0; right: 0; height: 1px;"></div>
-                    <div class="grid-line" style="left: 50%; top: 0; bottom: 0; width: 1px;"></div>
-                `;
-            } else if (gridType === '3x3') {
-                gridOverlay.innerHTML = `
-                    <div class="grid-line" style="top: 33.33%; left: 0; right: 0; height: 1px;"></div>
-                    <div class="grid-line" style="top: 66.66%; left: 0; right: 0; height: 1px;"></div>
-                    <div class="grid-line" style="left: 33.33%; top: 0; bottom: 0; width: 1px;"></div>
-                    <div class="grid-line" style="left: 66.66%; top: 0; bottom: 0; width: 1px;"></div>
-                `;
-            }
-        }
-        
-        // Aspect ratio controls
-        function setAspectRatio(ratio) {
-            aspectRatio = ratio;
-            const overlay = document.getElementById('aspectRatioOverlay');
-            
-            overlay.classList.remove('active');
-            
-            setTimeout(() => {
-                if (ratio === '4:3') {
-                    const height = window.innerHeight * 0.75;
-                    const top = (window.innerHeight - height) / 2;
-                    overlay.style.top = `${top}px`;
-                    overlay.style.bottom = `${top}px`;
-                    overlay.style.left = '0';
-                    overlay.style.right = '0';
-                } else if (ratio === '16:9') {
-                    const height = window.innerWidth * 9 / 16;
-                    const top = (window.innerHeight - height) / 2;
-                    overlay.style.top = `${top}px`;
-                    overlay.style.bottom = `${window.innerHeight - top - height}px`;
-                    overlay.style.left = '0';
-                    overlay.style.right = '0';
-                } else if (ratio === '1:1') {
-                    const size = Math.min(window.innerWidth, window.innerHeight);
-                    const topBottom = (window.innerHeight - size) / 2;
-                    const leftRight = (window.innerWidth - size) / 2;
-                    overlay.style.top = `${topBottom}px`;
-                    overlay.style.bottom = `${topBottom}px`;
-                    overlay.style.left = `${leftRight}px`;
-                    overlay.style.right = `${leftRight}px`;
+                canvas.width = this.video.videoWidth;
+                canvas.height = this.video.videoHeight;
+                
+                // Mirror for front camera
+                if (this.facingMode === 'user') {
+                    context.scale(-1, 1);
+                    context.drawImage(this.video, -canvas.width, 0, canvas.width, canvas.height);
                 } else {
-                    overlay.style.top = '0';
-                    overlay.style.bottom = '0';
-                    overlay.style.left = '0';
-                    overlay.style.right = '0';
+                    context.drawImage(this.video, 0, 0, canvas.width, canvas.height);
                 }
                 
-                if (ratio !== 'full') {
-                    overlay.classList.add('active');
-                }
-            }, 50);
-            
-            updateSettingsButtons();
-        }
-        
-        // Camera modes
-        function setMode(mode) {
-            currentMode = mode;
-            document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            const shutterButton = document.querySelector('.shutter-button');
-            if (mode === 'video') {
-                shutterButton.style.background = '#ef4444';
-                shutterButton.title = isRecording ? 'Stop Recording' : 'Start Recording';
-            } else {
-                shutterButton.style.background = '#3b82f6';
-                shutterButton.title = 'Take Photo';
-            }
-        }
-        
-        // Settings panel
-        function toggleSettings() {
-            const panel = document.getElementById('settingsPanel');
-            panel.classList.toggle('active');
-        }
-        
-        function updateSettingsButtons() {
-            // Update aspect ratio buttons
-            document.querySelectorAll('.aspect-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600');
-                btn.classList.add('bg-gray-700');
-            });
-            
-            // Update grid buttons
-            document.querySelectorAll('.grid-option').forEach(btn => {
-                btn.classList.remove('bg-blue-600');
-                btn.classList.add('bg-gray-700');
-            });
-            
-            // Update timer buttons
-            document.querySelectorAll('.timer-option').forEach(btn => {
-                btn.classList.remove('bg-blue-600');
-                btn.classList.add('bg-gray-700');
-            });
-            
-            // Update flash buttons
-            document.querySelectorAll('.flash-option').forEach(btn => {
-                btn.classList.remove('bg-blue-600');
-                btn.classList.add('bg-gray-700');
-            });
-        }
-        
-        // Photo capture
-        async function takePhoto() {
-            if (currentMode === 'video') {
-                toggleRecording();
-                return;
-            }
-            
-            if (timerDuration > 0 && !timerActive) {
-                startTimer();
-                return;
-            }
-            
-            // Flash effect
-            if (flashMode === 'on' || (flashMode === 'auto' && shouldUseFlash())) {
-                const flashEffect = document.getElementById('flashEffect');
-                flashEffect.classList.add('active');
-                setTimeout(() => flashEffect.classList.remove('active'), 300);
-            }
-            
-            // Capture photo (simulated)
-            const canvas = document.createElement('canvas');
-            const video = document.getElementById('cameraPreview');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0);
-            
-            // Convert to blob and save (simulated)
-            canvas.toBlob(blob => {
-                const url = URL.createObjectURL(blob);
-                console.log('Photo captured:', url);
-                
-                // Update gallery thumbnail
-                const galleryBtn = document.querySelector('.gallery-thumbnail');
-                galleryBtn.innerHTML = `<img src="${url}" alt="Last photo">`;
-                
-                // Show success feedback
-                showCaptureSuccess();
-            }, 'image/jpeg', 0.9);
-        }
-        
-        function toggleRecording() {
-            isRecording = !isRecording;
-            const shutterButton = document.querySelector('.shutter-button');
-            
-            if (isRecording) {
-                shutterButton.style.background = '#dc2626';
-                shutterButton.title = 'Stop Recording';
-                // Add recording indicator
-                shutterButton.style.animation = 'pulse 1s infinite';
-            } else {
-                shutterButton.style.background = '#ef4444';
-                shutterButton.title = 'Start Recording';
-                shutterButton.style.animation = 'none';
-            }
-        }
-        
-        function startTimer() {
-            timerActive = true;
-            let countdown = timerDuration;
-            const indicator = document.getElementById('timerIndicator');
-            
-            indicator.textContent = countdown;
-            indicator.classList.add('active');
-            
-            const timer = setInterval(() => {
-                countdown--;
-                indicator.textContent = countdown;
-                
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    indicator.classList.remove('active');
-                    timerActive = false;
-                    takePhoto();
-                }
-            }, 1000);
-        }
-        
-        function shouldUseFlash() {
-            // Simple light detection simulation
-            return Math.random() < 0.3; // 30% chance to use flash in auto mode
-        }
-        
-        function showCaptureSuccess() {
-            // Brief visual feedback
-            const preview = document.getElementById('cameraPreview');
-            preview.style.filter = 'brightness(1.2)';
-            setTimeout(() => {
-                preview.style.filter = 'brightness(1)';
-            }, 200);
-        }
-        
-        // Gallery
-        function openGallery() {
-            alert('Gallery feature would open here with all captured photos and videos!');
-        }
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            initCamera();
-            updateFlashIcon();
-            updateTimerIcon();
-            updateGrid();
-            setAspectRatio('full');
-            
-            // Handle orientation changes
-            window.addEventListener('orientationchange', function() {
+                // Convert to blob and create download
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `photo_${Date.now()}.jpg`;
+                    a.click();
+                    
+                    // Show captured photo preview
+                    this.showCapturedPhoto(url);
+                    
+                    URL.revokeObjectURL(url);
+                }, 'image/jpeg', 0.9);
+
+                // Camera shutter animation
+                this.video.style.filter = 'brightness(1.5)';
                 setTimeout(() => {
-                    setAspectRatio(aspectRatio);
-                }, 500);
-            });
-            
-            // Prevent default touch behaviors
-            document.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-        });
-        
-        // Handle visibility change
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden && currentStream) {
-                currentStream.getTracks().forEach(track => track.stop());
-            } else if (!document.hidden) {
-                initCamera();
+                    this.video.style.filter = 'brightness(1)';
+                }, 100);
             }
+
+
+
+            startTimer() {
+                return new Promise((resolve) => {
+                    let countdown = this.timerSeconds;
+                    this.timerDisplay.textContent = countdown;
+                    this.timerDisplay.classList.add('show');
+                    
+                    const timer = setInterval(() => {
+                        countdown--;
+                        if (countdown > 0) {
+                            this.timerDisplay.textContent = countdown;
+                        } else {
+                            clearInterval(timer);
+                            this.timerDisplay.classList.remove('show');
+                            resolve();
+                        }
+                    }, 1000);
+                });
+            }
+
+            showFocusRing(x, y) {
+                this.focusRing.style.left = `${x}px`;
+                this.focusRing.style.top = `${y}px`;
+                this.focusRing.classList.add('show');
+                
+                setTimeout(() => {
+                    this.focusRing.classList.remove('show');
+                }, 1000);
+            }
+
+
+
+
+
+            showCapturedPhoto(url) {
+                // Remove existing preview
+                const existing = document.querySelector('.captured-photo');
+                if (existing) existing.remove();
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.className = 'captured-photo';
+                img.addEventListener('click', () => {
+                    window.open(url, '_blank');
+                });
+                document.body.appendChild(img);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (img.parentNode) img.remove();
+                }, 5000);
+            }
+
+            switchLens(zoom) {
+                this.currentZoom = zoom;
+                
+                // Update active button
+                document.querySelectorAll('.lens-btn').forEach(btn => btn.classList.remove('active'));
+                if (zoom === 0.5) this.lens05xBtn.classList.add('active');
+                else if (zoom === 1) this.lens1xBtn.classList.add('active');
+                else if (zoom === 2) this.lens2xBtn.classList.add('active');
+                
+                // Apply zoom effect to video
+                this.video.style.transform = `scaleX(${this.facingMode === 'user' ? -zoom : zoom}) scaleY(${zoom})`;
+            }
+
+            toggleGrid() {
+                // Grid implementation would go here
+                document.getElementById('gridBtn').classList.toggle('active');
+            }
+
+            toggleAspectRatio() {
+                // Cycle through aspect ratios: 16:9 -> 4:3 -> 1:1 -> 16:9
+                if (this.aspectRatio === '16:9') {
+                    this.aspectRatio = '4:3';
+                } else if (this.aspectRatio === '4:3') {
+                    this.aspectRatio = '1:1';
+                } else {
+                    this.aspectRatio = '16:9';
+                }
+                
+                this.aspectBtn.classList.toggle('active', this.aspectRatio !== '16:9');
+                this.applyAspectRatio();
+            }
+
+            applyAspectRatio() {
+                const video = this.video;
+                if (this.aspectRatio === '4:3') {
+                    video.style.objectFit = 'cover';
+                    video.style.aspectRatio = '4/3';
+                } else if (this.aspectRatio === '1:1') {
+                    video.style.objectFit = 'cover';
+                    video.style.aspectRatio = '1/1';
+                } else {
+                    video.style.objectFit = 'cover';
+                    video.style.aspectRatio = 'auto';
+                }
+            }
+
+            toggleFlash() {
+                // Cycle through flash modes: off -> on -> auto -> off
+                if (this.flashMode === 'off') {
+                    this.flashMode = 'on';
+                } else if (this.flashMode === 'on') {
+                    this.flashMode = 'auto';
+                } else {
+                    this.flashMode = 'off';
+                }
+                
+                this.flashBtn.classList.toggle('active', this.flashMode !== 'off');
+                
+                // Update flash icon based on mode
+                const flashSvg = this.flashBtn.querySelector('svg');
+                if (this.flashMode === 'on') {
+                    flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10" fill="currentColor"/>';
+                } else if (this.flashMode === 'auto') {
+                    flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/><text x="12" y="18" text-anchor="middle" font-size="8" fill="currentColor">A</text>';
+                } else {
+                    flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/><line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="2"/>';
+                }
+            }
+        }
+
+        // Initialize camera when page loads
+        window.addEventListener('load', () => {
+            new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9842fbcb433a57f0',t:'MTc1ODcyNDI2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98432eb68539fe9a',t:'MTc1ODcyNjM1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
