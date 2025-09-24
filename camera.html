@@ -1,542 +1,820 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Camera — $LENS</title>
-<style>
-  :root{
-    --bg:#0b0b0b;
-    --panel:#111;
-    --muted:#aeaeae;
-    --accent:#1e90ff; /* beautiful blue shutter */
-  }
-  html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  .app {height:100%;display:flex;flex-direction:column;}
-  header{display:flex;align-items:center;gap:12px;padding:12px;z-index:50;}
-  .stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-  /* video wrapper with adjustable aspect ratio */
-  .video-wrap{position:relative;width:100%;max-width:1000px;height:100%;display:flex;align-items:center;justify-content:center;background:#000;}
-  .ratio-16-9{aspect-ratio:16/9;}
-  .ratio-4-3{aspect-ratio:4/3;}
-  .ratio-1-1{aspect-ratio:1/1;}
-  .ratio-full{aspect-ratio:auto;width:100%;height:100%;}
-  video#preview{width:100%;height:100%;object-fit:cover;border-radius:12px;transform:scaleX(-1); /* mirror by default turned off for rear logic below */ }
-
-  /* overlays & controls */
-  .controls {position:absolute;left:0;right:0;bottom:20px;display:flex;align-items:center;justify-content:center;pointer-events:none;gap:18px;}
-  .control-btn{pointer-events:auto;display:flex;align-items:center;justify-content:center;border:1px solid rgba(101,101,101,0.5);background:rgba(51,51,51,0.85);color:var(--muted);padding:8px;border-radius:999px;transition:all .15s ease;}
-  .control-btn:hover{background:#444;color:#fff;transform:translateY(-3px)}
-  .circle-shutter{width:86px;height:86px;border-radius:50%;background:linear-gradient(180deg,var(--accent),#0b60c8);box-shadow:0 6px 20px rgba(30,144,255,0.35);display:flex;align-items:center;justify-content:center;cursor:pointer;border:4px solid rgba(255,255,255,0.06);pointer-events:auto;transition:transform .12s ease;}
-  .circle-shutter:active{transform:scale(.96)}
-  .shutter-inner{width:64px;height:64px;border-radius:50%;background:linear-gradient(180deg,#fff,#d8ecff);opacity:.95;display:flex;align-items:center;justify-content:center;}
-  .shutter-inner::after{content:'';width:54px;height:54px;border-radius:50%;background:var(--accent);opacity:.06;display:block}
-
-  .side-small{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-
-  /* top lens buttons */
-  .top-lenses{position:absolute;top:20px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:10px;pointer-events:auto;z-index:40;}
-  .lens-btn{background:rgba(20,20,20,0.6);border:1px solid rgba(101,101,101,0.45);color:var(--muted);padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;transition:all .12s}
-  .lens-btn.active, .lens-btn:hover{background:#222;color:#fff;border-color:rgba(255,255,255,0.12);transform:translateY(-3px)}
-
-  /* small top right/left icons */
-  .top-left, .top-right {position:absolute;top:14px;display:flex;gap:8px;z-index:40;pointer-events:auto;}
-  .top-left {left:14px}
-  .top-right {right:14px}
-
-  /* grid overlays */
-  .grid-overlay {position:absolute;inset:0;pointer-events:none;z-index:30;display:none}
-  .grid-overlay.visible{display:block}
-  .grid-overlay .line{position:absolute;background:rgba(255,255,255,0.12)}
-  /* 3x3 */
-  .grid-3 .line.h{height:1px;left:0;right:0}
-  .grid-3 .line.v{width:1px;top:0;bottom:0}
-  /* symmetrical cross */
-  .grid-sym .line.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:2px;height:2px;border-radius:2px;background:rgba(255,255,255,0.12)}
-
-  /* timer overlay */
-  .timer-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;font-weight:700;color:#fff;z-index:60;pointer-events:none; text-shadow:0 4px 20px rgba(0,0,0,.6)}
-
-  /* small bottom hint */
-  .hint{position:absolute;bottom:8px;left:8px;color:var(--muted);font-size:12px;z-index:40}
-
-  /* captured preview */
-  .preview-modal{position:absolute;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:80;display:none}
-  .preview-modal.visible{display:flex}
-  .preview-modal img{max-width:95%;max-height:95%;border-radius:8px}
-
-  /* some utility */
-  .hidden{display:none!important}
-  .muted{color:var(--muted)}
-  button.small{padding:6px;border-radius:8px;border:1px solid rgba(101,101,101,0.45);background:rgba(20,20,20,0.6);color:var(--muted)}
-  .top-controls{display:flex;gap:8px;align-items:center}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENS Camera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .camera-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+        
+        .camera-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+        }
+        
+        .camera-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        
+        .camera-overlay > * {
+            pointer-events: auto;
+        }
+        
+        .shutter-button {
+            width: 80px;
+            height: 80px;
+            border: 4px solid white;
+            border-radius: 50%;
+            background: #3b82f6;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .shutter-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+        }
+        
+        .shutter-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        
+        .shutter-button:active::after {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .control-button {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .control-button.active {
+            background: rgba(59, 130, 246, 0.8);
+            border-color: #3b82f6;
+        }
+        
+        .zoom-button {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .zoom-button.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            transform: scale(1.1);
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .grid-overlay.active {
+            opacity: 0.5;
+        }
+        
+        .grid-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .grid-3x3 .grid-line:nth-child(1) { top: 33.33%; left: 0; right: 0; height: 1px; }
+        .grid-3x3 .grid-line:nth-child(2) { top: 66.66%; left: 0; right: 0; height: 1px; }
+        .grid-3x3 .grid-line:nth-child(3) { left: 33.33%; top: 0; bottom: 0; width: 1px; }
+        .grid-3x3 .grid-line:nth-child(4) { left: 66.66%; top: 0; bottom: 0; width: 1px; }
+        
+        .settings-panel {
+            position: absolute;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .settings-panel.active {
+            right: 0;
+        }
+        
+        .aspect-ratio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .aspect-ratio-overlay.active {
+            opacity: 1;
+        }
+        
+        .timer-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .timer-indicator.active {
+            opacity: 1;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .flash-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .flash-effect.active {
+            animation: flash 0.3s ease;
+        }
+        
+        @keyframes flash {
+            0% { opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+        
+        .gallery-thumbnail {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: #333;
+            overflow: hidden;
+        }
+        
+        .gallery-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mode-selector {
+            display: flex;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .mode-button {
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .mode-button.active {
+            color: white;
+        }
+        
+        .mode-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #3b82f6;
+            border-radius: 1px;
+        }
+    </style>
 </head>
 <body>
-  <div class="app">
-    <header>
-      <!-- Back button you provided -->
-      <button class="back-button p-2 rounded-full text-sm font-medium transition bg-[#333333] border border-[#656565] text-[#aeaeae] hover:bg-[#444444] hover:text-white active:scale-95" onclick="goBack()">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
-      </button>
-
-      <div style="flex:1"></div>
-      <div style="font-size:13px;color:var(--muted)">Live Camera</div>
-      <div style="flex:1"></div>
-    </header>
-
-    <main class="stage">
-      <div class="video-wrap ratio-16-9" id="videoWrap">
-        <video id="preview" autoplay playsinline muted></video>
-
-        <!-- grid overlay -->
-        <div id="gridOverlay" class="grid-overlay grid-3">
-          <!-- 3x3: two horizontal and two vertical lines -->
-          <div class="line h" style="top:33.333%"></div>
-          <div class="line h" style="top:66.666%"></div>
-          <div class="line v" style="left:33.333%"></div>
-          <div class="line v" style="left:66.666%"></div>
-          <!-- symmetrical center cross -->
-          <div class="grid-sym" style="pointer-events:none;">
-            <div class="line center" style="width:2px;height:80%;left:50%;top:50%"></div>
-            <div class="line center" style="height:2px;width:80%;left:50%;top:50%"></div>
-          </div>
+    <div class="camera-container">
+        <!-- Camera Preview -->
+        <video class="camera-preview" id="cameraPreview" autoplay muted playsinline></video>
+        
+        <!-- Grid Overlay -->
+        <div class="grid-overlay grid-3x3" id="gridOverlay">
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
         </div>
-
-        <!-- timer -->
-        <div id="timerOverlay" class="timer-overlay hidden"></div>
-
-        <!-- top lens buttons -->
-        <div class="top-lenses">
-          <button class="lens-btn" id="btn-uw" title="Ultra wide / 0.5x">0.5x</button>
-          <button class="lens-btn active" id="btn-1x" title="Normal / 1x">1x</button>
-          <button class="lens-btn" id="btn-2x" title="2x">2x</button>
+        
+        <!-- Aspect Ratio Overlay -->
+        <div class="aspect-ratio-overlay" id="aspectRatioOverlay"></div>
+        
+        <!-- Timer Indicator -->
+        <div class="timer-indicator" id="timerIndicator">3</div>
+        
+        <!-- Flash Effect -->
+        <div class="flash-effect" id="flashEffect"></div>
+        
+        <!-- Camera Overlay -->
+        <div class="camera-overlay">
+            <!-- Top Controls -->
+            <div class="absolute top-0 left-0 right-0 p-4 flex justify-between items-start">
+                <!-- Left Top Controls -->
+                <div class="flex flex-col gap-3">
+                    <button class="control-button" onclick="goBack()" title="Back">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="control-button" id="flashBtn" onclick="toggleFlash()" title="Flash">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </button>
+                    <button class="control-button" id="timerBtn" onclick="toggleTimer()" title="Timer">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Right Top Controls -->
+                <div class="flex flex-col gap-3">
+                    <button class="control-button" onclick="toggleSettings()" title="Settings">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </button>
+                    <button class="control-button" id="gridBtn" onclick="toggleGrid()" title="Grid">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Zoom Controls -->
+            <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
+                <div class="flex flex-col gap-2">
+                    <button class="zoom-button active" onclick="setZoom(0.5)">0.5x</button>
+                    <button class="zoom-button" onclick="setZoom(1)">1x</button>
+                    <button class="zoom-button" onclick="setZoom(2)">2x</button>
+                </div>
+            </div>
+            
+            <!-- Camera Modes -->
+            <div class="absolute bottom-32 left-0 right-0">
+                <div class="mode-selector justify-center">
+                    <button class="mode-button" onclick="setMode('video')">VIDEO</button>
+                    <button class="mode-button active" onclick="setMode('photo')">PHOTO</button>
+                    <button class="mode-button" onclick="setMode('portrait')">PORTRAIT</button>
+                </div>
+            </div>
+            
+            <!-- Bottom Controls -->
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="flex items-center justify-between">
+                    <!-- Gallery Button -->
+                    <button class="gallery-thumbnail" onclick="openGallery()" title="Gallery">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                    </button>
+                    
+                    <!-- Shutter Button -->
+                    <button class="shutter-button" onclick="takePhoto()" title="Take Photo"></button>
+                    
+                    <!-- Switch Camera Button -->
+                    <button class="control-button" onclick="switchCamera()" title="Switch Camera">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <!-- top right small controls -->
-        <div class="top-right">
-          <div class="top-controls">
-            <button class="small" id="aspectBtn">4:3</button>
-            <button class="small" id="gridBtn">Grid</button>
-            <button class="small" id="timerBtn">Timer</button>
-            <button class="small" id="flashBtn">Flash</button>
-          </div>
+        
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-white text-lg font-semibold">Camera Settings</h3>
+                <button onclick="toggleSettings()" class="text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Aspect Ratio -->
+            <div class="mb-6">
+                <h4 class="text-white text-sm font-medium mb-3">Aspect Ratio</h4>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('full')">Full</button>
+                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('4:3')">4:3</button>
+                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('16:9')">16:9</button>
+                    <button class="aspect-btn bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setAspectRatio('1:1')">1:1</button>
+                </div>
+            </div>
+            
+            <!-- Grid Options -->
+            <div class="mb-6">
+                <h4 class="text-white text-sm font-medium mb-3">Grid Lines</h4>
+                <div class="space-y-2">
+                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('none')">None</button>
+                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('3x3')">Rule of Thirds</button>
+                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('golden')">Golden Ratio</button>
+                    <button class="grid-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setGridType('center')">Center Lines</button>
+                </div>
+            </div>
+            
+            <!-- Timer Options -->
+            <div class="mb-6">
+                <h4 class="text-white text-sm font-medium mb-3">Timer</h4>
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="timer-option bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setTimerDuration(3)">3s</button>
+                    <button class="timer-option bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setTimerDuration(5)">5s</button>
+                    <button class="timer-option bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors" onclick="setTimerDuration(10)">10s</button>
+                </div>
+            </div>
+            
+            <!-- Flash Options -->
+            <div class="mb-6">
+                <h4 class="text-white text-sm font-medium mb-3">Flash</h4>
+                <div class="space-y-2">
+                    <button class="flash-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setFlashMode('off')">Off</button>
+                    <button class="flash-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setFlashMode('on')">On</button>
+                    <button class="flash-option w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded text-sm transition-colors text-left" onclick="setFlashMode('auto')">Auto</button>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="controls" id="controls">
-          <button class="control-btn side-small" id="galleryBtn" title="Gallery"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7v10a2 2 0 0 0 2 2h14"/></svg></button>
-
-          <div class="circle-shutter" id="shutterBtn" title="Capture">
-            <div class="shutter-inner"></div>
-          </div>
-
-          <button class="control-btn side-small" id="switchBtn" title="Switch Camera">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 11-9-9v3"/></svg>
-          </button>
-        </div>
-
-        <div class="hint">Tap shutter to capture • swipe or buttons to change options</div>
-
-        <div id="previewModal" class="preview-modal">
-          <img id="capturedImage" src="" alt="Captured">
-          <div style="position:absolute;bottom:24px;display:flex;gap:8px">
-            <button class="control-btn" id="downloadBtn">Download</button>
-            <button class="control-btn" id="closePreviewBtn">Close</button>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-<script>
-/*
-  Camera.html script
-  - enumerates devices and picks appropriate rear devices for UW/1x/2x using label keywords
-  - falls back to zoom capabilities if dedicated device not available
-  - torch/flash toggling if supported
-  - grid, aspect ratio, timer, gallery (file input), capture to canvas
-*/
-
-(async function(){
-  // Elements
-  const video = document.getElementById('preview');
-  const videoWrap = document.getElementById('videoWrap');
-  const btnUW = document.getElementById('btn-uw');
-  const btn1x = document.getElementById('btn-1x');
-  const btn2x = document.getElementById('btn-2x');
-  const shutter = document.getElementById('shutterBtn');
-  const switchBtn = document.getElementById('switchBtn');
-  const galleryBtn = document.getElementById('galleryBtn');
-  const gridBtn = document.getElementById('gridBtn');
-  const aspectBtn = document.getElementById('aspectBtn');
-  const timerBtn = document.getElementById('timerBtn');
-  const flashBtn = document.getElementById('flashBtn');
-  const gridOverlay = document.getElementById('gridOverlay');
-  const timerOverlay = document.getElementById('timerOverlay');
-  const previewModal = document.getElementById('previewModal');
-  const capturedImage = document.getElementById('capturedImage');
-  const downloadBtn = document.getElementById('downloadBtn');
-  const closePreviewBtn = document.getElementById('closePreviewBtn');
-
-  let currentStream = null;
-  let videoTrack = null;
-  let usingFacingMode = 'environment'; // default rear
-  let devices = [];
-  let deviceMap = { rear: [], front: [] }; // arrays of deviceInfos
-  let selectedDeviceId = null;
-  let currentLens = '1x'; // 'uw', '1x', '2x'
-  let torchOn = false;
-  let timerSeconds = 0; // 0 means no timer
-  let aspectMode = '4:3'; // '1:1','4:3','16:9','full'
-  let gridMode = 'none'; // 'none','3x3','sym'
-  let frontFacing = false;
-
-  // helper: list devices and classify
-  async function updateDeviceList(){
-    try{
-      const all = await navigator.mediaDevices.enumerateDevices();
-      devices = all.filter(d=>d.kind==='videoinput');
-      deviceMap = { rear: [], front: [] };
-      devices.forEach(d=>{
-        const label = (d.label||'').toLowerCase();
-        if(label.includes('front') || label.includes('user')) deviceMap.front.push(d);
-        else deviceMap.rear.push(d);
-      });
-    }catch(e){
-      console.warn('Device enumeration failed', e);
-    }
-  }
-
-  // pick device by keyword list (try to find ultrawide/tele/wide)
-  function pickDeviceByKeyword(keywords = [], preferFront=false){
-    const list = preferFront ? deviceMap.front : deviceMap.rear;
-    for(const kw of keywords){
-      const match = list.find(d => (d.label||'').toLowerCase().includes(kw));
-      if(match) return match.deviceId;
-    }
-    // fallback to the first rear
-    if(list.length) return list[0].deviceId;
-    // fallback to front if nothing else
-    if(deviceMap.front.length) return deviceMap.front[0].deviceId;
-    return null;
-  }
-
-  // Start streaming with optional deviceId and constraints
-  async function startStream({deviceId=null, facingMode='environment', zoom=null} = {}){
-    stopStream();
-    const constraints = {
-      audio: false,
-      video: {
-        width: { ideal: 2160 }, // high res ideal
-        height: { ideal: 1440 },
-        facingMode: facingMode,
-      }
-    };
-    if(deviceId){
-      constraints.video.deviceId = { exact: deviceId };
-    } else {
-      constraints.video.facingMode = { ideal: facingMode };
-    }
-    try{
-      currentStream = await navigator.mediaDevices.getUserMedia(constraints);
-      video.srcObject = currentStream;
-      videoTrack = currentStream.getVideoTracks()[0];
-
-      // mirror for front camera, not for rear
-      const settings = videoTrack.getSettings();
-      frontFacing = (settings.facingMode === 'user' || settings.facingMode === 'front');
-      video.style.transform = frontFacing ? 'scaleX(-1)' : 'scaleX(1)';
-
-      // attempt to set zoom if requested and available
-      const capabilities = videoTrack.getCapabilities ? videoTrack.getCapabilities() : {};
-      if(zoom && capabilities.zoom){
-        const z = Math.max(capabilities.zoom.min || 1, Math.min(capabilities.zoom.max || zoom, zoom));
-        try{ await videoTrack.applyConstraints({ advanced: [{ zoom: z }] }); } catch(e){ console.debug('zoom apply failed', e); }
-      }
-
-      // update torch availability
-      updateFlashButton();
-
-      // remember selected deviceId
-      try{ selectedDeviceId = videoTrack.getSettings().deviceId || deviceId; }catch(e){}
-    }catch(err){
-      console.error('Could not start camera', err);
-      alert('Camera access denied or unavailable. Please allow camera permissions and try again.');
-    }
-  }
-
-  function stopStream(){
-    if(currentStream){
-      currentStream.getTracks().forEach(t=>t.stop());
-      currentStream = null;
-      videoTrack = null;
-    }
-  }
-
-  // Attempt to use dedicated lens devices for 0.5x and 2x; fallback to zoom constraints
-  async function applyLens(lens){
-    currentLens = lens;
-    // highlight UI
-    [btnUW, btn1x, btn2x].forEach(b=>b.classList.toggle('active', b.id === `btn-${lens.replace('x','x')}` || (lens==='1x' && b.id==='btn-1x')));
-    // if front camera only allow 1x
-    if(frontFacing && lens !== '1x'){
-      console.debug('front facing - not switching lens; only 1x available');
-      return;
-    }
-
-    // define keyword lists for selection
-    if(lens === 'uw' || lens === '0.5x'){
-      // ultrawide keywords
-      const candidate = pickDeviceByKeyword(['ultra','ultrawide','ultrawide','0.5','wide-angle','wide angle']);
-      if(candidate && candidate !== selectedDeviceId){
-        await startStream({ deviceId: candidate, facingMode: 'environment' });
-        return;
-      }
-      // fallback: try zoom < 1 if device supports (rare). Usually zoom is >=1; we'll skip if unsupported.
-      if(videoTrack && videoTrack.getCapabilities){
-        const cap = videoTrack.getCapabilities();
-        if(cap.zoom && cap.zoom.min < 1){
-          const desired = Math.max(cap.zoom.min, 0.5);
-          try{ await videoTrack.applyConstraints({ advanced: [{ zoom: desired }] }); return; }catch(e){}
+    <script>
+        // Camera state
+        let currentStream = null;
+        let currentCamera = 'user'; // 'user' for front, 'environment' for back
+        let currentZoom = 1;
+        let flashMode = 'off';
+        let timerDuration = 0;
+        let timerActive = false;
+        let gridType = 'none';
+        let aspectRatio = 'full';
+        let currentMode = 'photo';
+        let isRecording = false;
+        
+        // Initialize camera
+        async function initCamera() {
+            try {
+                const constraints = {
+                    video: {
+                        facingMode: currentCamera,
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    }
+                };
+                
+                if (currentStream) {
+                    currentStream.getTracks().forEach(track => track.stop());
+                }
+                
+                currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+                document.getElementById('cameraPreview').srcObject = currentStream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('Unable to access camera. Please check permissions.');
+            }
         }
-      }
-      // final fallback: do nothing (already using main wide)
-    } else if(lens === '2x' || lens === 'tele'){
-      const candidate = pickDeviceByKeyword(['tele','telephoto','2x','3x']);
-      if(candidate && candidate !== selectedDeviceId){
-        await startStream({ deviceId: candidate, facingMode: 'environment' });
-        return;
-      }
-      // fallback: try to set zoom >1
-      if(videoTrack && videoTrack.getCapabilities){
-        const cap = videoTrack.getCapabilities();
-        if(cap.zoom){
-          const desired = Math.min(cap.zoom.max || 2, 2);
-          try{ await videoTrack.applyConstraints({ advanced: [{ zoom: desired }] }); return; }catch(e){}
+        
+        // Navigation
+        function goBack() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+            window.location.href = 'index.html';
         }
-      }
-    } else if(lens === '1x'){
-      // pick default wide rear device
-      const candidate = pickDeviceByKeyword(['wide','main','back','wide-angle','standard']);
-      if(candidate && candidate !== selectedDeviceId){
-        await startStream({ deviceId: candidate, facingMode: 'environment' });
-        return;
-      }
-      // otherwise keep current
-    }
-  }
-
-  // Switch between front/back cameras
-  async function toggleCamera(){
-    await updateDeviceList();
-    // if currently using rear -> switch to front if available
-    if(!frontFacing && deviceMap.front.length){
-      const deviceId = deviceMap.front[0].deviceId;
-      await startStream({ deviceId, facingMode: 'user' });
-    } else {
-      // switch to rear (prefer main)
-      const candidate = pickDeviceByKeyword(['wide','main','back','rear','wide-angle']);
-      if(candidate) await startStream({ deviceId: candidate, facingMode: 'environment' });
-      else if(deviceMap.rear.length) await startStream({ deviceId: deviceMap.rear[0].deviceId });
-    }
-    // after switching, ensure lens UI: front camera only 1x
-    frontFacing ? disableLensButtonsForFront() : enableLensButtons();
-  }
-
-  function disableLensButtonsForFront(){
-    [btnUW, btn2x].forEach(b=>{
-      b.classList.remove('active');
-      b.disabled = true;
-      b.style.opacity = '0.5';
-      b.style.cursor = 'not-allowed';
-    });
-    btn1x.classList.add('active');
-    btn1x.disabled = false;
-    btn1x.style.opacity = '1';
-    btn1x.style.cursor = 'pointer';
-  }
-  function enableLensButtons(){
-    [btnUW, btn1x, btn2x].forEach(b=>{
-      b.disabled = false;
-      b.style.opacity = '1';
-      b.style.cursor = 'pointer';
-    });
-  }
-
-  // Flash / torch toggle
-  async function toggleTorch(){
-    if(!videoTrack) return;
-    const cap = videoTrack.getCapabilities ? videoTrack.getCapabilities() : {};
-    if(!cap.torch){
-      alert('Torch not supported on this device/browser.');
-      return;
-    }
-    try{
-      torchOn = !torchOn;
-      await videoTrack.applyConstraints({ advanced: [{ torch: torchOn }] });
-      updateFlashButton();
-    }catch(e){
-      console.warn('Torch toggle failed', e);
-    }
-  }
-  function updateFlashButton(){
-    if(!videoTrack) { flashBtn.textContent = 'Flash'; return; }
-    const cap = videoTrack.getCapabilities ? videoTrack.getCapabilities() : {};
-    flashBtn.textContent = cap.torch ? (torchOn ? 'Flash On' : 'Flash') : 'No Flash';
-  }
-
-  // Aspect ratio control
-  function cycleAspect(){
-    const order = ['1:1','4:3','16:9','full'];
-    const idx = order.indexOf(aspectMode);
-    aspectMode = order[(idx+1)%order.length];
-    aspectBtn.textContent = aspectMode === 'full' ? 'Full' : aspectMode;
-    // toggle classes on wrapper
-    videoWrap.classList.remove('ratio-16-9','ratio-4-3','ratio-1-1','ratio-full');
-    if(aspectMode==='16:9') videoWrap.classList.add('ratio-16-9');
-    if(aspectMode==='4:3') videoWrap.classList.add('ratio-4-3');
-    if(aspectMode==='1:1') videoWrap.classList.add('ratio-1-1');
-    if(aspectMode==='full') videoWrap.classList.add('ratio-full');
-  }
-
-  // Grid toggle/cycle
-  function cycleGrid(){
-    if(gridMode==='none'){ gridMode='3x3'; gridOverlay.classList.add('visible'); gridOverlay.classList.remove('grid-sym'); gridOverlay.classList.add('grid-3'); gridBtn.textContent='Grid:3x3'; }
-    else if(gridMode==='3x3'){ gridMode='sym'; gridOverlay.classList.add('visible'); gridOverlay.classList.remove('grid-3'); gridBtn.textContent='Grid:Sym'; }
-    else { gridMode='none'; gridOverlay.classList.remove('visible'); gridBtn.textContent='Grid'; }
-  }
-
-  // Timer control
-  function cycleTimer(){
-    const order = [0,3,5,10];
-    const idx = order.indexOf(timerSeconds);
-    timerSeconds = order[(idx+1)%order.length];
-    timerBtn.textContent = timerSeconds===0 ? 'Timer' : `${timerSeconds}s`;
-  }
-
-  // shutter capture with timer
-  async function capturePhoto(){
-    if(timerSeconds > 0){
-      await runCountdown(timerSeconds);
-    }
-    // capture current frame to canvas with aspect ratio cropping
-    if(!video) return;
-    const trackSettings = videoTrack ? videoTrack.getSettings() : {};
-    const naturalWidth = video.videoWidth;
-    const naturalHeight = video.videoHeight;
-    if(!naturalWidth || !naturalHeight){
-      console.warn('video dimensions not ready');
-      return;
-    }
-
-    // Determine capture target size based on aspectMode
-    let targetW = naturalWidth, targetH = naturalHeight;
-    const ratio = (r)=>{ const [a,b]=r.split(':').map(Number); return a/b; };
-    if(aspectMode==='1:1'){ const side=Math.min(naturalWidth, naturalHeight); targetW = targetH = side; }
-    else if(aspectMode==='4:3'){ const r=4/3; if(naturalWidth/naturalHeight > r){ targetH = naturalHeight; targetW = Math.round(r*targetH); } else { targetW = naturalWidth; targetH = Math.round(targetW / r); }}
-    else if(aspectMode==='16:9'){ const r=16/9; if(naturalWidth/naturalHeight > r){ targetH = naturalHeight; targetW = Math.round(r*targetH); } else { targetW = naturalWidth; targetH = Math.round(targetW / r); }}
-    // full -> capture entire frame
-
-    // create canvas
-    const canvas = document.createElement('canvas');
-    canvas.width = targetW; canvas.height = targetH;
-    const ctx = canvas.getContext('2d');
-
-    // compute source rect to center-crop
-    const sx = Math.round((naturalWidth - targetW)/2);
-    const sy = Math.round((naturalHeight - targetH)/2);
-    try{
-      ctx.drawImage(video, sx, sy, targetW, targetH, 0, 0, targetW, targetH);
-    }catch(e){
-      // some browsers require drawing using track image capture fallback
-      try{
-        const imgBitmap = await createImageBitmap(video);
-        ctx.drawImage(imgBitmap, sx, sy, targetW, targetH, 0, 0, targetW, targetH);
-      }catch(er){
-        console.error('capture failed',er);
-      }
-    }
-
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
-    showPreview(dataUrl);
-  }
-
-  function showPreview(dataUrl){
-    capturedImage.src = dataUrl;
-    previewModal.classList.add('visible');
-  }
-
-  downloadBtn.addEventListener('click', ()=>{
-    const a = document.createElement('a');
-    a.href = capturedImage.src;
-    a.download = `LENS_${Date.now()}.jpg`;
-    a.click();
-  });
-  closePreviewBtn.addEventListener('click', ()=> previewModal.classList.remove('visible'));
-
-  // Countdown display
-  function runCountdown(seconds){
-    return new Promise(resolve=>{
-      let s = seconds;
-      timerOverlay.classList.remove('hidden');
-      timerOverlay.textContent = s;
-      const iv = setInterval(()=>{
-        s--;
-        if(s<=0){ clearInterval(iv); timerOverlay.classList.add('hidden'); resolve(); }
-        else timerOverlay.textContent = s;
-      },1000);
-    });
-  }
-
-  // Gallery button -> trigger file input
-  const fileInput = document.createElement('input');
-  fileInput.type='file';
-  fileInput.accept='image/*';
-  fileInput.className='hidden';
-  document.body.appendChild(fileInput);
-  fileInput.addEventListener('change',(e)=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    const url = URL.createObjectURL(f);
-    showPreview(url);
-  });
-  galleryBtn.addEventListener('click', ()=> fileInput.click());
-
-  // wire UI events
-  btnUW.addEventListener('click', ()=> applyLens('uw'));
-  btn1x.addEventListener('click', ()=> applyLens('1x'));
-  btn2x.addEventListener('click', ()=> applyLens('2x'));
-  switchBtn.addEventListener('click', ()=> toggleCamera());
-  flashBtn.addEventListener('click', ()=> toggleTorch());
-  aspectBtn.addEventListener('click', ()=> cycleAspect());
-  gridBtn.addEventListener('click', ()=> cycleGrid());
-  timerBtn.addEventListener('click', ()=> cycleTimer());
-  shutter.addEventListener('click', ()=> capturePhoto());
-
-  // Start camera on load - choose best rear by default (main wide)
-  await updateDeviceList();
-  // pick main wide/back device by keywords
-  const preferred = pickDeviceByKeyword(['wide','main','back','rear','wide-angle']);
-  if(preferred){
-    await startStream({ deviceId: preferred, facingMode: 'environment' });
-  } else {
-    // fallback to any device
-    await startStream({ facingMode: 'environment' });
-  }
-  enableLensButtons();
-
-  // Expose goBack for header
-  window.goBack = function(){
-    // customize as needed - default behavior is history.back
-    try { history.back(); } catch(e){ window.location = '/'; }
-  };
-
-  // Expose navigateToCamera although this file is camera page already
-  window.navigateToCamera = ()=> {};
-})();
-
-</script>
-</body>
+        
+        // Camera controls
+        async function switchCamera() {
+            currentCamera = currentCamera === 'user' ? 'environment' : 'user';
+            await initCamera();
+        }
+        
+        function setZoom(zoom) {
+            currentZoom = zoom;
+            document.querySelectorAll('.zoom-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Apply zoom effect (visual feedback)
+            const preview = document.getElementById('cameraPreview');
+            preview.style.transform = `scale(${zoom})`;
+        }
+        
+        // Flash controls
+        function toggleFlash() {
+            const modes = ['off', 'on', 'auto'];
+            const currentIndex = modes.indexOf(flashMode);
+            flashMode = modes[(currentIndex + 1) % modes.length];
+            
+            const flashBtn = document.getElementById('flashBtn');
+            flashBtn.classList.toggle('active', flashMode !== 'off');
+            
+            updateFlashIcon();
+        }
+        
+        function setFlashMode(mode) {
+            flashMode = mode;
+            const flashBtn = document.getElementById('flashBtn');
+            flashBtn.classList.toggle('active', mode !== 'off');
+            updateFlashIcon();
+            updateSettingsButtons();
+        }
+        
+        function updateFlashIcon() {
+            const flashBtn = document.getElementById('flashBtn');
+            const icon = flashBtn.querySelector('svg');
+            
+            if (flashMode === 'off') {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12"/>';
+            } else if (flashMode === 'auto') {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/><text x="12" y="20" text-anchor="middle" font-size="8" fill="currentColor">A</text>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>';
+            }
+        }
+        
+        // Timer controls
+        function toggleTimer() {
+            const durations = [0, 3, 5, 10];
+            const currentIndex = durations.indexOf(timerDuration);
+            timerDuration = durations[(currentIndex + 1) % durations.length];
+            
+            const timerBtn = document.getElementById('timerBtn');
+            timerBtn.classList.toggle('active', timerDuration > 0);
+            
+            updateTimerIcon();
+        }
+        
+        function setTimerDuration(duration) {
+            timerDuration = duration;
+            const timerBtn = document.getElementById('timerBtn');
+            timerBtn.classList.toggle('active', duration > 0);
+            updateTimerIcon();
+            updateSettingsButtons();
+        }
+        
+        function updateTimerIcon() {
+            const timerBtn = document.getElementById('timerBtn');
+            const icon = timerBtn.querySelector('svg');
+            
+            if (timerDuration > 0) {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/><text x="12" y="16" text-anchor="middle" font-size="6" fill="currentColor">${timerDuration}</text>`;
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+            }
+        }
+        
+        // Grid controls
+        function toggleGrid() {
+            const types = ['none', '3x3', 'golden', 'center'];
+            const currentIndex = types.indexOf(gridType);
+            gridType = types[(currentIndex + 1) % types.length];
+            
+            const gridBtn = document.getElementById('gridBtn');
+            gridBtn.classList.toggle('active', gridType !== 'none');
+            
+            updateGrid();
+        }
+        
+        function setGridType(type) {
+            gridType = type;
+            const gridBtn = document.getElementById('gridBtn');
+            gridBtn.classList.toggle('active', type !== 'none');
+            updateGrid();
+            updateSettingsButtons();
+        }
+        
+        function updateGrid() {
+            const gridOverlay = document.getElementById('gridOverlay');
+            gridOverlay.className = `grid-overlay ${gridType !== 'none' ? 'active' : ''} grid-${gridType}`;
+            
+            // Update grid lines based on type
+            if (gridType === 'golden') {
+                gridOverlay.innerHTML = `
+                    <div class="grid-line" style="top: 38.2%; left: 0; right: 0; height: 1px;"></div>
+                    <div class="grid-line" style="top: 61.8%; left: 0; right: 0; height: 1px;"></div>
+                    <div class="grid-line" style="left: 38.2%; top: 0; bottom: 0; width: 1px;"></div>
+                    <div class="grid-line" style="left: 61.8%; top: 0; bottom: 0; width: 1px;"></div>
+                `;
+            } else if (gridType === 'center') {
+                gridOverlay.innerHTML = `
+                    <div class="grid-line" style="top: 50%; left: 0; right: 0; height: 1px;"></div>
+                    <div class="grid-line" style="left: 50%; top: 0; bottom: 0; width: 1px;"></div>
+                `;
+            } else if (gridType === '3x3') {
+                gridOverlay.innerHTML = `
+                    <div class="grid-line" style="top: 33.33%; left: 0; right: 0; height: 1px;"></div>
+                    <div class="grid-line" style="top: 66.66%; left: 0; right: 0; height: 1px;"></div>
+                    <div class="grid-line" style="left: 33.33%; top: 0; bottom: 0; width: 1px;"></div>
+                    <div class="grid-line" style="left: 66.66%; top: 0; bottom: 0; width: 1px;"></div>
+                `;
+            }
+        }
+        
+        // Aspect ratio controls
+        function setAspectRatio(ratio) {
+            aspectRatio = ratio;
+            const overlay = document.getElementById('aspectRatioOverlay');
+            
+            overlay.classList.remove('active');
+            
+            setTimeout(() => {
+                if (ratio === '4:3') {
+                    const height = window.innerHeight * 0.75;
+                    const top = (window.innerHeight - height) / 2;
+                    overlay.style.top = `${top}px`;
+                    overlay.style.bottom = `${top}px`;
+                    overlay.style.left = '0';
+                    overlay.style.right = '0';
+                } else if (ratio === '16:9') {
+                    const height = window.innerWidth * 9 / 16;
+                    const top = (window.innerHeight - height) / 2;
+                    overlay.style.top = `${top}px`;
+                    overlay.style.bottom = `${window.innerHeight - top - height}px`;
+                    overlay.style.left = '0';
+                    overlay.style.right = '0';
+                } else if (ratio === '1:1') {
+                    const size = Math.min(window.innerWidth, window.innerHeight);
+                    const topBottom = (window.innerHeight - size) / 2;
+                    const leftRight = (window.innerWidth - size) / 2;
+                    overlay.style.top = `${topBottom}px`;
+                    overlay.style.bottom = `${topBottom}px`;
+                    overlay.style.left = `${leftRight}px`;
+                    overlay.style.right = `${leftRight}px`;
+                } else {
+                    overlay.style.top = '0';
+                    overlay.style.bottom = '0';
+                    overlay.style.left = '0';
+                    overlay.style.right = '0';
+                }
+                
+                if (ratio !== 'full') {
+                    overlay.classList.add('active');
+                }
+            }, 50);
+            
+            updateSettingsButtons();
+        }
+        
+        // Camera modes
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const shutterButton = document.querySelector('.shutter-button');
+            if (mode === 'video') {
+                shutterButton.style.background = '#ef4444';
+                shutterButton.title = isRecording ? 'Stop Recording' : 'Start Recording';
+            } else {
+                shutterButton.style.background = '#3b82f6';
+                shutterButton.title = 'Take Photo';
+            }
+        }
+        
+        // Settings panel
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            panel.classList.toggle('active');
+        }
+        
+        function updateSettingsButtons() {
+            // Update aspect ratio buttons
+            document.querySelectorAll('.aspect-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-gray-700');
+            });
+            
+            // Update grid buttons
+            document.querySelectorAll('.grid-option').forEach(btn => {
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-gray-700');
+            });
+            
+            // Update timer buttons
+            document.querySelectorAll('.timer-option').forEach(btn => {
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-gray-700');
+            });
+            
+            // Update flash buttons
+            document.querySelectorAll('.flash-option').forEach(btn => {
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-gray-700');
+            });
+        }
+        
+        // Photo capture
+        async function takePhoto() {
+            if (currentMode === 'video') {
+                toggleRecording();
+                return;
+            }
+            
+            if (timerDuration > 0 && !timerActive) {
+                startTimer();
+                return;
+            }
+            
+            // Flash effect
+            if (flashMode === 'on' || (flashMode === 'auto' && shouldUseFlash())) {
+                const flashEffect = document.getElementById('flashEffect');
+                flashEffect.classList.add('active');
+                setTimeout(() => flashEffect.classList.remove('active'), 300);
+            }
+            
+            // Capture photo (simulated)
+            const canvas = document.createElement('canvas');
+            const video = document.getElementById('cameraPreview');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0);
+            
+            // Convert to blob and save (simulated)
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                console.log('Photo captured:', url);
+                
+                // Update gallery thumbnail
+                const galleryBtn = document.querySelector('.gallery-thumbnail');
+                galleryBtn.innerHTML = `<img src="${url}" alt="Last photo">`;
+                
+                // Show success feedback
+                showCaptureSuccess();
+            }, 'image/jpeg', 0.9);
+        }
+        
+        function toggleRecording() {
+            isRecording = !isRecording;
+            const shutterButton = document.querySelector('.shutter-button');
+            
+            if (isRecording) {
+                shutterButton.style.background = '#dc2626';
+                shutterButton.title = 'Stop Recording';
+                // Add recording indicator
+                shutterButton.style.animation = 'pulse 1s infinite';
+            } else {
+                shutterButton.style.background = '#ef4444';
+                shutterButton.title = 'Start Recording';
+                shutterButton.style.animation = 'none';
+            }
+        }
+        
+        function startTimer() {
+            timerActive = true;
+            let countdown = timerDuration;
+            const indicator = document.getElementById('timerIndicator');
+            
+            indicator.textContent = countdown;
+            indicator.classList.add('active');
+            
+            const timer = setInterval(() => {
+                countdown--;
+                indicator.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    indicator.classList.remove('active');
+                    timerActive = false;
+                    takePhoto();
+                }
+            }, 1000);
+        }
+        
+        function shouldUseFlash() {
+            // Simple light detection simulation
+            return Math.random() < 0.3; // 30% chance to use flash in auto mode
+        }
+        
+        function showCaptureSuccess() {
+            // Brief visual feedback
+            const preview = document.getElementById('cameraPreview');
+            preview.style.filter = 'brightness(1.2)';
+            setTimeout(() => {
+                preview.style.filter = 'brightness(1)';
+            }, 200);
+        }
+        
+        // Gallery
+        function openGallery() {
+            alert('Gallery feature would open here with all captured photos and videos!');
+        }
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initCamera();
+            updateFlashIcon();
+            updateTimerIcon();
+            updateGrid();
+            setAspectRatio('full');
+            
+            // Handle orientation changes
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    setAspectRatio(aspectRatio);
+                }, 500);
+            });
+            
+            // Prevent default touch behaviors
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+        });
+        
+        // Handle visibility change
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            } else if (!document.hidden) {
+                initCamera();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9842fbcb433a57f0',t:'MTc1ODcyNDI2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
