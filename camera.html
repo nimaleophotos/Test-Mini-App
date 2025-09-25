@@ -665,42 +665,68 @@
                     return;
                 }
                 
-                // Create crop overlay
+                // Create crop overlay with black masks
                 const overlay = document.createElement('div');
-                overlay.className = 'aspect-crop-overlay';
-                
-                const frame = document.createElement('div');
-                frame.className = 'aspect-crop-frame';
-                
-                // Clone the video element for the crop frame
-                const cropVideo = this.video.cloneNode(true);
-                cropVideo.className = 'aspect-crop-video';
-                cropVideo.srcObject = this.currentStream;
-                cropVideo.style.transform = this.video.style.transform; // Match zoom and flip
+                overlay.style.position = 'absolute';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.pointerEvents = 'none';
+                overlay.style.zIndex = '15';
                 
                 const containerWidth = container.offsetWidth; // x
                 const containerHeight = container.offsetHeight; // 2x (vertical phone)
-                let frameWidth, frameHeight;
+                let cropHeight;
                 
                 if (this.aspectRatio === '1:1') {
-                    // Square crop - use container width for both dimensions
-                    frameWidth = containerWidth; // x
-                    frameHeight = containerWidth; // x (square)
+                    // Square crop - height = width
+                    cropHeight = containerWidth; // x (square)
                 } else if (this.aspectRatio === '4:3') {
-                    // 4:3 portrait crop - width stays same, height = width * (4/3)
-                    frameWidth = containerWidth; // x
-                    frameHeight = containerWidth * (4/3); // x * 1.33 (taller than square)
+                    // 4:3 portrait crop - height = width * (4/3)
+                    cropHeight = containerWidth * (4/3); // x * 1.33
                 } else if (this.aspectRatio === '16:9') {
-                    // 16:9 portrait crop - width stays same, height = width * (16/9)
-                    frameWidth = containerWidth; // x
-                    frameHeight = containerWidth * (16/9); // x * 1.78 (taller than 4:3, but less than 2x)
+                    // 16:9 portrait crop - height = width * (16/9)
+                    cropHeight = containerWidth * (16/9); // x * 1.78
                 }
                 
-                frame.style.width = frameWidth + 'px';
-                frame.style.height = frameHeight + 'px';
+                // Calculate how much to crop from top and bottom
+                const cropAmount = (containerHeight - cropHeight) / 2;
                 
-                frame.appendChild(cropVideo);
-                overlay.appendChild(frame);
+                // Create top black mask
+                if (cropAmount > 0) {
+                    const topMask = document.createElement('div');
+                    topMask.style.position = 'absolute';
+                    topMask.style.top = '0';
+                    topMask.style.left = '0';
+                    topMask.style.width = '100%';
+                    topMask.style.height = cropAmount + 'px';
+                    topMask.style.background = '#000';
+                    overlay.appendChild(topMask);
+                    
+                    // Create bottom black mask
+                    const bottomMask = document.createElement('div');
+                    bottomMask.style.position = 'absolute';
+                    bottomMask.style.bottom = '0';
+                    bottomMask.style.left = '0';
+                    bottomMask.style.width = '100%';
+                    bottomMask.style.height = cropAmount + 'px';
+                    bottomMask.style.background = '#000';
+                    overlay.appendChild(bottomMask);
+                    
+                    // Create white border frame to show crop area
+                    const frame = document.createElement('div');
+                    frame.style.position = 'absolute';
+                    frame.style.top = cropAmount + 'px';
+                    frame.style.left = '0';
+                    frame.style.width = '100%';
+                    frame.style.height = cropHeight + 'px';
+                    frame.style.border = '2px solid rgba(255, 255, 255, 0.8)';
+                    frame.style.boxSizing = 'border-box';
+                    frame.style.pointerEvents = 'none';
+                    overlay.appendChild(frame);
+                }
+                
                 container.appendChild(overlay);
             }
 
@@ -775,5 +801,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b921fb04e4a25',t:'MTc1ODgxNDMxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b97c6c1a94a25',t:'MTc1ODgxNDU0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
