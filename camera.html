@@ -62,7 +62,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 30px 20px;
+            padding: 40px 20px;
             background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%);
             pointer-events: auto;
             z-index: 20;
@@ -185,12 +185,12 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .lens-btn {
-            width: 38px;
-            height: 38px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: rgba(255,255,255,0.2);
             border: none;
@@ -198,7 +198,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             backdrop-filter: blur(10px);
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -273,7 +273,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: #000;
             z-index: 15;
             pointer-events: none;
         }
@@ -285,7 +285,19 @@
             transform: translate(-50%, -50%);
             border: 2px solid rgba(255, 255, 255, 0.8);
             background: transparent;
-            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .aspect-crop-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
         }
 
         @media (max-width: 480px) {
@@ -660,6 +672,12 @@
                 const frame = document.createElement('div');
                 frame.className = 'aspect-crop-frame';
                 
+                // Clone the video element for the crop frame
+                const cropVideo = this.video.cloneNode(true);
+                cropVideo.className = 'aspect-crop-video';
+                cropVideo.srcObject = this.currentStream;
+                cropVideo.style.transform = this.video.style.transform; // Match zoom and flip
+                
                 const containerWidth = container.offsetWidth;
                 const containerHeight = container.offsetHeight;
                 let frameWidth, frameHeight;
@@ -693,6 +711,7 @@
                 frame.style.width = frameWidth + 'px';
                 frame.style.height = frameHeight + 'px';
                 
+                frame.appendChild(cropVideo);
                 overlay.appendChild(frame);
                 container.appendChild(overlay);
             }
@@ -768,5 +787,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b77336428b948',t:'MTc1ODgxMzIwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b7e17c7f8b948',t:'MTc1ODgxMzQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
