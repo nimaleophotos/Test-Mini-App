@@ -718,44 +718,50 @@
                     return;
                 }
                 
-                const containerHeight = container.offsetHeight;
-                
                 if (this.aspectRatio === '1:1') {
                     // Square crop - remove exactly 25% from top and 25% from bottom
+                    const containerHeight = window.innerHeight;
                     const cropAmount = containerHeight * 0.25; // 25% of total height
                     
                     // Create crop overlay with black masks
                     const overlay = document.createElement('div');
                     overlay.className = 'aspect-crop-overlay';
-                    overlay.style.position = 'absolute';
-                    overlay.style.top = '0';
-                    overlay.style.left = '0';
-                    overlay.style.width = '100%';
-                    overlay.style.height = '100%';
-                    overlay.style.pointerEvents = 'none';
-                    overlay.style.zIndex = '15';
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        pointer-events: none;
+                        z-index: 15;
+                        background: transparent;
+                    `;
                     
                     // Create top black mask (25% of screen height)
                     const topMask = document.createElement('div');
-                    topMask.style.position = 'absolute';
-                    topMask.style.top = '0';
-                    topMask.style.left = '0';
-                    topMask.style.width = '100%';
-                    topMask.style.height = cropAmount + 'px';
-                    topMask.style.background = '#000';
+                    topMask.style.cssText = `
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: ${cropAmount}px;
+                        background: #000;
+                    `;
                     overlay.appendChild(topMask);
                     
                     // Create bottom black mask (25% of screen height)
                     const bottomMask = document.createElement('div');
-                    bottomMask.style.position = 'absolute';
-                    bottomMask.style.bottom = '0';
-                    bottomMask.style.left = '0';
-                    bottomMask.style.width = '100%';
-                    bottomMask.style.height = cropAmount + 'px';
-                    bottomMask.style.background = '#000';
+                    bottomMask.style.cssText = `
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: ${cropAmount}px;
+                        background: #000;
+                    `;
                     overlay.appendChild(bottomMask);
                     
-                    container.appendChild(overlay);
+                    document.body.appendChild(overlay);
                 }
             }
 
@@ -830,5 +836,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bec60715bcbb9',t:'MTc1ODgxODAwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bf1b6f714cbb9',t:'MTc1ODgxODIyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
