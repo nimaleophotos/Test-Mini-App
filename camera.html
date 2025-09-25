@@ -675,20 +675,23 @@
                 overlay.style.pointerEvents = 'none';
                 overlay.style.zIndex = '15';
                 
-                const containerWidth = container.offsetWidth; // x
-                const containerHeight = container.offsetHeight; // 2x (vertical phone)
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
                 let cropHeight;
                 
                 if (this.aspectRatio === '1:1') {
                     // Square crop - height = width
-                    cropHeight = containerWidth; // x (square)
+                    cropHeight = containerWidth;
                 } else if (this.aspectRatio === '4:3') {
-                    // 4:3 portrait crop - height = width * (4/3)
-                    cropHeight = containerWidth * (4/3); // x * 1.33
+                    // 4:3 aspect ratio - height = width * (3/4) for portrait orientation
+                    cropHeight = containerWidth * (3/4);
                 } else if (this.aspectRatio === '16:9') {
-                    // 16:9 portrait crop - height = width * (16/9)
-                    cropHeight = containerWidth * (16/9); // x * 1.78
+                    // 16:9 aspect ratio - height = width * (9/16) for portrait orientation
+                    cropHeight = containerWidth * (9/16);
                 }
+                
+                // Ensure crop height doesn't exceed container height
+                cropHeight = Math.min(cropHeight, containerHeight);
                 
                 // Calculate how much to crop from top and bottom
                 const cropAmount = (containerHeight - cropHeight) / 2;
@@ -713,18 +716,6 @@
                     bottomMask.style.height = cropAmount + 'px';
                     bottomMask.style.background = '#000';
                     overlay.appendChild(bottomMask);
-                    
-                    // Create white border frame to show crop area
-                    const frame = document.createElement('div');
-                    frame.style.position = 'absolute';
-                    frame.style.top = cropAmount + 'px';
-                    frame.style.left = '0';
-                    frame.style.width = '100%';
-                    frame.style.height = cropHeight + 'px';
-                    frame.style.border = '2px solid rgba(255, 255, 255, 0.8)';
-                    frame.style.boxSizing = 'border-box';
-                    frame.style.pointerEvents = 'none';
-                    overlay.appendChild(frame);
                 }
                 
                 container.appendChild(overlay);
@@ -801,5 +792,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b97c6c1a94a25',t:'MTc1ODgxNDU0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bc382132bf5b4',t:'MTc1ODgxNjMzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
