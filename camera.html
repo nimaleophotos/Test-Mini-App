@@ -669,26 +669,24 @@
                     const size = Math.min(containerWidth, containerHeight);
                     frameWidth = frameHeight = size;
                 } else if (this.aspectRatio === '4:3') {
-                    // 4:3 crop - fit within screen bounds
-                    if (containerWidth / containerHeight > 4/3) {
-                        // Screen is wider than 4:3, constrain by height
+                    // 4:3 crop - taller than square, use full width and calculate height
+                    frameWidth = containerWidth;
+                    frameHeight = frameWidth * (4/3); // 4:3 means width:height, so height = width * (4/3)
+                    
+                    // If calculated height exceeds container, constrain by height
+                    if (frameHeight > containerHeight) {
                         frameHeight = containerHeight;
-                        frameWidth = frameHeight * (4/3);
-                    } else {
-                        // Screen is taller than 4:3, constrain by width
-                        frameWidth = containerWidth;
-                        frameHeight = frameWidth * (3/4);
+                        frameWidth = frameHeight * (3/4);
                     }
                 } else if (this.aspectRatio === '16:9') {
-                    // 16:9 crop - fit within screen bounds
-                    if (containerWidth / containerHeight > 16/9) {
-                        // Screen is wider than 16:9, constrain by height
+                    // 16:9 crop - even taller than 4:3, use full width and calculate height
+                    frameWidth = containerWidth;
+                    frameHeight = frameWidth * (16/9); // 16:9 means width:height, so height = width * (16/9)
+                    
+                    // If calculated height exceeds container, constrain by height
+                    if (frameHeight > containerHeight) {
                         frameHeight = containerHeight;
-                        frameWidth = frameHeight * (16/9);
-                    } else {
-                        // Screen is taller than 16:9, constrain by width
-                        frameWidth = containerWidth;
-                        frameHeight = frameWidth * (9/16);
+                        frameWidth = frameHeight * (9/16);
                     }
                 }
                 
@@ -770,5 +768,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b601d13fdf5e6',t:'MTc1ODgxMjI2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b77336428b948',t:'MTc1ODgxMzIwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
