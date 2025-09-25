@@ -198,7 +198,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             backdrop-filter: blur(10px);
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -234,17 +234,15 @@
 
         .timer-display {
             position: absolute;
-            top: 80px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            color: #ff4444;
-            font-size: 18px;
-            font-weight: 600;
-            background: rgba(0,0,0,0.7);
-            padding: 8px 16px;
-            border-radius: 20px;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 80px;
+            font-weight: 900;
             display: none;
-            backdrop-filter: blur(10px);
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            z-index: 25;
         }
 
         .timer-display.show {
@@ -267,6 +265,27 @@
 
         .captured-photo:hover {
             transform: scale(1.05);
+        }
+
+        .aspect-crop-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .aspect-crop-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background: transparent;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
         }
 
         @media (max-width: 480px) {
@@ -308,10 +327,7 @@
             
             <div style="display: flex; gap: 12px;">
                 <button class="control-btn" id="aspectBtn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <path d="M9 9h6v6"/>
-                    </svg>
+                    <span id="aspectText" style="font-size: 10px; font-weight: 600;">FULL</span>
                 </button>
                 <button class="control-btn" id="flashBtn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -319,10 +335,11 @@
                     </svg>
                 </button>
                 <button class="control-btn" id="timerBtn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg id="timerIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="12,6 12,12 16,14"/>
                     </svg>
+                    <span class="timer-text" id="timerText" style="display: none; font-size: 11px; color: white; font-weight: 600;">3s</span>
                 </button>
                 <button class="control-btn" id="gridBtn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -388,7 +405,7 @@
                 this.facingMode = 'user'; // Start with front camera
                 this.timerSeconds = 0;
                 this.currentZoom = 1;
-                this.aspectRatio = '16:9'; // Default aspect ratio
+                this.aspectRatio = 'Full'; // Default aspect ratio
                 this.flashMode = 'off'; // off, on, auto
                 
                 this.init();
@@ -397,6 +414,7 @@
             async init() {
                 await this.startCamera();
                 this.setupEventListeners();
+                this.updateAspectRatioIcon();
             }
 
             async startCamera() {
@@ -428,10 +446,12 @@
                 });
 
                 // Flip camera
-                this.flipBtn.addEventListener('click', () => {
+                this.flipBtn.addEventListener('click', async () => {
                     this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';
                     this.video.style.transform = `scaleX(${this.facingMode === 'user' ? -this.currentZoom : this.currentZoom}) scaleY(${this.currentZoom})`;
-                    this.startCamera();
+                    await this.startCamera();
+                    // Apply flash setting after switching camera
+                    await this.applyFlashSetting();
                 });
 
                 // Back button
@@ -447,8 +467,9 @@
 
                 // Timer
                 this.timerBtn.addEventListener('click', () => {
-                    this.timerSeconds = this.timerSeconds === 0 ? 3 : this.timerSeconds === 3 ? 10 : 0;
+                    this.timerSeconds = this.timerSeconds === 0 ? 3 : this.timerSeconds === 3 ? 5 : this.timerSeconds === 5 ? 10 : 0;
                     this.timerBtn.classList.toggle('active', this.timerSeconds > 0);
+                    this.updateTimerDisplay();
                 });
 
                 // Focus tap
@@ -604,34 +625,75 @@
             }
 
             toggleAspectRatio() {
-                // Cycle through aspect ratios: 16:9 -> 4:3 -> 1:1 -> 16:9
-                if (this.aspectRatio === '16:9') {
+                // Cycle through aspect ratios: Full -> 1:1 -> 4:3 -> 16:9 -> Full
+                if (this.aspectRatio === 'Full') {
+                    this.aspectRatio = '1:1';
+                } else if (this.aspectRatio === '1:1') {
                     this.aspectRatio = '4:3';
                 } else if (this.aspectRatio === '4:3') {
-                    this.aspectRatio = '1:1';
-                } else {
                     this.aspectRatio = '16:9';
+                } else {
+                    this.aspectRatio = 'Full';
                 }
                 
-                this.aspectBtn.classList.toggle('active', this.aspectRatio !== '16:9');
+                this.aspectBtn.classList.toggle('active', this.aspectRatio !== 'Full');
                 this.applyAspectRatio();
+                this.updateAspectRatioIcon();
             }
 
             applyAspectRatio() {
-                const video = this.video;
-                if (this.aspectRatio === '4:3') {
-                    video.style.objectFit = 'cover';
-                    video.style.aspectRatio = '4/3';
-                } else if (this.aspectRatio === '1:1') {
-                    video.style.objectFit = 'cover';
-                    video.style.aspectRatio = '1/1';
-                } else {
-                    video.style.objectFit = 'cover';
-                    video.style.aspectRatio = 'auto';
+                const container = document.querySelector('.camera-container');
+                
+                // Remove any existing crop overlay
+                const existingOverlay = document.querySelector('.aspect-crop-overlay');
+                if (existingOverlay) existingOverlay.remove();
+                
+                if (this.aspectRatio === 'Full') {
+                    // No crop overlay for full view
+                    return;
                 }
+                
+                // Create crop overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'aspect-crop-overlay';
+                
+                const frame = document.createElement('div');
+                frame.className = 'aspect-crop-frame';
+                
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                let frameWidth, frameHeight;
+                
+                if (this.aspectRatio === '1:1') {
+                    // Square crop
+                    const size = Math.min(containerWidth, containerHeight) * 0.85;
+                    frameWidth = frameHeight = size;
+                } else if (this.aspectRatio === '4:3') {
+                    // 4:3 crop - taller than square
+                    frameWidth = containerWidth * 0.85;
+                    frameHeight = frameWidth * (3/4);
+                    if (frameHeight > containerHeight * 0.8) {
+                        frameHeight = containerHeight * 0.8;
+                        frameWidth = frameHeight * (4/3);
+                    }
+                } else if (this.aspectRatio === '16:9') {
+                    // 16:9 crop - wider than 4:3
+                    frameWidth = containerWidth * 0.9;
+                    frameHeight = frameWidth * (9/16);
+                    if (frameHeight > containerHeight * 0.7) {
+                        frameHeight = containerHeight * 0.7;
+                        frameWidth = frameHeight * (16/9);
+                    }
+                }
+                
+                frame.style.width = frameWidth + 'px';
+                frame.style.height = frameHeight + 'px';
+                
+                overlay.appendChild(frame);
+                container.appendChild(overlay);
             }
 
-            toggleFlash() {
+            async toggleFlash() {
                 // Cycle through flash modes: off -> on -> auto -> off
                 if (this.flashMode === 'off') {
                     this.flashMode = 'on';
@@ -652,6 +714,48 @@
                 } else {
                     flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/><line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="2"/>';
                 }
+
+                // Apply flash setting to camera stream
+                await this.applyFlashSetting();
+            }
+
+            async applyFlashSetting() {
+                try {
+                    if (this.currentStream && this.facingMode === 'environment') {
+                        const track = this.currentStream.getVideoTracks()[0];
+                        const capabilities = track.getCapabilities();
+                        
+                        if (capabilities.torch) {
+                            const constraints = {
+                                advanced: [{
+                                    torch: this.flashMode === 'on'
+                                }]
+                            };
+                            await track.applyConstraints(constraints);
+                        }
+                    }
+                } catch (error) {
+                    console.log('Flash not supported on this device:', error);
+                }
+            }
+
+            updateTimerDisplay() {
+                const timerText = document.getElementById('timerText');
+                const timerIcon = document.getElementById('timerIcon');
+                
+                if (this.timerSeconds > 0) {
+                    timerText.textContent = `${this.timerSeconds}s`;
+                    timerText.style.display = 'block';
+                    timerIcon.style.display = 'none';
+                } else {
+                    timerText.style.display = 'none';
+                    timerIcon.style.display = 'block';
+                }
+            }
+
+            updateAspectRatioIcon() {
+                const aspectText = document.getElementById('aspectText');
+                aspectText.textContent = this.aspectRatio;
             }
         }
 
@@ -660,5 +764,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98432eb68539fe9a',t:'MTc1ODcyNjM1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b5a6317c8f5e6',t:'MTc1ODgxMjAyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
