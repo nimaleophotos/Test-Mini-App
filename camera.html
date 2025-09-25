@@ -713,9 +713,9 @@
             applyAspectRatio() {
                 const container = document.querySelector('.camera-container');
                 
-                // Remove any existing crop overlay
-                const existingOverlay = document.querySelector('.aspect-crop-overlay');
-                if (existingOverlay) existingOverlay.remove();
+                // Remove any existing crop overlays
+                const existingOverlays = document.querySelectorAll('.aspect-crop-overlay');
+                existingOverlays.forEach(overlay => overlay.remove());
                 
                 // Remove any existing grid overlay
                 const existingGrid = document.querySelector('.grid-overlay');
@@ -728,17 +728,6 @@
                     }
                     return;
                 }
-                
-                // Create crop overlay with black masks
-                const overlay = document.createElement('div');
-                overlay.className = 'aspect-crop-overlay';
-                overlay.style.position = 'absolute';
-                overlay.style.top = '0';
-                overlay.style.left = '0';
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.pointerEvents = 'none';
-                overlay.style.zIndex = '15';
                 
                 const containerWidth = container.offsetWidth;
                 const containerHeight = container.offsetHeight;
@@ -761,8 +750,9 @@
                 // Calculate how much to crop from top and bottom
                 const cropAmount = (containerHeight - cropHeight) / 2;
                 
-                // Create top black mask
-                if (cropAmount > 0) {
+                // Only create masks if there's actually something to crop
+                if (cropAmount > 5) { // Add minimum threshold to avoid tiny masks
+                    // Create top black mask
                     const topMask = document.createElement('div');
                     topMask.style.position = 'absolute';
                     topMask.style.top = '0';
@@ -770,7 +760,9 @@
                     topMask.style.width = '100%';
                     topMask.style.height = cropAmount + 'px';
                     topMask.style.background = '#000';
-                    overlay.appendChild(topMask);
+                    topMask.style.zIndex = '15';
+                    topMask.style.pointerEvents = 'none';
+                    container.appendChild(topMask);
                     
                     // Create bottom black mask
                     const bottomMask = document.createElement('div');
@@ -780,10 +772,14 @@
                     bottomMask.style.width = '100%';
                     bottomMask.style.height = cropAmount + 'px';
                     bottomMask.style.background = '#000';
-                    overlay.appendChild(bottomMask);
+                    bottomMask.style.zIndex = '15';
+                    bottomMask.style.pointerEvents = 'none';
+                    bottomMask.className = 'aspect-crop-overlay'; // Add class for easy removal
+                    container.appendChild(bottomMask);
+                    
+                    // Add class to top mask too for removal
+                    topMask.className = 'aspect-crop-overlay';
                 }
-                
-                container.appendChild(overlay);
                 
                 // Re-apply grid if active, positioned within the crop area
                 if (document.getElementById('gridBtn').classList.contains('active')) {
@@ -862,5 +858,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bca9454becbb9',t:'MTc1ODgxNjYyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bcdbab3bacbb9',t:'MTc1ODgxNjc1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
