@@ -632,8 +632,65 @@
             }
 
             toggleGrid() {
-                // Grid implementation would go here
-                document.getElementById('gridBtn').classList.toggle('active');
+                const gridBtn = document.getElementById('gridBtn');
+                gridBtn.classList.toggle('active');
+                
+                if (gridBtn.classList.contains('active')) {
+                    this.showGrid();
+                } else {
+                    this.hideGrid();
+                }
+            }
+
+            showGrid(cropTop = 0, cropHeight = null) {
+                // Remove existing grid
+                const existingGrid = document.querySelector('.grid-overlay');
+                if (existingGrid) existingGrid.remove();
+                
+                const container = document.querySelector('.camera-container');
+                const containerHeight = container.offsetHeight;
+                const gridHeight = cropHeight || containerHeight;
+                
+                // Create grid overlay
+                const gridOverlay = document.createElement('div');
+                gridOverlay.className = 'grid-overlay';
+                gridOverlay.style.position = 'absolute';
+                gridOverlay.style.top = cropTop + 'px';
+                gridOverlay.style.left = '0';
+                gridOverlay.style.width = '100%';
+                gridOverlay.style.height = gridHeight + 'px';
+                gridOverlay.style.pointerEvents = 'none';
+                gridOverlay.style.zIndex = '16';
+                
+                // Create grid lines
+                for (let i = 1; i <= 2; i++) {
+                    // Vertical lines
+                    const vLine = document.createElement('div');
+                    vLine.style.position = 'absolute';
+                    vLine.style.left = (i * 33.33) + '%';
+                    vLine.style.top = '0';
+                    vLine.style.width = '1px';
+                    vLine.style.height = '100%';
+                    vLine.style.background = 'rgba(255, 255, 255, 0.3)';
+                    gridOverlay.appendChild(vLine);
+                    
+                    // Horizontal lines
+                    const hLine = document.createElement('div');
+                    hLine.style.position = 'absolute';
+                    hLine.style.top = (i * 33.33) + '%';
+                    hLine.style.left = '0';
+                    hLine.style.width = '100%';
+                    hLine.style.height = '1px';
+                    hLine.style.background = 'rgba(255, 255, 255, 0.3)';
+                    gridOverlay.appendChild(hLine);
+                }
+                
+                container.appendChild(gridOverlay);
+            }
+
+            hideGrid() {
+                const existingGrid = document.querySelector('.grid-overlay');
+                if (existingGrid) existingGrid.remove();
             }
 
             toggleAspectRatio() {
@@ -660,13 +717,21 @@
                 const existingOverlay = document.querySelector('.aspect-crop-overlay');
                 if (existingOverlay) existingOverlay.remove();
                 
+                // Remove any existing grid overlay
+                const existingGrid = document.querySelector('.grid-overlay');
+                if (existingGrid) existingGrid.remove();
+                
                 if (this.aspectRatio === 'Full') {
-                    // No crop overlay for full view
+                    // No crop overlay for full view, but re-apply grid if active
+                    if (document.getElementById('gridBtn').classList.contains('active')) {
+                        this.showGrid();
+                    }
                     return;
                 }
                 
                 // Create crop overlay with black masks
                 const overlay = document.createElement('div');
+                overlay.className = 'aspect-crop-overlay';
                 overlay.style.position = 'absolute';
                 overlay.style.top = '0';
                 overlay.style.left = '0';
@@ -719,6 +784,11 @@
                 }
                 
                 container.appendChild(overlay);
+                
+                // Re-apply grid if active, positioned within the crop area
+                if (document.getElementById('gridBtn').classList.contains('active')) {
+                    this.showGrid(cropAmount, cropHeight);
+                }
             }
 
             async toggleFlash() {
@@ -792,5 +862,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bc382132bf5b4',t:'MTc1ODgxNjMzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bca9454becbb9',t:'MTc1ODgxNjYyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
