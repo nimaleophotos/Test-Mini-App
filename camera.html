@@ -59,10 +59,10 @@
 
         .bottom-controls {
             position: absolute;
-            bottom: 0;
+            bottom: 10px;
             left: 0;
             right: 0;
-            padding: 40px 20px;
+            padding: 20px 20px;
             background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%);
             pointer-events: auto;
             z-index: 20;
@@ -185,7 +185,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         .lens-btn {
@@ -642,20 +642,30 @@
                 }
             }
 
-            showGrid(cropTop = 0, cropHeight = null) {
+            showGrid() {
                 // Remove existing grid
                 const existingGrid = document.querySelector('.grid-overlay');
                 if (existingGrid) existingGrid.remove();
                 
                 const container = document.querySelector('.camera-container');
                 const containerHeight = container.offsetHeight;
-                const gridHeight = cropHeight || containerHeight;
+                
+                let gridTop = 0;
+                let gridHeight = containerHeight;
+                
+                // Adjust grid position based on aspect ratio
+                if (this.aspectRatio === '1:1') {
+                    // For square mode, position grid in the middle 50% of screen
+                    const cropAmount = containerHeight * 0.25; // 25% from top and bottom
+                    gridTop = cropAmount;
+                    gridHeight = containerHeight - (cropAmount * 2); // Middle 50%
+                }
                 
                 // Create grid overlay
                 const gridOverlay = document.createElement('div');
                 gridOverlay.className = 'grid-overlay';
                 gridOverlay.style.position = 'absolute';
-                gridOverlay.style.top = cropTop + 'px';
+                gridOverlay.style.top = gridTop + 'px';
                 gridOverlay.style.left = '0';
                 gridOverlay.style.width = '100%';
                 gridOverlay.style.height = gridHeight + 'px';
@@ -836,5 +846,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984bf1b6f714cbb9',t:'MTc1ODgxODIyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98505b77316f9fb2',t:'MTc1ODg2NDUwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
