@@ -421,6 +421,7 @@
                 this.currentZoom = 1;
                 this.aspectRatio = 'Full'; // Default aspect ratio
                 this.flashMode = 'off'; // off, on, auto
+                this.gridMode = null; // null, 'thirds', 'symmetrical'
                 
                 this.init();
             }
@@ -635,9 +636,20 @@
 
             toggleGrid() {
                 const gridBtn = document.getElementById('gridBtn');
-                gridBtn.classList.toggle('active');
                 
-                if (gridBtn.classList.contains('active')) {
+                // Cycle through grid modes: off -> rule of thirds -> symmetrical -> off
+                if (!this.gridMode) {
+                    this.gridMode = 'thirds';
+                    gridBtn.classList.add('active');
+                } else if (this.gridMode === 'thirds') {
+                    this.gridMode = 'symmetrical';
+                    gridBtn.classList.add('active');
+                } else {
+                    this.gridMode = null;
+                    gridBtn.classList.remove('active');
+                }
+                
+                if (this.gridMode) {
                     this.showGrid();
                 } else {
                     this.hideGrid();
@@ -684,27 +696,53 @@
                 gridOverlay.style.pointerEvents = 'none';
                 gridOverlay.style.zIndex = '16';
                 
-                // Create grid lines
-                for (let i = 1; i <= 2; i++) {
-                    // Vertical lines
-                    const vLine = document.createElement('div');
-                    vLine.style.position = 'absolute';
-                    vLine.style.left = (i * 33.33) + '%';
-                    vLine.style.top = '0';
-                    vLine.style.width = '1px';
-                    vLine.style.height = '100%';
-                    vLine.style.background = 'rgba(255, 255, 255, 0.3)';
-                    gridOverlay.appendChild(vLine);
-                    
-                    // Horizontal lines
-                    const hLine = document.createElement('div');
-                    hLine.style.position = 'absolute';
-                    hLine.style.top = (i * 33.33) + '%';
-                    hLine.style.left = '0';
-                    hLine.style.width = '100%';
-                    hLine.style.height = '1px';
-                    hLine.style.background = 'rgba(255, 255, 255, 0.3)';
-                    gridOverlay.appendChild(hLine);
+                // Create grid lines based on mode
+                if (this.gridMode === 'thirds') {
+                    // Rule of thirds grid (3x3)
+                    for (let i = 1; i <= 2; i++) {
+                        // Vertical lines
+                        const vLine = document.createElement('div');
+                        vLine.style.position = 'absolute';
+                        vLine.style.left = (i * 33.33) + '%';
+                        vLine.style.top = '0';
+                        vLine.style.width = '1px';
+                        vLine.style.height = '100%';
+                        vLine.style.background = 'rgba(255, 255, 255, 0.3)';
+                        gridOverlay.appendChild(vLine);
+                        
+                        // Horizontal lines
+                        const hLine = document.createElement('div');
+                        hLine.style.position = 'absolute';
+                        hLine.style.top = (i * 33.33) + '%';
+                        hLine.style.left = '0';
+                        hLine.style.width = '100%';
+                        hLine.style.height = '1px';
+                        hLine.style.background = 'rgba(255, 255, 255, 0.3)';
+                        gridOverlay.appendChild(hLine);
+                    }
+                } else if (this.gridMode === 'symmetrical') {
+                    // Symmetrical grid (4x4)
+                    for (let i = 1; i <= 3; i++) {
+                        // Vertical lines
+                        const vLine = document.createElement('div');
+                        vLine.style.position = 'absolute';
+                        vLine.style.left = (i * 25) + '%';
+                        vLine.style.top = '0';
+                        vLine.style.width = '1px';
+                        vLine.style.height = '100%';
+                        vLine.style.background = 'rgba(255, 255, 255, 0.3)';
+                        gridOverlay.appendChild(vLine);
+                        
+                        // Horizontal lines
+                        const hLine = document.createElement('div');
+                        hLine.style.position = 'absolute';
+                        hLine.style.top = (i * 25) + '%';
+                        hLine.style.left = '0';
+                        hLine.style.width = '100%';
+                        hLine.style.height = '1px';
+                        hLine.style.background = 'rgba(255, 255, 255, 0.3)';
+                        gridOverlay.appendChild(hLine);
+                    }
                 }
                 
                 container.appendChild(gridOverlay);
@@ -732,8 +770,7 @@
                 this.updateAspectRatioIcon();
                 
                 // Update grid if it's currently active
-                const gridBtn = document.getElementById('gridBtn');
-                if (gridBtn.classList.contains('active')) {
+                if (this.gridMode) {
                     this.showGrid();
                 }
             }
@@ -956,5 +993,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850a2e89750bdf3',t:'MTc1ODg2NzQyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850ab2b27aabdf3',t:'MTc1ODg2Nzc2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
