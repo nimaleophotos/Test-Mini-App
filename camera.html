@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scaleX(-1); /* Mirror effect for front camera */
+            transform: scaleX(1); /* No mirror for rear camera */
             filter: none;
             opacity: 1;
         }
@@ -417,7 +417,7 @@
                 this.flashBtn = document.getElementById('flashBtn');
                 
                 this.currentStream = null;
-                this.facingMode = 'user'; // Start with front camera
+                this.facingMode = 'environment'; // Start with rear camera
                 this.timerSeconds = 0;
                 this.currentZoom = 1;
                 this.aspectRatio = 'Full'; // Default aspect ratio
@@ -439,13 +439,39 @@
                         this.currentStream.getTracks().forEach(track => track.stop());
                     }
 
-                    const constraints = {
+                    let constraints = {
                         video: {
                             facingMode: this.facingMode,
                             width: { ideal: 1920 },
                             height: { ideal: 1080 }
                         }
                     };
+
+                    // For 0.5x zoom, try to access ultrawide camera if available
+                    if (this.currentZoom === 0.5 && this.facingMode === 'environment') {
+                        try {
+                            // Try to get ultrawide camera specifically
+                            const devices = await navigator.mediaDevices.enumerateDevices();
+                            const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                            
+                            // Look for ultrawide camera (usually has "ultra" or "wide" in label)
+                            const ultrawideCamera = videoDevices.find(device => 
+                                device.label.toLowerCase().includes('ultra') || 
+                                device.label.toLowerCase().includes('wide') ||
+                                device.label.toLowerCase().includes('0.5')
+                            );
+                            
+                            if (ultrawideCamera) {
+                                constraints.video.deviceId = { exact: ultrawideCamera.deviceId };
+                                console.log('Using ultrawide camera:', ultrawideCamera.label);
+                            } else {
+                                // Fallback: try advanced constraints for ultrawide
+                                constraints.video.advanced = [{ zoom: 0.5 }];
+                            }
+                        } catch (err) {
+                            console.log('Could not access ultrawide camera, using standard camera');
+                        }
+                    }
 
                     this.currentStream = await navigator.mediaDevices.getUserMedia(constraints);
                     this.video.srcObject = this.currentStream;
@@ -502,16 +528,16 @@
                 });
 
                 // Lens switching
-                this.lens05xBtn.addEventListener('click', () => {
-                    this.switchLens(0.5);
+                this.lens05xBtn.addEventListener('click', async () => {
+                    await this.switchLens(0.5);
                 });
 
-                this.lens1xBtn.addEventListener('click', () => {
-                    this.switchLens(1);
+                this.lens1xBtn.addEventListener('click', async () => {
+                    await this.switchLens(1);
                 });
 
-                this.lens2xBtn.addEventListener('click', () => {
-                    this.switchLens(2);
+                this.lens2xBtn.addEventListener('click', async () => {
+                    await this.switchLens(2);
                 });
 
                 // Aspect ratio toggle
@@ -626,7 +652,7 @@
                 }, 5000);
             }
 
-            switchLens(zoom) {
+            async switchLens(zoom) {
                 this.currentZoom = zoom;
                 
                 // Update active button
@@ -635,8 +661,18 @@
                 else if (zoom === 1) this.lens1xBtn.classList.add('active');
                 else if (zoom === 2) this.lens2xBtn.classList.add('active');
                 
-                // Apply zoom effect to video
-                this.video.style.transform = `scaleX(${this.facingMode === 'user' ? -zoom : zoom}) scaleY(${zoom})`;
+                // For 0.5x, try to switch to ultrawide camera hardware
+                if (zoom === 0.5) {
+                    await this.startCamera(); // Restart camera with ultrawide if available
+                    // Don't apply digital zoom for 0.5x - let hardware handle it
+                    this.video.style.transform = `scaleX(${this.facingMode === 'user' ? -1 : 1})`;
+                } else {
+                    // For 1x and 2x, use main camera with digital zoom
+                    if (zoom !== this.currentZoom || zoom === 1) {
+                        await this.startCamera(); // Restart with main camera
+                    }
+                    this.video.style.transform = `scaleX(${this.facingMode === 'user' ? -zoom : zoom}) scaleY(${zoom})`;
+                }
             }
 
             toggleGrid() {
@@ -1042,5 +1078,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850d8f705f2be6e',t:'MTc1ODg2OTY0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850df1b4523be6e',t:'MTc1ODg2OTg5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
