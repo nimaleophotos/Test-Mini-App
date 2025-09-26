@@ -532,6 +532,8 @@
                     await this.startTimer();
                 }
 
+                // Flash is already controlled by the toggle - no need for special photo handling
+
                 // Capture photo
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
@@ -546,6 +548,8 @@
                 } else {
                     context.drawImage(this.video, 0, 0, canvas.width, canvas.height);
                 }
+                
+
                 
                 // Convert to blob and create download
                 canvas.toBlob((blob) => {
@@ -931,23 +935,15 @@
             }
 
             async toggleFlash() {
-                // Cycle through flash modes: off -> on -> auto -> off
-                if (this.flashMode === 'off') {
-                    this.flashMode = 'on';
-                } else if (this.flashMode === 'on') {
-                    this.flashMode = 'auto';
-                } else {
-                    this.flashMode = 'off';
-                }
+                // Toggle between on and off
+                this.flashMode = this.flashMode === 'off' ? 'on' : 'off';
                 
-                this.flashBtn.classList.toggle('active', this.flashMode !== 'off');
+                this.flashBtn.classList.toggle('active', this.flashMode === 'on');
                 
                 // Update flash icon based on mode
                 const flashSvg = this.flashBtn.querySelector('svg');
                 if (this.flashMode === 'on') {
                     flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10" fill="currentColor"/>';
-                } else if (this.flashMode === 'auto') {
-                    flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/><text x="12" y="18" text-anchor="middle" font-size="8" fill="currentColor">A</text>';
                 } else {
                     flashSvg.innerHTML = '<polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/><line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="2"/>';
                 }
@@ -969,10 +965,27 @@
                                 }]
                             };
                             await track.applyConstraints(constraints);
+                            console.log(`Flash ${this.flashMode === 'on' ? 'turned ON' : 'turned OFF'}`);
+                        } else {
+                            console.log('Torch capability not available on this camera');
                         }
+                    } else if (this.facingMode === 'user') {
+                        console.log('Flash not available on front camera');
                     }
                 } catch (error) {
-                    console.log('Flash not supported on this device:', error);
+                    console.error('Error controlling flash:', error);
+                    // Try alternative method for some devices
+                    try {
+                        if (this.currentStream && this.facingMode === 'environment') {
+                            const track = this.currentStream.getVideoTracks()[0];
+                            await track.applyConstraints({
+                                torch: this.flashMode === 'on'
+                            });
+                            console.log(`Flash ${this.flashMode === 'on' ? 'turned ON' : 'turned OFF'} (alternative method)`);
+                        }
+                    } catch (altError) {
+                        console.error('Flash control not supported on this device:', altError);
+                    }
                 }
             }
 
@@ -1019,5 +1032,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850b9c024d1bdf3',t:'MTc1ODg2ODM2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850c3cfd1b1bdf3',t:'MTc1ODg2ODc3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
