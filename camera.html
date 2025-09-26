@@ -17,6 +17,7 @@
             overflow: hidden;
             height: 100vh;
             position: relative;
+            box-sizing: border-box;
         }
 
         .camera-container {
@@ -109,9 +110,39 @@
             background: rgba(128,128,128,0.4);
         }
 
+        .aspect-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
 
+        .aspect-btn {
+            width: 40px;
+            height: 32px;
+            border-radius: 6px;
+            background: rgba(128,128,128,0.2);
+            border: 1px solid rgba(128,128,128,0.4);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            font-size: 9px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
+        .aspect-btn:hover {
+            background: rgba(128,128,128,0.3);
+            transform: scale(1.05);
+        }
 
+        .aspect-btn.active {
+            background: rgba(128,128,128,0.4);
+        }
 
         .capture-controls {
             display: flex;
@@ -229,8 +260,6 @@
         .lens-btn.active {
             background: rgba(128,128,128,0.4);
         }
-
-
 
         .focus-ring {
             position: absolute;
@@ -359,6 +388,9 @@
                         <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
                     </svg>
                 </button>
+                <button class="control-btn" id="arBtn">
+                    <span id="arText" style="font-size: 8px; font-weight: 600;">FULL</span>
+                </button>
                 <button class="control-btn" id="timerBtn">
                     <svg id="timerIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
@@ -378,11 +410,10 @@
             </div>
         </div>
 
-
-
         <div class="timer-display" id="timerDisplay">3</div>
 
         <div class="bottom-controls">
+            
             <div class="lens-controls">
                 <button class="lens-btn active" id="lens1x">1x</button>
                 <button class="lens-btn" id="lens2x">2x</button>
@@ -430,6 +461,7 @@
                 this.currentZoom = 1;
                 this.flashMode = 'off'; // off, on, auto
                 this.gridMode = null; // null, 'thirds', 'symmetrical'
+                this.aspectRatio = 'full'; // Default aspect ratio
                 
                 this.init();
             }
@@ -481,6 +513,11 @@
 
                     this.currentStream = await navigator.mediaDevices.getUserMedia(constraints);
                     this.video.srcObject = this.currentStream;
+                    
+                    // Apply aspect ratio after camera starts
+                    this.video.addEventListener('loadedmetadata', () => {
+                        this.applyAspectRatio();
+                    });
                 } catch (error) {
                     console.error('Error accessing camera:', error);
                     alert('Unable to access camera. Please check permissions.');
@@ -549,9 +586,139 @@
                 this.flashBtn.addEventListener('click', () => {
                     this.toggleFlash();
                 });
+
+                // AR button (cycles through aspect ratios)
+                document.getElementById('arBtn').addEventListener('click', () => {
+                    this.cycleAspectRatio();
+                });
             }
 
+            cycleAspectRatio() {
+                // Cycle through: full -> 1:1 -> 3:4 -> full
+                if (this.aspectRatio === 'full') {
+                    this.aspectRatio = '1:1';
+                } else if (this.aspectRatio === '1:1') {
+                    this.aspectRatio = '3:4';
+                } else {
+                    this.aspectRatio = 'full';
+                }
+                
+                this.updateARButton();
+                this.applyAspectRatio();
+            }
 
+            updateARButton() {
+                const arText = document.getElementById('arText');
+                const arBtn = document.getElementById('arBtn');
+                
+                switch (this.aspectRatio) {
+                    case 'full':
+                        arText.textContent = 'FULL';
+                        arBtn.classList.remove('active');
+                        break;
+                    case '1:1':
+                        arText.textContent = '1:1';
+                        arBtn.classList.add('active');
+                        break;
+                    case '3:4':
+                        arText.textContent = '3:4';
+                        arBtn.classList.add('active');
+                        break;
+                }
+            }
+
+            applyAspectRatio() {
+                // Remove existing overlay
+                const existingOverlay = document.querySelector('.aspect-crop-overlay');
+                if (existingOverlay) existingOverlay.remove();
+
+                if (this.aspectRatio === 'full') {
+                    // Full screen - no overlay needed
+                    return;
+                }
+
+                // Create aspect ratio overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'aspect-crop-overlay';
+                
+                const container = document.querySelector('.camera-container');
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                
+                let frameWidth, frameHeight;
+                
+                switch (this.aspectRatio) {
+                    case '1:1':
+                        const size = Math.min(containerWidth, containerHeight);
+                        frameWidth = frameHeight = size;
+                        break;
+                    case '3:4':
+                        if (containerWidth / containerHeight > 3/4) {
+                            frameHeight = containerHeight;
+                            frameWidth = frameHeight * (3/4);
+                        } else {
+                            frameWidth = containerWidth;
+                            frameHeight = frameWidth * (4/3);
+                        }
+                        break;
+                }
+                
+                // Create frame
+                const frame = document.createElement('div');
+                frame.className = 'aspect-crop-frame';
+                frame.style.width = frameWidth + 'px';
+                frame.style.height = frameHeight + 'px';
+                
+                overlay.appendChild(frame);
+                
+                // Create masks for the overlay
+                const topMask = document.createElement('div');
+                topMask.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: ${(containerHeight - frameHeight) / 2}px;
+                    background: rgba(0, 0, 0, 0.6);
+                `;
+                
+                const bottomMask = document.createElement('div');
+                bottomMask.style.cssText = `
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: ${(containerHeight - frameHeight) / 2}px;
+                    background: rgba(0, 0, 0, 0.6);
+                `;
+                
+                const leftMask = document.createElement('div');
+                leftMask.style.cssText = `
+                    position: absolute;
+                    top: ${(containerHeight - frameHeight) / 2}px;
+                    left: 0;
+                    width: ${(containerWidth - frameWidth) / 2}px;
+                    height: ${frameHeight}px;
+                    background: rgba(0, 0, 0, 0.6);
+                `;
+                
+                const rightMask = document.createElement('div');
+                rightMask.style.cssText = `
+                    position: absolute;
+                    top: ${(containerHeight - frameHeight) / 2}px;
+                    right: 0;
+                    width: ${(containerWidth - frameWidth) / 2}px;
+                    height: ${frameHeight}px;
+                    background: rgba(0, 0, 0, 0.6);
+                `;
+                
+                overlay.appendChild(topMask);
+                overlay.appendChild(bottomMask);
+                overlay.appendChild(leftMask);
+                overlay.appendChild(rightMask);
+                
+                container.appendChild(overlay);
+            }
 
             async takePhoto() {
                 if (this.timerSeconds > 0) {
@@ -567,16 +734,48 @@
                 const videoWidth = this.video.videoWidth;
                 const videoHeight = this.video.videoHeight;
                 
-                // Set canvas size to match video dimensions
-                canvas.width = videoWidth;
-                canvas.height = videoHeight;
+                // Calculate crop dimensions based on aspect ratio
+                let cropWidth, cropHeight, cropX, cropY;
+                
+                switch (this.aspectRatio) {
+                    case 'full':
+                        // Use full video dimensions
+                        cropWidth = videoWidth;
+                        cropHeight = videoHeight;
+                        cropX = 0;
+                        cropY = 0;
+                        break;
+                    case '1:1':
+                        const size = Math.min(videoWidth, videoHeight);
+                        cropWidth = cropHeight = size;
+                        cropX = (videoWidth - size) / 2;
+                        cropY = (videoHeight - size) / 2;
+                        break;
+                    case '3:4':
+                        if (videoWidth / videoHeight > 3/4) {
+                            cropHeight = videoHeight;
+                            cropWidth = cropHeight * (3/4);
+                            cropX = (videoWidth - cropWidth) / 2;
+                            cropY = 0;
+                        } else {
+                            cropWidth = videoWidth;
+                            cropHeight = cropWidth * (4/3);
+                            cropX = 0;
+                            cropY = (videoHeight - cropHeight) / 2;
+                        }
+                        break;
+                }
+                
+                // Set canvas size to match crop dimensions
+                canvas.width = cropWidth;
+                canvas.height = cropHeight;
                 
                 // Mirror for front camera
                 if (this.facingMode === 'user') {
                     context.scale(-1, 1);
-                    context.drawImage(this.video, -canvas.width, 0, canvas.width, canvas.height);
+                    context.drawImage(this.video, cropX, cropY, cropWidth, cropHeight, -canvas.width, 0, canvas.width, canvas.height);
                 } else {
-                    context.drawImage(this.video, 0, 0, canvas.width, canvas.height);
+                    context.drawImage(this.video, cropX, cropY, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
                 }
                 
                 // Convert to blob and show Farcaster cast modal
@@ -594,8 +793,6 @@
                     this.video.style.filter = 'brightness(1)';
                 }, 100);
             }
-
-
 
             startTimer() {
                 return new Promise((resolve) => {
@@ -625,10 +822,6 @@
                     this.focusRing.classList.remove('show');
                 }, 1000);
             }
-
-
-
-
 
             showCapturedPhoto(url) {
                 // Remove existing preview
@@ -1316,6 +1509,13 @@
                     btn.style.transition = 'transform 0.3s ease';
                 });
                 
+                // Special handling for AR button (it should also rotate)
+                const arButton = document.querySelector('#arBtn span');
+                if (arButton) {
+                    arButton.style.transform = `rotate(${iconRotation}deg)`;
+                    arButton.style.transition = 'transform 0.3s ease';
+                }
+                
                 console.log(`Orientation changed to ${orientation}°, icons rotated ${iconRotation}°`);
             }
         }
@@ -1325,5 +1525,5 @@
             new OrientationHandler();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9854983534f9668d',t:'MTc1ODkwODkzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9854c94ce4d2fe9c',t:'MTc1ODkxMDk0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
