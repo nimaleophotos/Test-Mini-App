@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Camera App</title>
     <style>
         * {
@@ -47,10 +47,10 @@
 
         .top-controls {
             position: absolute;
-            top: env(safe-area-inset-top, 20px);
+            top: 0;
             left: 0;
             right: 0;
-            padding: max(20px, env(safe-area-inset-top, 20px)) 20px 20px 20px;
+            padding: 20px;
             background: transparent;
             display: flex;
             justify-content: space-between;
@@ -61,10 +61,10 @@
 
         .bottom-controls {
             position: absolute;
-            bottom: max(45px, env(safe-area-inset-bottom, 20px));
+            bottom: 60px;
             left: 0;
             right: 0;
-            padding: 20px max(20px, env(safe-area-inset-left, 20px)) max(20px, env(safe-area-inset-bottom, 20px)) max(20px, env(safe-area-inset-right, 20px));
+            padding: 20px 20px;
             background: transparent;
             pointer-events: auto;
             z-index: 20;
@@ -302,28 +302,13 @@
             object-fit: cover;
         }
 
-        /* iPhone specific adjustments */
-        @supports (-webkit-touch-callout: none) {
-            .bottom-controls {
-                bottom: max(80px, env(safe-area-inset-bottom, 60px));
-                padding-bottom: max(40px, env(safe-area-inset-bottom, 40px));
-            }
-            
-            .top-controls {
-                top: max(40px, env(safe-area-inset-top, 40px));
-                padding-top: max(40px, env(safe-area-inset-top, 40px));
-            }
-        }
-
-        /* Small screens */
         @media (max-width: 480px) {
             .top-controls {
-                padding: max(15px, env(safe-area-inset-top, 15px)) 15px 15px 15px;
+                padding: 15px;
             }
             
             .bottom-controls {
-                padding: 15px max(15px, env(safe-area-inset-left, 15px)) max(30px, env(safe-area-inset-bottom, 30px)) max(15px, env(safe-area-inset-right, 15px));
-                bottom: max(30px, env(safe-area-inset-bottom, 15px));
+                padding: 20px 15px;
             }
             
             .capture-btn {
@@ -331,62 +316,8 @@
                 height: 70px;
             }
             
-            .control-btn, .gallery-btn, .flip-btn {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .lens-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 8px;
-            }
-        }
-
-        /* Very small screens */
-        @media (max-width: 360px) {
-            .bottom-controls {
-                bottom: max(20px, env(safe-area-inset-bottom, 10px));
-                padding-bottom: max(25px, env(safe-area-inset-bottom, 25px));
-            }
-            
-            .capture-controls {
-                gap: 20px;
-            }
-            
-            .lens-controls {
-                gap: 6px;
-                margin-bottom: 12px;
-            }
-        }
-
-        /* Landscape orientation */
-        @media (orientation: landscape) {
-            .top-controls {
-                padding: 15px max(20px, env(safe-area-inset-left, 20px)) 15px max(20px, env(safe-area-inset-right, 20px));
-            }
-            
-            .bottom-controls {
-                bottom: max(20px, env(safe-area-inset-bottom, 10px));
-                padding: 15px max(20px, env(safe-area-inset-left, 20px)) max(15px, env(safe-area-inset-bottom, 15px)) max(20px, env(safe-area-inset-right, 20px));
-            }
-        }
-
-        /* Tall screens (like iPhone X and newer) */
-        @media (min-height: 800px) {
-            .bottom-controls {
-                bottom: max(60px, env(safe-area-inset-bottom, 40px));
-            }
-            
-            .top-controls {
-                top: max(30px, env(safe-area-inset-top, 30px));
-            }
-        }
-
-        /* Extra tall screens */
-        @media (min-height: 900px) {
-            .bottom-controls {
-                bottom: max(80px, env(safe-area-inset-bottom, 60px));
+            .zoom-slider {
+                height: 150px;
             }
         }
     </style>
@@ -1147,5 +1078,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850e6b8717ebe6e',t:'MTc1ODg3MDIwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850f463959abe6e',t:'MTc1ODg3MDc2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
