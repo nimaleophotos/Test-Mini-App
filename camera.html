@@ -579,22 +579,90 @@
 
                 // Flash is already controlled by the toggle - no need for special photo handling
 
-                // Capture photo
+                // Capture photo with aspect ratio cropping
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
                 
-                canvas.width = this.video.videoWidth;
-                canvas.height = this.video.videoHeight;
+                const videoWidth = this.video.videoWidth;
+                const videoHeight = this.video.videoHeight;
+                
+                let cropWidth = videoWidth;
+                let cropHeight = videoHeight;
+                let cropX = 0;
+                let cropY = 0;
+                
+                // Calculate crop dimensions based on aspect ratio
+                if (this.aspectRatio === '1:1') {
+                    // Square crop - use the smaller dimension
+                    const size = Math.min(videoWidth, videoHeight);
+                    cropWidth = size;
+                    cropHeight = size;
+                    cropX = (videoWidth - size) / 2;
+                    cropY = (videoHeight - size) / 2;
+                } else if (this.aspectRatio === '4:3') {
+                    // 4:3 aspect ratio
+                    const targetRatio = 4 / 3;
+                    const currentRatio = videoWidth / videoHeight;
+                    
+                    if (currentRatio > targetRatio) {
+                        // Video is wider than 4:3, crop width
+                        cropHeight = videoHeight;
+                        cropWidth = videoHeight * targetRatio;
+                        cropX = (videoWidth - cropWidth) / 2;
+                        cropY = 0;
+                    } else {
+                        // Video is taller than 4:3, crop height
+                        cropWidth = videoWidth;
+                        cropHeight = videoWidth / targetRatio;
+                        cropX = 0;
+                        cropY = (videoHeight - cropHeight) / 2;
+                    }
+                } else if (this.aspectRatio === '16:9') {
+                    // 16:9 aspect ratio
+                    const targetRatio = 16 / 9;
+                    const currentRatio = videoWidth / videoHeight;
+                    
+                    if (currentRatio > targetRatio) {
+                        // Video is wider than 16:9, crop width
+                        cropHeight = videoHeight;
+                        cropWidth = videoHeight * targetRatio;
+                        cropX = (videoWidth - cropWidth) / 2;
+                        cropY = 0;
+                    } else {
+                        // Video is taller than 16:9, crop height
+                        cropWidth = videoWidth;
+                        cropHeight = videoWidth / targetRatio;
+                        cropX = 0;
+                        cropY = (videoHeight - cropHeight) / 2;
+                    }
+                }
+                
+                // Set canvas size to match cropped dimensions
+                canvas.width = cropWidth;
+                canvas.height = cropHeight;
+                
+                // Apply zoom scaling to crop dimensions
+                const zoomFactor = this.currentZoom;
+                const scaledCropWidth = cropWidth / zoomFactor;
+                const scaledCropHeight = cropHeight / zoomFactor;
+                const scaledCropX = cropX + (cropWidth - scaledCropWidth) / 2;
+                const scaledCropY = cropY + (cropHeight - scaledCropHeight) / 2;
                 
                 // Mirror for front camera
                 if (this.facingMode === 'user') {
                     context.scale(-1, 1);
-                    context.drawImage(this.video, -canvas.width, 0, canvas.width, canvas.height);
+                    context.drawImage(
+                        this.video,
+                        scaledCropX, scaledCropY, scaledCropWidth, scaledCropHeight,
+                        -canvas.width, 0, canvas.width, canvas.height
+                    );
                 } else {
-                    context.drawImage(this.video, 0, 0, canvas.width, canvas.height);
+                    context.drawImage(
+                        this.video,
+                        scaledCropX, scaledCropY, scaledCropWidth, scaledCropHeight,
+                        0, 0, canvas.width, canvas.height
+                    );
                 }
-                
-
                 
                 // Convert to blob and show Farcaster cast modal
                 canvas.toBlob((blob) => {
@@ -1338,5 +1406,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98545bde670f662b',t:'MTc1ODkwNjQ2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9854656e4431662b',t:'MTc1ODkwNjg1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
