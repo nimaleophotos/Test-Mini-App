@@ -1229,6 +1229,101 @@
         window.addEventListener('load', () => {
             new MobileCamera();
         });
+
+        // Handle orientation changes for icon rotation
+        class OrientationHandler {
+            constructor() {
+                this.currentOrientation = 0;
+                this.init();
+            }
+
+            init() {
+                // Listen for orientation changes
+                window.addEventListener('orientationchange', () => {
+                    setTimeout(() => this.handleOrientationChange(), 100);
+                });
+                
+                // Also listen for resize events as fallback
+                window.addEventListener('resize', () => {
+                    this.handleOrientationChange();
+                });
+                
+                // Initial check
+                this.handleOrientationChange();
+            }
+
+            handleOrientationChange() {
+                // Get current orientation
+                let orientation = 0;
+                
+                if (screen.orientation) {
+                    // Modern API
+                    const angle = screen.orientation.angle;
+                    orientation = angle;
+                } else if (window.orientation !== undefined) {
+                    // Legacy API
+                    orientation = window.orientation;
+                }
+                
+                // Only update if orientation actually changed
+                if (orientation !== this.currentOrientation) {
+                    this.currentOrientation = orientation;
+                    this.rotateIcons(orientation);
+                }
+            }
+
+            rotateIcons(orientation) {
+                // Get all button icons that should rotate
+                const iconsToRotate = document.querySelectorAll(`
+                    #backBtn svg,
+                    #flashBtn svg,
+                    #timerBtn svg,
+                    #timerBtn .timer-text,
+                    #gridBtn svg,
+                    #gridBtn .grid-text,
+                    #galleryBtn svg,
+                    #flipBtn svg
+                `);
+                
+                // Calculate rotation based on device orientation
+                let iconRotation = 0;
+                
+                switch(orientation) {
+                    case 90:  // Landscape left (rotated 90° clockwise)
+                        iconRotation = -90;
+                        break;
+                    case -90: // Landscape right (rotated 90° counter-clockwise)
+                    case 270: // Some devices report 270 instead of -90
+                        iconRotation = 90;
+                        break;
+                    case 0:   // Portrait
+                    case 180: // Portrait upside down
+                    default:
+                        iconRotation = 0;
+                        break;
+                }
+                
+                // Apply rotation to all icons
+                iconsToRotate.forEach(icon => {
+                    icon.style.transform = `rotate(${iconRotation}deg)`;
+                    icon.style.transition = 'transform 0.3s ease';
+                });
+                
+                // Special handling for lens buttons (they should also rotate)
+                const lensButtons = document.querySelectorAll('.lens-btn');
+                lensButtons.forEach(btn => {
+                    btn.style.transform = `rotate(${iconRotation}deg)`;
+                    btn.style.transition = 'transform 0.3s ease';
+                });
+                
+                console.log(`Orientation changed to ${orientation}°, icons rotated ${iconRotation}°`);
+            }
+        }
+
+        // Initialize orientation handler
+        window.addEventListener('load', () => {
+            new OrientationHandler();
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98548b95d4c5f5c9',t:'MTc1ODkwODQxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9854983534f9668d',t:'MTc1ODkwODkzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
