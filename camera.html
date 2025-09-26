@@ -721,28 +721,33 @@
                         gridOverlay.appendChild(hLine);
                     }
                 } else if (this.gridMode === 'symmetrical') {
-                    // Symmetrical grid (4x4)
-                    for (let i = 1; i <= 3; i++) {
-                        // Vertical lines
+                    // Symmetrical grid - 2 vertical and 2 horizontal lines closer to center
+                    const verticalPositions = [42, 58]; // 2 vertical lines closer to center
+                    const horizontalPositions = [42, 58]; // 2 horizontal lines closer to center
+                    
+                    // Create vertical lines
+                    verticalPositions.forEach(position => {
                         const vLine = document.createElement('div');
                         vLine.style.position = 'absolute';
-                        vLine.style.left = (i * 25) + '%';
+                        vLine.style.left = position + '%';
                         vLine.style.top = '0';
                         vLine.style.width = '1px';
                         vLine.style.height = '100%';
                         vLine.style.background = 'rgba(255, 255, 255, 0.3)';
                         gridOverlay.appendChild(vLine);
-                        
-                        // Horizontal lines
+                    });
+                    
+                    // Create horizontal lines
+                    horizontalPositions.forEach(position => {
                         const hLine = document.createElement('div');
                         hLine.style.position = 'absolute';
-                        hLine.style.top = (i * 25) + '%';
+                        hLine.style.top = position + '%';
                         hLine.style.left = '0';
                         hLine.style.width = '100%';
                         hLine.style.height = '1px';
                         hLine.style.background = 'rgba(255, 255, 255, 0.3)';
                         gridOverlay.appendChild(hLine);
-                    }
+                    });
                 }
                 
                 container.appendChild(gridOverlay);
@@ -993,5 +998,5 @@
             new MobileCamera();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850ab2b27aabdf3',t:'MTc1ODg2Nzc2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9850b2f6a1e7bdf3',t:'MTc1ODg2ODA4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
