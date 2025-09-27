@@ -725,8 +725,8 @@
                     // Create a File object from the blob for consistency with gallery selection
                     const file = new File([blob], `photo_${Date.now()}.jpg`, { type: 'image/jpeg' });
                     
-                    // Show the same Farcaster cast modal as gallery selection
-                    this.showFarcasterCast(file);
+                    // Show Farcaster cast modal with capture flag
+                    this.showFarcasterCast(file, true);
                 }, 'image/jpeg', 0.9);
 
                 // Camera shutter animation
@@ -1035,7 +1035,7 @@
                 fileInput.addEventListener('change', (e) => {
                     const file = e.target.files[0];
                     if (file) {
-                        this.showFarcasterCast(file);
+                        this.showFarcasterCast(file, false);
                     }
                     // Clean up
                     document.body.removeChild(fileInput);
@@ -1045,7 +1045,7 @@
                 fileInput.click();
             }
 
-            showFarcasterCast(imageFile) {
+            showFarcasterCast(imageFile, isFromCapture = false) {
                 // Create image URL for preview
                 const imageUrl = URL.createObjectURL(imageFile);
                 
@@ -1065,6 +1065,51 @@
                     justify-content: center;
                     padding: 20px;
                     box-sizing: border-box;
+                `;
+                
+                // Create bottom buttons based on source
+                const bottomButtons = isFromCapture ? `
+                    <div style="display: flex; gap: 12px;">
+                        <button id="saveToGallery" style="
+                            flex: 1;
+                            background: #22c55e;
+                            border: none;
+                            color: white;
+                            padding: 12px 20px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: background 0.2s;
+                        ">Save to Gallery</button>
+                        <button id="cancelCast" style="
+                            flex: 1;
+                            background: #333;
+                            border: none;
+                            color: white;
+                            padding: 12px 20px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: background 0.2s;
+                        ">Cancel</button>
+                    </div>
+                ` : `
+                    <div style="display: flex; justify-content: center;">
+                        <button id="cancelCast" style="
+                            background: #333;
+                            border: none;
+                            color: white;
+                            padding: 12px 20px;
+                            border-radius: 8px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: background 0.2s;
+                            min-width: 120px;
+                        ">Cancel</button>
+                    </div>
                 `;
                 
                 modal.innerHTML = `
@@ -1183,32 +1228,7 @@
                             </div>
                         </div>
                         
-                        <div style="display: flex; gap: 12px;">
-                            <button id="saveToGallery" style="
-                                flex: 1;
-                                background: #22c55e;
-                                border: none;
-                                color: white;
-                                padding: 12px 20px;
-                                border-radius: 8px;
-                                font-size: 14px;
-                                font-weight: 500;
-                                cursor: pointer;
-                                transition: background 0.2s;
-                            ">Save to Gallery</button>
-                            <button id="cancelCast" style="
-                                flex: 1;
-                                background: #333;
-                                border: none;
-                                color: white;
-                                padding: 12px 20px;
-                                border-radius: 8px;
-                                font-size: 14px;
-                                font-weight: 500;
-                                cursor: pointer;
-                                transition: background 0.2s;
-                            ">Cancel</button>
-                        </div>
+                        ${bottomButtons}
                     </div>
                 `;
                 
@@ -1227,10 +1247,14 @@
                 
                 closeBtn.addEventListener('click', closeModal);
                 cancelBtn.addEventListener('click', closeModal);
-                saveBtn.addEventListener('click', () => {
-                    this.saveImageToGallery(imageFile);
-                    closeModal();
-                });
+                
+                // Only add save button listener if it exists (for captured photos)
+                if (saveBtn) {
+                    saveBtn.addEventListener('click', () => {
+                        this.saveImageToGallery(imageFile);
+                        closeModal();
+                    });
+                }
                 
                 // Hover effects
                 closeBtn.addEventListener('mouseenter', () => {
@@ -1247,12 +1271,15 @@
                     cancelBtn.style.background = '#333';
                 });
                 
-                saveBtn.addEventListener('mouseenter', () => {
-                    saveBtn.style.background = '#16a34a';
-                });
-                saveBtn.addEventListener('mouseleave', () => {
-                    saveBtn.style.background = '#22c55e';
-                });
+                // Only add save button hover effects if it exists (for captured photos)
+                if (saveBtn) {
+                    saveBtn.addEventListener('mouseenter', () => {
+                        saveBtn.style.background = '#16a34a';
+                    });
+                    saveBtn.addEventListener('mouseleave', () => {
+                        saveBtn.style.background = '#22c55e';
+                    });
+                }
                 
                 // Preset button handlers
                 presetBtns.forEach(btn => {
@@ -1495,5 +1522,5 @@
             new OrientationHandler();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9859660c2520910e',t:'MTc1ODk1OTMwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9859823ec1b6845a',t:'MTc1ODk2MDQ2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
