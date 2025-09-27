@@ -46,9 +46,9 @@
 
         .top-controls {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: env(safe-area-inset-top, 20px);
+            left: env(safe-area-inset-left, 0);
+            right: env(safe-area-inset-right, 0);
             padding: 20px;
             background: transparent;
             display: flex;
@@ -60,10 +60,10 @@
 
         .bottom-controls {
             position: absolute;
-            bottom: 80px;
-            left: 0;
-            right: 0;
-            padding: 20px 20px;
+            bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+            left: env(safe-area-inset-left, 0);
+            right: env(safe-area-inset-right, 0);
+            padding: 20px;
             background: transparent;
             pointer-events: auto;
             z-index: 20;
@@ -266,15 +266,16 @@
             transform: scale(1.05);
         }
 
-
-
+        /* Responsive design for all devices */
         @media (max-width: 480px) {
             .top-controls {
                 padding: 15px;
+                top: max(env(safe-area-inset-top, 0px), 10px);
             }
             
             .bottom-controls {
-                padding: 20px 15px;
+                padding: 15px;
+                bottom: max(env(safe-area-inset-bottom, 0px), 15px);
             }
             
             .capture-btn {
@@ -282,8 +283,104 @@
                 height: 70px;
             }
             
-            .zoom-slider {
-                height: 150px;
+            .capture-controls {
+                gap: 25px;
+                padding: 0 15px;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .gallery-btn, .flip-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Tablet landscape */
+        @media (min-width: 768px) and (orientation: landscape) {
+            .top-controls {
+                padding: 25px 30px;
+                top: max(env(safe-area-inset-top, 0px), 15px);
+            }
+            
+            .bottom-controls {
+                padding: 25px 30px;
+                bottom: max(env(safe-area-inset-bottom, 0px), 25px);
+            }
+            
+            .capture-controls {
+                gap: 40px;
+            }
+        }
+
+        /* iPhone X and newer with notch/dynamic island */
+        @media (max-width: 430px) and (min-height: 800px) {
+            .top-controls {
+                top: max(env(safe-area-inset-top, 0px), 15px);
+                padding: 15px 20px;
+            }
+            
+            .bottom-controls {
+                bottom: max(env(safe-area-inset-bottom, 0px), 25px);
+                padding: 15px 20px;
+            }
+        }
+
+        /* Ultra-wide screens */
+        @media (min-aspect-ratio: 21/9) {
+            .top-controls {
+                padding: 20px 40px;
+            }
+            
+            .bottom-controls {
+                padding: 20px 40px;
+            }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) {
+            .timer-display {
+                font-size: 60px;
+            }
+            
+            .lens-controls {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Very small screens (older phones) */
+        @media (max-width: 360px) {
+            .top-controls {
+                padding: 12px;
+            }
+            
+            .bottom-controls {
+                padding: 12px;
+            }
+            
+            .capture-btn {
+                width: 65px;
+                height: 65px;
+            }
+            
+            .capture-controls {
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .control-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+            
+            .gallery-btn, .flip-btn {
+                width: 38px;
+                height: 38px;
             }
         }
     </style>
@@ -1522,5 +1619,5 @@
             new OrientationHandler();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9859823ec1b6845a',t:'MTc1ODk2MDQ2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98599584324897fc',t:'MTc1ODk2MTI1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
