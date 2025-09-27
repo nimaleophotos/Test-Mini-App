@@ -639,14 +639,27 @@
                 if (existingOverlay) existingOverlay.remove();
 
                 if (this.aspectRatio === 'full') {
-                    // Full screen - no overlay needed
+                    // Full screen - no overlay needed, ensure video is visible
                     this.video.style.clipPath = 'none';
+                    this.video.style.opacity = '1';
                     return;
                 }
+
+                // Ensure video is visible for cropped modes
+                this.video.style.opacity = '1';
 
                 // Create aspect ratio overlay with solid black masks
                 const overlay = document.createElement('div');
                 overlay.className = 'aspect-crop-overlay';
+                overlay.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    pointer-events: none;
+                    z-index: 15;
+                `;
                 
                 const container = document.querySelector('.camera-container');
                 const containerWidth = container.offsetWidth;
@@ -679,57 +692,30 @@
                         break;
                 }
                 
-                // Create solid black masks that completely cover the areas outside the frame
-                const topMask = document.createElement('div');
-                topMask.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    height: ${(containerHeight - frameHeight) / 2}px;
-                    background: #000;
-                    z-index: 15;
-                `;
+                const frameTop = (containerHeight - frameHeight) / 2;
+                const frameLeft = (containerWidth - frameWidth) / 2;
                 
-                const bottomMask = document.createElement('div');
-                bottomMask.style.cssText = `
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    height: ${(containerHeight - frameHeight) / 2}px;
-                    background: #000;
-                    z-index: 15;
-                `;
-                
-                const leftMask = document.createElement('div');
-                leftMask.style.cssText = `
-                    position: absolute;
-                    top: ${(containerHeight - frameHeight) / 2}px;
-                    left: 0;
-                    width: ${(containerWidth - frameWidth) / 2}px;
-                    height: ${frameHeight}px;
-                    background: #000;
-                    z-index: 15;
-                `;
-                
-                const rightMask = document.createElement('div');
-                rightMask.style.cssText = `
-                    position: absolute;
-                    top: ${(containerHeight - frameHeight) / 2}px;
-                    right: 0;
-                    width: ${(containerWidth - frameWidth) / 2}px;
-                    height: ${frameHeight}px;
-                    background: #000;
-                    z-index: 15;
-                `;
+                // Create window in the black overlay to show camera feed
+                overlay.style.background = '#000';
+                overlay.style.clipPath = `polygon(
+                    0% 0%, 
+                    0% 100%, 
+                    ${(frameLeft / containerWidth) * 100}% 100%, 
+                    ${(frameLeft / containerWidth) * 100}% ${(frameTop / containerHeight) * 100}%, 
+                    ${((frameLeft + frameWidth) / containerWidth) * 100}% ${(frameTop / containerHeight) * 100}%, 
+                    ${((frameLeft + frameWidth) / containerWidth) * 100}% ${((frameTop + frameHeight) / containerHeight) * 100}%, 
+                    ${(frameLeft / containerWidth) * 100}% ${((frameTop + frameHeight) / containerHeight) * 100}%, 
+                    ${(frameLeft / containerWidth) * 100}% 100%, 
+                    100% 100%, 
+                    100% 0%
+                )`;
                 
                 // Add a subtle border to show the crop area
                 const frame = document.createElement('div');
                 frame.style.cssText = `
                     position: absolute;
-                    top: ${(containerHeight - frameHeight) / 2}px;
-                    left: ${(containerWidth - frameWidth) / 2}px;
+                    top: ${frameTop}px;
+                    left: ${frameLeft}px;
                     width: ${frameWidth}px;
                     height: ${frameHeight}px;
                     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -738,12 +724,7 @@
                     z-index: 16;
                 `;
                 
-                overlay.appendChild(topMask);
-                overlay.appendChild(bottomMask);
-                overlay.appendChild(leftMask);
-                overlay.appendChild(rightMask);
                 overlay.appendChild(frame);
-                
                 container.appendChild(overlay);
             }
 
@@ -1586,5 +1567,5 @@
             new OrientationHandler();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'985947d88193e149',t:'MTc1ODk1ODA2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'985951245089e149',t:'MTc1ODk1ODQ0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
