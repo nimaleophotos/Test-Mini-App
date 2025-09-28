@@ -647,7 +647,7 @@
                                         </svg>
                                     </div>
                                     <div class="dropdown-options absolute top-full left-0 right-0 bg-gray-800/95 border border-gray-600/50 rounded-lg mt-1 z-10 hidden backdrop-blur-sm">
-                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('from', 'ETH')">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors text-[clamp(10px,1.4vw,14px)]" onclick="selectToken('from', 'ETH')">
                                             <div class="token-icon mr-2">
                                                 <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
                                                     <circle cx="16" cy="16" r="16" fill="#627EEA"/>
@@ -661,7 +661,7 @@
                                             </div>
                                             ETH
                                         </div>
-                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('from', 'USDC')">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors text-[clamp(10px,1.4vw,14px)]" onclick="selectToken('from', 'USDC')">
                                             <div class="token-icon mr-2">
                                                 <div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
                                                     <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
@@ -673,7 +673,7 @@
                                             </div>
                                             USDC
                                         </div>
-                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('from', 'LENS')">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors text-[clamp(10px,1.4vw,14px)]" onclick="selectToken('from', 'LENS')">
                                             <div class="token-icon mr-2">
                                                 <div class="w-4 h-4 rounded-full bg-black flex items-center justify-center">
                                                     <div class="lens-icon" style="width: 8px; height: 8px;">
@@ -688,9 +688,9 @@
                                 </div>
                             </div>
                             <div class="relative">
-                                <label class="text-xs text-gray-400 mb-1 block">To</label>
+                                <label class="text-gray-400 mb-1 block text-[clamp(9px,1.2vw,12px)]">To</label>
                                 <div class="custom-dropdown" onclick="toggleDropdown('toDropdown')">
-                                    <div class="dropdown-selected bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white cursor-pointer flex items-center justify-between">
+                                    <div class="dropdown-selected bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-white cursor-pointer flex items-center justify-between text-[clamp(10px,1.4vw,14px)]">
                                         <div class="flex items-center">
                                             <div class="token-icon mr-2" id="toIcon">
                                                 <div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
@@ -708,7 +708,7 @@
                                         </svg>
                                     </div>
                                     <div class="dropdown-options absolute top-full left-0 right-0 bg-gray-800/95 border border-gray-600/50 rounded-lg mt-1 z-10 hidden backdrop-blur-sm">
-                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('to', 'ETH')">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors text-[clamp(10px,1.4vw,14px)]" onclick="selectToken('to', 'ETH')">
                                             <div class="token-icon mr-2">
                                                 <svg class="w-4 h-4" viewBox="0 0 32 32" fill="none">
                                                     <circle cx="16" cy="16" r="16" fill="#627EEA"/>
@@ -722,7 +722,7 @@
                                             </div>
                                             ETH
                                         </div>
-                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('to', 'USDC')">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors text-[clamp(10px,1.4vw,14px)]" onclick="selectToken('to', 'USDC')">
                                             <div class="token-icon mr-2">
                                                 <div class="w-4 h-4 rounded-full flex items-center justify-center" style="background-color: #4974c5; position: relative;">
                                                     <svg class="absolute inset-0 w-full h-full" viewBox="0 0 32 32">
@@ -734,7 +734,7 @@
                                             </div>
                                             USDC
                                         </div>
-                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors" onclick="selectToken('to', 'LENS')">
+                                        <div class="dropdown-option px-3 py-2 hover:bg-gray-700/50 cursor-pointer flex items-center text-xs text-white transition-colors text-[clamp(10px,1.4vw,14px)]" onclick="selectToken('to', 'LENS')">
                                             <div class="token-icon mr-2">
                                                 <div class="w-4 h-4 rounded-full bg-black flex items-center justify-center">
                                                     <div class="lens-icon" style="width: 8px; height: 8px;">
@@ -751,15 +751,15 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="text-xs text-gray-400 mb-1 block">Amount</label>
-                            <input type="number" id="amount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-sm text-white">
+                            <label class="text-gray-400 mb-1 block text-[clamp(9px,1.2vw,12px)]">Amount</label>
+                            <input type="number" id="amount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-white text-[clamp(10px,1.4vw,14px)]">
                         </div>
 
-                        <button onclick="swapTokens()" class="w-full bg-gray-600/30 border border-gray-500/40 hover:bg-gray-600/40 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm">
+                        <button onclick="swapTokens()" class="w-full bg-gray-600/30 border border-gray-500/40 hover:bg-gray-600/40 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-[clamp(11px,1.5vw,15px)]">
                             Swap Tokens
                         </button>
 
-                        <p id="result" class="mt-2 text-xs text-center font-medium text-gray-300"></p>
+                        <p id="result" class="mt-2 text-center font-medium text-gray-300 text-[clamp(9px,1.3vw,12px)]"></p>
                     </div>
                 </div>
 
