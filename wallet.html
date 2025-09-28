@@ -804,18 +804,18 @@
                     <div class="grid grid-cols-3 gap-3">
                         <div class="flex flex-col space-y-2">
                             <input type="number" id="stakeAmount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white">
-                            <button onclick="stakeTokens()" class="bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/30 text-blue-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm">
+                            <button onclick="stakeTokens()" class="bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/30 text-blue-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300">
                                 Stake
                             </button>
                         </div>
                         <div class="flex flex-col space-y-2">
                             <input type="number" id="unstakeAmount" placeholder="0.0" class="w-full bg-gray-700/50 border border-gray-600/50 rounded-lg px-3 py-2 text-xs text-white">
-                            <button onclick="unstakeTokens()" class="bg-red-500/20 border border-red-400/30 hover:bg-red-500/30 text-red-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm">
+                            <button onclick="unstakeTokens()" class="bg-red-500/20 border border-red-400/30 hover:bg-red-500/30 text-red-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300">
                                 Unstake
                             </button>
                         </div>
                         <div class="flex flex-col justify-end">
-                            <button onclick="claimRewards()" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm">
+                            <button onclick="claimRewards()" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-2 px-3 rounded-lg transition-all duration-300">
                                 Claim All
                             </button>
                         </div>
@@ -830,6 +830,50 @@
                         <div class="flex justify-between text-sm mt-1">
                             <span class="text-gray-400">Next Reward:</span>
                             <span class="text-white">23h 45m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claim POD Reward/Curator Fee Section -->
+                <div class="wallet-card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        </svg>
+                        Claim POD Reward/Curator Fee
+                    </h3>
+                    
+                    <!-- Pool Stats -->
+                    <div class="grid grid-cols-3 gap-3 mb-4">
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">POD Rewards</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">Total Claimed Rewards</div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button onclick="stakeTokens()" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-6 px-3 rounded-xl transition-all duration-300">
+                                Claim Reward
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pool Stats -->
+                    <div class="grid grid-cols-3 gap-3 mb-4">
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">Curator Fee</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-600/20 to-gray-700/20 border border-gray-500/30 rounded-xl p-4 text-center">
+                            <div class="text-sm font-bold text-gray-300">0</div>
+                            <div class="text-xs text-gray-400">Total Claimed Fees Fee</div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button onclick="stakeTokens()" class="bg-green-500/20 border border-green-400/30 hover:bg-green-500/30 text-green-400 font-semibold py-6 px-3 rounded-xl transition-all duration-300">
+                                Claim Fee
+                            </button>
                         </div>
                     </div>
                 </div>
